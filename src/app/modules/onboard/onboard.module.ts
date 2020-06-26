@@ -33,7 +33,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
   ]
 })
 export class OnboardModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<OnboardModule> {
     return {
       ngModule: OnboardModule,
       providers: []
