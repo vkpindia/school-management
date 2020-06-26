@@ -1,0 +1,93 @@
+<form class="login100-form validate-form" [formGroup]="registrationForm" (ngSubmit)="onRegister()">
+  <h4 class="login100-form-title">
+    CREATE AN ACCOUNT
+  </h4>
+
+  <div class="wrap-input100">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Name</mat-label><!-- [errorStateMatcher]="matcher" -->
+      <input matInput formControlName="username" placeholder="Name">
+      <mat-icon matSuffix>account_circle</mat-icon>
+      <!-- <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
+        Please enter a valid user name
+      </mat-error> -->
+      <mat-error *ngIf="f.username.hasError('required')">
+        User name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <!-- <input class="input100" type="email" formControlName="username" placeholder="Enter Username"
+            [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">Email is required</div>
+          </div> -->
+  </div>
+  <div class="wrap-input100">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Email</mat-label><!-- [errorStateMatcher]="matcher" -->
+      <input matInput formControlName="useremail" placeholder="Email">
+      <mat-icon matSuffix>mail</mat-icon>
+      <mat-error *ngIf="submitted && f.useremail.hasError('email') && !f.useremail.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="f.useremail.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="f.useremail.hasError('pattern')">
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+    <!-- <input class="input100" type="email" formControlName="username" placeholder="Enter Username"
+            [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">Email is required</div>
+          </div> -->
+  </div>
+
+  <div class="wrap-input100">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Password</mat-label><!-- [errorStateMatcher]="matcher" -->
+      <input matInput formControlName="pass" placeholder="Password" type="password">
+      <mat-icon matSuffix>vpn_key</mat-icon>
+      <!--             <mat-error *ngIf="submitted && f.pass.hasError('email') && !f.pass.hasError('required')">
+              Please enter a valid email address
+            </mat-error> -->
+      <mat-error *ngIf="f.pass.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="wrap-input100">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Password(confirm)</mat-label><!-- [errorStateMatcher]="matcher" -->
+      <input matInput formControlName="confirmPass" type="password" placeholder="Password(confirm)">
+      <mat-icon matSuffix>vpn_key</mat-icon>
+      <!--             <mat-error *ngIf="submitted && f.pass.hasError('email') && !f.pass.hasError('required')">
+              Please enter a valid email address
+            </mat-error> -->
+      <mat-error *ngIf="f.confirmPass.hasError('required')">
+        Confirm password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="d-flex align-items-center" style="padding-bottom: 1rem;">
+    <div style="flex:1">
+      <mat-checkbox formControlName="accept">Accept <a href="javascript:void(0)" style="color: #039be5;"></a>terms and conditions</mat-checkbox>
+    </div>
+  </div>
+  <div class="container-login100-form-btn">
+    <button mat-raised-button color="primary">CREATE AN ACCOUNT</button>
+  </div>
+  <div class="login-navigation-link">
+    <div class="text-center">
+      <span>Already have an account?</span>
+    </div>
+
+    <div class="text-center">
+      <a class="text-link" routerLink="/login" color="primary">
+        Login
+        <!-- <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i> -->
+      </a>
+    </div>
+  </div>
+</form>

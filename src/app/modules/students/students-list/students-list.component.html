@@ -1,0 +1,108 @@
+<div class="list-container">
+  <div class="page-title">
+    <h3>Students</h3>
+  </div>
+
+  <div class="s-list">
+    <mat-card>
+      <mat-card-title>All Students Data</mat-card-title>
+      <mat-card-content class="pt-4">
+        <mat-form-field appearance="outline" class="col-6 p-0">
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Search...">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <table mat-table [dataSource]="studentList" class="col-12" matSort>
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="rollnumber">
+            <th mat-header-cell *matHeaderCellDef> Roll </th>
+            <td mat-cell *matCellDef="let element"><span *ngIf="element.roll ;else dash">{{element.roll}}</span></td>
+          </ng-container>
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="enrolnumber">
+            <th mat-header-cell *matHeaderCellDef> Enrollment </th>
+            <td mat-cell *matCellDef="let element"><span
+                *ngIf="element.enrolnumber ;else dash">{{element.enrolnumber}}</span></td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="firstname">
+            <th mat-header-cell *matHeaderCellDef> First Name </th>
+            <td mat-cell *matCellDef="let element"><span
+                *ngIf="element.firstname ;else dash">{{element.firstname | titlecase}}</span></td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef> Last Name </th>
+            <td mat-cell *matCellDef="let element"> <span
+                *ngIf="element.lastname ;else dash">{{element.lastname | titlecase}}</span></td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="sex">
+            <th mat-header-cell *matHeaderCellDef> Gender </th>
+            <td mat-cell *matCellDef="let element"> <span *ngIf="element.sex ;else dash">{{element.sex | titlecase}}</span></td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="section">
+            <th mat-header-cell *matHeaderCellDef> Section </th>
+            <td mat-cell *matCellDef="let element"><span *ngIf="element.section ;else dash">{{element.section}}</span>
+            </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="dob">
+            <th mat-header-cell *matHeaderCellDef> DOB </th>
+            <td mat-cell *matCellDef="let element"> <span
+                *ngIf="element.dob ;else dash">{{element.dob | date: 'dd/MM/yyyy'}}</span></td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="mobilenumber">
+            <th mat-header-cell *matHeaderCellDef> Mobile</th>
+            <td mat-cell *matCellDef="let element"><span
+                *ngIf="element.mobilenumber ;else dash">{{element.mobilenumber}}</span></td>
+          </ng-container>
+
+          <!-- Action Column -->
+          <!-- <ng-container cdkColumnDef="actions">
+            <md-header-cell > Actions </md-header-cell>
+            <md-cell *cdkCellDef="let row" >
+                 <button md-raised-button >Edit</button>
+            </md-cell>
+        </ng-container>  -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef style="width: 50px;"></th>
+            <td mat-cell *matCellDef="let element">
+              <div class="col">
+                <div ngbDropdown class="d-inline-block">
+                  <span class="flaticon-more-button-of-three-dots" id="dropdownBasic1" ngbDropdownToggle></span>
+                  <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem><span class="fa fa-cogs"
+                        style="color: #00c853;"></span>&nbsp;&nbsp;&nbsp;Edit</button>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator
+        [length]="recordLength"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25, 100]">
+      </mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #dash>---</ng-template>

@@ -1,0 +1,135 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav md-elevation-z15" fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)">
+    <mat-toolbar color="primary">
+      <a href="javascript:void(0)"><img src="assets/images/logo.png" alt=""></a>
+    </mat-toolbar>
+    <mat-nav-list>
+      <app-side-nav *ngFor="let item of navItems" [item]="item"></app-side-nav>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle(); menuToggle();">
+        <mat-icon aria-label="Side nav toggle icon">menu_open</mat-icon>
+      </button>
+      <!-- <span style="float: right !important">Angular</span> -->
+      <div class="prfl_dropdown">
+        <ul>
+          <li>
+            <div ngbDropdown class="d-inline-block msg-dropdown">
+              <a href="javascript:void(0)" id="dropdownBasic2" class="msg" ngbDropdownToggle>
+                <mat-icon>mail</mat-icon>
+                <span>5</span>
+              </a>
+              <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="">
+                <div class="item-header">
+                    <h6 class="item-title">05 Message</h6>
+                </div>
+                <div class="item-content">
+                    <div class="media">
+                        <div class="item-img bg-skyblue author-online">
+                            <img src="assets/images/student11.png" alt="img">
+                        </div>
+                        <div class="media-body space-sm">
+                            <div class="item-title">
+                                <a href="#">
+                                    <span class="item-name">Maria Zaman</span>
+                                    <span class="item-time">18:30</span>
+                                </a>
+                            </div>
+                            <p>What is the reason of buy this item.
+                            Is it usefull for me.....</p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="item-img bg-yellow author-online">
+                            <img src="assets/images/student12.png" alt="img">
+                        </div>
+                        <div class="media-body space-sm">
+                            <div class="item-title">
+                                <a href="#">
+                                    <span class="item-name">Benny Roy</span>
+                                    <span class="item-time">10:35</span>
+                                </a>
+                            </div>
+                            <p>What is the reason of buy this item.
+                            Is it usefull for me.....</p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="item-img bg-pink">
+                            <img src="assets/images/student13.png" alt="img">
+                        </div>
+                        <div class="media-body space-sm">
+                            <div class="item-title">
+                                <a href="#">
+                                    <span class="item-name">Steven</span>
+                                    <span class="item-time">02:35</span>
+                                </a>
+                            </div>
+                            <p>What is the reason of buy this item.
+                            Is it usefull for me.....</p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="item-img bg-violet-blue">
+                            <img src="assets/images/student11.png" alt="img">
+                        </div>
+                        <div class="media-body space-sm">
+                            <div class="item-title">
+                                <a href="#">
+                                    <span class="item-name">Joshep Joe</span>
+                                    <span class="item-time">12:35</span>
+                                </a>
+                            </div>
+                            <p>What is the reason of buy this item.
+                            Is it usefull for me.....</p>
+                        </div>
+                    </div>
+                </div> -->
+            <!-- </div> -->
+            </div>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="notification">
+              <mat-icon>notifications_none</mat-icon>
+              <span>8</span>
+            </a>
+          </li>
+          <li>
+            <div ngbDropdown class="d-inline-block profile-dropdown">
+              <a  class="prfl_img" id="dropdownBasic1" ngbDropdownToggle>
+                <p class="m-0"><span class="username">Stevne Zone</span> <span class="userrole">Admin</span></p>
+                <img src="assets/images/profile.jpg" alt="">
+              </a>
+              <!-- <div aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem>Action - 1</button>
+                <button ngbDropdownItem>Another Action</button>
+                <button ngbDropdownItem>Something else is here</button>
+              </div> -->
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <div class="item-header">
+                    <h6 class="item-title">Steven Zone</h6>
+                </div>
+                <div class="item-content">
+                    <ul class="settings-list">
+                        <li ngbDropdownItem><a href="javascript:void(0)"><i class="flaticon-user"></i>My Profile</a></li>
+                        <li ngbDropdownItem><a href="javascript:void(0)"><i class="flaticon-list"></i>Task</a></li>
+                        <li ngbDropdownItem><a href="javascript:void(0)"><i class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i>Message</a></li>
+                        <li ngbDropdownItem><a href="javascript:void(0)"><i class="flaticon-gear-loading"></i>Account Settings</a></li>
+                        <li ngbDropdownItem><a href="javascript:void(0)" (click)="signOut()"><i class="flaticon-turn-off"></i>Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </mat-toolbar>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

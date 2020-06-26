@@ -1,0 +1,54 @@
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+<!--       <div class="login100-pic js-tilt" data-tilt>
+        <img src="/assets/images/img-01.png" alt="IMG">
+      </div> -->
+
+      <form class="login100-form validate-form" [formGroup]="forgotForm">
+        <h4 class="login100-form-title">
+          RECOVER YOUR PASSWORD
+        </h4>
+
+        <div class="wrap-input100" >
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Email</mat-label><!-- [errorStateMatcher]="matcher" -->
+            <input matInput formControlName="username" placeholder="Email">
+            <mat-icon matSuffix>mail</mat-icon>
+            <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="f.username.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+       <!--  <div class="wrap-input100">
+          <input class="input100" type="password" name="pass" placeholder="Password">
+          <span class="focus-input100"></span>
+          <span class="symbol-input100">
+            <i class="fa fa-lock" aria-hidden="true"></i>
+          </span>
+        </div> -->
+
+        <div class="container-login100-form-btn">
+          <button mat-raised-button color="primary">GET RESENT LINK</button>
+        </div>
+
+        <div class="login-navigation-link">
+          <!-- <div class="text-center">
+            <span>Don't have an account?</span>
+          </div> -->
+
+          <div class="text-center">
+            <a class="text-link" routerLink="/login" color="primary">
+              Go back to login
+              <!-- <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i> -->
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
