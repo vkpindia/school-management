@@ -5,7 +5,7 @@
 
   <div class="form-fields">
     <mat-card>
-      <mat-card-title>Add New Students</mat-card-title>
+      <mat-card-title>{{cardTitle}}</mat-card-title>
       <mat-card-content class="pt-4">
         <form [formGroup]="admissionForm" (ngSubmit)="onSubmit()">
           <div class="row">
@@ -320,8 +320,8 @@
 
           <div class="example-button-row pt-3 text-center">
             <button mat-raised-button color="primary" type="submit">Submit</button>
-            <button *ngIf="true" mat-raised-button class="ml-3 mat-secondary">Cancel</button>
-            <button mat-raised-button class="ml-3 mat-secondary" (click)="onFormReset()">Reset</button>
+            <button *ngIf="showButtons" mat-raised-button class="ml-3 mat-secondary" (click)="onCancel($event)">Cancel</button>
+            <button *ngIf="!showButtons" mat-raised-button class="ml-3 mat-secondary" (click)="onFormReset($event)">Reset</button>
           </div>
         </form>
       </mat-card-content>

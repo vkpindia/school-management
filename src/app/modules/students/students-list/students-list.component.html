@@ -84,7 +84,7 @@
                   <span class="flaticon-more-button-of-three-dots" id="dropdownBasic1" ngbDropdownToggle></span>
                   <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button ngbDropdownItem><span class="fa fa-cogs"
+                    <button ngbDropdownItem (click)="onEdit(element)"><span class="fa fa-cogs"
                         style="color: #00c853;"></span>&nbsp;&nbsp;&nbsp;Edit</button>
                   </div>
                 </div>

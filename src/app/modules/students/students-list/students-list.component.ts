@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { StudentsService } from '../../../_services/students.service';
 import { DatePipe } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-students-list',
@@ -20,7 +21,7 @@ export class StudentsListComponent implements OnInit {
   public filterData: string = '';
   public recordLength: number;
 
-  constructor(private _ss: StudentsService, private _date: DatePipe) { }
+  constructor( private _ss: StudentsService, private _router: Router, private _activatedRout: ActivatedRoute ) { }
 
   ngOnInit(): void {
     // method call
@@ -63,6 +64,18 @@ export class StudentsListComponent implements OnInit {
     if (this.studentList.paginator) {
       this.studentList.paginator.firstPage();
     }
+  }
+
+  /**
+   * @description Method to route on edit page
+   * @author Virendra Pandey
+   * @date 2020-06-26
+   * @param {*} row
+   * @memberof StudentsListComponent
+   */
+  public onEdit(row): void {
+    console.log('row', row);
+    this._router.navigate(['edit', row.id], {relativeTo: this._activatedRout});
   }
 
   editStudentRecord() {

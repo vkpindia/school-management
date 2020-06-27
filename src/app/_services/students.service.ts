@@ -99,13 +99,13 @@ export class StudentsService {
    * @returns {Observable<any>}
    * @memberof StudentsService
    */
-  postStudent(studentRecord: any): Observable<any> {
+  postStudent(studentRecord: any)/* : Observable<any> */ {
     console.log('studentRecord', studentRecord);
-    return this._http.post(this._apiUrl + 'student/AddStudent', studentRecord)//
-      .pipe(
-        map(this.extractData),
-        catchError(this.handleError)
-      );
+    return this._http.post(this._apiUrl + 'student/AddStudent', studentRecord); //
+    /*  .pipe(
+       map(this.extractData),
+       catchError(this.handleError)
+     ); */
   }
 
   /**
@@ -116,8 +116,8 @@ export class StudentsService {
    * @returns {Observable<any>}
    * @memberof StudentsService
    */
-  updateStudent(studentRecord: any, id: any): Observable<any> {
-    return this._http.put(this._apiUrl + id + '/student', studentRecord)
+  updateStudent(studentRecord: any): Observable<any> {
+    return this._http.put(this._apiUrl + 'student/UpdateStudent', studentRecord)
       .pipe(
         catchError(this.handleError)
       );

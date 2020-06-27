@@ -1,1 +1,3 @@
-<p>student-edit works!</p>
+<div *ngIf="showForm">
+  <app-student-admission [studentDetails]="studentDetails" (formSubmit)="onFormSubmit($event)" (formCancel)="onFormCancel($event)"></app-student-admission>
+</div>
