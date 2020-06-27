@@ -21,12 +21,12 @@ export class StudentsListComponent implements OnInit {
   public filterData: string = '';
   public recordLength: number;
 
+  // tslint:disable-next-line: variable-name
   constructor( private _ss: StudentsService, private _router: Router, private _activatedRout: ActivatedRoute ) { }
 
   ngOnInit(): void {
     // method call
     this.getStudentList();
-    this.editStudentRecord();
   }
 
   /**
@@ -78,9 +78,4 @@ export class StudentsListComponent implements OnInit {
     this._router.navigate(['edit', row.id], {relativeTo: this._activatedRout});
   }
 
-  editStudentRecord() {
-    this._ss.getStudentDetails(1).subscribe(data => {
-      console.log('Edited data', data);
-    });
-  }
 }

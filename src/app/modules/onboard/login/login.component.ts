@@ -62,12 +62,12 @@ export class LoginComponent implements OnInit {
     this.router.navigate([this.returnUrl]);
     this.showNotification();
     // stop here if form is invalid
-    /* if (this.loginForm.invalid) {
+    if (this.loginForm.invalid) {
       return;
-    } */
+    }
 // console.log('this.loginForm.value.username', this.loginForm.value.username);
     this.loading = true;
-    /* this.authenticationService.login(this.loginForm.value.username, this.loginForm.value.pass)
+    this.authenticationService.login(this.loginForm.value.username, this.loginForm.value.pass)
       .pipe(first())
       .subscribe(
         data => {
@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
         error => {
           this.error = error;
           this.loading = false;
-        }); */
+        });
   }
 
   /**
