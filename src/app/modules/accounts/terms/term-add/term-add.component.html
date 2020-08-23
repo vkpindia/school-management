@@ -1,0 +1,69 @@
+<div class="form-container">
+  <!--  <div class="page-title">
+    <h3>Expenses</h3>
+  </div> -->
+  <div class="form-fields">
+    <mat-card>
+      <mat-card-title>{{cardTitle}}</mat-card-title>
+      <mat-card-content class="pt-2">
+        <form [formGroup]="termForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-4">
+            <mat-form-field appearance="outline" class="p-0">
+              <mat-label>Term Name</mat-label>
+              <input matInput formControlName="termname" placeholder="Enter term name">
+              <!--  <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
+                Please enter a valid email address
+              </mat-error> -->
+              <mat-error *ngIf="submitted && f.termname.hasError('required')">
+                Term name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-4">
+            <mat-form-field appearance="outline" class="p-0">
+              <mat-label>Start Date</mat-label>
+              <input matInput [matDatepicker]="picker" placeholder="Select Date" formControlName="termstartdate">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error *ngIf="submitted && f.termstartdate.hasError('required')">
+                Start date is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-4">
+            <mat-form-field appearance="outline" class="p-0">
+              <mat-label>End Date</mat-label>
+              <input matInput [matDatepicker]="picker1" placeholder="Select Date" formControlName="termenddate">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+              <mat-error *ngIf="submitted && f.termstartdate.hasError('required')">
+                End date is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+            <!-- Mother related fields -->
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Optional</mat-label>
+                <input matInput formControlName="optional" placeholder="Enter Amount">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="example-button-row pt-3 text-center">
+            <button mat-raised-button color="primary" type="submit">{{buttonLabel}}</button>
+            <button mat-raised-button class="ml-3 mat-secondary" (click)="onCancel($event)">Cancel</button>
+            <button *ngIf="!showButtons" mat-raised-button class="ml-3" color="warn"
+              (click)="onFormReset($event)">Reset</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #dash>---</ng-template>

@@ -1,1 +1,143 @@
-<p>student-details works!</p>
+<div class="form-container">
+  <div class="page-title">
+    <h3>Students</h3>
+  </div>
+  <div class="no-record" *ngIf="isLoading">
+    <img src="assets/images/page-loader.gif" alt="">
+    <p class="m-0">loading...</p>
+  </div>
+  <div class="form-fields" *ngIf="showDetails">
+    <mat-card>
+      <mat-card-title>About Me
+        <div class="pull-right">
+          <div class="col">
+            <div ngbDropdown class="d-inline-block">
+              <span class="flaticon-more-button-of-three-dots" id="dropdownBasic1" ngbDropdownToggle></span>
+              <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem><span class="fa fa-cogs"
+                    style="color:#00c853;"></span>&nbsp;&nbsp;&nbsp;Edit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-title>
+      <mat-card-content class="pt-4">
+        <div class="row">
+          <div class="col-6 col-md-3">
+            <img *ngIf="studentDetails && studentDetails.sex=='female';" src="assets/images/student_female.jpg" alt="">
+            <img *ngIf="!studentDetails" src="assets/images/student_female.jpg" alt="">
+            <img *ngIf="studentDetails && studentDetails.sex=='male'" src="assets/images/male_avatar.jpg" alt="">
+          </div>
+          <div class="col-12 col-md-9">
+            <h3 class="profile-heading" *ngIf="studentDetails && studentDetails.firstname; else dash">{{studentDetails.firstname | titlecase}} {{studentDetails.lastname | titlecase}}
+            </h3>
+            <!-- <p style="width 80%; font-size 16px; color #646464; line-height 1.6;s">Aliquam erat volutpat. Curabiene
+              natis massa sedde lacu stiquen sodale word moun taiery.Aliquam erat volutpaturabiene natis massa sedde
+              sodale word moun taiery.</p> -->
+            <div class="info-table table-responsive">
+              <table class="table text-nowrap">
+                <tbody>
+                 <!--  <tr>
+                    <td>Name</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="studentDetails.firstname; else dash">{{studentDetails.firstname | titlecase}}
+                        {{studentDetails.lastname | titlecase}}</span></td>
+                  </tr> -->
+                  <tr>
+                    <td>Gender</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="studentDetails && studentDetails.sex; else dash">{{studentDetails.sex | titlecase}}</span></td>
+                  </tr>
+                  <!-- <tr>
+                    <td>Father Name</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="studentDetails && studentDetails.fathername; else dash">{{studentDetails.fathername | titlecase}}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Mother Name</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="studentDetails && studentDetails.mothername; else dash">{{studentDetails.mothername | titlecase}}</span>
+                    </td>
+                  </tr> -->
+                  <tr>
+                    <td>Blood Group</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="studentDetails && studentDetails.bloodgroup; else dash">{{studentDetails.bloodgroup | titlecase}}</span></td>
+                  </tr>
+                  <tr>
+                    <td>Enrollment Number</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="studentDetails && studentDetails.enrolnumber; else dash">{{studentDetails.enrolnumber}}</span></td>
+                  </tr>
+                  <tr>
+                    <td>Date Of Birth</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="studentDetails && studentDetails.dob; else dash">{{studentDetails.dob | date:"dd.MM.yyyy"}}</span></td>
+                  </tr>
+                  <tr>
+                    <td>Religion</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="studentDetails && studentDetails.religion; else dash">{{studentDetails.religion | titlecase}}</span></td>
+                  </tr>
+                  <!-- <tr>
+                    <td>Father Occupation</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="studentDetails && studentDetails.occupation; else dash">{{studentDetails.occupation | titlecase}}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>E-mail</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="studentDetails && studentDetails.email; else dash">{{studentDetails.email}}</span></td>
+                  </tr> -->
+                  <tr>
+                    <td>Admission Date</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="studentDetails &&studentDetails.dateofadmission; else dash">{{studentDetails.dateofadmission | date :"dd.MM.yyyy"}}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Class</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="studentDetails && studentDetails.Class; else dash">{{studentDetails.Class}}</span></td>
+                  </tr>
+                  <tr>
+                    <td>Section</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="studentDetails && studentDetails.section; else dash">{{studentDetails.section}}</span></td>
+                  </tr>
+                  <tr>
+                    <td>Roll</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="studentDetails && studentDetails.rollnumber; else dash">{{studentDetails.rollnumber}}</span></td>
+                  </tr>
+                  <!-- <tr>
+                    <td>Address</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="studentDetails && studentDetails.address; else dash">{{studentDetails.address}}</span></td>
+                  </tr> -->
+                  <tr>
+                    <td>Aadhar No</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="studentDetails && studentDetails.adharnumber; else dash">{{studentDetails.adharnumber}}</span></td>
+                  </tr>
+                  <tr>
+                    <td>Phone</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="studentDetails && studentDetails.mobilenumber; else dash">{{studentDetails.mobilenumber}}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #dash>---</ng-template>
+<ng-template #imgS><img *ngIf="studentDetails.sex=='female'" src="assets/images/student_female.jpg" alt=""></ng-template>

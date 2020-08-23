@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { BreadcrumbModule } from './shared/breadcrumb/breadcrumb.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor, JwtInterceptor, fakeBackendProvider } from './_helpers';
 import { CommonModule } from '@angular/common';
@@ -39,7 +40,8 @@ import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
     MatListModule,
     CommonModule,
     HttpClientModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    BreadcrumbModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

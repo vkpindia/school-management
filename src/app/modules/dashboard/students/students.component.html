@@ -1,0 +1,370 @@
+<div class="list-container">
+  <div class="page-title">
+    <h3>Student Dashboard</h3>
+  </div>
+  <!--   <div class="no-record" *ngIf="isLoading">
+    <img src="assets/images/page-loader.gif" alt="">
+    <p class="m-0">loading...</p>
+  </div> -->
+  <div class="s-list">
+    <div class="row gutters-20">
+      <div class="col-md-4 col-sm-6 col-12 pr-xl-0">
+        <div class="dashboard-summery-one mg-b-20">
+          <div class="row">
+            <div class="col-6">
+              <div class="item-icon bg-light-magenta">
+                <i class="flaticon-shopping-list text-magenta"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="item-content">
+                <div class="item-title">Notification</div>
+                <div class="item-number"><span class="counter" data-num="12">12</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-12 pr-xl-0">
+        <div class="dashboard-summery-one mg-b-20">
+          <div class="row">
+            <div class="col-6">
+              <div class="item-icon bg-light-blue">
+                <i class="flaticon-calendar text-blue"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="item-content">
+                <div class="item-title">Events</div>
+                <div class="item-number"><span class="counter" data-num="06">6</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-12">
+        <div class="dashboard-summery-one mg-b-20">
+          <div class="row">
+            <div class="col-6">
+              <div class="item-icon bg-light-yellow">
+                <i class="flaticon-percentage-discount text-orange"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="item-content">
+                <div class="item-title">Attendance</div>
+                <div class="item-number"><span class="counter" data-num="94">94</span><span>%</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row gutters-20">
+  <div class="list-container col-12">
+    <!-- <div class="no-record" *ngIf="isLoading">
+      <img src="assets/images/page-loader.gif" alt="">
+      <p class="m-0">loading...</p>
+    </div> -->
+    <div class="s-list p-0 pb-3">
+      <mat-card>
+        <div class="list-head">
+          <mat-card-title>All Exam Results</mat-card-title>
+          <div class="d-flex align-items-center">
+            <div>
+              <mat-form-field appearance="outline" class="col-12 p-0">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Search...">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <mat-card-content class="pt-4">
+          <table mat-table [dataSource]="expenseList" class="col-12" matSort>
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null"
+                  [checked]="selection.hasValue() && isAllSelected()"
+                  [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                  [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+
+            <!-- Name Number Column -->
+            <ng-container matColumnDef="expensetype">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Exam Name</th>
+              <td mat-cell *matCellDef="let element"><span
+                  *ngIf="element.expensetype;else dash">{{element.expensetype}}</span></td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="amount">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Subject</th>
+              <td mat-cell *matCellDef="let element"> <span
+                  *ngIf="element.amount;else dash">{{element.amount | currency:'INR'}}</span></td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="pendingamount">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Class</th>
+              <td mat-cell *matCellDef="let element"><span
+                  *ngIf="element.pendingamount ;else dash">{{element.pendingamount | currency:'INR'}}</span>
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Grade </th>
+              <td mat-cell *matCellDef="let element">
+                <span *ngIf="element.status;else dash" class="p-0 m-0">
+                  {{element.status}}
+                </span>
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Percent </th>
+              <td mat-cell *matCellDef="let element">
+                <span [title]="element.description" *ngIf="element.description;else dash" class="p-0 m-0"
+                  class="text-truncate col-10 p-0">
+                  {{element.description}}
+                </span>
+              </td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef style="width: 50px;"></th>
+              <td mat-cell *matCellDef="let element">
+                <div class="col">
+                  <div ngbDropdown class="d-inline-block">
+                    <span class="flaticon-more-button-of-three-dots" id="dropdownBasic1" ngbDropdownToggle></span>
+                    <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <button ngbDropdownItem (click)="onEdit(element)"><span class="fa fa-cogs"
+                          style="color: #00c853;"></span>&nbsp;&nbsp;&nbsp;Edit</button>
+                      <button ngbDropdownItem (click)="onDelete(element)"><span class="fa fa-trash"
+                          style="color: #f00;"></span>&nbsp;&nbsp;&nbsp;Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [length]="recordLength" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+          </mat-paginator>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-4 pr-xl-0">
+    <div class="card dashboard-card-three pd-b-20">
+      <div class="card-body">
+        <div class="heading-layout1">
+          <div class="item-title">
+            <h3>Attendence</h3>
+          </div>
+        </div>
+        <div class="doughnut-chart-wrap">
+          <highcharts-chart [Highcharts]="highcharts" [options]="attendanceCharts"
+            style="width: 100%; height: 400px; display: flex; flex-wrap: wrap;">
+          </highcharts-chart>
+        </div>
+        <div class="student-report">
+          <div class="student-count pseudo-bg-blue">
+            <h4 class="item-title">Absent</h4>
+            <div class="item-number">28.2%</div>
+          </div>
+          <div class="student-count pseudo-bg-yellow">
+            <h4 class="item-title">Present</h4>
+            <div class="item-number">65.8%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-4 pr-xl-0">
+    <div class="card dashboard-card-two pd-b-20">
+      <div class="card-body">
+        <div class="heading-layout1">
+          <div class="item-title pb-2">
+            <h3>Events
+            </h3>
+          </div>
+        </div>
+        <div class="expense-chart-wrap">
+          <div class="notice-board-wrap dashboard-notice">
+            <ul *ngIf="eventList && eventList.length >0">
+              <li *ngFor="let list of eventList">
+                <div class="notice-list">
+                  <div class="post-date" [style.backgroundColor]="list.dateLbelBg">
+                    <span>{{list.startdate | date: 'd MMM y'}}</span></div>
+                  <h6 class="notice-title"><a href="javascript:void(0)">{{list.name}}</a></h6>
+                  <div class="entry-meta">{{list.description}}</div>
+                  <div class="entry-meta">
+                    <span>{{list.startdate | date: 'd MMM y'}}</span>&nbsp;to&nbsp;<span>{{list.enddate | date: 'd MMM y'}}</span>
+                  </div>
+                  <!-- <h6 class="notice-title"><a href="javascript:void(0)">{{list.description}}.</a></h6> -->
+                </div>
+                <div class="">
+                  <div ngbDropdown class="d-inline-block pr-2">
+                    <span class="flaticon-more-button-of-three-dots" id="dropdownBasic1" ngbDropdownToggle></span>
+                    <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <button ngbDropdownItem (click)="onEventDelete(list)"><span class="fa fa-trash"
+                          style="color: #f00;"></span>&nbsp;&nbsp;&nbsp;Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            <ul *ngIf="eventList && eventList.length ==0 && !isLoading">
+              <li>
+                <div class="notice-list">
+                  <div class="post-date" style="background-color:#40dfcd">
+                    <span>Event Name</span></div>
+                  <h6 class="notice-title"><a href="javascript:void(0)">Event Title</a></h6>
+                  <div class="entry-meta"> Lorem ipsum is a placeholder text commonly used to demonstrate the visual
+                    form of a document or a typeface without relying on meaningful content</div>
+                  <div class="entry-meta">
+                    <span>03/08/2020</span>&nbsp;to&nbsp;<span>06/08/2020</span>
+                  </div>
+                  <!-- <h6 class="notice-title"><a href="javascript:void(0)">{{list.description}}.</a></h6> -->
+                </div>
+                <div class="">
+                  <div ngbDropdown class="d-inline-block pr-2">
+                    <span class="flaticon-more-button-of-three-dots" id="dropdownBasic1" ngbDropdownToggle></span>
+                    <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <button ngbDropdownItem><span class="fa fa-trash"
+                          style="color: #f00;"></span>&nbsp;&nbsp;&nbsp;Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="notice-list">
+                  <div class="post-date" style="background-color:#fbd540">
+                    <span>Event Name</span></div>
+                  <h6 class="notice-title"><a href="javascript:void(0)">Event Title</a></h6>
+                  <div class="entry-meta"> Lorem ipsum is a placeholder text commonly used to demonstrate the visual
+                    form of a document or a typeface without relying on meaningful content</div>
+                  <div class="entry-meta">
+                    <span>4/08/2020</span>&nbsp;to&nbsp;<span>07/08/2020</span>
+                  </div>
+                  <!-- <h6 class="notice-title"><a href="javascript:void(0)">{{list.description}}.</a></h6> -->
+                </div>
+                <div class="">
+                  <div ngbDropdown class="d-inline-block pr-2">
+                    <span class="flaticon-more-button-of-three-dots" id="dropdownBasic1" ngbDropdownToggle></span>
+                    <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <button ngbDropdownItem><span class="fa fa-trash"
+                          style="color: #f00;"></span>&nbsp;&nbsp;&nbsp;Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="notice-list">
+                  <div class="post-date" style="background-color:#f939a1">
+                    <span>Event Name</span></div>
+                  <h6 class="notice-title"><a href="javascript:void(0)">Event Title</a></h6>
+                  <div class="entry-meta"> Lorem ipsum is a placeholder text commonly used to demonstrate the visual
+                    form of a document or a typeface without relying on meaningful content</div>
+                  <div class="entry-meta">
+                    <span>05/08/2020</span>&nbsp;to&nbsp;<span>06/08/2020</span>
+                  </div>
+                  <!-- <h6 class="notice-title"><a href="javascript:void(0)">{{list.description}}.</a></h6> -->
+                </div>
+                <div class="">
+                  <div ngbDropdown class="d-inline-block pr-2">
+                    <span class="flaticon-more-button-of-three-dots" id="dropdownBasic1" ngbDropdownToggle></span>
+                    <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <button ngbDropdownItem><span class="fa fa-trash"
+                          style="color: #f00;"></span>&nbsp;&nbsp;&nbsp;Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-4 ">
+    <div class="card dashboard-card-two pd-b-20">
+      <div class="card-body">
+        <div class="heading-layout1">
+          <div class="item-title pb-2">
+            <h3>Notifications
+            </h3>
+          </div>
+        </div>
+        <div class="expense-chart-wrap">
+          <div class="notice-board-wrap dashboard-notice">
+            <ul *ngIf="notificationList && notificationList.length>0">
+              <li *ngFor="let list of notificationList">
+                <div class="notice-list">
+                  <div class="post-date" [style.backgroundColor]="list.dateLbelBg">{{list.startdate | date: 'd MMM y'}}
+                  </div>
+                  <h6 class="notice-title"><a href="javascript:void(0)">{{list.name}}.</a></h6>
+                  <!-- <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div> -->
+                </div>
+              </li>
+            </ul>
+            <ul *ngIf="notificationList && notificationList.length==0 && !isLoading">
+              <li>
+                <div class="notice-list">
+                  <div class="post-date" style="background-color:#40dfcd">03/08/2020</div>
+                  <h6 class="notice-title"><a href="javascript:void(0)">Lorem ipsum is a placeholder text commonly used
+                      to demonstrate the visual form of a document or a typeface without relying on meaningful
+                      content.</a></h6>
+                  <!-- <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div> -->
+                </div>
+              </li>
+              <li>
+                <div class="notice-list">
+                  <div class="post-date" style="background-color:#fbd540">04/08/2020</div>
+                  <h6 class="notice-title"><a href="javascript:void(0)">Lorem ipsum is a placeholder text commonly used
+                      to demonstrate the visual form of a document or a typeface without relying on meaningful
+                      content.</a></h6>
+                  <!-- <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div> -->
+                </div>
+              </li>
+              <li>
+                <div class="notice-list">
+                  <div class="post-date" style="background-color:#f939a1">05/08/2020</div>
+                  <h6 class="notice-title"><a href="javascript:void(0)">Lorem ipsum is a placeholder text commonly used
+                      to demonstrate the visual form of a document or a typeface without relying on meaningful
+                      content.</a></h6>
+                  <!-- <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div> -->
+                </div>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #dash>---</ng-template>

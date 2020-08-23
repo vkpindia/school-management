@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NavService } from '../../../_services/nav.service';
 
@@ -26,29 +26,41 @@ import { NavService } from '../../../_services/nav.service';
   ]
 })
 export class SideNavComponent implements OnInit {
-  expanded: boolean;
-  @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
   @Input() item;
   @Input() depth: number;
+  public expanded: boolean;
+  public selectedMenu:string;
+  @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
 
-  constructor(public router: Router, private navService: NavService) {
+
+  constructor(public router: Router, private navService: NavService, private _ar: ActivatedRoute) {
     if (this.depth === undefined) {
       this.depth = 0;
     }
   }
 
   ngOnInit() {
-    console.log('item', this.item);
-    if (this.item.children && this.item.children.length && this.router.isActive(this.item.routePath, true)) {
-      this.expanded = true;
-      console.log('this.expanded', this.expanded);
+    if (this.item && this.item.children && this.item.children.length) {
+      this.item.children.forEach(route => {
+        if (this.router.url === '/' + route.routePath) {
+          this.expanded = true;
+        }
+      });
     }
+    /* console.log('his.router.isActive(this.item.routePath, true111)', this.router.isActive(this.item.routePath, true));
+    if (this.item.children && this.item.children.length && this.router.isActive(this.item.routePath, true)) {
+      console.log('this.expanded', this.expanded);
+      this.expanded = true;
+    } */
   }
   onItemSelected(item) {
-    if (!item.children || !item.children.length) {
+    this.selectedMenu = item.displayName;
+    console.log('expanded');
+    if ((!item.children || !item.children.length) && item.routePath !=undefined) {
       this.router.navigate([item.routePath]);
       // this.navService.closeNav();
     }
+    console.log(this.item.displayName+' '  +  ' '+ item.displayName)
     if (item.children && item.children.length) {
       this.expanded = !this.expanded;
     }

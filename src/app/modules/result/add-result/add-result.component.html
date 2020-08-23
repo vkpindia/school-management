@@ -1,0 +1,221 @@
+<div class="form-container">
+  <div class="page-title">
+    <h3>Add Result</h3>
+  </div>
+  <div class="form-fields">
+    <mat-card>
+      <mat-card-title>{{cardTitle}}</mat-card-title>
+      <mat-card-content class="pt-2">
+        <mat-tab-group [selectedIndex]="selectedIndex">
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon">wc</mat-icon>
+              Add Result
+            </ng-template>
+            <form [formGroup]="addResultForm" (ngSubmit)="onSubmit('addResult')" *ngIf="showForm">
+              <div formArrayName="items" *ngFor="let item of f.items['controls']; let i = index">
+                <div class="row m-0 pt-4" [formGroupName]="i">
+                  <div class="col-4">
+                    <mat-form-field appearance="outline" class="p-0">
+                      <mat-label>Student Name</mat-label>
+                      <input matInput placeholder="Select student" aria-label="Number" [formControl]="studentID"
+                        [matAutocomplete]="auto">
+                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="getOptionText"
+                        (optionSelected)="onOptionSelection($event, 'ar', i)">
+                        <mat-option *ngFor="let option of studentFilteredList | async" [value]="option">
+                          {{option.name}}
+                        </mat-option>
+                        <mat-error *ngIf="submitted && studentID.hasError('required')">
+                          Student name is <strong>required</strong>
+                        </mat-error>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-4">
+                    <mat-form-field appearance="outline" class="p-0">
+                      <mat-label>Exam ID</mat-label>
+                      <input matInput type="number" placeholder="Enter exam ID" formControlName="examid">
+                      <mat-error *ngIf="submitted && item.get('examid').hasError('required')">
+                        Exam ID is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <!-- <div class="col-4">
+                      <mat-form-field appearance="outline" class="p-0">
+                        <mat-label>Choose Gender</mat-label>
+                        <mat-select placeholder="Select Gender" formControlName="sex">
+                          <mat-option value="male">Male</mat-option>
+                          <mat-option value="female">Female</mat-option>
+                          <mat-option value="others">Others</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="submitted && f.sex.hasError('required')">
+                          Gender is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div> -->
+
+                  <div class="col-4">
+                    <mat-form-field appearance="outline" class="p-0">
+                      <mat-label>Subject</mat-label>
+                      <input matInput placeholder="Enter subject" formControlName="subject">
+                      <mat-error *ngIf="submitted && item.get('subject').hasError('required')">
+                        Subject is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-4">
+                    <mat-form-field appearance="outline" class="p-0">
+                      <mat-label>Actual Mark</mat-label>
+                      <input type="number" matInput placeholder="Enter Actual smarks" formControlName="actualmarks">
+                      <mat-error *ngIf="submitted && item.get('actualmarks').hasError('required')">
+                        Actual mark is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-4">
+                    <mat-form-field appearance="outline" class="p-0">
+                      <mat-label>Marks</mat-label>
+                      <input type="number" matInput placeholder="Enter smarks" formControlName="marks">
+                      <mat-error *ngIf="submitted && item.get('marks').hasError('required')">
+                        Marks is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="col-4">
+                </div> -->
+              <div class="example-button-row pt-3 text-center">
+                <button mat-raised-button type="button" class="mat-next mt-2 mr-3" (click)="addNextSubjectMark()">Add
+                  Next</button>
+                <button mat-raised-button color="primary" type="submit">Submit</button>
+                <!-- <button mat-raised-button class="ml-3 mat-secondary" (click)="onCancel($event)">Cancel</button> -->
+                <button *ngIf="!showButtons" mat-raised-button color="warn" class="ml-3 mat-secondary"
+                  (click)="onFormReset($event, 'addResult')">Reset</button>
+              </div>
+
+            </form>
+          </mat-tab>
+
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="">layers</mat-icon>
+              Add Total Result
+            </ng-template>
+            <form [formGroup]="addTResultForm" (ngSubmit)="onSubmit()" *ngIf="showTForm">
+              <div class="row m-0 pt-4">
+
+                <div class="col-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Student Name</mat-label>
+                    <input matInput placeholder="Select student" aria-label="Number" [formControl]="studentTID"
+                      [matAutocomplete]="auto">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="getOptionText"
+                      (optionSelected)="onOptionSelection($event)">
+                      <mat-option *ngFor="let option of studentTFilteredList | async" [value]="option">
+                        {{option.name}}
+                      </mat-option>
+                      <mat-error *ngIf="submitted && studentTID.hasError('required')">
+                        Student name is <strong>required</strong>
+                      </mat-error>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Exam ID</mat-label>
+                    <input matInput type="number" placeholder="Enter exam ID" formControlName="examid">
+                    <mat-error *ngIf="submitted && ff.examid.hasError('required')">
+                      Exam ID is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- <div class="col-4">
+                    <mat-form-field appearance="outline" class="p-0">
+                      <mat-label>Choose Gender</mat-label>
+                      <mat-select placeholder="Select Gender" formControlName="sex">
+                        <mat-option value="male">Male</mat-option>
+                        <mat-option value="female">Female</mat-option>
+                        <mat-option value="others">Others</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="submitted && f.sex.hasError('required')">
+                        Gender is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div> -->
+
+                <div class="col-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Total Mark</mat-label>
+                    <input matInput type="number" placeholder="Enter subject" formControlName="totalmarks">
+                    <mat-error *ngIf="submitted && ff.totalmarks.hasError('required')">
+                      Total marks is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Actual Total Mark</mat-label>
+                    <input type="number" matInput placeholder="Enter Actual Total smarks" formControlName="actualtotal">
+                    <mat-error *ngIf="submitted && ff.actualtotal.hasError('required')">
+                      Actual Total is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Grade</mat-label>
+                    <input matInput placeholder="Enter grade" formControlName="grade">
+                    <mat-error *ngIf="submitted && ff.grade.hasError('required')">
+                      Grade is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Percent</mat-label>
+                    <input type="number" matInput placeholder="Enter percent" formControlName="percetage">
+                    <mat-error *ngIf="submitted && ff.percetage.hasError('required')">
+                      Percent is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Comments</mat-label>
+                    <textarea matInput placeholder="Enter percent" formControlName="comments" row="4"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="example-button-row pt-3 text-center">
+                <button mat-raised-button color="primary" type="submit">Submit</button>
+                <button *ngIf="showButtons" mat-raised-button class="ml-3 mat-secondary"
+                  (click)="onCancel($event)">Cancel</button>
+                <button *ngIf="!showButtons" mat-raised-button class="ml-3 mat-secondary"
+                  (click)="onFormReset($event)">Reset</button>
+              </div>
+            </form>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div>
+    <app-student-result [studentResultList]="studentResultList" [isResultReady]="isResultReady"></app-student-result>
+  </div>
+</div>
+
+<ng-template #dash>---</ng-template>

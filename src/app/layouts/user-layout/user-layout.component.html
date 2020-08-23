@@ -6,7 +6,10 @@
       <a href="javascript:void(0)"><img src="assets/images/logo.png" alt=""></a>
     </mat-toolbar>
     <mat-nav-list>
-      <app-side-nav *ngFor="let item of navItems" [item]="item"></app-side-nav>
+      <ng-container *ngFor="let item of navItems">
+        <app-side-nav [item]="item"></app-side-nav>
+      </ng-container>
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -101,7 +104,7 @@
           <li>
             <div ngbDropdown class="d-inline-block profile-dropdown">
               <a  class="prfl_img" id="dropdownBasic1" ngbDropdownToggle>
-                <p class="m-0"><span class="username">Stevne Zone</span> <span class="userrole">Admin</span></p>
+                <p class="m-0"><span class="username">{{userData['username']?userData['username']:'Ashok Kumar' }}</span> <span class="userrole">Admin</span></p>
                 <img src="assets/images/profile.jpg" alt="">
               </a>
               <!-- <div aria-labelledby="dropdownBasic1">
@@ -111,7 +114,7 @@
               </div> -->
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <div class="item-header">
-                    <h6 class="item-title">Steven Zone</h6>
+                    <h6 class="item-title">Ashok Kumar</h6>
                 </div>
                 <div class="item-content">
                     <ul class="settings-list">
@@ -129,6 +132,7 @@
       </div>
     </mat-toolbar>
     <div class="main-content">
+      <app-breadcrumb [allowBootstrap]="true"></app-breadcrumb>
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>

@@ -1,0 +1,181 @@
+<div class="form-container">
+  <div class="page-title">
+    <h3>Salary</h3>
+  </div>
+  <div class="form-fields">
+    <!-- Student Search -->
+    <div class="row">
+      <div class="col-4">
+        <mat-form-field appearance="outline" class="p-0">
+          <mat-label>Search</mat-label>
+          <input matInput placeholder="Select student" aria-label="Number" [formControl]="teacherName"
+          [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="getOptionText" (optionSelected)="onOptionSelection($event)">
+            <mat-option *ngFor="let option of teacherFilteredList | async" [value]="option">
+              {{option.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div class="col-2 pt-1 mt-1">
+        <button mat-raised-button color="primary" type="button" (click)="getAllSalaryList()">Search</button>
+      </div>
+    </div><!-- Student search end -->
+    <mat-card>
+      <mat-card-title>{{cardTitle}}</mat-card-title>
+      <mat-card-content class="pt-2">
+        <form [formGroup]="salaryForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
+          <div class="row">
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Enter Last Name" formControlName="name">
+                <mat-error *ngIf="submitted && f.name.hasError('required')">
+                  Name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Gross Salary</mat-label>
+                <input matInput placeholder="Enter gross salary" formControlName="grosssalary">
+                <mat-error *ngIf="submitted && f.grosssalary.hasError('required')">
+                  Gross salary is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Net Salary</mat-label>
+                <input matInput placeholder="Enter net salary" formControlName="netsalary">
+                <mat-error *ngIf="submitted && f.netsalary.hasError('required')">
+                  Net salary is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Absent Days</mat-label>
+                <input matInput placeholder="Enter absent days" formControlName="absentdays">
+                <mat-error *ngIf="submitted && f.absentdays.hasError('required')">
+                  Absent days is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Salary Type</mat-label>
+                <mat-select placeholder="Select salarytype" formControlName="salarytype">
+                  <mat-option *ngFor="let salary of salarytypesList" [value]="salary.salarytype">{{salary.salarytype}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="submitted && f.salarytype.hasError('required')">
+                  Salary type is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Pay Date</mat-label>
+                <input matInput [matDatepicker]="picker1" placeholder="Select date" formControlName="paydate">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+                <mat-error *ngIf="submitted && f.paydate.hasError('required')">
+                  Pay date is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Pay Amount</mat-label>
+                <input type="number" matInput placeholder="Enter amount" formControlName="payamount">
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>PF</mat-label>
+                <input type="number" matInput placeholder="Enter PF" formControlName="PF">
+                <!-- <mat-error *ngIf="submitted && f.paidamount.hasError('required')">
+                  Paid amount is <strong>required</strong>
+                </mat-error> -->
+
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>PF Amount</mat-label>
+                <input type="number" matInput placeholder="Enter discount" formControlName="PFamount">
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>ESI</mat-label>
+                <input type="number" matInput placeholder="Enter ESI" formControlName="ESI">
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>ESI Amount</mat-label>
+                <input type="number" matInput placeholder="Enter ESI amount" formControlName="ESIamount">
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Salary After Added</mat-label>
+                <input type="number" matInput placeholder="Enter after added" formControlName="salaryafterded">
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <!-- <mat-form-field appearance="outline" class="p-0"> -->
+              <mat-checkbox formControlName="status">Status</mat-checkbox>
+              <!-- </mat-form-field> -->
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Pending Amount</mat-label>
+                <input type="number" matInput placeholder="Enter amount" formControlName="pendingamount">
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Description</mat-label>
+                <textarea matInput placeholder="Description" rows="3" formControlName="description"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="example-button-row pt-3 text-center">
+            <button mat-raised-button color="primary" type="submit">{{buttonLabel}}</button>
+            <button *ngIf="showButtons" mat-raised-button class="ml-3 mat-secondary"
+              (click)="onCancel($event)">Cancel</button>
+            <button *ngIf="!showButtons" mat-raised-button class="ml-3 mat-secondary"
+              (click)="onFormReset($event)">Reset</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div class="form-container">
+  <div class="">
+    <ng-container *ngIf="ShowList">
+      <app-salary-list [salaryList]="salaryList" [teacherID]="teacherID" (onEditSalary)="onEditRecord($event)" (onDeleteSalary)="onDeleteSalary($event)"></app-salary-list>
+    </ng-container>
+  </div>
+</div>
+  <ng-template #dash>---</ng-template>

@@ -1,33 +1,59 @@
 .sidenav-container {
   height: 100%;
 }
-    .icon-expand{
-      position: absolute;
-    /* z-index: 99; */
-    right: 0;
-    }
-.sub-menu{
+.icon-expand {
+  position: absolute;
+  /* z-index: 99; */
+  right: 0;
+}
+.sub-menu {
   background-color: #051f3e;
   padding: 0;
-  .mat-list-item{
-    padding: 10px 20px 10px 50px !important;
-    &.active{
-      background-color: #06203f;
-      color: #FFA000;
+  .mat-list-item {
+    padding: 10px 20px 10px 60px !important;
+    border-bottom: none !important;
+    .mat-icon {
+      color: #a3aab3;
+      font-size: 14px !important;
+      margin-right: 10px !important;
+      margin-left: 0;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      padding-bottom: 2px;
     }
-
+    &.active {
+      background-color: #05346a;
+      color: #ffa901;
+      .mat-icon {
+        color: #ffa901;
+      }
+    }
+  }
+}
+.submenu-2{
+    // right: -5px;
+    .mat-icon{
+      color: #ffa901 !important;
+    }
+  .sub-menu{
+    .mat-list-item{
+     padding: 10px 20px 10px 83px !important;
+    }
+    .mat-icon{
+      color: #a3aab3 !important;
+    }
   }
 }
 .sidenav {
   width: 300px;
-  .mat-nav-list{
+  .mat-nav-list {
     padding-top: 65px;
   }
-
 }
 a:not([href]):hover {
-  color: #FFC107;
-  text-decoration: none;
+  background-color: #042954;
+  color: #ffffff;
 }
 .sidenav .mat-toolbar {
   background: inherit;

@@ -1,0 +1,132 @@
+<div class="form-container">
+  <div class="page-title">
+    <h3>Class</h3>
+  </div>
+  <div class="form-fields">
+    <mat-card>
+      <mat-card-title>{{cardTitle}}</mat-card-title>
+      <mat-card-content class="pt-2">
+        <mat-tab-group [selectedIndex] = "selectedIndex">
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon">wc</mat-icon>
+              Class
+            </ng-template>
+            <form [formGroup]="classForm" (ngSubmit)="onSubmit('class')" *ngIf="showForm">
+              <div class="row col-12 m-0 p-0 pt-3">
+                <div class="col-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Class Name</mat-label>
+                    <input matInput formControlName="classname" placeholder="Enter Class Name">
+                    <!--  <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
+              Please enter a valid email address
+            </mat-error> -->
+                    <mat-error *ngIf="submitted && cf.classname.hasError('required')">
+                      Class name is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+               <!--  <div class="col-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Section</mat-label>
+                    <mat-chip-list #chipList2 aria-label="Section" formControlName="section">
+                      <mat-chip *ngFor="let ac of cf.section.value" [selectable]="selectable" [removable]="removable"
+                        (removed)="removeChips(ac, 'ac')">
+                        {{ac}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                      <input placeholder="Enter Assigned Class" [matChipInputFor]="chipList2"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="addChips($event, 'ac')">
+                    </mat-chip-list>
+                  </mat-form-field>
+                </div> -->
+                <div class="col-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Class Teacher</mat-label>
+                    <input matInput placeholder="Enter Class Teacher Name" formControlName="classteacher">
+                    <mat-error *ngIf="submitted && cf.classteacher.hasError('required')">
+                      Last name is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="example-button-row pt-3 pb-2 text-center">
+                <button mat-raised-button color="primary" type="submit">Next</button>
+                <button mat-raised-button class="ml-3 mat-secondary"
+                  (click)="onFormReset($event, 'class')">Reset</button>
+              </div>
+            </form>
+          </mat-tab>
+
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="">layers</mat-icon>
+              Section
+            </ng-template>
+            <form [formGroup]="sectionForm" (ngSubmit)="onSubmit('section')" *ngIf="showForm">
+              <div class="row col-12 m-0 p-0 pt-3">
+                <div class="col-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Class ID</mat-label>
+                    <!-- <input matInput formControlName="classid" placeholder="Enter Class ID"> -->
+                    <!--  <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
+                      Please enter a valid email address
+                    </mat-error> -->
+                    <mat-select placeholder="Enter Class ID" formControlName="classid">
+                      <ng-template ngFor let-cs [ngForOf]="classSectionList">
+                        <mat-option [value]="cs.id">{{cs.classname}}</mat-option>
+                      </ng-template>
+                    </mat-select>
+                    <mat-error *ngIf="submitted && sf.classid.hasError('required')">
+                      Class ID is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Section Name</mat-label>
+                    <!-- <mat-select placeholder="Select section name" formControlName="sectionname">
+                      <ng-template ngFor let-section [ngForOf]="sectionList">
+                        <mat-option [value]="section">{{section}}</mat-option>
+                      </ng-template>
+                    </mat-select> -->
+                    <input matInput formControlName="sectionname" placeholder="Enter Section Name">
+                    <mat-error *ngIf="submitted && sf.sectionname.hasError('required')">
+                      Section Name is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Subjects</mat-label>
+                    <!-- <mat-select placeholder="Select subjects" formControlName="subjects" multiple>
+                      <mat-option value="xyz">XYZ</mat-option>
+                    </mat-select> -->
+                    <mat-chip-list #chipList3 aria-label="subjects" formControlName="subjects">
+                      <mat-chip *ngFor="let sb of sf.subjects.value" [selectable]="selectable" [removable]="removable"
+                        (removed)="removeChips(sb, 'sb')">
+                        {{sb}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                      <input placeholder="Enter Assigned Class" [matChipInputFor]="chipList3"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="addChips($event, 'sb')">
+                    </mat-chip-list>
+                    <mat-error *ngIf="submitted && sf.subjects.hasError('required')">
+                      Subjects is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="example-button-row pt-3 pb-2 text-center">
+                <button mat-raised-button color="primary" type="submit">Submit</button>
+                <button mat-raised-button class="ml-3 mat-secondary"
+                  (click)="onFormReset($event, 'section')">Reset</button>
+              </div>
+            </form>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  </div>

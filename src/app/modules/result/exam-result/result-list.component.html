@@ -1,0 +1,125 @@
+<div class="list-container">
+  <div class="page-title">
+    <h3>Scheduled Exam</h3>
+  </div>
+  <!-- <div class="no-record" *ngIf="isLoading">
+    <img src="assets/images/page-loader.gif" alt="">
+    <p class="m-0">loading...</p>
+  </div> -->
+  <div class="s-list">
+        <!-- Student Search -->
+        <div class="row">
+          <div class="col-5">
+            <mat-form-field appearance="outline" class="p-0 w-100">
+              <mat-label>Class</mat-label>
+              <mat-select placeholder="Select Class" [formControl]="classID" (selectionChange)="onClassChange($event)">
+                <mat-option *ngFor = "let class of classList" [value]="class.id">{{class.classname}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-5">
+            <mat-form-field appearance="outline" class="p-0 w-100">
+              <mat-label>Section</mat-label>
+              <mat-select placeholder="Select Section" [formControl]="sectionID">
+                <mat-option *ngFor = "let section of sectionList" [value]="section.id">{{section.sectionname}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-2 pt-1 mt-1">
+            <button mat-raised-button color="primary" type="button" (click)="getexamList()">Search</button>
+          </div>
+        </div><!-- Student search end -->
+    <mat-card>
+      <div class="list-head">
+        <mat-card-title>Scheduled Exam List</mat-card-title>
+        <div>
+          <mat-form-field appearance="outline" class="col-12 p-0">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Search...">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-card-content class="pt-4">
+
+        <table mat-table [dataSource]="examList" class="col-12" matSort>
+
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+
+          <!-- Roll Number Column -->
+          <ng-container matColumnDef="examname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Exam Name </th>
+            <td mat-cell *matCellDef="let element"><span
+                *ngIf="element.examname ;else dash">{{element.examname | titlecase}}</span></td>
+          </ng-container>
+
+          <!-- Enrollment Number Column -->
+          <ng-container matColumnDef="startdate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+            <td mat-cell *matCellDef="let element"><span
+                *ngIf="element.startdate ;else dash">{{element.startdate | date: 'dd/MM/yyy' }}</span></td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="enddate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> End date </th>
+            <td mat-cell *matCellDef="let element"><span
+                *ngIf="element.enddate ;else dash">{{element.enddate | date: 'dd/MM/yyy'}}</span></td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <!-- <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+            <td mat-cell *matCellDef="let element"> <span
+                *ngIf="element.lastname ;else dash">{{element.lastname | titlecase}}</span></td>
+          </ng-container> -->
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="examdescription">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+            <td mat-cell *matCellDef="let element"> <span
+                *ngIf="element.examdescription ;else dash">{{element.examdescription}}</span></td>
+          </ng-container>
+
+          <!-- Action Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef style="width: 50px;"></th>
+            <td mat-cell *matCellDef="let element">
+              <div class="col">
+                <div ngbDropdown class="d-inline-block">
+                  <span class="flaticon-more-button-of-three-dots" id="dropdownBasic1" ngbDropdownToggle></span>
+                  <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem (click)="addResult(element)"><span class="fa fa-cogs"
+                        style="color: #00c853;"></span>&nbsp;&nbsp;&nbsp;Add Result</button>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [length]="recordLength" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #dash>---</ng-template>

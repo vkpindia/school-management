@@ -12,6 +12,7 @@ export class StudentEditComponent implements OnInit {
   public studentDetails: any;
   public paramID: number;
   public showForm: boolean = false;
+  public isLoading: boolean = true;
 
   constructor(private _route: Router, private _activatedRout: ActivatedRoute, private _ss: StudentsService) {
     this._activatedRout.paramMap.subscribe(params => {
@@ -36,6 +37,7 @@ export class StudentEditComponent implements OnInit {
         console.log('record', record);
         this.studentDetails = record;
         this.showForm = true;
+        this.isLoading = false;
       }
     });
   }

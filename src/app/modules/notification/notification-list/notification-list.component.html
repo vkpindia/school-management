@@ -1,0 +1,58 @@
+<div class="no-record" *ngIf="isLoading">
+  <img src="assets/images/page-loader.gif" alt="">
+  <p class="m-0">loading...</p>
+</div>
+<div class="notice-board-wrap">
+  <div class="row m-0 p-0">
+    <div class="col-5 pl-0">
+      <mat-form-field appearance="outline" class="col-12 p-0">
+        <mat-label>Search by date</mat-label>
+        <input matInput [matDatepicker]="picker1" placeholder="Search by date...">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-5 pl-0">
+      <mat-form-field appearance="outline" class="col-12 p-0">
+        <mat-label>Search by title</mat-label>
+        <input matInput placeholder="Search by title...">
+        <!-- <mat-icon matSuffix>search</mat-icon> -->
+      </mat-form-field>
+    </div>
+    <div class="example-button-row text-center col-2 p-0 mt-1">
+      <button mat-raised-button color="primary" type="submit" class="pt-1 pb-1 pl-4 pr-4">Search</button>
+    </div>
+  </div>
+  <ul *ngIf="notificationList && notificationList.length>0">
+    <li *ngFor="let list of notificationList">
+      <div class="notice-list">
+        <div class="post-date" [style.backgroundColor]="list.dateLbelBg">{{list.startdate | date: 'd MMM y'}}</div>
+        <h6 class="notice-title"><a href="javascript:void(0)">{{list.name}}.</a></h6>
+        <!-- <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div> -->
+      </div>
+    </li>
+  </ul>
+  <ul *ngIf="notificationList && notificationList.length==0 && !isLoading">
+    <li>
+      <div class="notice-list">
+        <div class="post-date" style="background-color:#40dfcd">03/08/2020</div>
+        <h6 class="notice-title"><a href="javascript:void(0)">Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</a></h6>
+        <!-- <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div> -->
+      </div>
+    </li>
+    <li>
+      <div class="notice-list">
+        <div class="post-date" style="background-color:#fbd540">04/08/2020</div>
+        <h6 class="notice-title"><a href="javascript:void(0)">Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</a></h6>
+        <!-- <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div> -->
+      </div>
+    </li>
+    <li>
+      <div class="notice-list">
+        <div class="post-date" style="background-color:#f939a1">05/08/2020</div>
+        <h6 class="notice-title"><a href="javascript:void(0)">Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</a></h6>
+        <!-- <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div> -->
+      </div>
+    </li>
+  </ul>
+</div>

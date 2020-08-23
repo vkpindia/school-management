@@ -1,0 +1,56 @@
+<div class="list-container">
+  <div class="page-title">
+    <h3>Transactions</h3>
+  </div>
+  <div class="no-record" *ngIf="isLoading">
+    <img src="assets/images/page-loader.gif" alt="">
+    <p class="m-0">loading...</p>
+  </div>
+  <div class="s-list">
+    <mat-card>
+      <div class="list-head">
+        <mat-card-title>All Transactions</mat-card-title>
+        <div class="d-flex align-items-center">
+          <div>
+            <mat-form-field appearance="outline" class="col-12 p-0">
+              <mat-label>Filter</mat-label>
+              <input matInput placeholder="Search..." (keyup)="applyFilter()">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <mat-card-content class="pt-4">
+        <table mat-table [dataSource]="transactionList" class="col-12" matSort>
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+
+            <!-- Name Number Column -->
+            <ng-container matColumnDef="{{colu}}"  *ngFor="let colu of displayedColumns">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{colu | titlecase}}</th>
+              <td mat-cell *matCellDef="let element"><span *ngIf="element.colu;else dash">{{element.colu}}</span></td>
+            </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <!-- <mat-paginator [length]="recordLength" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #dash>---</ng-template>

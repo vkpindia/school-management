@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'Mannapur.com/api/'
+  apiBaseUrl: 'http://sergiusschoolsapi.azurewebsites.net/api/'
 };

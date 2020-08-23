@@ -1,0 +1,131 @@
+<div class="form-container">
+  <div class="page-title">
+    <h3>teachers</h3>
+  </div>
+  <div class="no-record" *ngIf="isLoading">
+    <img src="assets/images/page-loader.gif" alt="">
+    <p class="m-0">loading...</p>
+  </div>
+  <div class="form-fields" *ngIf="showDetails">
+    <mat-card>
+      <mat-card-title>About Me
+        <div class="pull-right">
+          <div class="col">
+            <div ngbDropdown class="d-inline-block">
+              <span class="flaticon-more-button-of-three-dots" id="dropdownBasic1" ngbDropdownToggle></span>
+              <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem><span class="fa fa-cogs"
+                    style="color:#00c853;"></span>&nbsp;&nbsp;&nbsp;Edit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-title>
+      <mat-card-content class="pt-4">
+        <div class="row">
+          <div class="col-4">
+            <!-- <img *ngIf="teacherDetails.sex == 'female'" src="assets/images/teacher_female.jpg" alt="">
+            <img *ngIf="teacherDetails.sex == 'male'" src="assets/images/male_avatar.jpg" alt=""> -->
+            <img src="assets/images/male_avatar.jpg" alt="">
+          </div>
+          <div class="col-8">
+            <h3 class="profile-heading" *ngIf="teacherDetails && teacherDetails.firstname">{{teacherDetails.firstname | titlecase}} {{teacherDetails.lastname | titlecase}}
+            </h3>
+            <!-- <p style="width 80%; font-size 16px; color #646464; line-height 1.6;s">Aliquam erat volutpat. Curabiene
+              natis massa sedde lacu stiquen sodale word moun taiery.Aliquam erat volutpaturabiene natis massa sedde
+              sodale word moun taiery.</p> -->
+            <div class="info-table table-responsive">
+              <table class="table text-nowrap">
+                <tbody>
+                 <!--  <tr>
+                    <td>Name</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="teacherDetails.firstname; else dash">{{teacherDetails.firstname | titlecase}}
+                        {{teacherDetails.lastname | titlecase}}</span></td>
+                  </tr> -->
+                  <tr>
+                    <td>Gender</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="teacherDetails && teacherDetails.sex; else dash">{{teacherDetails.sex | titlecase}}</span></td>
+                  </tr>
+                  <!-- <tr>
+                    <td>Father's Name</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="teacherDetails && teacherDetails.fathername; else dash">{{teacherDetails.fathername | titlecase}}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Mother's Name</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="teacherDetails && teacherDetails.mothername; else dash">{{teacherDetails.mothername | titlecase}}</span>
+                    </td>
+                  </tr> -->
+
+                  <tr>
+                    <td>Religion</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="teacherDetails && teacherDetails.religion; else dash">{{teacherDetails.religion | titlecase}}</span></td>
+                  </tr>
+                  <tr>
+                    <td>Date of Birth</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="teacherDetails.dob; else dash">{{teacherDetails.dob | date: 'dd.MM.yyyy'}}</span></td>
+                  </tr>
+                  <tr>
+                    <td>Joining Date</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="teacherDetails && teacherDetails.dateofjoin; else dash">{{teacherDetails.dateofjoin | date: 'dd.MM.yyyy'}}</span></td>
+                  </tr>
+                  <tr>
+                    <td>E-mail</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="teacherDetails && teacherDetails.email; else dash">{{teacherDetails.email}}</span></td>
+                  </tr>
+                  <tr>
+                    <td>Subject</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="teacherDetails && teacherDetails.assignedsubject; else dash">{{teacherDetails.assignedsubject}}</span></td>
+                  </tr>
+                  <tr>
+                    <td>Class</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="teacherDetails && teacherDetails.assignedclass; else dash">{{teacherDetails.assignedclass}}</span></td>
+                  </tr>
+                  <!-- <tr>
+                    <td>Section</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="teacherDetails && teacherDetails.section; else dash">{{teacherDetails.section}}</span></td>
+                  </tr> -->
+                  <tr>
+                    <td>ID No</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="teacherDetails && teacherDetails.id; else dash">#{{teacherDetails.id}}</span></td>
+                  </tr>
+                  <tr>
+                    <td>Blood Group</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="teacherDetails && teacherDetails.bloodgroup; else dash">{{teacherDetails.bloodgroup}}</span></td>
+                  </tr>
+                  <!-- <tr>
+                    <td>Address</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="teacherDetails && teacherDetails.address; else dash">{{teacherDetails.address}}</span></td>
+                  </tr> -->
+                  <tr>
+                    <td>Phone</td>
+                    <td class="font-medium text-dark-medium"><span
+                        *ngIf="teacherDetails && teacherDetails.mobilenumber; else dash">{{teacherDetails.mobilenumber}}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #dash>---</ng-template>

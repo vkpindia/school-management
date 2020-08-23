@@ -1,0 +1,109 @@
+<div class="list-container">
+  <div class="no-record" *ngIf="isLoading">
+    <img src="assets/images/page-loader.gif" alt="">
+    <p class="m-0">loading...</p>
+  </div>
+  <div class="s-list">
+    <mat-card>
+      <div class="list-head">
+        <mat-card-title>Student Fee Data <br/><a style="font-size: 14px; color: rgb(12, 12, 235); cursor: pointer" *ngIf="studentID" (click)="getTransactions()">Get all transactions</a></mat-card-title>
+
+        <div class="d-flex align-items-center">
+          <div>
+            <mat-form-field appearance="outline" class="col-12 p-0">
+              <mat-label>Filter</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Search...">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <mat-card-content class="pt-4">
+        <table mat-table [dataSource]="feeList" class="col-12" matSort>
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+
+          <!-- Name Number Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let element"><span
+                *ngIf="element.name;else dash">{{element.name}}</span></td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="feetype">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fee Type</th>
+            <td mat-cell *matCellDef="let element"><span
+                *ngIf="element.feetype ;else dash">{{element.feetype}}</span>
+            </td>
+          </ng-container>
+
+           <!-- Symbol Column -->
+           <ng-container matColumnDef="feeamount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fee Amount</th>
+            <td mat-cell *matCellDef="let element"> <span
+                *ngIf="element.feeamount;else dash">{{element.feeamount | currency: 'INR'}}</span></td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="paidamount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Paid Amount </th>
+            <td mat-cell *matCellDef="let element">
+              <span *ngIf="element.paidamount;else dash" class="p-0 m-0">
+                {{element.paidamount | currency: 'INR'}}
+              </span>
+            </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="termname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Term Name </th>
+            <td mat-cell *matCellDef="let element">
+              <span *ngIf="element.termname;else dash" class="p-0 m-0">
+                {{element.termname}}
+              </span>
+            </td>
+          </ng-container>
+
+          <!-- Action Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef style="width: 50px;"></th>
+            <td mat-cell *matCellDef="let element">
+              <div class="col">
+                <div ngbDropdown class="d-inline-block">
+                  <span class="flaticon-more-button-of-three-dots" id="dropdownBasic1" ngbDropdownToggle></span>
+                  <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem (click)="onEdit(element)"><span class="fa fa-cogs"
+                        style="color: #00c853;"></span>&nbsp;&nbsp;&nbsp;Edit</button>
+                    <button ngbDropdownItem (click)="onDelete(element)"><span class="fa fa-trash"
+                        style="color: #f00;"></span>&nbsp;&nbsp;&nbsp;Delete</button>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <!-- <mat-paginator [length]="recordLength" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #dash>---</ng-template>

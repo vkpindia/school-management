@@ -15,19 +15,26 @@ import { DatePipe } from '@angular/common';
 
 export class StudentAdmissionComponent implements OnInit {
 
+  // Component properties variable declaration
   @Input() studentDetails: any;
   @Output() formCancel: EventEmitter<any> = new EventEmitter<any>();
   @Output() formSubmit: EventEmitter<any> = new EventEmitter<any>();
 
+  // VAriable declaration
   public admissionForm: FormGroup;
+  public imageSrc: string;
   public loading: boolean = false;
   public submitted: boolean = false;
   public returnUrl: string;
   public error: string = '';
   public cardTitle: string = 'Add New Students';
   public showButtons: boolean = false;
+  public showForm: boolean = true;
+  public buttonLabel: string = 'Next';
   public horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   public verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  public classList: any = [];
+  public sectionList: any = [];
 
   constructor(
     private _ar: ActivatedRoute,
@@ -70,15 +77,19 @@ export class StudentAdmissionComponent implements OnInit {
       hostelroom: new FormControl(null),
       previousclass: new FormControl(null),
       previousschoolname: new FormControl(null),
-      previousschooladdress: new FormControl(null)
+      previousschooladdress: new FormControl(null),
+      file: new FormControl(null, Validators.required),
+      image: new FormControl('', Validators.required),
     });
     console.log('studentDetails', this.studentDetails);
     if (this.studentDetails && this.studentDetails[0].id) {
       this.cardTitle = 'Update Student Record';
+      this.buttonLabel = 'Update';
       this.showButtons = true;
     }
 
     // method to set data in form
+    this.getClassSection();
     this.setDataToForm();
   }
 
@@ -90,6 +101,57 @@ export class StudentAdmissionComponent implements OnInit {
    */
   get f() { return this.admissionForm.controls; }
 
+
+
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-07-21
+   * @memberof AddfeeComponent
+   */
+  public getClassSection() {
+    // this.showForm = false;
+    this._ss.getClassSection().subscribe(data => {
+      if (data) {
+        this.classList = data;
+      }
+    });
+  }
+
+  onFileChange(event) {
+    let reader = new FileReader();
+
+    if(event.target.files && event.target.files.length) {
+      let file = (event.target as HTMLInputElement).files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+
+        this.imageSrc = reader.result as string;
+        this.admissionForm.patchValue({
+          image: reader.result
+        });
+        this.admissionForm.get('image').updateValueAndValidity()
+      };
+    }
+  }
+
+    /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-07-19
+   * @param {*} event
+   * @memberof ClassAddComponent
+   */
+  public onClassChange(event):void {
+    if(event){
+       this._ss.getSections(event.value).subscribe(section=>{
+         if(section){
+           this.sectionList = section;
+         }
+      })
+    }
+  }
+
   /**
    * @description Method to set data in form
    * @author Virendra Pandey
@@ -98,6 +160,7 @@ export class StudentAdmissionComponent implements OnInit {
    */
   public setDataToForm(): void {
     if (this.studentDetails) {
+      // this.studentDetails[0].Class = this.studentDetails[0].Class;
       this.admissionForm.patchValue(this.studentDetails[0]);
     }
   }
@@ -126,14 +189,23 @@ export class StudentAdmissionComponent implements OnInit {
       return;
     }
 
+    let payload = {};
+    Object.assign(payload, this.admissionForm.value);
+    delete payload['file'];
     this.loading = true;
     if (this.studentDetails && this.studentDetails[0].id) {
+      payload['id'] = this.studentDetails[0].id;
       console.log('studentDetails.id', this.studentDetails.id);
-      this._ss.updateStudent(this.admissionForm.value).subscribe(data => {
+      this._ss.updateStudent(this.studentDetails[0].id, payload).subscribe(data => {
         this.formSubmit.emit(true);
         this.showNotification('Updated Successfully!!');
         this.admissionForm.reset();
         // this._router.navigate([this.returnUrl]);
+        this.showForm = false;
+        this.imageSrc = "";
+        setTimeout(() => {
+          this.showForm = true;
+        }, 50);
       },
         error => {
           this.error = error;
@@ -141,10 +213,12 @@ export class StudentAdmissionComponent implements OnInit {
           console.error(this.error);
         });
     } else {
-      this._ss.postStudent(this.admissionForm.value).subscribe(data => {
-        console.log('data', data);
+      this._ss.postStudent(payload).subscribe(data => {
+        let paramID = data['id'];
         this.showNotification('Submitted Successfully!!');
+        this._router.navigate(['/parents/add'], { queryParams: { id: paramID } });
         this.admissionForm.reset();
+        this.imageSrc = "";
         // this._router.navigate([this.returnUrl]);
       },
         error => {

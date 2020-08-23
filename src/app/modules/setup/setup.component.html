@@ -1,0 +1,120 @@
+<div class="list-container">
+  <div class="page-title">
+    <h3>Setup</h3>
+  </div>
+  <div class="row m-0">
+    <div class="col-12 s-list pl-0 pr-0">
+      <mat-card class="h-100">
+        <div class="list-head">
+          <mat-card-title>Create Setup</mat-card-title>
+        </div>
+        <mat-card-content class="">
+          <div class="form-container">
+            <div class="form-fields pt-4">
+              <form [formGroup]="setupForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
+                <div class="row m-0">
+                  <div class="col-6">
+                    <mat-form-field appearance="outline" class="col-12 p-0">
+                      <mat-label>Type</mat-label>
+                      <!-- <input matInput formControlName="name" placeholder="Enter Title"> -->
+                      <mat-select placeholder="Enter Type" formControlName="type"
+                        (selectionChange)="onSetupTypeChange($event)">
+                        <ng-template ngFor let-cs [ngForOf]="setupTypeList">
+                          <mat-option [value]="cs.value">{{cs.label}}</mat-option>
+                        </ng-template>
+                      </mat-select>
+                      <mat-error *ngIf="submitted && f.type.hasError('required')">
+                        Type is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-6">
+                    <mat-form-field appearance="outline" class="col-12 p-0">
+                      <mat-label>{{fieldLabel? fieldLabel: 'Setup Type'}}</mat-label>
+                      <input matInput placeholder="Setup Type" formControlName="typename">
+                      <mat-error *ngIf="submitted && f.typename.hasError('required')">
+                        {{fieldLabel? fieldLabel: 'Setup Type'}} is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-6" [hidden]="fieldLabel != 'Transport Type'">
+                    <mat-form-field appearance="outline" class="col-12 p-0">
+                      <mat-label>Amount</mat-label>
+                      <input matInput placeholder="Enter Amount" formControlName="optionalparam">
+                      <mat-error *ngIf="submitted && f.optionalparam.hasError('required')">
+                        Amount is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+
+                  </div>
+
+                </div>
+
+                <div class="example-button-row pt-3 text-center">
+                  <button mat-raised-button color="primary" type="submit">Submit</button>
+                  <button mat-raised-button class="ml-3 mat-secondary" (click)="onFormReset($event)">Reset</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row m-0">
+    <div class="s-list col-12 p-0 pt-3">
+      <mat-card class="h-100">
+        <div class="list-head">
+          <mat-card-title>Setup List</mat-card-title>
+          <mat-divider class="mt-4"></mat-divider>
+        </div>
+        <mat-card-content class="pt-4">
+          <div class="row m-0 pt-2 setup-list">
+            <div class="col-12 col-sm-6 col-md-3 list">
+              <h3><strong>Fee Type List</strong></h3>
+              <ul class="p-0 m-0" style="list-style: none;">
+                <li *ngFor="let fee of feeTypeList; let i = index">
+                  <span><strong>{{i+1}}.</strong></span>
+                  <span>{{fee.feetype}}</span>
+                  <a href="javascript:void(0)" (click)="deleteTransportType(fee, 'fee')" style="color: #f00;" class="fa fa-trash"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3 list">
+              <h3><strong>Salary Type List</strong></h3>
+              <ul class="p-0 m-0" style="list-style: none;">
+                <li *ngFor="let salary of salaryTypeList; let i = index">
+                  <span><strong>{{i+1}}.</strong></span>
+                  <span>{{salary.salarytype}}</span>
+                  <a href="javascript:void(0)" (click)="deleteTransportType(salary, 'salary')" style="color: #f00;" class="fa fa-trash"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3 list">
+              <h3><strong>Transport Type List</strong></h3>
+              <ul class="p-0 m-0" style="list-style: none;">
+                <li *ngFor="let transport of transportList; let i = index">
+                  <span><strong>{{i+1}}.</strong></span>
+                  <span>{{transport.villagename}}&nbsp;-&nbsp;{{transport.price | currency:'INR'}}</span>
+                  <a href="javascript:void(0)" (click)="deleteTransportType(transport, 'transport')" style="color: #f00;" class="fa fa-trash"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3 list">
+              <h3><strong>Expense Type List</strong></h3>
+              <ul class="p-0 m-0" style="list-style: none;">
+                <li *ngFor="let expanse of expansesTypeList; let i = index">
+                  <span><strong>{{i+1}}.</strong></span>
+                  <span>{{expanse.expensetype}}</span>
+                  <a href="javascript:void(0)" (click)="deleteTransportType(expanse, 'expanse')" style="color: #f00;" class="fa fa-trash"></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

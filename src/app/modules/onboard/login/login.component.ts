@@ -35,14 +35,14 @@ export class LoginComponent implements OnInit {
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/']);
     }
   }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      username: new FormControl('', Validators.required),
-      pass: new FormControl('', Validators.required),
+      Userid: new FormControl('', Validators.required),
+      Password: new FormControl('', Validators.required),
       rememberMe: new FormControl(''),
     });
     // get return url from route parameters or default to '/'
@@ -59,19 +59,20 @@ export class LoginComponent implements OnInit {
   public onSubmit() {
     console.log('onSubmit');
     this.submitted = true;
-    this.router.navigate([this.returnUrl]);
-    this.showNotification();
+    // this.router.navigate([this.returnUrl]);
     // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
     }
 // console.log('this.loginForm.value.username', this.loginForm.value.username);
     this.loading = true;
-    this.authenticationService.login(this.loginForm.value.username, this.loginForm.value.pass)
+    delete this.loginForm.value.rememberMe;
+    this.authenticationService.login(this.loginForm.value)
       .pipe(first())
       .subscribe(
         data => {
           this.showNotification();
+          console.log('this.returnUrl', this.returnUrl);
           this.router.navigate([this.returnUrl]);
         },
         error => {

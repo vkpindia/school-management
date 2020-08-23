@@ -4,14 +4,17 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../_models';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
+  public _apiUrl = environment.apiBaseUrl;
   constructor(private http: HttpClient, private _router: Router) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
@@ -36,11 +39,13 @@ export class AuthenticationService {
    * @returns {Observable<any>}
    * @memberof AuthenticationService
    */
-  public login(username: string, password: string): Observable<any> {
-    return this.http.post<any>(`/users/authenticate`, { username, password })
+  public login(formData:any): Observable<any> {
+    return this.http.post<any>(this._apiUrl+'login/UserLogin', formData)
       .pipe(map(user => {
         // login successful if there's a jwt token in the response
-        if (user && user.token) {
+        // console.log('user', user);
+        if (user && user.Message) {
+          console.log('user', user);
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);

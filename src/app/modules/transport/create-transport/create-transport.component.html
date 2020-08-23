@@ -1,0 +1,328 @@
+<div class="form-container">
+  <div class="page-title">
+    <h3>Transportation</h3>
+  </div>
+  <div class="form-fields">
+    <mat-card>
+      <mat-card-title>Add Transport</mat-card-title>
+      <mat-card-content class="pt-2">
+        <form [formGroup]="transportationForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
+          <div class="row">
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Route Name</mat-label>
+                <input matInput formControlName="routename" placeholder="Enter Route">
+                <mat-error *ngIf="submitted && f.routename.hasError('required')">
+                  Route name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Serial Number</mat-label>
+                <input matInput placeholder="Enter Serial No" formControlName="serial_number">
+                <mat-error *ngIf="submitted && f.serial_number.hasError('required')">
+                  Serial Number is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>RC Number</mat-label>
+                <input matInput placeholder="Enter RC Number" formControlName="rc_number">
+                <mat-error *ngIf="submitted && f.rc_number.hasError('required')">
+                  RC Number is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Insurance Number</mat-label>
+                <input matInput placeholder="Enter Insurance Number" formControlName="insurance_number">
+                <mat-error *ngIf="submitted && f.insurance_number.hasError('required')">
+                  Insurance Number is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Permit Number</mat-label>
+                <input matInput placeholder="Enter Permit Number" formControlName="permit_number">
+                <mat-error *ngIf="submitted && f.permit_number.hasError('required')">
+                  Permit Number is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>FC Number</mat-label>
+                <input matInput placeholder="Enter FC Number" formControlName="fc_number">
+                <mat-error *ngIf="submitted && f.fc_number.hasError('required')">
+                  FC Number is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Permit Start Date</mat-label>
+                <input matInput [matDatepicker]="picker1" placeholder="Select date" formControlName="permit_startdate">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+                <mat-error *ngIf="submitted && f.permit_startdate.hasError('required')">
+                  Permit start date is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Permit End Date</mat-label>
+                <input matInput [matDatepicker]="picker2" placeholder="Select date" formControlName="permit_enddate">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                <mat-error *ngIf="submitted && f.permit_enddate.hasError('required')">
+                  Permit end date is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Insurance Start Date</mat-label>
+                <input matInput [matDatepicker]="picker12" placeholder="Select date" formControlName="insurance_start">
+                <mat-datepicker-toggle matSuffix [for]="picker12"></mat-datepicker-toggle>
+                <mat-datepicker #picker12></mat-datepicker>
+                <mat-error *ngIf="submitted && f.insurance_start.hasError('required')">
+                  Insurance start Date is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Insurance End Date</mat-label>
+                <input matInput [matDatepicker]="picker13" placeholder="Select date"
+                  formControlName="insurance_enddate">
+                <mat-datepicker-toggle matSuffix [for]="picker13"></mat-datepicker-toggle>
+                <mat-datepicker #picker13></mat-datepicker>
+                <mat-error *ngIf="submitted && f.insurance_enddate.hasError('required')">
+                  Insurance end Date is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>FC Start Date</mat-label>
+                <input matInput [matDatepicker]="picker14" placeholder="Select date" formControlName="fc_start">
+                <mat-datepicker-toggle matSuffix [for]="picker14"></mat-datepicker-toggle>
+                <mat-datepicker #picker14></mat-datepicker>
+                <mat-error *ngIf="submitted && f.fc_start.hasError('required')">
+                  FC start Date is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>FC Start Date</mat-label>
+                <input matInput [matDatepicker]="picker15" placeholder="Select date" formControlName="fc_enddate">
+                <mat-datepicker-toggle matSuffix [for]="picker15"></mat-datepicker-toggle>
+                <mat-datepicker #picker15></mat-datepicker>
+                <mat-error *ngIf="submitted && f.fc_enddate.hasError('required')">
+                  FC end Date is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Model</mat-label>
+                <input matInput placeholder="Enter model" formControlName="model">
+                <mat-error *ngIf="submitted && f.model.hasError('required')">
+                  Model is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Company Name</mat-label>
+                <input matInput placeholder="Enter companyname" formControlName="companyname">
+                <mat-error *ngIf="submitted && f.companyname.hasError('required')">
+                  Comapny Name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Seating Capacity</mat-label>
+                <input matInput placeholder="Enter Caste" formControlName="seatingcapacity">
+                <mat-error *ngIf="submitted && f.seatingcapacity.hasError('required')">
+                  Seating capacity is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Vehicle Number</mat-label>
+                <input matInput placeholder="Enter vehicle no" formControlName="vehiclenumber">
+                <mat-error *ngIf="submitted && f.vehiclenumber.hasError('required')">
+                  vehicle no is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- Optional Details fields -->
+
+            <div class="col-12 pb-2 pt-3">
+              <mat-card-title>Driver Details</mat-card-title>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Driver Name</mat-label>
+                <input matInput placeholder="Enter Adhaar" formControlName="drivername">
+                <mat-error *ngIf="submitted && f.drivername.hasError('required')">
+                  vehicle no is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Date of Birth</mat-label>
+                <input matInput [matDatepicker]="picker16" placeholder="Select date" formControlName="dob">
+                <mat-datepicker-toggle matSuffix [for]="picker16"></mat-datepicker-toggle>
+                <mat-datepicker #picker16></mat-datepicker>
+                <mat-error *ngIf="submitted && f.dob.hasError('required')">
+                  DOB is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Driving License No</mat-label>
+                <input matInput placeholder="Enter License No" formControlName="driving_liciense_numebr">
+                <mat-error *ngIf="submitted && f.driving_liciense_numebr.hasError('required')">
+                  Driving License is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Date of Issue</mat-label>
+                <input matInput [matDatepicker]="picker6" placeholder="Select date" formControlName="dateofissue">
+                <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+                <mat-datepicker #picker6></mat-datepicker>
+                <mat-error *ngIf="submitted && f.dateofissue.hasError('required')">
+                  Date of issue is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Date of Expire</mat-label>
+                <input matInput [matDatepicker]="picker17" placeholder="Select date" formControlName="dateofexpire">
+                <mat-datepicker-toggle matSuffix [for]="picker17"></mat-datepicker-toggle>
+                <mat-datepicker #picker17></mat-datepicker>
+                <mat-error *ngIf="submitted && f.dateofexpire.hasError('required')">
+                  Date of expire is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>License Type</mat-label>
+                <input matInput placeholder="Enter License type" formControlName="liciencetype">
+                <mat-error *ngIf="submitted && f.liciencetype.hasError('required')">
+                  License type is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Place of Issue</mat-label>
+                <input matInput placeholder="Enter palce of issue" formControlName="placeofissue">
+                <mat-error *ngIf="submitted && f.placeofissue.hasError('required')">
+                  Place of issue is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Driver Number</mat-label>
+                <input matInput placeholder="Enter Driver Number" formControlName="driver_number">
+                <mat-error *ngIf="submitted && f.driver_number.hasError('required')">
+                  Driver number is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 pb-2 pt-3">
+              <mat-card-title>Attendar Details</mat-card-title>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Attender Name</mat-label>
+                <input  matInput placeholder="Enter name" formControlName="attendername">
+                <mat-error *ngIf="submitted && f.attendername.hasError('required')">
+                  Attender name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Attender Number</mat-label>
+                <input  matInput placeholder="Enter name" formControlName="attender_number">
+                <mat-error *ngIf="submitted && f.attender_number.hasError('required')">
+                  Attender number is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Date of Birth</mat-label>
+                <input matInput [matDatepicker]="picker18" placeholder="Select date" formControlName="attenderdob">
+                <mat-datepicker-toggle matSuffix [for]="picker18"></mat-datepicker-toggle>
+                <mat-datepicker #picker18></mat-datepicker>
+                <mat-error *ngIf="submitted && f.attenderdob.hasError('required')">
+                  Date of  birth is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+          <div class="example-button-row pt-3 text-center">
+            <button mat-raised-button color="primary" type="submit">{{buttonLabel}}</button>
+            <button mat-raised-button class="ml-3 mat-secondary"
+              (click)="onCancel($event)">Cancel</button>
+            <button *ngIf="!showButtons" mat-raised-button class="ml-3 mat-secondary"
+              (click)="onFormReset($event)">Reset</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #dash>---</ng-template>

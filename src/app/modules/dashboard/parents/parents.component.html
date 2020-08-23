@@ -1,0 +1,357 @@
+<div class="list-container">
+  <div class="page-title">
+    <h3>Parent Dashboard</h3>
+  </div>
+  <!--   <div class="no-record" *ngIf="isLoading">
+    <img src="assets/images/page-loader.gif" alt="">
+    <p class="m-0">loading...</p>
+  </div> -->
+  <div class="s-list">
+    <div class="row gutters-20">
+      <div class="col-xl-3 col-sm-6 col-12 pr-xl-0">
+        <div class="dashboard-summery-one mg-b-20">
+          <div class="row align-items-center">
+            <div class="col-6">
+              <div class="item-icon bg-light-red">
+                <i class="flaticon-money text-red"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="item-content">
+                <div class="item-title">Earnings</div>
+                <div class="item-number"><span>₹</span><span class="counter" data-num="193000">193000</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 pr-xl-0">
+        <div class="dashboard-summery-one mg-b-20">
+          <div class="row">
+            <div class="col-6">
+              <div class="item-icon bg-light-magenta">
+                <i class="flaticon-shopping-list text-magenta"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="item-content">
+                <div class="item-title">Notifications</div>
+                <div class="item-number"><span class="counter" data-num="12">12</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 pr-xl-0">
+        <div class="dashboard-summery-one mg-b-20">
+          <div class="row">
+            <div class="col-6">
+              <div class="item-icon bg-light-yellow">
+                <i class="flaticon-mortarboard text-orange"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="item-content">
+                <div class="item-title">Result</div>
+                <div class="item-number"><span class="counter" data-num="16">16</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12">
+        <div class="dashboard-summery-one mg-b-20">
+          <div class="row">
+            <div class="col-6">
+              <div class="item-icon bg-light-blue">
+                <i class="flaticon-money text-blue"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="item-content">
+                <div class="item-title">Expenses</div>
+                <div class="item-number"><span>₹</span><span class="counter" data-num="193000">193000</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row gutters-20">
+  <div class="list-container col-12">
+    <!-- <div class="no-record" *ngIf="isLoading">
+      <img src="assets/images/page-loader.gif" alt="">
+      <p class="m-0">loading...</p>
+    </div> -->
+    <div class="s-list p-0 pb-3">
+      <mat-card>
+        <div class="list-head">
+          <mat-card-title>All Expenses</mat-card-title>
+          <div class="d-flex align-items-center">
+            <div>
+              <mat-form-field appearance="outline" class="col-12 p-0">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Search...">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <mat-card-content class="pt-4">
+          <mat-table [dataSource]="expenseList" class="col-12" matSort>
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+              <mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null"
+                  [checked]="selection.hasValue() && isAllSelected()"
+                  [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                  [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Name Number Column -->
+            <ng-container matColumnDef="expensetype">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Expense Type</mat-header-cell>
+              <mat-cell *matCellDef="let element"><span
+                  *ngIf="element.expensetype;else dash">{{element.expensetype}}</span></mat-cell>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="amount">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Amount</mat-header-cell>
+              <mat-cell *matCellDef="let element"> <span
+                  *ngIf="element.amount;else dash">{{element.amount | currency:'INR'}}</span></mat-cell>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="pendingamount">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Pending Amount</mat-header-cell>
+              <mat-cell *matCellDef="let element"><span
+                  *ngIf="element.pendingamount ;else dash">{{element.pendingamount | currency:'INR'}}</span>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+              <mat-cell mat-cell *matCellDef="let element">
+                <span *ngIf="element.status;else dash" class="p-0 m-0">
+                  {{element.status}}
+                </span>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="description">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <span [title]="element.description" *ngIf="element.description;else dash" class="p-0 m-0"
+                  class="text-mat-rowuncate col-10 p-0">
+                  {{element.description}}
+                </span>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="actions">
+              <mat-header-cell mat-header-cell *matHeaderCellDef style="widmat-header-cell: 50px;"></mat-header-cell>
+              <mat-cell mat-cell *matCellDef="let element">
+                <div class="col">
+                  <div ngbDropdown class="d-inline-block">
+                    <span class="flaticon-more-button-of-mat-header-cellree-dots" id="dropdownBasic1" ngbDropdownToggle></span>
+                    <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <button ngbDropdownItem (click)="onEdit(element)"><span class="fa fa-cogs"
+                          style="color: #00c853;"></span>&nbsp;&nbsp;&nbsp;Edit</button>
+                      <button ngbDropdownItem (click)="onDelete(element)"><span class="fa fa-mat-rowash"
+                          style="color: #f00;"></span>&nbsp;&nbsp;&nbsp;Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+          </mat-paginator>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-4 pr-xl-0">
+    <div class="card dashboard-card-two pd-b-20">
+      <div class="card-body">
+        <div class="heading-layout1">
+          <div class="item-title">
+            <h3>Notifications
+            </h3>
+          </div>
+        </div>
+        <div class="expense-chart-wrap">
+          <div class="notice-board-wrap dashboard-notice">
+            <ul *ngIf="notificationList && notificationList.length>0">
+              <li *ngFor="let list of notificationList">
+                <div class="notice-list">
+                  <div class="post-date" [style.backgroundColor]="list.dateLbelBg">{{list.startdate | date: 'd MMM y'}}
+                  </div>
+                  <h6 class="notice-title"><a href="javascript:void(0)">{{list.name}}.</a></h6>
+                  <!-- <div class="enmat-rowy-meta"> Jennyfar Lopez / <span>5 min ago</span></div> -->
+                </div>
+              </li>
+            </ul>
+            <ul *ngIf="notificationList && notificationList.length==0 && !isLoading">
+              <li>
+                <div class="notice-list">
+                  <div class="post-date" style="background-color:#40dfcd">03/08/2020</div>
+                  <h6 class="notice-title"><a href="javascript:void(0)">Lorem ipsum is a placeholder text commonly used
+                      to demonsmat-rowate mat-header-celle visual form of a document or a typeface wimat-header-cellout relying on meaningful
+                      content.</a></h6>
+                  <!-- <div class="enmat-rowy-meta"> Jennyfar Lopez / <span>5 min ago</span></div> -->
+                </div>
+              </li>
+              <li>
+                <div class="notice-list">
+                  <div class="post-date" style="background-color:#fbd540">04/08/2020</div>
+                  <h6 class="notice-title"><a href="javascript:void(0)">Lorem ipsum is a placeholder text commonly used
+                      to demonsmat-rowate mat-header-celle visual form of a document or a typeface wimat-header-cellout relying on meaningful
+                      content.</a></h6>
+                  <!-- <div class="enmat-rowy-meta"> Jennyfar Lopez / <span>5 min ago</span></div> -->
+                </div>
+              </li>
+              <li>
+                <div class="notice-list">
+                  <div class="post-date" style="background-color:#f939a1">05/08/2020</div>
+                  <h6 class="notice-title"><a href="javascript:void(0)">Lorem ipsum is a placeholder text commonly used
+                      to demonsmat-rowate mat-header-celle visual form of a document or a typeface wimat-header-cellout relying on meaningful
+                      content.</a></h6>
+                  <!-- <div class="enmat-rowy-meta"> Jennyfar Lopez / <span>5 min ago</span></div> -->
+                </div>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-8">
+    <div class="list-container">
+      <!-- <div class="no-record" *ngIf="isLoading">
+        <img src="assets/images/page-loader.gif" alt="">
+        <p class="m-0">loading...</p>
+      </div> -->
+      <div class="s-list p-0 pb-3">
+        <mat-card>
+          <div class="list-head">
+            <mat-card-title>All Exam Results</mat-card-title>
+            <div class="d-flex align-items-center">
+              <div>
+                <mat-form-field appearance="outline" class="col-12 p-0">
+                  <mat-label>Filter</mat-label>
+                  <input matInput (keyup)="applyFilter($event)" placeholder="Search...">
+                  <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <mat-card-content class="pt-4">
+            <table mat-table [dataSource]="expenseList" class="col-12" matSort>
+              <!-- Checkbox Column -->
+              <ng-container matColumnDef="select">
+                <mat-header-cell mat-header-cell *matHeaderCellDef>
+                  <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                  </mat-checkbox>
+                </mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let row">
+                  <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                  </mat-checkbox>
+                </mat-cell>
+              </ng-container>
+
+              <!-- Name Number Column -->
+              <ng-container matColumnDef="expensetype">
+                <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Exam Name</mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let element"><span
+                    *ngIf="element.expensetype;else dash">{{element.expensetype}}</span></mat-cell>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="amount">
+                <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Subject</mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let element"> <span
+                    *ngIf="element.amount;else dash">{{element.amount | currency:'INR'}}</span></mat-cell>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="pendingamount">
+                <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Class</mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let element"><span
+                    *ngIf="element.pendingamount ;else dash">{{element.pendingamount | currency:'INR'}}</span>
+                </mat-cell>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="status">
+                <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Grade </mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let element">
+                  <span *ngIf="element.status;else dash" class="p-0 m-0">
+                    {{element.status}}
+                  </span>
+                </mat-cell>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="description">
+                <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Percent </mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let element">
+                  <span [title]="element.description" *ngIf="element.description;else dash" class="p-0 m-0"
+                    class="text-mat-rowuncate col-10 p-0">
+                    {{element.description}}
+                  </span>
+                </mat-cell>
+              </ng-container>
+
+              <!-- Action Column -->
+              <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef style="widmat-header-cell: 50px;"></mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <div class="col">
+                    <div ngbDropdown class="d-inline-block">
+                      <span class="flaticon-more-button-of-mat-header-cellree-dots" id="dropdownBasic1" ngbDropdownToggle></span>
+                      <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem (click)="onEdit(element)"><span class="fa fa-cogs"
+                            style="color: #00c853;"></span>&nbsp;&nbsp;&nbsp;Edit</button>
+                        <button ngbDropdownItem (click)="onDelete(element)"><span class="fa fa-mat-rowash"
+                            style="color: #f00;"></span>&nbsp;&nbsp;&nbsp;Delete</button>
+                      </div>
+                    </div>
+                  </div>
+                </mat-cell>
+              </ng-container>
+
+              <mat-row mat-header-row *matHeaderRowDef="displayedColumns"></mat-row>
+              <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </table>
+            <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+            </mat-paginator>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #dash>---</ng-template>

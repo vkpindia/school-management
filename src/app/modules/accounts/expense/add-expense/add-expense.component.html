@@ -1,0 +1,96 @@
+<div class="form-container">
+  <!--  <div class="page-title">
+    <h3>Expenses</h3>
+  </div> -->
+  <div class="form-fields " *ngIf="showForm">
+    <mat-card>
+      <mat-card-title>{{cardTitle}}</mat-card-title>
+      <mat-card-content class="pt-2">
+        <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Expense type</mat-label>
+                <mat-select formControlName="expensetype" placeholder="Selecty expense type" [(value)]="selectedType">
+                  <ng-template ngFor let-eType [ngForOf]="expensetypesList">
+                    <mat-option [value]="eType.expensetype">{{eType.expensetype}}</mat-option>
+                  </ng-template>
+                </mat-select>
+                <mat-error *ngIf="submitted && f.expensetype.hasError('required')">
+                  Expense type is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- Mother related fields -->
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Amount</mat-label>
+                <input type="number" matInput formControlName="amount" placeholder="Enter Amount">
+                <!--  <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
+                  Please enter a valid email address
+                </mat-error> -->
+                <mat-error *ngIf="submitted && f.amount.hasError('required')">
+                  Amount is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Pending amount</mat-label>
+                <input type="number" matInput formControlName="pendingamount" placeholder="Enter Pending Amount">
+                <!--  <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
+                  Please enter a valid email address
+                </mat-error> -->
+                <mat-error *ngIf="submitted && f.pendingamount.hasError('required')">
+                  Pending mount is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Date</mat-label>
+                <input matInput [matDatepicker]="picker12" placeholder="Select date" formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="picker12"></mat-datepicker-toggle>
+                <mat-datepicker #picker12></mat-datepicker>
+                <mat-error *ngIf="submitted && f.date.hasError('required')">
+                  Date is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Status</mat-label>
+                <input matInput placeholder="Enter status" formControlName="status">
+                <mat-error *ngIf="submitted && f.status .hasError('required')">
+                  Status is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-6">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Description</mat-label>
+                <textarea matInput placeholder="Description" formControlName="description" rows="3"></textarea>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+          <div class="example-button-row pt-3 text-center">
+            <button mat-raised-button color="primary" type="submit">{{buttonLabel}}</button>
+            <button mat-raised-button class="ml-3 mat-secondary" (click)="onCancel($event)">Cancel</button>
+            <button *ngIf="!showButtons" mat-raised-button class="ml-3" color="warn"
+              (click)="onFormReset($event)">Reset</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #dash>---</ng-template>

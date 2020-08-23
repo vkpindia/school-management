@@ -9,19 +9,31 @@ import { StudentDetailsComponent } from './student-details/student-details.compo
 const routes: Routes = [
   {
     path: '',
-    component: StudentsListComponent
+    component: StudentsListComponent,
+    data: {
+      breadcrumb: 'List'
+    }
   },
   {
     path: 'admission',
-    component: StudentAdmissionComponent
+    component: StudentAdmissionComponent,
+    data: {
+      breadcrumb: 'Admission'
+    }
   },
   {
     path: 'edit/:id',
-    component: StudentEditComponent
+    component: StudentEditComponent,
+    data: {
+      breadcrumb: 'Edit'
+    }
   },
   {
     path: 'details',
-    component: StudentDetailsComponent
+    component: StudentDetailsComponent,
+    data: {
+      breadcrumb: 'Details'
+    }
   }
 ];
 

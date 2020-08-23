@@ -1,0 +1,157 @@
+<div class="form-container">
+  <div class="page-title">
+    <h3>Attendance</h3>
+  </div>
+  <div class="form-fields">
+
+    <mat-card>
+      <mat-card-title>Student Attendance</mat-card-title>
+      <mat-card-content class="pt-2">
+        <!-- <mat-tab-group [selectedIndex] = "selectedIndex">
+          <mat-tab> -->
+            <!-- <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon">wc</mat-icon>
+              First Session Attendance
+            </ng-template> -->
+                <!-- Student Search -->
+
+    <form [formGroup]="attendanceForm" (ngSubmit)="onSubmit()" *ngIf="isFormActive"><!--  *ngIf="showForm" -->
+      <div class="row">
+        <div class="col-4">
+          <mat-form-field appearance="outline" class="p-0">
+            <mat-label>Class</mat-label>
+            <mat-select placeholder="Select Class" formControlName="classid" (selectionChange)="onClassChange($event)">
+              <mat-option *ngFor = "let class of classList" [value]="class.id">{{class.classname}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.classid.hasError('required')">
+             Class is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-4">
+          <mat-form-field appearance="outline" class="p-0">
+            <mat-label>Section</mat-label>
+            <mat-select placeholder="Select Section" formControlName="sectionid" (selectionChange)="onSectionChange($event)">
+              <mat-option *ngFor = "let section of sectionList" [value]="section.id">{{section.sectionname}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.sectionid.hasError('required')">
+              Section is <strong>required</strong>
+             </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field appearance="outline" class="col-12 p-0">
+            <mat-label>Select Date</mat-label>
+            <!-- <input matInput type="datetime-local" placeholder="Select Date" formControlName="startdate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker> -->
+            <input matInput [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" placeholder="Date Time" formControlName="date">
+            <mat-icon matSuffix [owlDateTimeTrigger]="dt2" style="cursor: pointer;">date_range</mat-icon>
+            <owl-date-time #dt2></owl-date-time>
+            <mat-error *ngIf="submitted && f.date.hasError('required')">
+              Date-time is <strong>required</strong>
+             </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field appearance="outline" class="p-0">
+            <mat-label>Select shift</mat-label>
+            <mat-select placeholder="Select shift" formControlName="attendace_part">
+              <mat-option value="shift_1">First shift</mat-option>
+              <mat-option value="shift_2">Second shift</mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.attendace_part.hasError('required')">
+              Attendace_part is <strong>required</strong>
+             </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="list-container col-12">
+          <div class="s-list studentList p-0">
+            <div class="list-head">
+              <h3><strong>Student List</strong></h3>
+            </div>
+            <table mat-table [dataSource]="studentList" class="col-12" matSort>
+
+              <!-- Checkbox Column -->
+              <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                  <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                  </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                  <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null; onSelectionToggle(row)"
+                    [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)" [checked]="true"><!-- row.hasPermission -->
+                  </mat-checkbox>
+                </td>
+              </ng-container>
+
+              <!-- Name Number Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Student Name</th>
+                <td mat-cell *matCellDef="let element"><span
+                    *ngIf="element.name;else dash">{{element.name}}</span></td>
+              </ng-container>
+
+              <!-- Action Column -->
+              <!-- <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef style="width: 50px;"></th>
+                <td mat-cell *matCellDef="let element">
+                  <div class="col">
+                    <div ngbDropdown class="d-inline-block">
+                      <span class="flaticon-more-button-of-three-dots" id="dropdownBasic1" ngbDropdownToggle></span>
+                      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem><span class="fa fa-trash"
+                            style="color: #f00;"></span>&nbsp;&nbsp;&nbsp;Delete</button>(click)="onDelete(element)"
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </ng-container> -->
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [length]="recordLength" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
+          </div>
+        </div>
+        <!-- <div class="col-4">
+          <mat-form-field appearance="outline" class="p-0">
+            <mat-label>Search</mat-label>
+            <input matInput placeholder="Select student" aria-label="Number" formControlName="studentName"
+            [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="getOptionText" (optionSelected)="onOptionSelection($event)">
+              <mat-option *ngFor="let option of studentFilteredList | async" [value]="option">
+                {{option.name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div> -->
+      </div><!-- Student search end -->
+
+      <div class="example-button-row pt-3 text-center">
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+        <!-- <button *ngIf="showButtons" mat-raised-button class="ml-3 mat-secondary"
+          (click)="onCancel($event)">Cancel</button> -->
+        <button *ngIf="!showButtons" mat-raised-button class="ml-3 mat-secondary"
+          (click)="onFormReset($event)">Reset</button>
+      </div>
+    </form>
+         <!--  </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="">wc</mat-icon>
+              Second Session Attendance
+            </ng-template> -->
+
+          <!-- </mat-tab>
+        </mat-tab-group> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <ng-template #dash></ng-template>

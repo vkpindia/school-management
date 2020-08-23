@@ -1,0 +1,121 @@
+<div class="no-record" *ngIf="isLoading">
+  <img src="assets/images/page-loader.gif" alt="">
+  <p class="m-0">loading...</p>
+</div>
+<div class="notice-board-wrap">
+  <div class="row m-0 p-0">
+    <div class="col-5 pl-0">
+      <mat-form-field appearance="outline" class="col-12 p-0">
+        <mat-label>Search by date</mat-label>
+        <input matInput [matDatepicker]="picker1" placeholder="Search by date...">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-5 pl-0">
+      <mat-form-field appearance="outline" class="col-12 p-0">
+        <mat-label>Search by title</mat-label>
+        <input matInput placeholder="Search by title...">
+        <!-- <mat-icon matSuffix>search</mat-icon> -->
+      </mat-form-field>
+    </div>
+    <div class="example-button-row text-center col-2 p-0 mt-1">
+      <button mat-raised-button color="primary" type="submit" class="pt-1 pb-1 pl-4 pr-4">Search</button>
+    </div>
+  </div>
+  <ul *ngIf="eventList && eventList.length >0">
+    <li *ngFor="let list of eventList">
+      <div class="notice-list">
+        <div class="post-date" [style.backgroundColor]="list.dateLbelBg">
+          <span>{{list.startdate | date: 'd MMM y'}}</span></div>
+        <h6 class="notice-title"><a href="javascript:void(0)">{{list.name}}</a></h6>
+        <div class="entry-meta">{{list.description}}</div>
+        <div class="entry-meta">
+          <span>{{list.startdate | date: 'd MMM y'}}</span>&nbsp;to&nbsp;<span>{{list.enddate | date: 'd MMM y'}}</span>
+        </div>
+        <!-- <h6 class="notice-title"><a href="javascript:void(0)">{{list.description}}.</a></h6> -->
+      </div>
+      <div class="">
+        <div ngbDropdown class="d-inline-block pr-2">
+          <span class="flaticon-more-button-of-three-dots" id="dropdownBasic1" ngbDropdownToggle></span>
+          <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem (click)="onDelete(list)"><span class="fa fa-trash"
+                style="color: #f00;"></span>&nbsp;&nbsp;&nbsp;Delete</button>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <ul *ngIf="eventList && eventList.length ==0 && !isLoading">
+    <li>
+      <div class="notice-list">
+        <div class="post-date" style="background-color:#40dfcd">
+          <span>Event Name</span></div>
+        <h6 class="notice-title"><a href="javascript:void(0)">Event Title</a></h6>
+        <div class="entry-meta"> Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content</div>
+        <div class="entry-meta">
+          <span>03/08/2020</span>&nbsp;to&nbsp;<span>06/08/2020</span>
+        </div>
+        <!-- <h6 class="notice-title"><a href="javascript:void(0)">{{list.description}}.</a></h6> -->
+      </div>
+      <div class="">
+        <div ngbDropdown class="d-inline-block pr-2">
+          <span class="flaticon-more-button-of-three-dots" id="dropdownBasic1" ngbDropdownToggle></span>
+          <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem><span class="fa fa-trash"
+                style="color: #f00;"></span>&nbsp;&nbsp;&nbsp;Delete</button>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="notice-list">
+        <div class="post-date" style="background-color:#fbd540">
+          <span>Event Name</span></div>
+        <h6 class="notice-title"><a href="javascript:void(0)">Event Title</a></h6>
+        <div class="entry-meta"> Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content</div>
+        <div class="entry-meta">
+          <span>4/08/2020</span>&nbsp;to&nbsp;<span>07/08/2020</span>
+        </div>
+        <!-- <h6 class="notice-title"><a href="javascript:void(0)">{{list.description}}.</a></h6> -->
+      </div>
+      <div class="">
+        <div ngbDropdown class="d-inline-block pr-2">
+          <span class="flaticon-more-button-of-three-dots" id="dropdownBasic1" ngbDropdownToggle></span>
+          <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem><span class="fa fa-trash"
+                style="color: #f00;"></span>&nbsp;&nbsp;&nbsp;Delete</button>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="notice-list">
+        <div class="post-date" style="background-color:#f939a1">
+          <span>Event Name</span></div>
+        <h6 class="notice-title"><a href="javascript:void(0)">Event Title</a></h6>
+        <div class="entry-meta"> Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content</div>
+        <div class="entry-meta">
+          <span>05/08/2020</span>&nbsp;to&nbsp;<span>06/08/2020</span>
+        </div>
+        <!-- <h6 class="notice-title"><a href="javascript:void(0)">{{list.description}}.</a></h6> -->
+      </div>
+      <div class="">
+        <div ngbDropdown class="d-inline-block pr-2">
+          <span class="flaticon-more-button-of-three-dots" id="dropdownBasic1" ngbDropdownToggle></span>
+          <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem><span class="fa fa-trash"
+                style="color: #f00;"></span>&nbsp;&nbsp;&nbsp;Delete</button>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<ng-template #dash>---</ng-template>

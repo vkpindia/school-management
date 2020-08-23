@@ -1,0 +1,375 @@
+<div class="form-container">
+  <div class="page-title">
+    <h3>Teachers</h3>
+  </div>
+  <div class="form-fields">
+    <mat-card>
+      <mat-card-title>{{cardTitle}}</mat-card-title>
+      <mat-card-content class="pt-2">
+        <form [formGroup]="teacherForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
+          <div class="row">
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstname" placeholder="Enter First Name">
+                <!--  <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
+                  Please enter a valid email address
+                </mat-error> -->
+                <mat-error *ngIf="submitted && f.firstname.hasError('required')">
+                  First name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Enter Last Name" formControlName="lastname">
+                <mat-error *ngIf="submitted && f.lastname.hasError('required')">
+                  Last name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>DOB</mat-label>
+                <input matInput [matDatepicker]="picker1" placeholder="Select DOB" formControlName="dob">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+                <mat-error *ngIf="submitted && f.dob.hasError('required')">
+                  Date of birth is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Choose Gender</mat-label>
+                <mat-select placeholder="Select Gender" formControlName="sex">
+                  <mat-option value="male">Male</mat-option>
+                  <mat-option value="female">Female</mat-option>
+                  <mat-option value="others">Others</mat-option>
+                </mat-select>
+                <mat-error *ngIf="submitted && f.sex.hasError('required')">
+                  Gender is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Caste</mat-label>
+                <input matInput placeholder="Enter Caste" formControlName="cast">
+                <mat-error *ngIf="submitted && f.cast.hasError('required')">
+                  Caste is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Religion </mat-label>
+                <input matInput placeholder="Enter Religion" formControlName="religion">
+                <mat-error *ngIf="submitted && f.religion.hasError('required')">
+                  Religion is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Previous Experiance</mat-label>
+                <input type="number" matInput placeholder="Enter Previous Experiance" formControlName="previousexp">
+                <!--  <mat-error *ngIf="submitted && f.previousexp.hasError('required')">
+                  Previous experiance is <strong>required</strong>
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Prev Work Address</mat-label>
+                <input matInput placeholder="Enter Prev Work Address" formControlName="previouswrkaddress">
+                <!--  <mat-error *ngIf="submitted && f.previouswrkaddress.hasError('required')">
+                  Previous work address is <strong>required</strong>
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Position</mat-label>
+                <mat-select placeholder="Select Position" formControlName="positionapplied">
+                  <mat-option value="Teacher">Teacher</mat-option>
+                  <mat-option value="Driver">Driver</mat-option>
+                  <mat-option value="Attender">Attender</mat-option>
+                  <mat-option value="cleaner">cleaner</mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="submitted && f.positionapplied.hasError('required')">
+                  Position is <strong>required</strong>
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <!-- Below fields will display based on applied position(teacher) -->
+
+            <ng-container *ngIf="teacherForm.get('positionapplied').value == 'Teacher'">
+              <div class="row col-12 m-0 p-0">
+                <div class="col-12 pb-2 pt-3">
+                  <mat-card-title>Teacher Summary</mat-card-title>
+                  <mat-divider></mat-divider>
+                </div>
+                <div class="col-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Qualification</mat-label>
+                    <mat-chip-list #chipList aria-label="Qualification..." formControlName="qualification">
+                      <mat-chip *ngFor="let ql of f.qualification.value" [selectable]="selectable"
+                        [removable]="removable" (removed)="removeChips(ql, 'ql')">
+                        {{ql}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                      <input placeholder="Enter Qualification" [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="addChips($event, 'ql')">
+                    </mat-chip-list>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Subjects</mat-label>
+                    <mat-chip-list #chipList1 aria-label="Subjects..." formControlName="subjects">
+                      <mat-chip *ngFor="let sb of f.subjects.value" [selectable]="selectable"
+                        [removable]="removable" (removed)="removeChips(sb, 'sb')">
+                        {{sb}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                      <input placeholder="Enter Subjects" [matChipInputFor]="chipList1"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="addChips($event, 'sb')">
+                    </mat-chip-list>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Assigned Class</mat-label>
+                    <mat-chip-list #chipList2 aria-label="Assignedclass..." formControlName="assignedclass">
+                      <mat-chip *ngFor="let ac of f.assignedclass.value" [selectable]="selectable"
+                        [removable]="removable" (removed)="removeChips(ac, 'ac')">
+                        {{ac}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                      <input placeholder="Enter Assigned Class" [matChipInputFor]="chipList2"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="addChips($event, 'ac')">
+                    </mat-chip-list>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Assigned Subject</mat-label>
+                    <mat-chip-list #chipList3 aria-label="Assignedsubject..." formControlName="assignedsubject">
+                      <mat-chip *ngFor="let asc of f.assignedsubject.value" [selectable]="selectable"
+                        [removable]="removable" (removed)="removeChips(asc, 'as')">
+                        {{asc}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                      <input placeholder="Enter Assigned Subject" [matChipInputFor]="chipList3"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="addChips($event, 'as')">
+                    </mat-chip-list>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-12">
+                  <hr class="mt-0">
+                </div>
+              </div>
+            </ng-container>
+
+            <br />
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Date of Join</mat-label>
+                <input matInput [matDatepicker]="picker2" placeholder="Select Date" formControlName="dateofjoin">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                <mat-error *ngIf="submitted && f.dateofjoin.hasError('required')">
+                  Joining date is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Worktimings</mat-label>
+                <input matInput placeholder="Enter worktimings in hours(11:00-7:00)" formControlName="worktimings">
+                <!--  <mat-error *ngIf="submitted && f.worktimings.hasError('required')">
+                  Worktimings is <strong>required</strong>
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Transport</mat-label>
+                <mat-select placeholder="Select Transport" formControlName="transport">
+                  <mat-option value="own">Own</mat-option>
+                  <mat-option value="school">School</mat-option>
+                </mat-select>
+                <mat-error *ngIf="submitted && f.transport.hasError('required')">
+                  Transport is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Gross Salary</mat-label>
+                <input matInput placeholder="Enter Gross Salary" formControlName="grosssalary">
+                <!-- <mat-error *ngIf="submitted && f.grosssalary.hasError('required')">
+                  Gross salary is <strong>required</strong>
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>PF Number</mat-label>
+                <input matInput placeholder="Enter PF number" formControlName="pfnumber">
+                <!-- <mat-error *ngIf="submitted && f.pfnumber.hasError('required')">
+                  Gross salary is <strong>required</strong>
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>ESI Number</mat-label>
+                <input matInput placeholder="Enter ESI number" formControlName="esinumber">
+                <!-- <mat-error *ngIf="submitted && f.pfnumber.hasError('required')">
+                  Gross salary is <strong>required</strong>
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>PF</mat-label>
+                <input matInput placeholder="Enter PF" formControlName="PF">
+                <!-- <mat-error *ngIf="submitted && f.pfnumber.hasError('required')">
+                  Gross salary is <strong>required</strong>
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Net Salary</mat-label>
+                <input matInput placeholder="Enter Net Salary" formControlName="netsalary">
+                <!-- <mat-error *ngIf="submitted && f.pfnumber.hasError('required')">
+                  Gross salary is <strong>required</strong>
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>ESI</mat-label>
+                <input matInput placeholder="Enter ESI" formControlName="ESI">
+                <!-- <mat-error *ngIf="submitted && f.pfnumber.hasError('required')">
+                  Gross salary is <strong>required</strong>
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Adhaar Number</mat-label>
+                <input type="number" matInput placeholder="Enter Adhaar" formControlName="adharnumber">
+                <mat-error
+                  *ngIf="submitted && f.adharnumber.hasError('minlength') && !f.adharnumber.hasError('required')">
+                  Adhaar number must be minimum 12 characters
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Blood Group</mat-label>
+                <input matInput placeholder="Enter Blood Group" formControlName="bloodgroup">
+                <!-- <mat-error *ngIf="submitted && f.bloodgroup.hasError('required')">
+                  Blood group is <strong>required</strong>
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="Enter Email" formControlName="email">
+                <mat-error *ngIf="submitted && f.email.hasError('required')">
+                  Email is <strong>required</strong>
+                </mat-error>
+                <mat-error
+                  *ngIf="submitted && f.email.hasError('pattern') && f.email.dirty && !f.email.hasError('required')">
+                  Email should be in proper formate.
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Mobile Number</mat-label>
+                <input matInput placeholder="Enter Mobile Number" formControlName="mobilenumber">
+                <mat-error *ngIf="submitted && f.mobilenumber.hasError('required')">
+                  Mobile number is <strong>required</strong>
+                </mat-error>
+                <mat-error
+                  *ngIf="submitted && f.mobilenumber.hasError('minlength') && f.mobilenumber.dirty && !f.mobilenumber.hasError('required')">
+                  Mobile number must be minimum 10 characters
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>What's App Number</mat-label>
+                <input matInput placeholder="Enter Whatsapp Number" formControlName="whatsappnumber">
+                <!-- <mat-error *ngIf="submitted && f.whatsappnumber.hasError('required')">
+                  What's app number is <strong>required</strong>
+                </mat-error> -->
+                <!--  <mat-error
+                  *ngIf="submitted && f.whatsappnumber.hasError('minlength') && f.whatsappnumber.dirty">
+                  What's app number must be minimum 10 characters
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <!-- Optional Details fields -->
+
+            <!-- <div class="col-12 pb-2 pt-3"><mat-card-title>Optional Details</mat-card-title></div> -->
+
+
+
+
+          </div>
+
+          <div class="example-button-row pt-3 text-center">
+            <button mat-raised-button color="primary" type="submit">{{buttonLabel}}</button>
+            <button *ngIf="showButtons" mat-raised-button class="ml-3 mat-secondary"
+              (click)="onCancel($event)">Cancel</button>
+            <button *ngIf="!showButtons" mat-raised-button class="ml-3 mat-secondary"
+              (click)="onFormReset($event)">Reset</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #dash>---</ng-template>

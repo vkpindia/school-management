@@ -1,0 +1,169 @@
+<div class="list-container">
+  <div class="page-title">
+    <h3>Admin Dashboard</h3>
+  </div>
+  <!--   <div class="no-record" *ngIf="isLoading">
+    <img src="assets/images/page-loader.gif" alt="">
+    <p class="m-0">loading...</p>
+  </div> -->
+  <div class="s-list">
+    <div class="row gutters-20">
+      <div class="col-xl-3 col-sm-6 col-12 pr-xl-0">
+        <div class="dashboard-summery-one mg-b-20">
+          <div class="row align-items-center">
+            <div class="col-6">
+              <div class="item-icon bg-light-green ">
+                <i class="flaticon-classmates text-green"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="item-content">
+                <div class="item-title">Students</div>
+                <div class="item-number"><span class="counter" data-num="150000">150000</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 pr-xl-0">
+        <div class="dashboard-summery-one mg-b-20">
+          <div class="row align-items-center">
+            <div class="col-6">
+              <div class="item-icon bg-light-blue">
+                <i class="flaticon-multiple-users-silhouette text-blue"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="item-content">
+                <div class="item-title">Teachers</div>
+                <div class="item-number"><span class="counter" data-num="2250">2250</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 pr-xl-0">
+        <div class="dashboard-summery-one mg-b-20">
+          <div class="row align-items-center">
+            <div class="col-6">
+              <div class="item-icon bg-light-yellow">
+                <i class="flaticon-couple text-orange"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="item-content">
+                <div class="item-title">Parents</div>
+                <div class="item-number"><span class="counter" data-num="5690">5690</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12">
+        <div class="dashboard-summery-one mg-b-20">
+          <div class="row align-items-center">
+            <div class="col-6">
+              <div class="item-icon bg-light-red">
+                <i class="flaticon-money text-red"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="item-content">
+                <div class="item-title">Earnings</div>
+                <div class="item-number"><span>₹</span><span class="counter" data-num="193000">193000</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row gutters-20">
+  <div class="col-12 col-md-6 col-sm-12 pr-xl-0">
+    <div class="card dashboard-card-one pd-b-20">
+      <div class="card-body">
+        <div class="heading-layout1">
+          <div class="item-title">
+            <h3>Earnings</h3>
+          </div>
+        </div>
+        <div class="earning-report">
+          <div class="item-content">
+            <div class="single-item pseudo-bg-blue">
+              <h4>Total Collections</h4>
+              <span>75,000</span>
+            </div>
+            <div class="single-item pseudo-bg-red">
+              <h4>Fees Collection</h4>
+              <span>15,000</span>
+            </div>
+          </div>
+        </div>
+        <div class="earning-chart-wrap">
+          <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions"
+            style="width: 100% !important; height: 400px; display: flex; flex-wrap: wrap;">
+          </highcharts-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6 col-xl-3 pr-xl-0">
+    <div class="card dashboard-card-two pd-b-20">
+      <div class="card-body">
+        <div class="heading-layout1">
+          <div class="item-title">
+            <h3>Expenses</h3>
+          </div>
+        </div>
+        <div class="expense-report">
+          <div class="monthly-expense pseudo-bg-Aquamarine">
+            <div class="expense-date">Jan 2019</div>
+            <div class="expense-amount"><span>₹</span> 15,000</div>
+          </div>
+          <div class="monthly-expense pseudo-bg-blue">
+            <div class="expense-date">Feb 2019</div>
+            <div class="expense-amount"><span>₹</span> 10,000</div>
+          </div>
+          <div class="monthly-expense pseudo-bg-yellow">
+            <div class="expense-date">Mar 2019</div>
+            <div class="expense-amount"><span>₹</span> 8,000</div>
+          </div>
+        </div>
+        <div class="expense-chart-wrap">
+          <highcharts-chart [Highcharts]="highcharts" [options]="drillDownColumnOption"
+            style="width: 100%; height: 400px; display: flex; flex-wrap: wrap;">
+          </highcharts-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 col-xl-3">
+    <div class="card dashboard-card-three pd-b-20">
+        <div class="card-body">
+            <div class="heading-layout1">
+                <div class="item-title">
+                    <h3>Students</h3>
+                </div>
+            </div>
+            <div class="doughnut-chart-wrap"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+            <highcharts-chart [Highcharts]="highcharts" [options]="StudentsCharts"
+            style="width: 100%; height: 400px; display: flex; flex-wrap: wrap;">
+          </highcharts-chart>
+            </div>
+            <div class="student-report">
+                <div class="student-count pseudo-bg-blue">
+                    <h4 class="item-title">Female Students</h4>
+                    <div class="item-number">45,000</div>
+                </div>
+                <div class="student-count pseudo-bg-yellow">
+                    <h4 class="item-title">Male Students</h4>
+                    <div class="item-number">1,05,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<ng-template #dash>---</ng-template>

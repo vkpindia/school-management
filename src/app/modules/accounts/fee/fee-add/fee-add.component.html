@@ -1,0 +1,102 @@
+<div class="form-container">
+  <!--  <div class="page-title">
+    <h3>Expenses</h3>
+  </div> -->
+  <div class="form-fields">
+    <mat-card>
+      <mat-card-title>{{cardTitle}}</mat-card-title>
+      <mat-card-content class="pt-2">
+        <form [formGroup]="feeForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Class</mat-label>
+                <mat-select formControlName="classid" placeholder="Select class" (selectionChange)="onClassChange($event)">
+
+                  <mat-option *ngFor="let eType of classList" [value]="eType.id">{{eType.classname}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="submitted && f.classid.hasError('required')">
+                  Class is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Section</mat-label>
+                <mat-select formControlName="sectionid" placeholder="Select section" >
+
+                  <mat-option *ngFor="let eType of sectionList" [value]="eType.id">{{eType.sectionname}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="submitted && f.sectionid.hasError('required')">
+                  Section is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Fee Type</mat-label>
+                <mat-select formControlName="feetypeid" placeholder="Selecty fee type" >
+
+                  <mat-option *ngFor="let eType of feetypesList" [value]="eType.id">{{eType.feetype}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="submitted && f.feetypeid.hasError('required')">
+                  Fee type is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- Mother related fields -->
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Amount</mat-label>
+                <input type="number" matInput formControlName="price" placeholder="Enter Amount">
+                <!--  <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
+                  Please enter a valid email address
+                </mat-error> -->
+                <mat-error *ngIf="submitted && f.price.hasError('required')">
+                  Amount is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Term</mat-label>
+                <mat-select formControlName="termid" placeholder="Select term" >
+
+                  <mat-option *ngFor="let eType of termList" [value]="eType.id">{{eType.termname}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="submitted && f.termid.hasError('required')">
+                  Term is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-6">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Description</mat-label>
+                <textarea matInput placeholder="Description" formControlName="description" rows="3"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="example-button-row pt-3 text-center">
+            <button mat-raised-button color="primary" type="submit">{{buttonLabel}}</button>
+            <button mat-raised-button class="ml-3 mat-secondary" (click)="onCancel($event)">Cancel</button>
+            <button *ngIf="!showButtons" mat-raised-button class="ml-3" color="warn"
+              (click)="onFormReset($event)">Reset</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #dash>---</ng-template>

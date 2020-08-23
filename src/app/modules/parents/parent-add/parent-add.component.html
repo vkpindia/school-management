@@ -1,0 +1,260 @@
+<div class="form-container">
+  <div class="page-title">
+    <h3>Parents</h3>
+  </div>
+  <div class="form-fields">
+    <mat-card>
+      <mat-card-title>{{cardTitle}}</mat-card-title>
+      <mat-card-content class="pt-2">
+        <form [formGroup]="parentForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
+          <div class="row">
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Father's Name</mat-label>
+                <input matInput formControlName="father_guardian_firstname" placeholder="Enter Father's Name">
+                <!--  <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
+                  Please enter a valid email address
+                </mat-error> -->
+                <mat-error *ngIf="submitted && f.father_guardian_firstname.hasError('required')">
+                  Father's name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Family Name</mat-label>
+                <input matInput formControlName="familyname" placeholder="Enter Family Name">
+                <!--  <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
+                  Please enter a valid email address
+                </mat-error> -->
+                <mat-error *ngIf="submitted && f.familyname.hasError('required')">
+                  Family name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Father's Adhaar Number</mat-label>
+                <input type="number" matInput placeholder="Enter Father's Adhaar"
+                  formControlName="father_guardian_adharnumber">
+                <mat-error *ngIf="submitted && f.father_guardian_adharnumber .hasError('required')">
+                  Father adhaar number is <strong>required</strong>
+                </mat-error>
+                <mat-error
+                  *ngIf="submitted && f.father_guardian_adharnumber.hasError('minlength') && !f.father_guardian_adharnumber.hasError('required')">
+                  Father's adhaar number must be minimum 12 characters
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Father's Occupation</mat-label>
+                <input matInput placeholder="Enter Guardian Occupation" formControlName="father_guardian_occupation">
+                <mat-error *ngIf="submitted && f.father_guardian_occupation.hasError('required')">
+                  Father's occupation is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Father's Qualification</mat-label>
+                <input matInput placeholder="Enter Father's Qualification"
+                  formControlName="father_guardian_qualification">
+                <mat-error *ngIf="submitted && f.father_guardian_qualification.hasError('required')">
+                  Father's qualification is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Father's Mobile Number</mat-label>
+                <input type="number" matInput placeholder="Enter Father's Mobile Number"
+                  formControlName="father_guardian_mobilenumber">
+                  <mat-error *ngIf="submitted && f.father_guardian_mobilenumber.hasError('required')">
+                    Father's mobile number is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.father_guardian_mobilenumber.hasError('minlength') && f.father_guardian_mobilenumber.dirty && !f.father_guardian_mobilenumber.hasError('required')">
+                    Father's mobile Number must be minimum 10 characters
+                  </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="Enter Email"
+                  formControlName="email">
+                  <mat-error *ngIf="submitted && f.email.hasError('required')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                  <mat-error
+                    *ngIf="submitted && f.email.hasError('pattern') && f.email.dirty && !f.email.hasError('required')">
+                    Email should be in proper formate.
+                  </mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- Mother related fields -->
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Mother's Name</mat-label>
+                <input matInput formControlName="mother_firstname" placeholder="Enter Mother's Name">
+                <!--  <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
+                  Please enter a valid email address
+                </mat-error> -->
+                <mat-error *ngIf="submitted && f.mother_firstname.hasError('required')">
+                  Mother's name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Mother's Adhaar Number</mat-label>
+                <input type="number" matInput placeholder="Enter Mother's Adhaar" formControlName="mother_aadharnumber">
+                <mat-error *ngIf="submitted && f.mother_aadharnumber.hasError('required')">
+                  Mother's adhaar number is <strong>required</strong>
+                </mat-error>
+                <mat-error
+                  *ngIf="submitted && f.mother_aadharnumber.hasError('minlength') && !f.mother_aadharnumber.hasError('required')">
+                  Mother's adhaar number must be minimum 12 characters
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Mother's Occupation</mat-label>
+                <input matInput placeholder="Enter Mother's Occupation" formControlName="mother_occupation">
+                <mat-error *ngIf="submitted && f.mother_occupation.hasError('required')">
+                  Mother's occupation is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Mother's Qualification</mat-label>
+                <input matInput placeholder="Enter Mother's Qualification" formControlName="mother_qualification">
+                <mat-error *ngIf="submitted && f.mother_qualification.hasError('required')">
+                  Mother's qualification is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Mother's Mobile</mat-label>
+                <input type="number" matInput placeholder="Enter Mother Mobile Number" formControlName="mother_phonenumber">
+                <mat-error *ngIf="submitted && f.father_guardian_mobilenumber .hasError('required')">
+                  Mother's Mobile number is <strong>required</strong>
+                </mat-error>
+                <mat-error
+                  *ngIf="submitted && f.mother_phonenumber.hasError('minlength') && !f.mother_phonenumber.hasError('required')">
+                  Mother's Mobile number must be minimum 10 characters
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- Optional Details fields -->
+
+            <div class="col-12 pb-2 pt-3">
+              <mat-card-title>Optional Details</mat-card-title>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Account Number</mat-label>
+                <input matInput type="number" placeholder="Enter A/C Number" formControlName="bank_accountnumber">
+                <mat-error></mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>IFSC</mat-label>
+                <input matInput placeholder="Enter IFSC" formControlName="bank_ifsccode">
+                <mat-error></mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Branch Name</mat-label>
+                <input matInput placeholder="Enter Branch Name" formControlName="bank_addressbranch">
+                <mat-error></mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Ration Card</mat-label>
+                <input matInput placeholder="Enter Ration Card Number" formControlName="rationcardnumber">
+                <mat-error></mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Anual Income</mat-label>
+                <input matInput placeholder="Enter Anual Income" formControlName="annualIncome">
+                <mat-error></mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Mother Tongue</mat-label>
+                <input matInput placeholder="Enter Mother Tongue" formControlName="mothertoung">
+                <mat-error></mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Nationality</mat-label>
+                <input matInput placeholder="Enter Nationality" formControlName="nationality">
+                <mat-error></mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label> Blood Group</mat-label>
+                <input matInput placeholder="Enter Blood Group" formControlName="bloodgroup">
+                <mat-error></mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>What's App</mat-label>
+                <input type="number" matInput placeholder="Enter What's App Number" formControlName="whatsappnumber">
+                <mat-error
+                  *ngIf="submitted && f.whatsappnumber.hasError('minlength') && !f.whatsappnumber.hasError('required')">
+                  What's app number must be minimum 10 characters
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="example-button-row pt-3 text-center">
+            <button mat-raised-button color="primary" type="submit">{{buttonLabel}}</button>
+            <button *ngIf="showButtons" mat-raised-button class="ml-3 mat-secondary"
+              (click)="onCancel($event)">Cancel</button>
+            <button *ngIf="!showButtons" mat-raised-button class="ml-3 mat-secondary"
+              (click)="onFormReset($event)">Reset</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #dash>---</ng-template>

@@ -5,14 +5,14 @@
 
   <div class="wrap-input100">
     <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Email</mat-label><!-- [errorStateMatcher]="matcher" -->
-      <input matInput formControlName="username" placeholder="Email" autocomplete="off">
-      <mat-icon matSuffix>mail</mat-icon>
-      <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
+      <mat-label>User Name</mat-label><!-- [errorStateMatcher]="matcher" -->
+      <input matInput formControlName="Userid" placeholder="User Name" autocomplete="off">
+      <mat-icon matSuffix>account_circle</mat-icon>
+      <!-- <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
         Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="f.username.hasError('required')">
-        Email is <strong>required</strong>
+      </mat-error> -->
+      <mat-error *ngIf="f.Userid.hasError('required')">
+        User name is <strong>required</strong>
       </mat-error>
     </mat-form-field>
     <!-- <input class="input100" type="email" formControlName="username" placeholder="Enter Username"
@@ -25,12 +25,12 @@
   <div class="wrap-input100">
     <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Password</mat-label><!-- [errorStateMatcher]="matcher" -->
-      <input matInput formControlName="pass" type="password" placeholder="Password" autocomplete="off">
+      <input matInput formControlName="Password" type="password" placeholder="Password" autocomplete="off">
       <mat-icon matSuffix>vpn_key</mat-icon>
       <!--             <mat-error *ngIf="submitted && f.pass.hasError('email') && !f.pass.hasError('required')">
               Please enter a valid email address
             </mat-error> -->
-      <mat-error *ngIf="f.pass.hasError('required')">
+      <mat-error *ngIf="f.Password.hasError('required')">
         Password is <strong>required</strong>
       </mat-error>
     </mat-form-field>

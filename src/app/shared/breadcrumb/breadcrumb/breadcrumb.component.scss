@@ -1,0 +1,35 @@
+.fluid-bread {
+  // background-color: white;
+}
+.breadcrumb {
+  // background-color: white;
+  padding: 0;
+  margin-bottom: 0;
+  .breadcrumb-item{
+    a{
+      color: #646464;
+      font-size: 16px;
+      &:hover{
+        color: #ffa901;
+        text-decoration: none;
+      }
+    }
+    &.active{
+      span{
+        color: #ffa901 !important;
+      }
+    }
+  }
+  }
+  .breadcrumb-item + .breadcrumb-item::before {
+    content: "\f107";
+    font-family: Flaticon;
+    // position: absolute;
+    font-size: 10px;
+    font-weight: 600;
+    // right: -10px;
+    // top: 50%;
+    // transform: translateY(-50%);
+    z-index: 5;
+    color: #fea801;
+}

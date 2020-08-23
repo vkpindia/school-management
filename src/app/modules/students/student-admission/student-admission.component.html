@@ -2,12 +2,11 @@
   <div class="page-title">
     <h3>Students</h3>
   </div>
-
   <div class="form-fields">
     <mat-card>
       <mat-card-title>{{cardTitle}}</mat-card-title>
-      <mat-card-content class="pt-4">
-        <form [formGroup]="admissionForm" (ngSubmit)="onSubmit()">
+      <mat-card-content class="pt-2">
+        <form [formGroup]="admissionForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
           <div class="row">
 
             <div class="col-4">
@@ -29,18 +28,6 @@
                 <input matInput placeholder="Enter Last Name" formControlName="lastname">
                 <mat-error *ngIf="submitted && f.lastname.hasError('required')">
                   Last name is <strong>required</strong>
-                </mat-error>
-              </mat-form-field>
-            </div>
-
-            <div class="col-4">
-              <mat-form-field appearance="outline" class="p-0">
-                <mat-label>DOB</mat-label>
-                <input matInput [matDatepicker]="picker1" placeholder="Select DOB" formControlName="dob">
-                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                <mat-datepicker #picker1></mat-datepicker>
-                <mat-error *ngIf="submitted && f.dob.hasError('required')">
-                  Date of birth is <strong>required</strong>
                 </mat-error>
               </mat-form-field>
             </div>
@@ -89,6 +76,19 @@
 
             <div class="col-4">
               <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Date of Birth </mat-label>
+                <input matInput [matDatepicker]="picker1" placeholder="Select DOB"
+                  formControlName="dob">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+               <mat-error *ngIf="submitted && f.dob.hasError('required')">
+                 Date of birth is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Date of Admission </mat-label>
                 <input matInput [matDatepicker]="picker12" placeholder="Select dateofadmission"
                   formControlName="dateofadmission">
@@ -103,20 +103,23 @@
             <div class="col-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Class</mat-label>
-                <mat-select placeholder="Select Class" formControlName="Class">
-                  <mat-option value="1">1st</mat-option>
-                  <mat-option value="2">2nd</mat-option>
-                  <mat-option value="3">3rd</mat-option>
-                  <mat-option value="4">4th</mat-option>
-                  <mat-option value="5">5th</mat-option>
-                  <mat-option value="6">6th</mat-option>
-                  <mat-option value="7">6th</mat-option>
-                  <mat-option value="8">8th</mat-option>
-                  <mat-option value="9">9th</mat-option>
-                  <mat-option value="10">10th</mat-option>
+                <mat-select placeholder="Select Class" formControlName="Class" (selectionChange)="onClassChange($event)">
+                  <mat-option *ngFor = "let class of classList" [value]="class.id">{{class.classname}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="submitted && f.Class.hasError('required')">
                   Class name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Section</mat-label>
+                <mat-select placeholder="Select Section" formControlName="section">
+                  <mat-option *ngFor = "let section of sectionList" [value]="section.id">{{section.sectionname}}</mat-option>
+                </mat-select>
+               <mat-error *ngIf="submitted && f.section.hasError('required')">
+                  Section is <strong>required</strong>
                 </mat-error>
               </mat-form-field>
             </div>
@@ -127,21 +130,6 @@
                 <input type="number" matInput placeholder="Enter Roll Number" formControlName="rollnumber">
                 <mat-error *ngIf="submitted && f.rollnumber.hasError('required')">
                   Roll number is <strong>required</strong>
-                </mat-error>
-              </mat-form-field>
-            </div>
-
-            <div class="col-4">
-              <mat-form-field appearance="outline" class="p-0">
-                <mat-label>Section</mat-label>
-                <mat-select placeholder="Select Section" formControlName="section">
-                  <mat-option value="a">A</mat-option>
-                  <mat-option value="b">B</mat-option>
-                  <mat-option value="c">C</mat-option>
-                  <mat-option value="d">D</mat-option>
-                </mat-select>
-               <mat-error *ngIf="submitted && f.section.hasError('required')">
-                  Section is <strong>required</strong>
                 </mat-error>
               </mat-form-field>
             </div>
@@ -178,14 +166,14 @@
 
             <div class="col-4">
               <mat-form-field appearance="outline" class="p-0">
-                <mat-label>Mothertoung</mat-label>
-                <mat-select placeholder="Select Mothertoung" formControlName="Mothertoung">
+                <mat-label>Mothertongue</mat-label>
+                <mat-select placeholder="Select Mothertongue" formControlName="Mothertoung">
                   <mat-option value="telugu">Telugu</mat-option>
                   <mat-option value="hindi">Hindi</mat-option>
                   <mat-option value="english">English</mat-option>
                 </mat-select>
                 <mat-error *ngIf="submitted && f.Mothertoung.hasError('required')">
-                  Mothertoung is <strong>required</strong>
+                  Mothertongue is <strong>required</strong>
                 </mat-error>
               </mat-form-field>
             </div>
@@ -217,7 +205,7 @@
                 <mat-error *ngIf="submitted && f.mobilenumber.hasError('required')">
                   Mobile number is <strong>required</strong>
                 </mat-error>
-                <mat-error *ngIf="submitted && f.mobilenumber.hasError('minlength') && !f.mobilenumber.hasError('required')">
+                <mat-error *ngIf="submitted && f.mobilenumber.hasError('minlength') && f.mobilenumber.dirty && !f.mobilenumber.hasError('required')">
                   Mobile number must be minimum 10 characters
                 </mat-error>
               </mat-form-field>
@@ -230,7 +218,7 @@
                 <mat-error *ngIf="submitted && f.whatsappnumber.hasError('required')">
                   What's app number is <strong>required</strong>
                 </mat-error>
-                <mat-error *ngIf="submitted && f.whatsappnumber.hasError('minlength') && !f.whatsappnumber.hasError('required')">
+                <mat-error *ngIf="submitted && f.whatsappnumber.hasError('minlength') && f.whatsappnumber.dirty && !f.whatsappnumber.hasError('required')">
                   What's app number must be minimum 10 characters
                 </mat-error>
               </mat-form-field>
@@ -238,7 +226,7 @@
 
             <!-- Optional Details fields -->
 
-            <div class="col-12 pb-2 pt-2"><mat-card-title>Optional Details</mat-card-title></div>
+            <div class="col-12 pb-2 pt-3"><mat-card-title>Optional Details</mat-card-title></div>
 
             <div class="col-4">
               <mat-form-field appearance="outline" class="p-0">
@@ -316,10 +304,22 @@
               </mat-form-field>
             </div>
 
+            <div class="col-4">
+              <img [src]="imageSrc" *ngIf="imageSrc" style="width:200px;" class="mb-2">
+              <div class="form-group">
+                <label for="exampleFormControlFile1">Upload
+                   Picture</label>
+                <input type="file" class="form-control-file" id="exampleFormControlFile1" formControlName="file" (change)="onFileChange($event)">
+                <mat-error *ngIf="submitted && f.file.hasError('required')">
+                  Religion is <strong>required</strong>
+                </mat-error>
+              </div>
+            </div>
+
           </div>
 
           <div class="example-button-row pt-3 text-center">
-            <button mat-raised-button color="primary" type="submit">Submit</button>
+            <button mat-raised-button color="primary" type="submit">{{buttonLabel}}</button>
             <button *ngIf="showButtons" mat-raised-button class="ml-3 mat-secondary" (click)="onCancel($event)">Cancel</button>
             <button *ngIf="!showButtons" mat-raised-button class="ml-3 mat-secondary" (click)="onFormReset($event)">Reset</button>
           </div>

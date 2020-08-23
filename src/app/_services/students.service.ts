@@ -10,8 +10,9 @@ import { environment } from '../../environments/environment';
 
 export class StudentsService {
 
-  // private _apiUrl: string = environment.apiUrl;
-  private _apiUrl: string = 'http://mannapur.com/api/';
+  private _apiUrl: string = environment.apiBaseUrl;
+  // private _apiUrl: string = 'http://mannapur.com/api/';
+  // private _apiUrl: string = 'https://schoolsapi1.azurewebsites.net/api/';
 
   // setting headers for http call
 
@@ -76,6 +77,35 @@ export class StudentsService {
       catchError(this.handleError));
   }
 
+      /**
+   * @description Method for getting unique Class data by key
+   * @author Virendra Pandey
+   * @date 2020-06-21
+   * @returns {Observable<any>}
+   * @memberof FeeService
+   */
+  getClassSection(): Observable<any> {
+    const url = `${this._apiUrl}setup/getclassesandsections`;
+    return this._http.get(url).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+    /**
+   * @description Method for getting section list
+   * @author Virendra Pandey
+   * @date 2020-06-21
+   * @param {*} id
+   * @returns {Observable<any>}
+   * @memberof FeeService
+   */
+  getSections(id: any): Observable<any> {
+    const url = `${this._apiUrl}setup/getsectionsforclass?id=${id}`;
+    return this._http.get(url).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
   /**
    * @description Method for getting unique student data by key
    * @author Virendra Pandey
@@ -116,7 +146,7 @@ export class StudentsService {
    * @returns {Observable<any>}
    * @memberof StudentsService
    */
-  updateStudent(studentRecord: any): Observable<any> {
+  updateStudent(id, studentRecord: any): Observable<any> {
     return this._http.put(this._apiUrl + 'student/UpdateStudent', studentRecord)
       .pipe(
         catchError(this.handleError)
