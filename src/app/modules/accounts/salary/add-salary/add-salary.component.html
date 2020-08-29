@@ -5,7 +5,7 @@
   <div class="form-fields">
     <!-- Student Search -->
     <div class="row">
-      <div class="col-4">
+      <div class="col-12 col-sm-6 col-md-4">
         <mat-form-field appearance="outline" class="p-0">
           <mat-label>Search</mat-label>
           <input matInput placeholder="Select student" aria-label="Number" [formControl]="teacherName"
@@ -17,7 +17,7 @@
           </mat-autocomplete>
         </mat-form-field>
       </div>
-      <div class="col-2 pt-1 mt-1">
+      <div class="col-2 pt-1 mt-1 mb-3">
         <button mat-raised-button color="primary" type="button" (click)="getAllSalaryList()">Search</button>
       </div>
     </div><!-- Student search end -->
@@ -27,7 +27,7 @@
         <form [formGroup]="salaryForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
           <div class="row">
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Name</mat-label>
                 <input matInput placeholder="Enter Last Name" formControlName="name">
@@ -37,7 +37,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Gross Salary</mat-label>
                 <input matInput placeholder="Enter gross salary" formControlName="grosssalary">
@@ -47,7 +47,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Net Salary</mat-label>
                 <input matInput placeholder="Enter net salary" formControlName="netsalary">
@@ -57,7 +57,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Absent Days</mat-label>
                 <input matInput placeholder="Enter absent days" formControlName="absentdays">
@@ -67,7 +67,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Salary Type</mat-label>
                 <mat-select placeholder="Select salarytype" formControlName="salarytype">
@@ -79,7 +79,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Pay Date</mat-label>
                 <input matInput [matDatepicker]="picker1" placeholder="Select date" formControlName="paydate">
@@ -91,14 +91,14 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Pay Amount</mat-label>
                 <input type="number" matInput placeholder="Enter amount" formControlName="payamount">
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>PF</mat-label>
                 <input type="number" matInput placeholder="Enter PF" formControlName="PF">
@@ -109,48 +109,48 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>PF Amount</mat-label>
                 <input type="number" matInput placeholder="Enter discount" formControlName="PFamount">
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>ESI</mat-label>
                 <input type="number" matInput placeholder="Enter ESI" formControlName="ESI">
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>ESI Amount</mat-label>
                 <input type="number" matInput placeholder="Enter ESI amount" formControlName="ESIamount">
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Salary After Added</mat-label>
                 <input type="number" matInput placeholder="Enter after added" formControlName="salaryafterded">
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <!-- <mat-form-field appearance="outline" class="p-0"> -->
               <mat-checkbox formControlName="status">Status</mat-checkbox>
               <!-- </mat-form-field> -->
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Pending Amount</mat-label>
                 <input type="number" matInput placeholder="Enter amount" formControlName="pendingamount">
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Description</mat-label>
                 <textarea matInput placeholder="Description" rows="3" formControlName="description"></textarea>

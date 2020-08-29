@@ -9,7 +9,7 @@
         <form [formGroup]="feeForm" (ngSubmit)="onSubmit()">
           <div class="row">
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Class</mat-label>
                 <mat-select formControlName="classid" placeholder="Select class" (selectionChange)="onClassChange($event)">
@@ -23,7 +23,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Section</mat-label>
                 <mat-select formControlName="sectionid" placeholder="Select section" >
@@ -37,7 +37,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Fee Type</mat-label>
                 <mat-select formControlName="feetypeid" placeholder="Selecty fee type" >
@@ -52,7 +52,7 @@
             </div>
             <!-- Mother related fields -->
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Amount</mat-label>
                 <input type="number" matInput formControlName="price" placeholder="Enter Amount">
@@ -65,7 +65,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Term</mat-label>
                 <mat-select formControlName="termid" placeholder="Select term" >

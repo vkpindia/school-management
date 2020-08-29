@@ -17,7 +17,7 @@
 
     <form [formGroup]="attendanceForm" (ngSubmit)="onSubmit()" *ngIf="isFormActive"><!--  *ngIf="showForm" -->
       <div class="row">
-        <div class="col-4">
+        <div class="col-12 col-sm-6 col-md-4">
           <mat-form-field appearance="outline" class="p-0">
             <mat-label>Class</mat-label>
             <mat-select placeholder="Select Class" formControlName="classid" (selectionChange)="onClassChange($event)">
@@ -29,7 +29,7 @@
           </mat-form-field>
         </div>
 
-        <div class="col-4">
+        <div class="col-12 col-sm-6 col-md-4">
           <mat-form-field appearance="outline" class="p-0">
             <mat-label>Section</mat-label>
             <mat-select placeholder="Select Section" formControlName="sectionid" (selectionChange)="onSectionChange($event)">
@@ -40,7 +40,7 @@
              </mat-error>
           </mat-form-field>
         </div>
-        <div class="col-4">
+        <div class="col-12 col-sm-6 col-md-4">
           <mat-form-field appearance="outline" class="col-12 p-0">
             <mat-label>Select Date</mat-label>
             <!-- <input matInput type="datetime-local" placeholder="Select Date" formControlName="startdate">
@@ -54,7 +54,7 @@
              </mat-error>
           </mat-form-field>
         </div>
-        <div class="col-4">
+        <div class="col-12 col-sm-6 col-md-4">
           <mat-form-field appearance="outline" class="p-0">
             <mat-label>Select shift</mat-label>
             <mat-select placeholder="Select shift" formControlName="attendace_part">
@@ -119,7 +119,7 @@
             </mat-paginator>
           </div>
         </div>
-        <!-- <div class="col-4">
+        <!-- <div class="col-12 col-sm-6 col-md-4">
           <mat-form-field appearance="outline" class="p-0">
             <mat-label>Search</mat-label>
             <input matInput placeholder="Select student" aria-label="Number" formControlName="studentName"

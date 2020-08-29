@@ -15,7 +15,7 @@
             <form [formGroup]="addResultForm" (ngSubmit)="onSubmit('addResult')" *ngIf="showForm">
               <div formArrayName="items" *ngFor="let item of f.items['controls']; let i = index">
                 <div class="row m-0 pt-4" [formGroupName]="i">
-                  <div class="col-4">
+                  <div class="col-12 col-sm-6 col-md-4">
                     <mat-form-field appearance="outline" class="p-0">
                       <mat-label>Student Name</mat-label>
                       <input matInput placeholder="Select student" aria-label="Number" [formControl]="studentID"
@@ -32,7 +32,7 @@
                     </mat-form-field>
                   </div>
 
-                  <div class="col-4">
+                  <div class="col-12 col-sm-6 col-md-4">
                     <mat-form-field appearance="outline" class="p-0">
                       <mat-label>Exam ID</mat-label>
                       <input matInput type="number" placeholder="Enter exam ID" formControlName="examid">
@@ -42,7 +42,7 @@
                     </mat-form-field>
                   </div>
 
-                  <!-- <div class="col-4">
+                  <!-- <div class="col-12 col-sm-6 col-md-4">
                       <mat-form-field appearance="outline" class="p-0">
                         <mat-label>Choose Gender</mat-label>
                         <mat-select placeholder="Select Gender" formControlName="sex">
@@ -56,7 +56,7 @@
                       </mat-form-field>
                     </div> -->
 
-                  <div class="col-4">
+                  <div class="col-12 col-sm-6 col-md-4">
                     <mat-form-field appearance="outline" class="p-0">
                       <mat-label>Subject</mat-label>
                       <input matInput placeholder="Enter subject" formControlName="subject">
@@ -66,7 +66,7 @@
                     </mat-form-field>
                   </div>
 
-                  <div class="col-4">
+                  <div class="col-12 col-sm-6 col-md-4">
                     <mat-form-field appearance="outline" class="p-0">
                       <mat-label>Actual Mark</mat-label>
                       <input type="number" matInput placeholder="Enter Actual smarks" formControlName="actualmarks">
@@ -76,7 +76,7 @@
                     </mat-form-field>
                   </div>
 
-                  <div class="col-4">
+                  <div class="col-12 col-sm-6 col-md-4">
                     <mat-form-field appearance="outline" class="p-0">
                       <mat-label>Marks</mat-label>
                       <input type="number" matInput placeholder="Enter smarks" formControlName="marks">
@@ -88,7 +88,7 @@
                 </div>
               </div>
 
-              <!-- <div class="col-4">
+              <!-- <div class="col-12 col-sm-6 col-md-4">
                 </div> -->
               <div class="example-button-row pt-3 text-center">
                 <button mat-raised-button type="button" class="mat-next mt-2 mr-3" (click)="addNextSubjectMark()">Add
@@ -110,7 +110,7 @@
             <form [formGroup]="addTResultForm" (ngSubmit)="onSubmit()" *ngIf="showTForm">
               <div class="row m-0 pt-4">
 
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Student Name</mat-label>
                     <input matInput placeholder="Select student" aria-label="Number" [formControl]="studentTID"
@@ -127,7 +127,7 @@
                   </mat-form-field>
                 </div>
 
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Exam ID</mat-label>
                     <input matInput type="number" placeholder="Enter exam ID" formControlName="examid">
@@ -137,7 +137,7 @@
                   </mat-form-field>
                 </div>
 
-                <!-- <div class="col-4">
+                <!-- <div class="col-12 col-sm-6 col-md-4">
                     <mat-form-field appearance="outline" class="p-0">
                       <mat-label>Choose Gender</mat-label>
                       <mat-select placeholder="Select Gender" formControlName="sex">
@@ -151,7 +151,7 @@
                     </mat-form-field>
                   </div> -->
 
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Total Mark</mat-label>
                     <input matInput type="number" placeholder="Enter subject" formControlName="totalmarks">
@@ -161,7 +161,7 @@
                   </mat-form-field>
                 </div>
 
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Actual Total Mark</mat-label>
                     <input type="number" matInput placeholder="Enter Actual Total smarks" formControlName="actualtotal">
@@ -171,7 +171,7 @@
                   </mat-form-field>
                 </div>
 
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Grade</mat-label>
                     <input matInput placeholder="Enter grade" formControlName="grade">
@@ -181,7 +181,7 @@
                   </mat-form-field>
                 </div>
 
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Percent</mat-label>
                     <input type="number" matInput placeholder="Enter percent" formControlName="percetage">
@@ -191,7 +191,7 @@
                   </mat-form-field>
                 </div>
 
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Comments</mat-label>
                     <textarea matInput placeholder="Enter percent" formControlName="comments" row="4"></textarea>

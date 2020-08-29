@@ -13,7 +13,7 @@
             <div class="form-fields pt-4">
               <form [formGroup]="setupForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
                 <div class="row m-0">
-                  <div class="col-6">
+                  <div class="col-12 col-md-6">
                     <mat-form-field appearance="outline" class="col-12 p-0">
                       <mat-label>Type</mat-label>
                       <!-- <input matInput formControlName="name" placeholder="Enter Title"> -->
@@ -29,7 +29,7 @@
                     </mat-form-field>
                   </div>
 
-                  <div class="col-6">
+                  <div class="col-12 col-md-6">
                     <mat-form-field appearance="outline" class="col-12 p-0">
                       <mat-label>{{fieldLabel? fieldLabel: 'Setup Type'}}</mat-label>
                       <input matInput placeholder="Setup Type" formControlName="typename">
@@ -39,7 +39,7 @@
                     </mat-form-field>
                   </div>
 
-                  <div class="col-6" [hidden]="fieldLabel != 'Transport Type'">
+                  <div class="col-12 col-md-6" [hidden]="fieldLabel != 'Transport Type'">
                     <mat-form-field appearance="outline" class="col-12 p-0">
                       <mat-label>Amount</mat-label>
                       <input matInput placeholder="Enter Amount" formControlName="optionalparam">

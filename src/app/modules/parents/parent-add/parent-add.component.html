@@ -8,7 +8,7 @@
       <mat-card-content class="pt-2">
         <form [formGroup]="parentForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
           <div class="row">
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Father's Name</mat-label>
                 <input matInput formControlName="father_guardian_firstname" placeholder="Enter Father's Name">
@@ -21,7 +21,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Family Name</mat-label>
                 <input matInput formControlName="familyname" placeholder="Enter Family Name">
@@ -34,7 +34,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Father's Adhaar Number</mat-label>
                 <input type="number" matInput placeholder="Enter Father's Adhaar"
@@ -49,7 +49,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Father's Occupation</mat-label>
                 <input matInput placeholder="Enter Guardian Occupation" formControlName="father_guardian_occupation">
@@ -59,7 +59,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Father's Qualification</mat-label>
                 <input matInput placeholder="Enter Father's Qualification"
@@ -70,7 +70,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Father's Mobile Number</mat-label>
                 <input type="number" matInput placeholder="Enter Father's Mobile Number"
@@ -84,7 +84,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Email</mat-label>
                 <input type="email" matInput placeholder="Enter Email"
@@ -101,7 +101,7 @@
 
             <!-- Mother related fields -->
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Mother's Name</mat-label>
                 <input matInput formControlName="mother_firstname" placeholder="Enter Mother's Name">
@@ -114,7 +114,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Mother's Adhaar Number</mat-label>
                 <input type="number" matInput placeholder="Enter Mother's Adhaar" formControlName="mother_aadharnumber">
@@ -128,7 +128,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Mother's Occupation</mat-label>
                 <input matInput placeholder="Enter Mother's Occupation" formControlName="mother_occupation">
@@ -138,7 +138,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Mother's Qualification</mat-label>
                 <input matInput placeholder="Enter Mother's Qualification" formControlName="mother_qualification">
@@ -148,7 +148,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Mother's Mobile</mat-label>
                 <input type="number" matInput placeholder="Enter Mother Mobile Number" formControlName="mother_phonenumber">
@@ -168,7 +168,7 @@
               <mat-card-title>Optional Details</mat-card-title>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Account Number</mat-label>
                 <input matInput type="number" placeholder="Enter A/C Number" formControlName="bank_accountnumber">
@@ -176,7 +176,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>IFSC</mat-label>
                 <input matInput placeholder="Enter IFSC" formControlName="bank_ifsccode">
@@ -184,7 +184,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Branch Name</mat-label>
                 <input matInput placeholder="Enter Branch Name" formControlName="bank_addressbranch">
@@ -192,7 +192,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Ration Card</mat-label>
                 <input matInput placeholder="Enter Ration Card Number" formControlName="rationcardnumber">
@@ -200,7 +200,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Anual Income</mat-label>
                 <input matInput placeholder="Enter Anual Income" formControlName="annualIncome">
@@ -208,7 +208,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Mother Tongue</mat-label>
                 <input matInput placeholder="Enter Mother Tongue" formControlName="mothertoung">
@@ -216,7 +216,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Nationality</mat-label>
                 <input matInput placeholder="Enter Nationality" formControlName="nationality">
@@ -224,7 +224,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label> Blood Group</mat-label>
                 <input matInput placeholder="Enter Blood Group" formControlName="bloodgroup">
@@ -232,7 +232,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>What's App</mat-label>
                 <input type="number" matInput placeholder="Enter What's App Number" formControlName="whatsappnumber">

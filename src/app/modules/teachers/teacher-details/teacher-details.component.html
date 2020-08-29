@@ -23,13 +23,13 @@
         </div>
       </mat-card-title>
       <mat-card-content class="pt-4">
-        <div class="row">
-          <div class="col-4">
+        <div class="row details-page">
+          <div class="col-6 col-md-3">
             <!-- <img *ngIf="teacherDetails.sex == 'female'" src="assets/images/teacher_female.jpg" alt="">
             <img *ngIf="teacherDetails.sex == 'male'" src="assets/images/male_avatar.jpg" alt=""> -->
-            <img src="assets/images/male_avatar.jpg" alt="">
+            <img src="assets/images/male_avatar.jpg" alt="" class="mb-2">
           </div>
-          <div class="col-8">
+          <div class="col-12 col-md-9">
             <h3 class="profile-heading" *ngIf="teacherDetails && teacherDetails.firstname">{{teacherDetails.firstname | titlecase}} {{teacherDetails.lastname | titlecase}}
             </h3>
             <!-- <p style="width 80%; font-size 16px; color #646464; line-height 1.6;s">Aliquam erat volutpat. Curabiene
@@ -70,7 +70,7 @@
                   <tr>
                     <td>Date of Birth</td>
                     <td class="font-medium text-dark-medium"><span
-                        *ngIf="teacherDetails.dob; else dash">{{teacherDetails.dob | date: 'dd.MM.yyyy'}}</span></td>
+                        *ngIf="teacherDetails && teacherDetails.dob; else dash">{{teacherDetails.dob | date: 'dd.MM.yyyy'}}</span></td>
                   </tr>
                   <tr>
                     <td>Joining Date</td>

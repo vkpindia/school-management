@@ -5,7 +5,7 @@
   <div class="form-fields">
     <!-- Student Search -->
     <div class="row">
-      <div class="col-3">
+      <div class="col-12 col-sm-6 col-md-3">
         <mat-form-field appearance="outline" class="p-0">
           <mat-label>Class</mat-label>
           <mat-select placeholder="Select Class" [formControl]="classID" (selectionChange)="onClassChange($event)">
@@ -14,7 +14,7 @@
         </mat-form-field>
       </div>
 
-      <div class="col-3">
+      <div class="col-12 col-sm-6 col-md-3">
         <mat-form-field appearance="outline" class="p-0">
           <mat-label>Section</mat-label>
           <mat-select placeholder="Select Section" [formControl]="sectionID" (selectionChange)="onSectionChange($event)">
@@ -22,7 +22,7 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="col-4">
+      <div class="col-12 col-sm-6 col-md-4">
         <mat-form-field appearance="outline" class="p-0">
           <mat-label>Search</mat-label>
           <input matInput placeholder="Select student" aria-label="Number" [formControl]="studentName"
@@ -34,7 +34,7 @@
           </mat-autocomplete>
         </mat-form-field>
       </div>
-      <div class="col-2 pt-1 mt-1">
+      <div class="col-12 col-md-2 pt-1 mt-1 mb-3">
         <button mat-raised-button color="primary" type="button" (click)="getSetStudent()">Search</button>
       </div>
     </div><!-- Student search end -->
@@ -43,7 +43,7 @@
       <mat-card-content class="pt-2">
         <form [formGroup]="feesForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
           <div class="row">
-            <!-- <div class="col-4">
+            <!-- <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Student ID</mat-label>
                 <input type="number" matInput formControlName="studentid" placeholder="Enter Student ID">
@@ -56,7 +56,7 @@
               </mat-form-field>
             </div> -->
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Name</mat-label>
                 <input matInput placeholder="Enter Last Name" formControlName="name">
@@ -66,7 +66,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Fee Type</mat-label>
                 <mat-select placeholder="Select fee type" formControlName="feetype">
@@ -78,7 +78,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Termname</mat-label>
                 <mat-select placeholder="Select Termname" formControlName="termname">
@@ -90,7 +90,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Term Start Date</mat-label>
                 <input matInput [matDatepicker]="picker1" placeholder="Select date" formControlName="termstartdate">
@@ -102,7 +102,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Term End Date</mat-label>
                 <input matInput [matDatepicker]="picker12" placeholder="Select date" formControlName="termenddate">
@@ -114,7 +114,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Fee Amount</mat-label>
                 <input type="number" matInput placeholder="Enter amount" formControlName="feeamount">
@@ -124,7 +124,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Paid Amount</mat-label>
                 <input type="number" matInput placeholder="Enter amount" formControlName="paidamount">
@@ -135,21 +135,21 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Discount</mat-label>
                 <input type="number" matInput placeholder="Enter discount" formControlName="discount">
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Fee After Discount</mat-label>
                 <input type="number" matInput placeholder="Enter fee after discount" formControlName="feeafterdiscount">
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Paid Date</mat-label>
                 <input matInput [matDatepicker]="picker2" placeholder="Select Date" formControlName="paiddate">
@@ -161,13 +161,13 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <!-- <mat-form-field appearance="outline" class="p-0"> -->
               <mat-checkbox formControlName="status">Status</mat-checkbox>
               <!-- </mat-form-field> -->
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Description</mat-label>
                 <textarea matInput placeholder="Description" rows="3" formControlName="description"></textarea>

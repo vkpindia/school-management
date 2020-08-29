@@ -14,7 +14,7 @@
             </ng-template>
             <form [formGroup]="classForm" (ngSubmit)="onSubmit('class')" *ngIf="showForm">
               <div class="row col-12 m-0 p-0 pt-3">
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Class Name</mat-label>
                     <input matInput formControlName="classname" placeholder="Enter Class Name">
@@ -26,7 +26,7 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-               <!--  <div class="col-4">
+               <!--  <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Section</mat-label>
                     <mat-chip-list #chipList2 aria-label="Section" formControlName="section">
@@ -41,7 +41,7 @@
                     </mat-chip-list>
                   </mat-form-field>
                 </div> -->
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Class Teacher</mat-label>
                     <input matInput placeholder="Enter Class Teacher Name" formControlName="classteacher">
@@ -66,7 +66,7 @@
             </ng-template>
             <form [formGroup]="sectionForm" (ngSubmit)="onSubmit('section')" *ngIf="showForm">
               <div class="row col-12 m-0 p-0 pt-3">
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Class ID</mat-label>
                     <!-- <input matInput formControlName="classid" placeholder="Enter Class ID"> -->
@@ -83,7 +83,7 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Section Name</mat-label>
                     <!-- <mat-select placeholder="Select section name" formControlName="sectionname">
@@ -97,7 +97,7 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Subjects</mat-label>
                     <!-- <mat-select placeholder="Select subjects" formControlName="subjects" multiple>

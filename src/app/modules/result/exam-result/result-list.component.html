@@ -9,7 +9,7 @@
   <div class="s-list">
         <!-- Student Search -->
         <div class="row">
-          <div class="col-5">
+          <div class="col-12 col-sm-6 col-md-5">
             <mat-form-field appearance="outline" class="p-0 w-100">
               <mat-label>Class</mat-label>
               <mat-select placeholder="Select Class" [formControl]="classID" (selectionChange)="onClassChange($event)">
@@ -18,7 +18,7 @@
             </mat-form-field>
           </div>
 
-          <div class="col-5">
+          <div class="col-12 col-sm-6 col-md-5">
             <mat-form-field appearance="outline" class="p-0 w-100">
               <mat-label>Section</mat-label>
               <mat-select placeholder="Select Section" [formControl]="sectionID">
@@ -26,7 +26,7 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div class="col-2 pt-1 mt-1">
+          <div class="col-12 col-sm-6 col-md-2 pt-1 mt-1 mb-3">
             <button mat-raised-button color="primary" type="button" (click)="getexamList()">Search</button>
           </div>
         </div><!-- Student search end -->

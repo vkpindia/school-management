@@ -9,7 +9,7 @@
         <form [formGroup]="admissionForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
           <div class="row">
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>First Name</mat-label>
                 <input matInput formControlName="firstname" placeholder="Enter First Name">
@@ -22,7 +22,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Last Name</mat-label>
                 <input matInput placeholder="Enter Last Name" formControlName="lastname">
@@ -32,7 +32,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Choose Gender</mat-label>
                 <mat-select placeholder="Select Gender" formControlName="sex">
@@ -46,7 +46,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Admin Number</mat-label>
                 <input type="number" matInput placeholder="Enter Admin Number" formControlName="adminnumber">
@@ -56,7 +56,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Enrollment Number</mat-label>
                 <input type="number" matInput placeholder="Enter Enrollment Number" formControlName="enrolnumber">
@@ -66,7 +66,7 @@
               </mat-form-field>
             </div>
 
-            <!-- <div class="col-4">
+            <!-- <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Enrollment Number</mat-label>
                 <input matInput placeholder="Enter Enrollment Number" formControlName="enrolnumber">
@@ -74,7 +74,7 @@
               </mat-form-field>
             </div> -->
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Date of Birth </mat-label>
                 <input matInput [matDatepicker]="picker1" placeholder="Select DOB"
@@ -87,7 +87,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Date of Admission </mat-label>
                 <input matInput [matDatepicker]="picker12" placeholder="Select dateofadmission"
@@ -100,7 +100,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Class</mat-label>
                 <mat-select placeholder="Select Class" formControlName="Class" (selectionChange)="onClassChange($event)">
@@ -112,7 +112,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Section</mat-label>
                 <mat-select placeholder="Select Section" formControlName="section">
@@ -124,7 +124,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Roll Number</mat-label>
                 <input type="number" matInput placeholder="Enter Roll Number" formControlName="rollnumber">
@@ -134,7 +134,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Fees</mat-label>
                 <input type="number" matInput placeholder="Enter Fees" formControlName="fee">
@@ -144,7 +144,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Caste</mat-label>
                 <input matInput placeholder="Enter Caste" formControlName="cast">
@@ -154,7 +154,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Religion </mat-label>
                 <input matInput placeholder="Enter Religion" formControlName="religion">
@@ -164,7 +164,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Mothertongue</mat-label>
                 <mat-select placeholder="Select Mothertongue" formControlName="Mothertoung">
@@ -178,7 +178,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Nationality</mat-label>
                 <input matInput placeholder="Enter Nationality" formControlName="nationality">
@@ -188,7 +188,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Blood Group</mat-label>
                 <input matInput placeholder="Enter Blood Group" formControlName="bloodgroup">
@@ -198,7 +198,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Mobile Number</mat-label>
                 <input matInput placeholder="Enter Mobile Number" formControlName="mobilenumber">
@@ -211,7 +211,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>What's App Number</mat-label>
                 <input matInput placeholder="Enter Whatsapp Number" formControlName="whatsappnumber">
@@ -228,7 +228,7 @@
 
             <div class="col-12 pb-2 pt-3"><mat-card-title>Optional Details</mat-card-title></div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Adhaar Number</mat-label>
                 <input type="number" matInput placeholder="Enter Adhaar" formControlName="adharnumber">
@@ -238,7 +238,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Biometric ID</mat-label>
                 <input matInput placeholder="Enter Biometric ID" formControlName="biometricid">
@@ -246,7 +246,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Bus Route</mat-label>
                 <mat-select placeholder="Select Route" formControlName="busroute">
@@ -256,7 +256,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Bus Number</mat-label>
                 <input type="number" matInput placeholder="Enter Bus Number" formControlName="busnumber">
@@ -264,7 +264,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Hostel Block</mat-label>
                 <input matInput placeholder="Enter Hostel Block " formControlName="hostelblock">
@@ -272,7 +272,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Hostel Room</mat-label>
                 <input matInput placeholder="Enter Hostel Room" formControlName="hostelroom">
@@ -280,7 +280,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Previous Class</mat-label>
                 <input type="number" matInput placeholder="Enter Previous Class" formControlName="previousclass">
@@ -288,7 +288,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Previous School</mat-label>
                 <input matInput placeholder="Enter Previous School" formControlName="previousschoolname">
@@ -296,7 +296,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Previous School Address</mat-label>
                 <input matInput placeholder="Enter Previous School Add" formControlName="previousschooladdress">
@@ -304,7 +304,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <img [src]="imageSrc" *ngIf="imageSrc" style="width:200px;" class="mb-2">
               <div class="form-group">
                 <label for="exampleFormControlFile1">Upload

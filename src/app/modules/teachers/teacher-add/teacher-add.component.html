@@ -8,7 +8,7 @@
       <mat-card-content class="pt-2">
         <form [formGroup]="teacherForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
           <div class="row">
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>First Name</mat-label>
                 <input matInput formControlName="firstname" placeholder="Enter First Name">
@@ -21,7 +21,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Last Name</mat-label>
                 <input matInput placeholder="Enter Last Name" formControlName="lastname">
@@ -31,7 +31,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>DOB</mat-label>
                 <input matInput [matDatepicker]="picker1" placeholder="Select DOB" formControlName="dob">
@@ -43,7 +43,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Choose Gender</mat-label>
                 <mat-select placeholder="Select Gender" formControlName="sex">
@@ -58,7 +58,7 @@
             </div>
 
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Caste</mat-label>
                 <input matInput placeholder="Enter Caste" formControlName="cast">
@@ -68,7 +68,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Religion </mat-label>
                 <input matInput placeholder="Enter Religion" formControlName="religion">
@@ -78,7 +78,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Previous Experiance</mat-label>
                 <input type="number" matInput placeholder="Enter Previous Experiance" formControlName="previousexp">
@@ -88,7 +88,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Prev Work Address</mat-label>
                 <input matInput placeholder="Enter Prev Work Address" formControlName="previouswrkaddress">
@@ -98,7 +98,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Position</mat-label>
                 <mat-select placeholder="Select Position" formControlName="positionapplied">
@@ -121,7 +121,7 @@
                   <mat-card-title>Teacher Summary</mat-card-title>
                   <mat-divider></mat-divider>
                 </div>
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Qualification</mat-label>
                     <mat-chip-list #chipList aria-label="Qualification..." formControlName="qualification">
@@ -137,7 +137,7 @@
                   </mat-form-field>
                 </div>
 
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Subjects</mat-label>
                     <mat-chip-list #chipList1 aria-label="Subjects..." formControlName="subjects">
@@ -153,7 +153,7 @@
                   </mat-form-field>
                 </div>
 
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Assigned Class</mat-label>
                     <mat-chip-list #chipList2 aria-label="Assignedclass..." formControlName="assignedclass">
@@ -169,7 +169,7 @@
                   </mat-form-field>
                 </div>
 
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Assigned Subject</mat-label>
                     <mat-chip-list #chipList3 aria-label="Assignedsubject..." formControlName="assignedsubject">
@@ -192,7 +192,7 @@
             </ng-container>
 
             <br />
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Date of Join</mat-label>
                 <input matInput [matDatepicker]="picker2" placeholder="Select Date" formControlName="dateofjoin">
@@ -204,7 +204,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Worktimings</mat-label>
                 <input matInput placeholder="Enter worktimings in hours(11:00-7:00)" formControlName="worktimings">
@@ -214,7 +214,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Transport</mat-label>
                 <mat-select placeholder="Select Transport" formControlName="transport">
@@ -227,7 +227,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Gross Salary</mat-label>
                 <input matInput placeholder="Enter Gross Salary" formControlName="grosssalary">
@@ -237,7 +237,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>PF Number</mat-label>
                 <input matInput placeholder="Enter PF number" formControlName="pfnumber">
@@ -247,7 +247,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>ESI Number</mat-label>
                 <input matInput placeholder="Enter ESI number" formControlName="esinumber">
@@ -257,7 +257,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>PF</mat-label>
                 <input matInput placeholder="Enter PF" formControlName="PF">
@@ -267,7 +267,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Net Salary</mat-label>
                 <input matInput placeholder="Enter Net Salary" formControlName="netsalary">
@@ -277,7 +277,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>ESI</mat-label>
                 <input matInput placeholder="Enter ESI" formControlName="ESI">
@@ -287,7 +287,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Adhaar Number</mat-label>
                 <input type="number" matInput placeholder="Enter Adhaar" formControlName="adharnumber">
@@ -298,7 +298,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Blood Group</mat-label>
                 <input matInput placeholder="Enter Blood Group" formControlName="bloodgroup">
@@ -308,7 +308,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Email</mat-label>
                 <input type="email" matInput placeholder="Enter Email" formControlName="email">
@@ -322,7 +322,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Mobile Number</mat-label>
                 <input matInput placeholder="Enter Mobile Number" formControlName="mobilenumber">
@@ -336,7 +336,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>What's App Number</mat-label>
                 <input matInput placeholder="Enter Whatsapp Number" formControlName="whatsappnumber">

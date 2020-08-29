@@ -9,7 +9,7 @@
         <form [formGroup]="transportationForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
           <div class="row">
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Route Name</mat-label>
                 <input matInput formControlName="routename" placeholder="Enter Route">
@@ -19,7 +19,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Serial Number</mat-label>
                 <input matInput placeholder="Enter Serial No" formControlName="serial_number">
@@ -29,7 +29,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>RC Number</mat-label>
                 <input matInput placeholder="Enter RC Number" formControlName="rc_number">
@@ -39,7 +39,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Insurance Number</mat-label>
                 <input matInput placeholder="Enter Insurance Number" formControlName="insurance_number">
@@ -49,7 +49,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Permit Number</mat-label>
                 <input matInput placeholder="Enter Permit Number" formControlName="permit_number">
@@ -59,7 +59,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>FC Number</mat-label>
                 <input matInput placeholder="Enter FC Number" formControlName="fc_number">
@@ -69,7 +69,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Permit Start Date</mat-label>
                 <input matInput [matDatepicker]="picker1" placeholder="Select date" formControlName="permit_startdate">
@@ -81,7 +81,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Permit End Date</mat-label>
                 <input matInput [matDatepicker]="picker2" placeholder="Select date" formControlName="permit_enddate">
@@ -93,7 +93,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Insurance Start Date</mat-label>
                 <input matInput [matDatepicker]="picker12" placeholder="Select date" formControlName="insurance_start">
@@ -105,7 +105,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Insurance End Date</mat-label>
                 <input matInput [matDatepicker]="picker13" placeholder="Select date"
@@ -118,7 +118,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>FC Start Date</mat-label>
                 <input matInput [matDatepicker]="picker14" placeholder="Select date" formControlName="fc_start">
@@ -130,7 +130,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>FC Start Date</mat-label>
                 <input matInput [matDatepicker]="picker15" placeholder="Select date" formControlName="fc_enddate">
@@ -142,7 +142,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Model</mat-label>
                 <input matInput placeholder="Enter model" formControlName="model">
@@ -152,7 +152,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Company Name</mat-label>
                 <input matInput placeholder="Enter companyname" formControlName="companyname">
@@ -162,7 +162,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Seating Capacity</mat-label>
                 <input matInput placeholder="Enter Caste" formControlName="seatingcapacity">
@@ -172,7 +172,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Vehicle Number</mat-label>
                 <input matInput placeholder="Enter vehicle no" formControlName="vehiclenumber">
@@ -188,7 +188,7 @@
               <mat-card-title>Driver Details</mat-card-title>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Driver Name</mat-label>
                 <input matInput placeholder="Enter Adhaar" formControlName="drivername">
@@ -198,7 +198,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Date of Birth</mat-label>
                 <input matInput [matDatepicker]="picker16" placeholder="Select date" formControlName="dob">
@@ -209,7 +209,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Driving License No</mat-label>
                 <input matInput placeholder="Enter License No" formControlName="driving_liciense_numebr">
@@ -219,7 +219,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Date of Issue</mat-label>
                 <input matInput [matDatepicker]="picker6" placeholder="Select date" formControlName="dateofissue">
@@ -231,7 +231,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Date of Expire</mat-label>
                 <input matInput [matDatepicker]="picker17" placeholder="Select date" formControlName="dateofexpire">
@@ -243,7 +243,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>License Type</mat-label>
                 <input matInput placeholder="Enter License type" formControlName="liciencetype">
@@ -253,7 +253,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Place of Issue</mat-label>
                 <input matInput placeholder="Enter palce of issue" formControlName="placeofissue">
@@ -264,7 +264,7 @@
             </div>
 
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Driver Number</mat-label>
                 <input matInput placeholder="Enter Driver Number" formControlName="driver_number">
@@ -278,7 +278,7 @@
               <mat-card-title>Attendar Details</mat-card-title>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Attender Name</mat-label>
                 <input  matInput placeholder="Enter name" formControlName="attendername">
@@ -288,7 +288,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Attender Number</mat-label>
                 <input  matInput placeholder="Enter name" formControlName="attender_number">
@@ -298,7 +298,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Date of Birth</mat-label>
                 <input matInput [matDatepicker]="picker18" placeholder="Select date" formControlName="attenderdob">

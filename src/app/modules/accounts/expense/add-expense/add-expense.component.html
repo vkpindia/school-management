@@ -9,7 +9,7 @@
         <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
           <div class="row">
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Expense type</mat-label>
                 <mat-select formControlName="expensetype" placeholder="Selecty expense type" [(value)]="selectedType">
@@ -24,7 +24,7 @@
             </div>
             <!-- Mother related fields -->
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Amount</mat-label>
                 <input type="number" matInput formControlName="amount" placeholder="Enter Amount">
@@ -37,7 +37,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Pending amount</mat-label>
                 <input type="number" matInput formControlName="pendingamount" placeholder="Enter Pending Amount">
@@ -50,7 +50,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Date</mat-label>
                 <input matInput [matDatepicker]="picker12" placeholder="Select date" formControlName="date">
@@ -62,7 +62,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Status</mat-label>
                 <input matInput placeholder="Enter status" formControlName="status">
