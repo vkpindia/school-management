@@ -80,7 +80,7 @@ export class AddSalaryComponent implements OnInit {
       absentdays: new FormControl(new Date(), Validators.required),
       salarytype: new FormControl(new Date(), Validators.required),
 
-      paydate: new FormControl(new Date(''), Validators.required),
+      paydate: new FormControl(new Date(), Validators.required),
       payamount: new FormControl(null),
       PF: new FormControl(null),
       PFamount: new FormControl(null),

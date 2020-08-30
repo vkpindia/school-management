@@ -30,8 +30,9 @@
             <img src="assets/images/male_avatar.jpg" alt="" class="mb-2">
           </div>
           <div class="col-12 col-md-9">
-            <h3 class="profile-heading" *ngIf="parentDetails && parentDetails.father_guardian_firstname; else dash">{{parentDetails.father_guardian_firstname | titlecase}} {{parentDetails.father_guardian_lastname | titlecase}}
-            </h3>
+            <h3 class="profile-heading"><span *ngIf="parentDetails && parentDetails.father_guardian_firstname; else name">{{parentDetails.father_guardian_firstname | titlecase}} {{parentDetails.father_guardian_lastname | titlecase}}</span></h3>
+            <!-- <h3 class="profile-heading" *ngIf="parentDetails && parentDetails.father_guardian_firstname; else dash">{{parentDetails.father_guardian_firstname | titlecase}} {{parentDetails.father_guardian_lastname | titlecase}}
+            </h3> -->
             <!-- <p style="width 80%; font-size 16px; color #646464; line-height 1.6;s">Aliquam erat volutpat. Curabiene
               natis massa sedde lacu stiquen sodale word moun taiery.Aliquam erat volutpaturabiene natis massa sedde
               sodale word moun taiery.</p> -->
@@ -94,3 +95,4 @@
 </div>
 
 <ng-template #dash>---</ng-template>
+<ng-template #name>Name</ng-template>

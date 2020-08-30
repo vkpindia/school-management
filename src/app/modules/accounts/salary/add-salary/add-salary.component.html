@@ -59,6 +59,38 @@
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
+                <mat-label>PF Number</mat-label>
+                <input type="number" matInput placeholder="Enter PF Number" formControlName="PF">
+                <!-- <mat-error *ngIf="submitted && f.paidamount.hasError('required')">
+                  Paid amount is <strong>required</strong>
+                </mat-error> -->
+
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>PF Percentage(%)</mat-label>
+                <input type="number" matInput placeholder="Enter PF Percentage(%)" formControlName="PFamount">
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>ESI Number</mat-label>
+                <input type="number" matInput placeholder="Enter ESI" formControlName="ESI">
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>ESI Percentage(%)</mat-label>
+                <input type="number" matInput placeholder="Enter ESI amount" formControlName="ESIamount">
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Absent Days</mat-label>
                 <input matInput placeholder="Enter absent days" formControlName="absentdays">
                 <mat-error *ngIf="submitted && f.absentdays.hasError('required')">
@@ -95,38 +127,6 @@
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Pay Amount</mat-label>
                 <input type="number" matInput placeholder="Enter amount" formControlName="payamount">
-              </mat-form-field>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4">
-              <mat-form-field appearance="outline" class="p-0">
-                <mat-label>PF</mat-label>
-                <input type="number" matInput placeholder="Enter PF" formControlName="PF">
-                <!-- <mat-error *ngIf="submitted && f.paidamount.hasError('required')">
-                  Paid amount is <strong>required</strong>
-                </mat-error> -->
-
-              </mat-form-field>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4">
-              <mat-form-field appearance="outline" class="p-0">
-                <mat-label>PF Amount</mat-label>
-                <input type="number" matInput placeholder="Enter discount" formControlName="PFamount">
-              </mat-form-field>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4">
-              <mat-form-field appearance="outline" class="p-0">
-                <mat-label>ESI</mat-label>
-                <input type="number" matInput placeholder="Enter ESI" formControlName="ESI">
-              </mat-form-field>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4">
-              <mat-form-field appearance="outline" class="p-0">
-                <mat-label>ESI Amount</mat-label>
-                <input type="number" matInput placeholder="Enter ESI amount" formControlName="ESIamount">
               </mat-form-field>
             </div>
 

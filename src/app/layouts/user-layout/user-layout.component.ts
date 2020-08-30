@@ -187,7 +187,7 @@ export class UserLayoutComponent implements OnInit, AfterViewInit {
           routePath: 'accounts/expense'
         },
         {
-          displayName: 'salary',
+          displayName: 'Salary',
           icon: 'fa fa-angle-right',
           routePath: 'accounts/salary'
         },

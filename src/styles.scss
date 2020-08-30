@@ -882,3 +882,13 @@ a {
     width: 100%;
   }
 }
+
+
+.table-bordered{
+  th{
+    padding-left: 10px !important;
+  }
+  td{
+    padding-left: 10px !important;
+  }
+}

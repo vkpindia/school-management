@@ -166,14 +166,14 @@
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
-                <mat-label>Mothertongue</mat-label>
-                <mat-select placeholder="Select Mothertongue" formControlName="Mothertoung">
+                <mat-label>Mother Tongue</mat-label>
+                <mat-select placeholder="Select Mother tongue" formControlName="Mothertoung">
                   <mat-option value="telugu">Telugu</mat-option>
                   <mat-option value="hindi">Hindi</mat-option>
                   <mat-option value="english">English</mat-option>
                 </mat-select>
                 <mat-error *ngIf="submitted && f.Mothertoung.hasError('required')">
-                  Mothertongue is <strong>required</strong>
+                  Mother Tongue is <strong>required</strong>
                 </mat-error>
               </mat-form-field>
             </div>
@@ -213,13 +213,13 @@
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
-                <mat-label>What's App Number</mat-label>
+                <mat-label>WhatsApp Number</mat-label>
                 <input matInput placeholder="Enter Whatsapp Number" formControlName="whatsappnumber">
                 <mat-error *ngIf="submitted && f.whatsappnumber.hasError('required')">
-                  What's app number is <strong>required</strong>
+                  WhatsApp number is <strong>required</strong>
                 </mat-error>
                 <mat-error *ngIf="submitted && f.whatsappnumber.hasError('minlength') && f.whatsappnumber.dirty && !f.whatsappnumber.hasError('required')">
-                  What's app number must be minimum 10 characters
+                  WhatsApp number must be minimum 10 characters
                 </mat-error>
               </mat-form-field>
             </div>
@@ -309,7 +309,7 @@
               <div class="form-group">
                 <label for="exampleFormControlFile1">Upload
                    Picture</label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1" formControlName="file" (change)="onFileChange($event)">
+                <input type="file" class="form-control-file" id="exampleFormControlFile1" formControlName="file"accept="image/*"  (change)="onFileChange($event)">
                 <mat-error *ngIf="submitted && f.file.hasError('required')">
                   Religion is <strong>required</strong>
                 </mat-error>

@@ -170,8 +170,8 @@
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
-                <mat-label>Account Number</mat-label>
-                <input matInput type="number" placeholder="Enter A/C Number" formControlName="bank_accountnumber">
+                <mat-label>BANK Account Number</mat-label>
+                <input matInput type="number" placeholder="Enter BANK Account Number" formControlName="bank_accountnumber">
                 <mat-error></mat-error>
               </mat-form-field>
             </div>
@@ -194,7 +194,7 @@
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
-                <mat-label>Ration Card</mat-label>
+                <mat-label>Ration Card Number</mat-label>
                 <input matInput placeholder="Enter Ration Card Number" formControlName="rationcardnumber">
                 <mat-error></mat-error>
               </mat-form-field>
@@ -234,11 +234,11 @@
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
-                <mat-label>What's App</mat-label>
-                <input type="number" matInput placeholder="Enter What's App Number" formControlName="whatsappnumber">
+                <mat-label>WhatsApp</mat-label>
+                <input type="number" matInput placeholder="Enter WhatsApp Number" formControlName="whatsappnumber">
                 <mat-error
                   *ngIf="submitted && f.whatsappnumber.hasError('minlength') && !f.whatsappnumber.hasError('required')">
-                  What's app number must be minimum 10 characters
+                  WhatsApp number must be minimum 10 characters
                 </mat-error>
               </mat-form-field>
             </div>

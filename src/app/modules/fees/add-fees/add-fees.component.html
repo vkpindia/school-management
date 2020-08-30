@@ -80,8 +80,8 @@
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
-                <mat-label>Termname</mat-label>
-                <mat-select placeholder="Select Termname" formControlName="termname">
+                <mat-label>Term Name</mat-label>
+                <mat-select placeholder="Select Term Name" formControlName="termname">
                   <mat-option *ngFor="let term of termList" [value]="term.id">{{term.termname}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="submitted && f.termname.hasError('required')">

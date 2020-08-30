@@ -30,7 +30,7 @@
             <img *ngIf="studentDetails && studentDetails.sex=='male'" src="assets/images/male_avatar.jpg" alt="">
           </div>
           <div class="col-12 col-md-9">
-            <h3 class="profile-heading" *ngIf="studentDetails && studentDetails.firstname; else dash">{{studentDetails.firstname | titlecase}} {{studentDetails.lastname | titlecase}}
+            <h3 class="profile-heading"><span *ngIf="studentDetails && studentDetails.firstname; else name">{{studentDetails.firstname | titlecase}} {{studentDetails.lastname | titlecase}}</span>
             </h3>
             <!-- <p style="width 80%; font-size 16px; color #646464; line-height 1.6;s">Aliquam erat volutpat. Curabiene
               natis massa sedde lacu stiquen sodale word moun taiery.Aliquam erat volutpaturabiene natis massa sedde
@@ -140,4 +140,5 @@
 </div>
 
 <ng-template #dash>---</ng-template>
+<ng-template #name>Name</ng-template>
 <ng-template #imgS><img *ngIf="studentDetails.sex=='female'" src="assets/images/student_female.jpg" alt=""></ng-template>
