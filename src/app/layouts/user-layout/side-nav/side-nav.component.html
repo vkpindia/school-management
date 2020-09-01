@@ -12,7 +12,7 @@
     </mat-icon> -->
   </span>
 </a>
-<div *ngIf=" item.isActive" class="sub-menu">
+<div *ngIf="item.isActive" class="sub-menu">
   <ng-container *ngFor="let child of item.children">
     <app-side-nav [item]="child" [depth]="depth+1" [ngClass]="this.child.children?'submenu-2':''"></app-side-nav>
   </ng-container>

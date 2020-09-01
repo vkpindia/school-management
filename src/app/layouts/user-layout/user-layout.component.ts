@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './user-layout.component.html',
   styleUrls: ['./user-layout.component.scss']
 })
+
 export class UserLayoutComponent implements OnInit, AfterViewInit {
   @ViewChild('appDrawer') appDrawer: ElementRef;
   version = VERSION;
@@ -281,19 +282,25 @@ export class UserLayoutComponent implements OnInit, AfterViewInit {
     , private _ar: ActivatedRoute) {
 
 
-    }
+  }
 
   ngOnInit() {
     this.userData = JSON.parse(localStorage.getItem('currentUser'));
-    // console.log('_ar', this._ar.snapshot.firstChild);
   }
   ngAfterViewInit() {
     // this.navService.appDrawer = this.appDrawer;
   }
 
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-09-01
+   * @memberof UserLayoutComponent
+   */
   public menuToggle(): void {
     document.body.classList.toggle("open-menu");
   }
+
   /**
    * @description Method to logout user
    * @author Virendra Pandey
@@ -312,9 +319,10 @@ export class UserLayoutComponent implements OnInit, AfterViewInit {
    * @memberof UserLayoutComponent
    */
   onMenuSelect(event) {
-    const obj = this.navItems.find(f => f.displayName === event.displayName);
     this.navItems.map(nav => {
-      if (obj.displayName !== nav.displayName) {
+      if (event.displayName === nav.displayName) {
+        nav['isActive'] = !nav['isActive'];
+      } else {
         nav['isActive'] = false;
       }
     });

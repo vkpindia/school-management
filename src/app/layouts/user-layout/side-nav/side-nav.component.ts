@@ -25,12 +25,12 @@ import { NavService } from '../../../_services/nav.service';
     ])
   ]
 })
+
 export class SideNavComponent implements OnInit {
   @Input() item;
   @Input() depth: number;
   @Output() onSelect: EventEmitter<any> = new EventEmitter();
-  public expanded: boolean;
-  public selectedMenu: string = "";
+  public expanded: boolean = true;
   public navMenu: any;;
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
 
@@ -43,39 +43,27 @@ export class SideNavComponent implements OnInit {
 
   ngOnInit() {
     if (this.item && this.item.children && this.item.children.length) {
-      this.item.children.forEach(route => {
+      this.item.children.map(route => {
         if (this.router.url === '/' + route.routePath) {
           this.item['isActive'] = true;
         }
       });
     }
-    /* console.log('his.router.isActive(this.item.routePath, true111)', this.router.isActive(this.item.routePath, true));
-    if (this.item.children && this.item.children.length && this.router.isActive(this.item.routePath, true)) {
-      console.log('this.expanded', this.expanded);
-      this.expanded = true;
-    } */
   }
 
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-09-01
+   * @param {*} item
+   * @param {HTMLElement} element
+   * @memberof SideNavComponent
+   */
   onItemSelected(item, element: HTMLElement) {
-    item['isActive'] = true;
-    console.log('expanded');
     if ((!item.children || !item.children.length) && item.routePath != undefined) {
       this.router.navigate([item.routePath]);
-      // this.navService.closeNav();
     }
-    console.log(this.item.displayName + ' ' + ' ' + item.displayName)
-    if (this.selectedMenu === item.routePath) {
-      console.log('element', element);
-      this.expanded = !this.expanded;
-    }
-    // this.selectedMenu = item.routePath;
-
-    // if (this.navMenu && (this.navMenu['displayName'] === item['displayName'])) {
-    //   item['isActive'] = false;
-    // }
-
     this.onSelect.emit(item);
-    this.navMenu = item;
   }
 
 }
