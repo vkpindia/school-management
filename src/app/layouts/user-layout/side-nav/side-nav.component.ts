@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NavService } from '../../../_services/nav.service';
@@ -28,8 +28,10 @@ import { NavService } from '../../../_services/nav.service';
 export class SideNavComponent implements OnInit {
   @Input() item;
   @Input() depth: number;
+  @Output() onSelect: EventEmitter<any> = new EventEmitter();
   public expanded: boolean;
-  public selectedMenu:string;
+  public selectedMenu: string = "";
+  public navMenu: any;;
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
 
 
@@ -43,7 +45,7 @@ export class SideNavComponent implements OnInit {
     if (this.item && this.item.children && this.item.children.length) {
       this.item.children.forEach(route => {
         if (this.router.url === '/' + route.routePath) {
-          this.expanded = true;
+          this.item['isActive'] = true;
         }
       });
     }
@@ -53,17 +55,27 @@ export class SideNavComponent implements OnInit {
       this.expanded = true;
     } */
   }
-  onItemSelected(item) {
-    this.selectedMenu = item.displayName;
+
+  onItemSelected(item, element: HTMLElement) {
+    item['isActive'] = true;
     console.log('expanded');
-    if ((!item.children || !item.children.length) && item.routePath !=undefined) {
+    if ((!item.children || !item.children.length) && item.routePath != undefined) {
       this.router.navigate([item.routePath]);
       // this.navService.closeNav();
     }
-    console.log(this.item.displayName+' '  +  ' '+ item.displayName)
-    if (item.children && item.children.length) {
+    console.log(this.item.displayName + ' ' + ' ' + item.displayName)
+    if (this.selectedMenu === item.routePath) {
+      console.log('element', element);
       this.expanded = !this.expanded;
     }
+    // this.selectedMenu = item.routePath;
+
+    // if (this.navMenu && (this.navMenu['displayName'] === item['displayName'])) {
+    //   item['isActive'] = false;
+    // }
+
+    this.onSelect.emit(item);
+    this.navMenu = item;
   }
 
 }

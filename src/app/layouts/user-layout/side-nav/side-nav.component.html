@@ -1,16 +1,19 @@
-<a mat-list-item [ngStyle]="{'padding-left': (depth * 12) + 'px'}" (click)="onItemSelected(item)"
-              [ngClass]="{'active': item.routePath ? router.isActive(item.routePath, true): false, 'expanded': expanded}">
-              <mat-icon class="routeIcon" [ngClass]="item.icon? item.icon: ''">{{item.iconName}}</mat-icon>
+<a mat-list-item [ngStyle]="{'padding-left': (depth * 12) + 'px'}" (click)="onItemSelected(item, $event.currentTarget)"
+  [ngClass]="{'active': item.routePath ? router.isActive(item.routePath, true): false, 'expanded': item.isActive}">
+  <mat-icon class="routeIcon" [ngClass]="item.icon? item.icon: ''">{{item.iconName}}</mat-icon>
   <span>{{item.displayName}}</span>
   <span fxFlex *ngIf="item.children && item.children.length" class="icon-expand">
     <span fxFlex></span>
-    <mat-icon [@indicatorRotate]="expanded ? 'expanded': 'collapsed'">
+    <mat-icon [@indicatorRotate]="item.isActive ? 'expanded': 'collapsed'">
       expand_more
     </mat-icon>
+    <!-- <mat-icon [@indicatorRotate]="expanded ? 'expanded': 'collapsed'">
+      expand_more
+    </mat-icon> -->
   </span>
 </a>
-<div *ngIf="expanded" class="sub-menu">
-  <ng-container  *ngFor="let child of item.children">
+<div *ngIf=" item.isActive" class="sub-menu">
+  <ng-container *ngFor="let child of item.children">
     <app-side-nav [item]="child" [depth]="depth+1" [ngClass]="this.child.children?'submenu-2':''"></app-side-nav>
   </ng-container>
 </div>

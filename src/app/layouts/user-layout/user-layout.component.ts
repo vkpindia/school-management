@@ -19,6 +19,7 @@ export class UserLayoutComponent implements OnInit, AfterViewInit {
     {
       displayName: 'Dashboard',
       iconName: 'dashboard',
+      // isActive: true,
       children: [
         {
           displayName: 'Admin',
@@ -277,7 +278,10 @@ export class UserLayoutComponent implements OnInit, AfterViewInit {
   constructor(private breakpointObserver: BreakpointObserver
     , private navService: NavService
     , private _authService: AuthenticationService
-    , private _ar: ActivatedRoute) { }
+    , private _ar: ActivatedRoute) {
+
+
+    }
 
   ngOnInit() {
     this.userData = JSON.parse(localStorage.getItem('currentUser'));
@@ -298,5 +302,21 @@ export class UserLayoutComponent implements OnInit, AfterViewInit {
    */
   public signOut(): void {
     this._authService.logout();
+  }
+
+  /**
+   * @description Collapsible
+   * @author Virendra Pandey
+   * @date 2020-09-01
+   * @param {*} event
+   * @memberof UserLayoutComponent
+   */
+  onMenuSelect(event) {
+    const obj = this.navItems.find(f => f.displayName === event.displayName);
+    this.navItems.map(nav => {
+      if (obj.displayName !== nav.displayName) {
+        nav['isActive'] = false;
+      }
+    });
   }
 }

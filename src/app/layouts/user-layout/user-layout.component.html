@@ -7,7 +7,7 @@
     </mat-toolbar>
     <mat-nav-list>
       <ng-container *ngFor="let item of navItems">
-        <app-side-nav [item]="item"></app-side-nav>
+        <app-side-nav [item]="item" (onSelect)="onMenuSelect($event)"></app-side-nav>
       </ng-container>
 
     </mat-nav-list>
