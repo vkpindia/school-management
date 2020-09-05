@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../_models';
 import { Router } from '@angular/router';
@@ -12,14 +12,16 @@ import { environment } from '../../environments/environment';
 
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
-  // private firstTimeUserLogin: BehaviorSubject<any>;
-  private firstTimeUserLogin = new Subject<any>();
+  private firstTimeUserLogin: BehaviorSubject<any>;
   public currentUser: Observable<User>;
+  public firstTimeUser: Observable<User>;
 
   public _apiUrl = environment.apiBaseUrl;
   constructor(private http: HttpClient, private _router: Router) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.firstTimeUserLogin = new BehaviorSubject<any>(null);
     this.currentUser = this.currentUserSubject.asObservable();
+    this.firstTimeUser = this.firstTimeUserLogin.asObservable();
   }
 
   /**
@@ -41,8 +43,8 @@ export class AuthenticationService {
    * @returns {Observable<any>}
    * @memberof AuthenticationService
    */
-  public login(formData: any): Observable<any> {
-    return this.http.post<any>(this._apiUrl + 'login/UserLogin', formData)
+  public login(formData:any): Observable<any> {
+    return this.http.post<any>(this._apiUrl+'login/UserLogin', formData)
       .pipe(map(user => {
         // login successful if there's a jwt token in the response
         // console.log('user', user);
@@ -66,20 +68,9 @@ export class AuthenticationService {
    * @returns {Observable<any>}
    * @memberof AuthenticationService
    */
-  public resetPassword(formData: any): Observable<any> {
-    return this.http.put<any>(this._apiUrl + 'adminController/UpdatePassword', formData)
+  public resetPassword(formData:any): Observable<any> {
+    return this.http.put<any>(this._apiUrl+'adminController/UpdatePassword', formData)
       .pipe(map(user => user));
-  }
-
-  /**
-   * @description
-   * @author Virendra Pandey
-   * @date 2020-09-05
-   * @returns {Observable<any>}
-   * @memberof AuthenticationService
-   */
-  public getUserdata(): Observable<any> {
-    return this.firstTimeUserLogin.asObservable();
   }
 
   /**

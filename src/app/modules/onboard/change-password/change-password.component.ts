@@ -20,8 +20,6 @@ export class ChangePasswordComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
-  public userData: any = {};
-
   public emailPattern: string = '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}';
 
 
@@ -35,10 +33,6 @@ export class ChangePasswordComponent implements OnInit {
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       cnfPassword: new FormControl('', passwordMatchValidator)
     });
-
-    this._aus.getUserdata().subscribe(data => {
-      this.userData = data
-    })
   }
   get f() { return this.resetPasswordForm.controls; }
 
@@ -58,10 +52,14 @@ export class ChangePasswordComponent implements OnInit {
       return;
     }
 
-    console.log('userData', this.userData);
+    let userData: any;
+    this._aus.firstTimeUser.subscribe(data => {
+      userData = data
+    })
+    console.log('userData', userData);
     let payload: any = {};
     Object.assign(payload, this.resetPasswordForm.value)
-    payload = { ...payload, ...this.userData };
+    payload = { ...payload, ...userData };
     delete payload.Roll;
     delete payload.Status;
     delete payload.Message;

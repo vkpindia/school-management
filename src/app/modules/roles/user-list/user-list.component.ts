@@ -32,11 +32,11 @@ export class UserListComponent implements OnInit {
     this.getUsersList();
   }
 
- /*  ngAfterViewInit() {
-    this.TSort.sortChange.subscribe(() => {
-        this.paginator.pageIndex = 0;
-        this.paginator.pageSize = this.pageSize;
-    }); */
+  ngAfterViewInit() {
+    this.UsersService.sort = this.TSort;
+    this.UsersService.paginator = this.paginator;
+  }
+
   /**
    * @description Method to get All student record
    * @author Virendra Pandey
@@ -49,8 +49,6 @@ export class UserListComponent implements OnInit {
       if (data) {
         this.recordLength = data.length;
         this.UsersService = new MatTableDataSource(data);
-        this.UsersService.sort = this.TSort;
-        this.UsersService.paginator = this.paginator;
         this.isLoading = false;
       }
       // Assign the data to the data source for the table to render
