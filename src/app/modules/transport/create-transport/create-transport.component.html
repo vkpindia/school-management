@@ -310,6 +310,40 @@
               </mat-form-field>
             </div>
 
+            <div class="col-12 pb-2 pt-3">
+              <mat-card-title>Incharge Details</mat-card-title>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Incharge First Name</mat-label>
+                <input  matInput placeholder="Enter first name" formControlName="incharge_fname">
+                <mat-error *ngIf="submitted && f.incharge_fname.hasError('required')">
+                  Incharge first name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Incharge Last Name</mat-label>
+                <input  matInput placeholder="Enter last name" formControlName="incharge_lname">
+                <mat-error *ngIf="submitted && f.incharge_lname.hasError('required')">
+                  Incharge last name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Incharge Number</mat-label>
+                <input  matInput placeholder="Enter name" formControlName="incharge_number">
+                <mat-error *ngIf="submitted && f.incharge_number.hasError('required')">
+                  Incharge number is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
           </div>
 
           <div class="example-button-row pt-3 text-center">

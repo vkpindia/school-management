@@ -173,6 +173,14 @@ const routes: Routes = [
         data: {
           breadcrumb: 'Transport',
         }
+      },
+      {
+        path: 'users',
+        loadChildren: () => import('./modules/roles/roles.module').then(m => m.RolesModule),
+        canActivate: [AuthGuard],
+        data: {
+          breadcrumb: 'Users',
+        }
       }
     ]
   }

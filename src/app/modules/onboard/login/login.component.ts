@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 // import { AuthenticationService } from '../../../_services';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../../../_services/authentication.service';
-import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 // import { AuthenticationService } from 'src/app/_services';
 
 @Component({
@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
       email: new FormControl(),
       pass: new FormControl()
     }); */
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -64,7 +65,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-// console.log('this.loginForm.value.username', this.loginForm.value.username);
+    // console.log('this.loginForm.value.username', this.loginForm.value.username);
     this.loading = true;
     delete this.loginForm.value.rememberMe;
     this.authenticationService.login(this.loginForm.value)
@@ -73,7 +74,11 @@ export class LoginComponent implements OnInit {
         data => {
           this.showNotification();
           console.log('this.returnUrl', this.returnUrl);
-          this.router.navigate([this.returnUrl]);
+          if (data && data.firsttime) {
+            this.router.navigate(['/login/change-password']);
+          } else {
+            this.router.navigate([this.returnUrl]);
+          }
         },
         error => {
           this.error = error;

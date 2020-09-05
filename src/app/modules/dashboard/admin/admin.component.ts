@@ -9,6 +9,7 @@ import * as Highcharts from 'highcharts';
 export class AdminComponent implements OnInit {
 
   public highcharts: typeof Highcharts = Highcharts;
+
   public chartOptions = {
     chart: {
       type: 'areaspline'

@@ -1,0 +1,91 @@
+<div class="form-container">
+  <div class="page-title">
+    <h3>Students</h3>
+  </div>
+  <div class="form-fields">
+    <mat-card>
+      <mat-card-title>{{cardTitle}}</mat-card-title>
+      <mat-card-content class="pt-2">
+        <form [formGroup]="usersForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
+          <div class="row">
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>User Name</mat-label>
+                <input matInput formControlName="username" placeholder="Enter User Name">
+               <!--  <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
+                  Please enter a valid email address
+                </mat-error> -->
+                <mat-error *ngIf="submitted && f.username.hasError('required')">
+                  User name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>User ID</mat-label>
+                <input matInput placeholder="Enter User ID" formControlName="userid">
+                <mat-error *ngIf="submitted && f.userid.hasError('required')">
+                  User ID is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput placeholder="Enter Password " formControlName="password">
+                <mat-error *ngIf="submitted && f.password.hasError('required')">
+                  Password is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="submitted && f.password.hasError('minLength')">
+                  Password must be 6 characters
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Confirm Password</mat-label>
+                <input type="password" matInput placeholder="Enter Confirm Password " formControlName="cnfPassword">
+                <mat-error *ngIf="f.cnfPassword.hasError('mismatch')">
+                  Passwords do not match
+                </mat-error>
+                <!-- <mat-error *ngIf="submitted && f.cnfPassword.hasError('required')">
+                  Password do not match
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Role ID</mat-label>
+                <input matInput placeholder="Enter Role ID" formControlName="roleid">
+                <mat-error *ngIf="submitted && f.roleid.hasError('required')">
+                  Role ID is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Comments</mat-label>
+                <textarea matInput placeholder="Enter Comments" formControlName="msg"></textarea>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+          <div class="example-button-row pt-3 text-center">
+            <button mat-raised-button color="primary" type="submit">{{buttonLabel}}</button>
+            <button *ngIf="showButtons" mat-raised-button class="ml-3 mat-secondary" (click)="onCancel($event)">Cancel</button>
+            <button *ngIf="!showButtons" mat-raised-button class="ml-3 mat-secondary" (click)="onFormReset($event)">Reset</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #dash>---</ng-template>

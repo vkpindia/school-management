@@ -13,11 +13,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
 @NgModule({
-  declarations: [RegistrationComponent, ForgotComponent, LoginComponent],
+  declarations: [RegistrationComponent, ForgotComponent, LoginComponent, ChangePasswordComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

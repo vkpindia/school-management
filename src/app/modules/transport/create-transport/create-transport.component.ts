@@ -77,7 +77,12 @@ export class CreateTransportComponent implements OnInit {
       //Attender Fields
       attendername: new FormControl(null, Validators.required),
       attender_number: new FormControl(null, Validators.required),
-      attenderdob: new FormControl(null, Validators.required)
+      attenderdob: new FormControl(null, Validators.required),
+
+      // Incharde Fields
+      incharge_fname: new FormControl(null, Validators.required),
+      incharge_lname: new FormControl(null, Validators.required),
+      incharge_number: new FormControl(null, Validators.required)
     });
 
     console.log('transportDetails', this.transportDetails);

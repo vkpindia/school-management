@@ -1,0 +1,8 @@
+<div class="no-record" *ngIf="isLoading">
+  <img src="assets/images/page-loader.gif" alt="">
+  <p class="m-0">loading...</p>
+</div>
+<div *ngIf="showForm">
+  <app-create-user [userDetails]="userDetails" (formSubmit)="onFormSubmit($event)" (formCancel)="onFormCancel($event)"></app-create-user>
+</div>
+
