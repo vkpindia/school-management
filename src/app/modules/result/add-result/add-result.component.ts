@@ -84,7 +84,7 @@ export class AddResultComponent implements OnInit {
       totalmarks: new FormControl(null, Validators.required),
       grade: new FormControl(null, Validators.required),
       percetage: new FormControl(null, Validators.required),
-      comments: new FormControl(null)
+      comments: new FormControl(null , Validators.required)
     });
 
     // Get total of actual and obtained mark
@@ -94,7 +94,7 @@ export class AddResultComponent implements OnInit {
 
 
     this.getStudentsRecord();
-    if(this.examRecord && this.studentid) {
+    if (this.examRecord && this.studentid) {
       this.getResult();
     }
   }
@@ -235,12 +235,22 @@ export class AddResultComponent implements OnInit {
    * @memberof AddResultComponent
    */
   onOptionSelection(event, rt?: any, index?: any) {
-    console.log('event', event);
-    if (rt == 'ar') {
+    if (rt === 'ar') {
       this.studentid = event.option.value.id;
       this.controlIndex = index;
       this.addTResultForm.get('studentid').setValue(event.option.value.id);
-      (this.addResultForm.get('items') as FormArray).at(index).get('studentid').patchValue(event.option.value.id)
+      if (this.studentRecordList) {
+        this.studentRecordList.map(data => {
+          if (data.id == event.option.value.id) {
+            console.log('data', data);
+            this.studentTID.patchValue(data.name);
+          }
+        });
+      }
+
+      (this.addResultForm.get('items') as FormArray).at(index).get('studentid')
+        .patchValue(event.option.value.id);
+
     } else {
       this.addTResultForm.patchValue({
         studentid: event.option.value.id
@@ -256,12 +266,13 @@ export class AddResultComponent implements OnInit {
    * @memberof AddResultComponent
    */
   public getResult() {
-    this._ss.getExamResultByClassSection(this.studentid, this.examRecord.examid, this.examRecord.classid, this.examRecord.sectionid).subscribe(data => {
-      if(data){
-        this.studentResultList = data;
-        this.isResultReady = true;
-      }
-    })
+    this._ss.getExamResultByClassSection(this.studentid, this.examRecord.examid,
+      this.examRecord.classid, this.examRecord.sectionid).subscribe(data => {
+        if (data) {
+          this.studentResultList = data;
+          this.isResultReady = true;
+        }
+      });
   }
 
   /**
@@ -272,7 +283,7 @@ export class AddResultComponent implements OnInit {
    * @memberof StudentAdmissionComponent
    */
   public onSubmit(form?: any) {
-    if (form == 'addResult') {
+    if (form === 'addResult') {
 
       this.submitted = true;
 
@@ -290,6 +301,7 @@ export class AddResultComponent implements OnInit {
 
       this._ss.saveResult(payload).subscribe(data => {
         this.showNotification('Submitted Successfully!!');
+        this.selectedIndex = 1;
 
         this.addResultForm.reset();
 
@@ -298,7 +310,7 @@ export class AddResultComponent implements OnInit {
           this.showForm = true;
         }, 0);
         data.forEach((element, index) => {
-          (this.addResultForm.get('items') as FormArray).at(index).get('examid').patchValue(element.examid)
+          (this.addResultForm.get('items') as FormArray).at(index).get('examid').patchValue(element.examid);
         });
         this.getTotalMarks(data);
         this.getResult();

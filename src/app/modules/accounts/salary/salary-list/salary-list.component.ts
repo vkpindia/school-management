@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatSort } from '@angular/material/sort';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './salary-list.component.html',
   styleUrls: ['./salary-list.component.scss']
 })
-export class SalaryListComponent implements OnInit {
+export class SalaryListComponent implements OnInit, OnChanges {
 
   @Input() salaryList: any = [];
   @Input() teacherID: any;
@@ -20,7 +20,7 @@ export class SalaryListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) TSort: MatSort;
 
-  public displayedColumns: string[] = ['name', 'grosssalary', 'netsalary', 'payamount', 'paydate', 'PFamount', 'actions'];
+  public displayedColumns: string[] = ['select', 'name', 'grosssalary', 'netsalary', 'payamount', 'paydate', 'PFamount', 'actions'];
   public filterData: string = '';
   public recordLength: number;
   public isLoading: boolean = true;
@@ -33,10 +33,16 @@ export class SalaryListComponent implements OnInit {
   // tslint:disable-next-line: variable-name
   constructor(private _ss: SalaryService, private _router: Router) { }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+
+    console.log('salaryList', this.salaryList);
+  }
   ngOnInit(): void {
     // method call
     this.getFeeList();
-    this.applyFilter();
+    // this.applyFilter();
   }
 
   /*  ngAfterViewInit() {
@@ -72,9 +78,11 @@ export class SalaryListComponent implements OnInit {
    * @memberof feeListComponent
    */
   isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.feeList.data.length;
-    return numSelected === numRows;
+    if (this.salaryList && this.salaryList.length){
+      const numSelected = this.selection.selected.length;
+      const numRows = this.feeList.data.length;
+      return numSelected === numRows;
+    }
   }
 
   /**
@@ -84,9 +92,11 @@ export class SalaryListComponent implements OnInit {
    * @memberof feeListComponent
    */
   masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.feeList.data.forEach(row => this.selection.select(row));
+    if (this.salaryList && this.salaryList.length){
+      this.isAllSelected() ?
+        this.selection.clear() :
+        this.feeList.data.forEach(row => this.selection.select(row));
+    }
   }
 
   /**
@@ -111,17 +121,14 @@ export class SalaryListComponent implements OnInit {
    * @param {*} event
    * @memberof feeListComponent
    */
-  applyFilter() {
-    /*  // console.log('list filter event', event);
+  applyFilter(event) {
+     // console.log('list filter event', event);
      const filterValue = (event.target as HTMLInputElement).value;
      this.feeList.filter = filterValue.trim().toLowerCase();
      // console.log('this.feeList', this.feeList);
      if (this.feeList.paginator) {
        this.feeList.paginator.firstPage();
-     } */
-    this._ss.searchTeacher().subscribe(data => {
-      console.log('data', data);
-    });
+     }
   }
 
   /**

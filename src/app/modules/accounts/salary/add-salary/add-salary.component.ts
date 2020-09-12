@@ -44,7 +44,7 @@ export class AddSalaryComponent implements OnInit {
   private _emailPattern = '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}';
   public horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   public verticalPosition: MatSnackBarVerticalPosition = 'bottom';
-  public teacherID:any;
+  public teacherID: any;
 
   //Chips variable declaration
   visible = true;
@@ -53,7 +53,7 @@ export class AddSalaryComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   // qualifications: any[] = [];
-  public salarytypesList: any = []
+  public salarytypesList: any = [];
 
   constructor(
     private _ar: ActivatedRoute,
@@ -97,7 +97,7 @@ export class AddSalaryComponent implements OnInit {
     // this.getAllSalaryList();
     // this.getSalaryDetails();
     this.getSalaryTypes();
-    this.getTeacherRecord()
+    this.getTeacherRecord();
   }
 
 
@@ -109,11 +109,11 @@ export class AddSalaryComponent implements OnInit {
   get f() { return this.salaryForm.controls; }
 
   /**
- * @description
- * @author Virendra Pandey
- * @date 2020-07-21
- * @memberof AddSalaryComponent
- */
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-07-21
+   * @memberof AddSalaryComponent
+   */
   public getSalaryTypes() {
     this._fs.getSalryType().subscribe(data => {
       if (data) {
@@ -129,6 +129,7 @@ export class AddSalaryComponent implements OnInit {
    * @memberof AddSalaryComponent
    */
   public getSalaryDetails(): void {
+    console.log('teacherID', this.teacherID);
     let id = this.teacherID ? this.teacherID : 1;
     this._fs.getSalaryDetails(id).subscribe(data => {
       if (data) {
@@ -146,22 +147,22 @@ export class AddSalaryComponent implements OnInit {
   public getAllSalaryList(): void {
     let id = this.teacherID ? this.teacherID : 1;
     this._fs.getAllSalaryDetails(id).subscribe(data => {
+      console.log('data', data);
       if (data) {
         this.salaryList = data;
-        console.log('this.SalaryList', this.salaryList);
         this.ShowList = true;
       }
-    })
+    });
   }
 
   getOptionText(option) {
-    if(option){
+    if (option) {
       return option.name;
     }
   }
 
-  public getTeacherRecord(): void{
-    this._fs.searchTeacher().subscribe(data=>{
+  public getTeacherRecord(): void {
+    this._fs.searchTeacher().subscribe(data => {
       this.teacherRecordList = data;
       this.teacherFilteredList = this.teacherName.valueChanges.pipe(
         startWith(''),
@@ -170,28 +171,28 @@ export class AddSalaryComponent implements OnInit {
     })
   }
 
-    /**
- * @description
- * @author Virendra Pandey
- * @date 2020-08-12
- * @private
- * @param {string} value
- * @returns {string[]}
- * @memberof AddFeesComponent
- */
-private _filter(value): any[] {
-  const filterValue = value;
-  return this.teacherRecordList.filter(option => option.name.toLowerCase().includes(filterValue)
-  );
-}
-
-onOptionSelection(event){
-  this.teacherID = event.option.value.id;
-  if(this.teacherID) {
-    this.getSalaryDetails();
-    this.getAllSalaryList();
+ /**
+  * @description
+  * @author Virendra Pandey
+  * @date 2020-08-12
+  * @private
+  * @param {string} value
+  * @returns {string[]}
+  * @memberof AddFeesComponent
+  */
+  private _filter(value): any[] {
+    const filterValue = value;
+    return this.teacherRecordList.filter(option => option.name.toLowerCase().includes(filterValue)
+    );
   }
-}
+
+  onOptionSelection(event) {
+    this.teacherID = event.option.value.id;
+    if (this.teacherID) {
+      this.getSalaryDetails();
+      this.getAllSalaryList();
+    }
+  }
 
   /**
    * @description
@@ -320,7 +321,7 @@ onOptionSelection(event){
    */
   public onDeleteSalary(event): void {
     if (event) {
-       this.getAllSalaryList();
+      this.getAllSalaryList();
     }
   }
 

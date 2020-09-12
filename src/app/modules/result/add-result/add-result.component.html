@@ -195,6 +195,9 @@
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Comments</mat-label>
                     <textarea matInput placeholder="Enter percent" formControlName="comments" row="4"></textarea>
+                    <mat-error *ngIf="submitted && ff.comments.hasError('required')">
+                      Comments is <strong>required</strong>
+                    </mat-error>
                   </mat-form-field>
                 </div>
               </div>

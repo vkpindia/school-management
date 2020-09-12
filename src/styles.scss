@@ -883,7 +883,6 @@ a {
   }
 }
 
-
 .table-bordered{
   th{
     padding-left: 10px !important;
@@ -891,4 +890,8 @@ a {
   td{
     padding-left: 10px !important;
   }
+}
+
+.form-container input{
+  text-transform: capitalize !important;
 }

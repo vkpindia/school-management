@@ -29,7 +29,7 @@ export class ChangePasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetPasswordForm = new FormGroup({
-      oldpassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      oldpassword: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       cnfPassword: new FormControl('', passwordMatchValidator)
     });
@@ -54,17 +54,17 @@ export class ChangePasswordComponent implements OnInit {
 
     let userData: any;
     this._aus.firstTimeUser.subscribe(data => {
-      userData = data
-    })
+      userData = data;
+    });
+
     console.log('userData', userData);
     let payload: any = {};
-    Object.assign(payload, this.resetPasswordForm.value)
+    Object.assign(payload, this.resetPasswordForm.value);
     payload = { ...payload, ...userData };
     delete payload.Roll;
     delete payload.Status;
     delete payload.Message;
     this.loading = true;
-    payload['firsttime'] = false;
     this._aus.resetPassword(payload)
       .pipe(first())
       .subscribe(

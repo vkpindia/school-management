@@ -35,6 +35,7 @@ export class StudentAdmissionComponent implements OnInit {
   public verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   public classList: any = [];
   public sectionList: any = [];
+  public routeList: any = [];
 
   constructor(
     private _ar: ActivatedRoute,
@@ -65,11 +66,11 @@ export class StudentAdmissionComponent implements OnInit {
       Mothertoung: new FormControl(null, Validators.required),
       nationality: new FormControl(null, Validators.required),
       bloodgroup: new FormControl(null, Validators.required),
-      mobilenumber: new FormControl(null, [Validators.required, Validators.minLength(10)]),
-      whatsappnumber: new FormControl(null, [Validators.required, Validators.minLength(10)]),
+      mobilenumber: new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{10}')]),
+      whatsappnumber: new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{10}')]),
 
       //Optional Fields
-      adharnumber: new FormControl(null, Validators.minLength(12)),
+      adharnumber: new FormControl(null, Validators.pattern('[0-9]{12}')),
       biometricid: new FormControl(null),
       busroute: new FormControl(null),
       busnumber: new FormControl(null),
@@ -78,7 +79,7 @@ export class StudentAdmissionComponent implements OnInit {
       previousclass: new FormControl(null),
       previousschoolname: new FormControl(null),
       previousschooladdress: new FormControl(null),
-      file: new FormControl(null, Validators.required),
+      profile: new FormControl('', Validators.required),
       image: new FormControl('', Validators.required),
     });
     console.log('studentDetails', this.studentDetails);
@@ -91,6 +92,7 @@ export class StudentAdmissionComponent implements OnInit {
     // method to set data in form
     this.getClassSection();
     this.setDataToForm();
+    this.getVillgaes();
   }
 
 
@@ -121,35 +123,56 @@ export class StudentAdmissionComponent implements OnInit {
   onFileChange(event) {
     let reader = new FileReader();
 
-    if(event.target.files && event.target.files.length) {
+    if (event.target.files && event.target.files.length) {
       let file = (event.target as HTMLInputElement).files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
 
+        console.log('reader.result', reader.result);
         this.imageSrc = reader.result as string;
+        console.log('imageSrc', this.imageSrc);
+        let formData = new FormData();
+        formData.append('image', event.target.files);
+        console.log('formData', formData);
         this.admissionForm.patchValue({
-          image: reader.result
+          image: formData
         });
-        this.admissionForm.get('image').updateValueAndValidity()
+        this.admissionForm.get('image').updateValueAndValidity();
       };
     }
   }
 
-    /**
+  /**
    * @description
    * @author Virendra Pandey
    * @date 2020-07-19
    * @param {*} event
    * @memberof ClassAddComponent
    */
-  public onClassChange(event):void {
-    if(event){
-       this._ss.getSections(event.value).subscribe(section=>{
-         if(section){
-           this.sectionList = section;
-         }
+  public onClassChange(event): void {
+    if (event) {
+      this._ss.getSections(event.value).subscribe(section => {
+        if (section) {
+          this.sectionList = section;
+        }
       })
     }
+  }
+
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-07-19
+   * @param {*} event
+   * @memberof ClassAddComponent
+   */
+  public getVillgaes(): void {
+    this._ss.getVillages().subscribe(routes => {
+      console.log('routes', routes);
+      if (routes) {
+        this.routeList = routes;
+      }
+    });
   }
 
   /**
@@ -191,7 +214,7 @@ export class StudentAdmissionComponent implements OnInit {
 
     let payload = {};
     Object.assign(payload, this.admissionForm.value);
-    delete payload['file'];
+    delete payload['profile'];
     this.loading = true;
     if (this.studentDetails && this.studentDetails[0].id) {
       payload['id'] = this.studentDetails[0].id;

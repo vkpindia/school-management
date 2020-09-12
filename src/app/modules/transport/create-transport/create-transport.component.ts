@@ -70,19 +70,19 @@ export class CreateTransportComponent implements OnInit {
       dateofissue: new FormControl(null, Validators.required),
       dateofexpire: new FormControl(null, Validators.required),
       driving_liciense_numebr: new FormControl(null, Validators.required),
-      driver_number: new FormControl(null, Validators.required),
+      driver_number: new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{10}')]),
       placeofissue: new FormControl(null, Validators.required),
       liciencetype: new FormControl(null, Validators.required),
 
       //Attender Fields
       attendername: new FormControl(null, Validators.required),
-      attender_number: new FormControl(null, Validators.required),
+      attender_number: new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{10}')]),
       attenderdob: new FormControl(null, Validators.required),
 
       // Incharde Fields
       incharge_fname: new FormControl(null, Validators.required),
       incharge_lname: new FormControl(null, Validators.required),
-      incharge_number: new FormControl(null, Validators.required)
+      incharge_number: new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{10}')])
     });
 
     console.log('transportDetails', this.transportDetails);

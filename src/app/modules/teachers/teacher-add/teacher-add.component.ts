@@ -27,7 +27,7 @@ export class TeacherAddComponent implements OnInit {
   public submitted: boolean = false;
   public returnUrl: string;
   public error: string = '';
-  public cardTitle: string = 'Add New teachers';
+  public cardTitle: string = 'Add New Staff';
   public showButtons: boolean = false;
   public showForm: boolean = true;
   public buttonLabel: string = 'Submit';
@@ -78,12 +78,11 @@ export class TeacherAddComponent implements OnInit {
       PF: new FormControl(null),
       ESI: new FormControl(null),
 
-      adharnumber: new FormControl(null, Validators.minLength(12)),
+      adharnumber: new FormControl(null, Validators.pattern('[0-9 ]{12}')),
       bloodgroup: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.pattern(this._emailPattern)]),
-      mobilenumber: new FormControl(null, [Validators.required, Validators.minLength(10)]),
-      whatsappnumber: new FormControl(null),
-
+      mobilenumber: new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{10}')]),
+      whatsappnumber: new FormControl(null, Validators.pattern('[0-9 ]{10}')),
     });
     console.log('teacherDetails', this.teacherDetails);
     if (this.teacherDetails && this.teacherDetails[0].id) {

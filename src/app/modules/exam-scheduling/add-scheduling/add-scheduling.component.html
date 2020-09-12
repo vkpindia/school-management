@@ -38,6 +38,16 @@
         </div>
 
         <div class="col-12">
+          <mat-form-field appearance="outline" class="p-0">
+            <mat-label>Teacher Name</mat-label>
+            <input matInput formControlName="teachername" placeholder="Enter Teacher Name">
+            <mat-error *ngIf="submitted && f.teachername.hasError('required')">
+              Teacher name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12">
           <mat-form-field appearance="outline" class="col-12 p-0">
             <mat-label>Start Date</mat-label>
             <input matInput [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" placeholder="Date Time" formControlName="startdate">

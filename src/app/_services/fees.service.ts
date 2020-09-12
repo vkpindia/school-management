@@ -101,13 +101,13 @@ export class FeesService {
       catchError(this.handleError));
   }
 
-        /**
-   * @description Method for getting unique Class data by key
-   * @author Virendra Pandey
-   * @date 2020-06-21
-   * @returns {Observable<any>}
-   * @memberof FeeService
-   */
+  /**
+* @description Method for getting unique Class data by key
+* @author Virendra Pandey
+* @date 2020-06-21
+* @returns {Observable<any>}
+* @memberof FeeService
+*/
   getClassSection(): Observable<any> {
     const url = `${this._apiUrl}setup/getclassesandsections`;
     return this._http.get(url).pipe(
@@ -156,13 +156,13 @@ export class FeesService {
       catchError(this.handleError));
   }
 
-    /**
-   * @description Method for getting all Classs data from server
-   * @author Virendra Pandey
-   * @date 2020-06-21
-   * @returns
-   * @memberof SalaryService
-   */
+  /**
+ * @description Method for getting all Classs data from server
+ * @author Virendra Pandey
+ * @date 2020-06-21
+ * @returns
+ * @memberof SalaryService
+ */
   getAllTransaction(id: number) {
     return this._http.get(this._apiUrl + `accounts/gettransaction?studentid=${id}`).pipe(
       map(this.extractData),

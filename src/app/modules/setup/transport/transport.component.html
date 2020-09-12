@@ -1,0 +1,96 @@
+<div class="list-container">
+  <div class="page-title">
+    <h3>Transport Setup</h3>
+  </div>
+  <div class="row m-0">
+    <div class="col-12 col-md-4 s-list pl-0 pr-0">
+      <mat-card class="h-100">
+        <div class="list-head">
+          <mat-card-title>Create Transport</mat-card-title>
+        </div>
+        <mat-card-content class="">
+          <div class="form-container">
+            <div class="form-fields pt-4">
+              <form [formGroup]="transportForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
+                <div class="row m-0">
+                  <div class="col-12">
+                    <mat-form-field appearance="outline" class="col-12 p-0">
+                      <mat-label>Type</mat-label>
+                      <!-- <input matInput formControlName="name" placeholder="Enter Title"> -->
+                      <mat-select placeholder="Enter Type" formControlName="type">
+                        <mat-option [value]="'villages'">Transport</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="submitted && f.type.hasError('required')">
+                        Type is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-12">
+                    <mat-form-field appearance="outline" class="col-12 p-0">
+                      <mat-label>Village Name</mat-label>
+                      <input matInput placeholder="Setup Type" formControlName="villagename">
+                      <mat-error *ngIf="submitted && f.villagename.hasError('required')">
+                        Village Name is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-12">
+                    <mat-form-field appearance="outline" class="col-12 p-0">
+                      <mat-label>Route</mat-label>
+                      <!-- <input matInput formControlName="name" placeholder="Enter Title"> -->
+                      <mat-select placeholder="Enter Type" formControlName="routeid">
+                        <mat-option *ngFor="let route of routeList" [value]="route.routeid">{{route.routename}}</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="submitted && f.routeid.hasError('required')">
+                        Route is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-12">
+                    <mat-form-field appearance="outline" class="col-12 p-0">
+                      <mat-label>Amount</mat-label>
+                      <input matInput placeholder="Enter Amount" formControlName="price">
+                      <mat-error *ngIf="submitted && f.price.hasError('required')">
+                        Amount is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+
+                  </div>
+
+                </div>
+
+                <div class="example-button-row pt-3 text-center">
+                  <button mat-raised-button color="primary" type="submit">Submit</button>
+                  <button mat-raised-button class="ml-3 mat-secondary" (click)="onFormReset($event)">Reset</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-12 col-md-8 s-list">
+      <mat-card class="h-100">
+        <div class="list-head">
+          <mat-card-title>Villages List</mat-card-title>
+        </div>
+        <mat-card-content class="">
+          <div class="list">
+            <ul class="p-0 m-0" style="list-style: none;">
+              <li *ngFor="let transport of transportList; let i = index">
+                <span><strong>{{i+1}}.</strong></span>
+                <span>{{transport.villagename}}&nbsp;-&nbsp;{{transport.price | currency:'INR'}}</span>
+                <a href="javascript:void(0)" (click)="deleteTransportType(transport, 'transport')" style="color: #f00;"
+                  class="fa fa-trash"></a>
+              </li>
+            </ul>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+</div>

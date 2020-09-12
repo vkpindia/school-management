@@ -16,6 +16,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./attendance.component.scss'],
   providers: [DatePipe]
 })
+
 export class AttendanceComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -36,7 +37,8 @@ export class AttendanceComponent implements OnInit {
   public part2: boolean;
   public shift: FormControl = new FormControl();
   public studentList: MatTableDataSource<any>;
-  public absentStudentsID = [];
+  public studentNameRecord: any = [];
+  public absentStudentsID: any = [];
 
   public selection = new SelectionModel<any>(true, this.studentList ? this.studentList.data : []);
   // public selection2 = new SelectionModel<any>(true, []);
@@ -88,36 +90,20 @@ export class AttendanceComponent implements OnInit {
       sectionid: new FormControl(null, Validators.required),
       attendace_part: new FormControl(null, Validators.required),
       date: new FormControl(new Date(), Validators.required),
-    })
+    });
 
     this.isAllSelected();
     // method call
     this.getClassSection();
-    // this.getStudentList();
-    /*     this.initialSelection = this.studentList.data.filter((element,e) => {
-          return this.savedSelection.some( (val,i) => {
-              if(element.key === val.key) {
-                  this.data[e]['amount'] = val['amount'];
-                  return true;
-              }
-          return;
-       });
-      }); */
-      this.getStudentAttendanceList();
+    this.getStudentAttendanceList();
   }
 
-  /*  ngAfterViewInit() {
-     this.TSort.sortChange.subscribe(() => {
-         this.paginator.pageIndex = 0;
-         this.paginator.pageSize = this.pageSize;
-     }); */
-
   /**
-* @description
-* @author Virendra Pandey
-* @date 2020-07-21
-* @memberof AddfeeComponent
-*/
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-07-21
+   * @memberof AddfeeComponent
+   */
   public getClassSection() {
     // this.showForm = false;
     this._cs.getClassSection().subscribe(data => {
@@ -128,12 +114,12 @@ export class AttendanceComponent implements OnInit {
   }
 
   /**
- * @description
- * @author Virendra Pandey
- * @date 2020-07-19
- * @param {*} event
- * @memberof ClassAddComponent
- */
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-07-19
+   * @param {*} event
+   * @memberof ClassAddComponent
+   */
   public onClassChange(event): void {
     if (event) {
       this._cs.getSections(event.value).subscribe(section => {
@@ -151,11 +137,11 @@ export class AttendanceComponent implements OnInit {
    * @memberof studentListComponent
    */
   public getStudentList() {
-    if(this.attendanceForm.value.classid && this.attendanceForm.value.sectionid) {
+    if (this.attendanceForm.value.classid && this.attendanceForm.value.sectionid) {
       this._cs.getStudentRecord(this.attendanceForm.value.classid, this.attendanceForm.value.sectionid).subscribe((data: any) => {
-        console.log('student Record', data);
         if (data) {
           this.recordLength = data.length;
+          this.studentNameRecord = data;
           this.studentList = new MatTableDataSource(data);
           this.selection = new SelectionModel<any>(true, this.studentList.data);
           this.studentList.sort = this.TSort;
@@ -174,21 +160,9 @@ export class AttendanceComponent implements OnInit {
    * @memberof studentListComponent
    */
   public getStudentAttendanceList() {
-    // if(this.attendanceForm.value.classid && this.attendanceForm.value.sectionid) {
-      this._cs.getStudentAttendance(1, 2).subscribe((data: any) => {
-        console.log('student Record', data);
-        /* if (data) {
-          this.recordLength = data.length;
-          this.studentList = new MatTableDataSource(data);
-          this.selection = new SelectionModel<any>(true, this.studentList.data);
-          this.studentList.sort = this.TSort;
-          this.studentList.paginator = this.paginator;
-          this.isLoading = false;
-        } */
-        // Assign the data to the data source for the table to render
-        // this.studentList = new MatTableDataSource(data);
-      });
-    // }
+    this._cs.getStudentAttendance(this.classID.value, this.sectionID.value).subscribe((data: any) => {
+
+    });
   }
 
   onSectionChange($event) {
@@ -196,11 +170,12 @@ export class AttendanceComponent implements OnInit {
       this.getStudentList();
     }
   }
+
   /**
- * @description convenience getter for easy access to form fields
- * @readonly
- * @memberof  StudentnotificationComponent
- */
+   * @description convenience getter for easy access to form fields
+   * @readonly
+   * @memberof  StudentnotificationComponent
+   */
   get f() { return this.attendanceForm.controls; }
 
   /**
@@ -252,12 +227,10 @@ export class AttendanceComponent implements OnInit {
    * @param {*} row
    * @memberof AttendanceComponent
    */
-  onSelectionToggle(row){
-    if(this.selection.isSelected(row) == false){
-      this.absentStudentsID.push(row.id)
+  onSelectionToggle(row) {
+    if (this.selection.isSelected(row) === false) {
+      this.absentStudentsID.push(row.id);
     }
-    console.log('this.selection.isSelected(row)', this.selection.isSelected(row));
-     console.log('row', row);
   }
 
   /**
@@ -270,8 +243,6 @@ export class AttendanceComponent implements OnInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.studentList.data.forEach(row => this.selection.select(row));
-
-    console.log('this.studentList.data', this.selection.selected);
   }
 
   /**
@@ -286,7 +257,6 @@ export class AttendanceComponent implements OnInit {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    // console.log('this.selection.isSelected(row)', this.selection.isSelected(row));
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 
@@ -298,10 +268,8 @@ export class AttendanceComponent implements OnInit {
    * @memberof studentListComponent
    */
   applyFilter(event: Event) {
-    // console.log('list filter event', event);
     const filterValue = (event.target as HTMLInputElement).value;
     this.studentList.filter = filterValue.trim().toLowerCase();
-    // console.log('this.studentList', this.studentList);
     if (this.studentList.paginator) {
       this.studentList.paginator.firstPage();
     }
@@ -318,28 +286,67 @@ export class AttendanceComponent implements OnInit {
 
     this.submitted = true;
 
+    // Check if invalid form then return
     if (this.attendanceForm.invalid) {
       return;
     }
 
+    // Date formate
     if (this.attendanceForm.value) {
-      this.attendanceForm.value.startdate = this._date.transform(this.attendanceForm.value.date, 'MM/dd/yyyy h:mm a');
+      this.attendanceForm.value.date = this._date.transform(this.attendanceForm.value.date, 'MM/dd/yyyy h:mm a');
     }
 
-    let payload = {};
+    const payload: any = {};
+    const studentsName: Array<string> = [];
+
     Object.assign(payload, this.attendanceForm.value);
-    if(payload['attendace_part'] === 'shift_1'){
+
+    // Set absent student
+    this.absentStudentsID.map(id => {
+      this.studentNameRecord.map(record => {
+        if (record.id === id) {
+          studentsName.push(record.name);
+        }
+      });
+    });
+
+    if (payload['attendace_part'] === 'shift_1') {
       payload['part1'] = true;
       payload['part2'] = false;
       payload['absent_student_id1'] = this.absentStudentsID.toString();
+      payload['absent_student_names1'] = studentsName.toString();
+      payload['absent_student_names2'] = null;
       payload['absent_student_id2'] = null;
-    } else if(this.attendanceForm.value.attendace_part === 'shift_2') {
+    } else if (this.attendanceForm.value.attendace_part === 'shift_2') {
       payload['part2'] = true;
       payload['part1'] = false;
       payload['absent_student_id2'] = this.absentStudentsID.toString();
+      payload['absent_student_names2'] = studentsName.toString();
+      payload['absent_student_names1'] = null;
       payload['absent_student_id1'] = null;
     }
+
+    // delete attendence_part control
     delete payload['attendace_part'];
+
+    // Set class name
+    if (this.classList && this.classList.length) {
+      this.classList.map(classRecord => {
+        if (payload['classid'] === classRecord.id) {
+          payload['classname'] = classRecord.classname;
+        }
+      });
+    }
+
+    // Set section name
+    if (this.sectionList && this.sectionList.length) {
+      this.sectionList.map(sectionRecord => {
+        if (payload['sectionid'] === sectionRecord.id) {
+          payload['sectionname'] = sectionRecord.sectionname;
+        }
+      });
+    }
+
     this.loading = true;
     this._cs.saveAttendance(payload).subscribe(data => {
       this.showNotification('Submitted Successfully!!');

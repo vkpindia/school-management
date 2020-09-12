@@ -59,7 +59,7 @@
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Enrollment Number</mat-label>
-                <input type="number" matInput placeholder="Enter Enrollment Number" formControlName="enrolnumber">
+                <input matInput placeholder="Enter Enrollment Number" formControlName="enrolnumber">
                 <mat-error *ngIf="submitted && f.enrolnumber.hasError('required')">
                   Enrollment Number is <strong>required</strong>
                 </mat-error>
@@ -201,12 +201,12 @@
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Mobile Number</mat-label>
-                <input matInput placeholder="Enter Mobile Number" formControlName="mobilenumber">
+                <input type="number" matInput placeholder="Enter Mobile Number" formControlName="mobilenumber">
                 <mat-error *ngIf="submitted && f.mobilenumber.hasError('required')">
                   Mobile number is <strong>required</strong>
                 </mat-error>
-                <mat-error *ngIf="submitted && f.mobilenumber.hasError('minlength') && f.mobilenumber.dirty && !f.mobilenumber.hasError('required')">
-                  Mobile number must be minimum 10 characters
+                <mat-error *ngIf="submitted && f.mobilenumber.hasError('pattern') && f.mobilenumber.dirty && !f.mobilenumber.hasError('required')">
+                  Mobile number must be only 10 digit
                 </mat-error>
               </mat-form-field>
             </div>
@@ -214,12 +214,12 @@
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>WhatsApp Number</mat-label>
-                <input matInput placeholder="Enter Whatsapp Number" formControlName="whatsappnumber">
+                <input type="number" matInput placeholder="Enter Whatsapp Number" formControlName="whatsappnumber">
                 <mat-error *ngIf="submitted && f.whatsappnumber.hasError('required')">
                   WhatsApp number is <strong>required</strong>
                 </mat-error>
-                <mat-error *ngIf="submitted && f.whatsappnumber.hasError('minlength') && f.whatsappnumber.dirty && !f.whatsappnumber.hasError('required')">
-                  WhatsApp number must be minimum 10 characters
+                <mat-error *ngIf="submitted && f.whatsappnumber.hasError('pattern') && f.whatsappnumber.dirty && !f.whatsappnumber.hasError('required')">
+                  WhatsApp number must be only 10 digit
                 </mat-error>
               </mat-form-field>
             </div>
@@ -232,8 +232,8 @@
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Adhaar Number</mat-label>
                 <input type="number" matInput placeholder="Enter Adhaar" formControlName="adharnumber">
-                <mat-error *ngIf="submitted && f.adharnumber.hasError('minlength') && !f.adharnumber.hasError('required')">
-                  Adhaar number must be minimum 12 characters
+                <mat-error *ngIf="submitted && f.adharnumber.hasError('pattern') && f.adharnumber.dirty">
+                  Adhaar number must be only 12 digits
                 </mat-error>
               </mat-form-field>
             </div>
@@ -250,7 +250,7 @@
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Bus Route</mat-label>
                 <mat-select placeholder="Select Route" formControlName="busroute">
-                  <mat-option value="xyz">XYZ</mat-option>
+                  <mat-option *ngFor="let route of routeList" [value]="route.villagename">{{route.villagename | titlecase}}</mat-option>
                 </mat-select>
                 <mat-error></mat-error>
               </mat-form-field>
@@ -259,7 +259,7 @@
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Bus Number</mat-label>
-                <input type="number" matInput placeholder="Enter Bus Number" formControlName="busnumber">
+                <input matInput placeholder="Enter Bus Number" formControlName="busnumber">
                 <mat-error></mat-error>
               </mat-form-field>
             </div>
@@ -309,9 +309,9 @@
               <div class="form-group">
                 <label for="exampleFormControlFile1">Upload
                    Picture</label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1" formControlName="file"accept="image/*"  (change)="onFileChange($event)">
-                <mat-error *ngIf="submitted && f.file.hasError('required')">
-                  Religion is <strong>required</strong>
+                <input type="file" class="form-control-file" id="exampleFormControlFile1" formControlName="profile" accept="image/*"  (change)="onFileChange($event)">
+                <mat-error *ngIf="submitted && f.profile.hasError('required')">
+                  Profile picture is <strong>required</strong>
                 </mat-error>
               </div>
             </div>

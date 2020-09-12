@@ -91,7 +91,7 @@ export class StudentsService {
       catchError(this.handleError));
   }
 
-    /**
+  /**
    * @description Method for getting section list
    * @author Virendra Pandey
    * @date 2020-06-21
@@ -101,6 +101,21 @@ export class StudentsService {
    */
   getSections(id: any): Observable<any> {
     const url = `${this._apiUrl}setup/getsectionsforclass?id=${id}`;
+    return this._http.get(url).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  /**
+   * @description Method for getting section list
+   * @author Virendra Pandey
+   * @date 2020-06-21
+   * @param {*} id
+   * @returns {Observable<any>}
+   * @memberof FeeService
+   */
+  getVillages(): Observable<any> {
+    const url = `${this._apiUrl}setup/GetVillagesdropdown`;
     return this._http.get(url).pipe(
       map(this.extractData),
       catchError(this.handleError));

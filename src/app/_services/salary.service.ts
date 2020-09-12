@@ -62,7 +62,7 @@ export class SalaryService {
     return body || {};
   }
 
-  /**
+/**
  * @description Method for getting all Classs data from server
  * @author Virendra Pandey
  * @date 2020-06-21
@@ -75,7 +75,7 @@ export class SalaryService {
       catchError(this.handleError));
   }
 
-  /**
+/**
  * @description Method for getting all Classs data from server
  * @author Virendra Pandey
  * @date 2020-06-21
@@ -144,7 +144,7 @@ export class SalaryService {
       );
   }
 
-    /**
+  /**
    * @description Method to Update Class record
    * @author Virendra Pandey
    * @date 2020-06-21

@@ -77,27 +77,27 @@ export let navConfig = [
     ]
   },
   {
-    displayName: 'Teachers',
+    displayName: 'Staff',
     // iconName: 'person',
     icon: 'flaticon-classmates',
     children: [
       {
-        displayName: 'All Teachers',
+        displayName: 'All Staff',
         iconName: '',
         icon: 'fa fa-angle-right',
-        routePath: 'teachers'
+        routePath: 'staff'
       },
       {
-        displayName: 'Teacher Details',
+        displayName: 'Staff Details',
         iconName: '',
         icon: 'fa fa-angle-right',
-        routePath: 'teachers/detail'
+        routePath: 'staff/detail'
       },
       {
-        displayName: 'Add Teacher',
+        displayName: 'Add Staff',
         iconName: '',
         icon: 'fa fa-angle-right',
-        routePath: 'teachers/add'
+        routePath: 'staff/add'
       }
     ]
   },
@@ -129,6 +129,12 @@ export let navConfig = [
         icon: 'fa fa-angle-right',
         // icon: 'flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler',
         routePath: 'setup'
+      },
+      {
+        displayName: 'Transport',
+        icon: 'fa fa-angle-right',
+        // icon: 'flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler',
+        routePath: 'setup/transport'
       },
       {
         displayName: 'Terms',
@@ -235,8 +241,8 @@ export let navConfig = [
   },
   {
     displayName: 'Role',
-    // iconName: 'event',
-    icon: 'flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler',
+    iconName: 'how_to_reg',
+    // icon: 'flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler',
     children: [
       {
         displayName: 'All Roles',
@@ -253,9 +259,9 @@ export let navConfig = [
     ]
   },
   {
-    displayName: 'Roles',
-    // iconName: 'event',
-    icon: 'flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler',
+    displayName: 'Results',
+    iconName: 'create',
+    // icon: 'flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler',
     routePath: 'exam-result'
   },
   {

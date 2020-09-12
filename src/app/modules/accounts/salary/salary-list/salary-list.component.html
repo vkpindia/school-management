@@ -11,14 +11,14 @@
           <div>
             <mat-form-field appearance="outline" class="col-12 p-0">
               <mat-label>Filter</mat-label>
-              <input matInput placeholder="Search..." (keyup)="applyFilter()" [(ngModel)] = "searchString">
+              <input matInput placeholder="Search..." (keyup)="applyFilter($event)" [(ngModel)] = "searchString">
               <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
           </div>
         </div>
       </div>
       <mat-card-content class="pt-4">
-        <table mat-table [dataSource]="salaryList" class="col-12" matSort>
+        <table mat-table [dataSource]="feeList" class="col-12" matSort>
           <!-- Checkbox Column -->
           <ng-container matColumnDef="select">
             <th mat-header-cell *matHeaderCellDef>

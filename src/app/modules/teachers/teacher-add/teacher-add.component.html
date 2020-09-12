@@ -1,6 +1,6 @@
 <div class="form-container">
   <div class="page-title">
-    <h3>Teachers</h3>
+    <h3>Staff</h3>
   </div>
   <div class="form-fields">
     <mat-card>
@@ -237,10 +237,33 @@
               </mat-form-field>
             </div>
 
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Net Salary</mat-label>
+                <input matInput placeholder="Enter Net Salary" formControlName="netsalary">
+                <!-- <mat-error *ngIf="submitted && f.pfnumber.hasError('required')">
+                  Gross salary is <strong>required</strong>
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>PF Number</mat-label>
                 <input matInput placeholder="Enter PF number" formControlName="pfnumber">
+                <!-- <mat-error *ngIf="submitted && f.pfnumber.hasError('required')">
+                  Gross salary is <strong>required</strong>
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+
+
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>PF Percentage(%)</mat-label>
+                <input matInput placeholder="Enter PF %" formControlName="PF">
                 <!-- <mat-error *ngIf="submitted && f.pfnumber.hasError('required')">
                   Gross salary is <strong>required</strong>
                 </mat-error> -->
@@ -259,28 +282,8 @@
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
-                <mat-label>PF</mat-label>
-                <input matInput placeholder="Enter PF" formControlName="PF">
-                <!-- <mat-error *ngIf="submitted && f.pfnumber.hasError('required')">
-                  Gross salary is <strong>required</strong>
-                </mat-error> -->
-              </mat-form-field>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4">
-              <mat-form-field appearance="outline" class="p-0">
-                <mat-label>Net Salary</mat-label>
-                <input matInput placeholder="Enter Net Salary" formControlName="netsalary">
-                <!-- <mat-error *ngIf="submitted && f.pfnumber.hasError('required')">
-                  Gross salary is <strong>required</strong>
-                </mat-error> -->
-              </mat-form-field>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4">
-              <mat-form-field appearance="outline" class="p-0">
-                <mat-label>ESI</mat-label>
-                <input matInput placeholder="Enter ESI" formControlName="ESI">
+                <mat-label>ESI Percentage(%)</mat-label>
+                <input matInput placeholder="Enter ESI %" formControlName="ESI">
                 <!-- <mat-error *ngIf="submitted && f.pfnumber.hasError('required')">
                   Gross salary is <strong>required</strong>
                 </mat-error> -->
@@ -292,8 +295,8 @@
                 <mat-label>Adhaar Number</mat-label>
                 <input type="number" matInput placeholder="Enter Adhaar" formControlName="adharnumber">
                 <mat-error
-                  *ngIf="submitted && f.adharnumber.hasError('minlength') && !f.adharnumber.hasError('required')">
-                  Adhaar number must be minimum 12 characters
+                  *ngIf="submitted && f.adharnumber.hasError('pattern') && f.adharnumber.dirty">
+                  Adhaar number must be 12 digits
                 </mat-error>
               </mat-form-field>
             </div>
@@ -316,7 +319,7 @@
                   Email is <strong>required</strong>
                 </mat-error>
                 <mat-error
-                  *ngIf="submitted && f.email.hasError('pattern') && f.email.dirty && !f.email.hasError('required')">
+                  *ngIf="submitted && f.email.hasError('pattern') && f.email.dirty">
                   Email should be in proper formate.
                 </mat-error>
               </mat-form-field>
@@ -330,8 +333,8 @@
                   Mobile number is <strong>required</strong>
                 </mat-error>
                 <mat-error
-                  *ngIf="submitted && f.mobilenumber.hasError('minlength') && f.mobilenumber.dirty && !f.mobilenumber.hasError('required')">
-                  Mobile number must be minimum 10 characters
+                  *ngIf="submitted && f.mobilenumber.hasError('pattern') && f.mobilenumber.dirty">
+                  Mobile number must be 10 digits
                 </mat-error>
               </mat-form-field>
             </div>
@@ -340,13 +343,10 @@
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>WhatsApp Number</mat-label>
                 <input matInput placeholder="Enter WhatsApp Number" formControlName="whatsappnumber">
-                <!-- <mat-error *ngIf="submitted && f.whatsappnumber.hasError('required')">
-                  What's app number is <strong>required</strong>
-                </mat-error> -->
-                <!--  <mat-error
-                  *ngIf="submitted && f.whatsappnumber.hasError('minlength') && f.whatsappnumber.dirty">
-                  What's app number must be minimum 10 characters
-                </mat-error> -->
+                <mat-error
+                  *ngIf="submitted && f.whatsappnumber.hasError('pattern') && f.whatsappnumber.dirty">
+                  WhatsApp number must be 10 digits
+                </mat-error>
               </mat-form-field>
             </div>
 

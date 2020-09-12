@@ -132,12 +132,12 @@
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
-                <mat-label>FC Start Date</mat-label>
+                <mat-label>FC End Date</mat-label>
                 <input matInput [matDatepicker]="picker15" placeholder="Select date" formControlName="fc_enddate">
                 <mat-datepicker-toggle matSuffix [for]="picker15"></mat-datepicker-toggle>
                 <mat-datepicker #picker15></mat-datepicker>
                 <mat-error *ngIf="submitted && f.fc_enddate.hasError('required')">
-                  FC end Date is <strong>required</strong>
+                  FC end-date is <strong>required</strong>
                 </mat-error>
               </mat-form-field>
             </div>
@@ -266,10 +266,13 @@
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
-                <mat-label>Driver Number</mat-label>
-                <input matInput placeholder="Enter Driver Number" formControlName="driver_number">
+                <mat-label>Driver Mobile</mat-label>
+                <input matInput placeholder="Enter Driver Mobile" formControlName="driver_number">
                 <mat-error *ngIf="submitted && f.driver_number.hasError('required')">
                   Driver number is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="submitted && f.driver_number.hasError('pattern') && f.driver_number.dirty">
+                  Driver Mobile must be 10 digits
                 </mat-error>
               </mat-form-field>
             </div>
@@ -290,10 +293,13 @@
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
-                <mat-label>Attender Number</mat-label>
-                <input  matInput placeholder="Enter name" formControlName="attender_number">
+                <mat-label>Attender Mobile</mat-label>
+                <input  matInput placeholder="Enter mobile" formControlName="attender_number">
                 <mat-error *ngIf="submitted && f.attender_number.hasError('required')">
-                  Attender number is <strong>required</strong>
+                  Attender mobile is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="submitted && f.attender_number.hasError('pattern') && f.attender_number.dirty">
+                  Attender Mobile must be 10 digits
                 </mat-error>
               </mat-form-field>
             </div>
@@ -336,10 +342,13 @@
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
-                <mat-label>Incharge Number</mat-label>
-                <input  matInput placeholder="Enter name" formControlName="incharge_number">
+                <mat-label>Incharge Mobile</mat-label>
+                <input  matInput placeholder="Enter Mobile" formControlName="incharge_number">
                 <mat-error *ngIf="submitted && f.incharge_number.hasError('required')">
-                  Incharge number is <strong>required</strong>
+                  Incharge mobile is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="submitted && f.incharge_number.hasError('pattern') && f.incharge_number.dirty">
+                  Incharge Mobile must be 10 digits
                 </mat-error>
               </mat-form-field>
             </div>

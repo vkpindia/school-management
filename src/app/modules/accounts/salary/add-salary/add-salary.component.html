@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-12 col-sm-6 col-md-4">
         <mat-form-field appearance="outline" class="p-0">
-          <mat-label>Search</mat-label>
+          <mat-label>Search Staff</mat-label>
           <input matInput placeholder="Select student" aria-label="Number" [formControl]="teacherName"
           [matAutocomplete]="auto">
           <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="getOptionText" (optionSelected)="onOptionSelection($event)">
@@ -173,6 +173,7 @@
 
 <div class="form-container">
   <div class="">
+    {{salaryList|json}}
     <ng-container *ngIf="ShowList">
       <app-salary-list [salaryList]="salaryList" [teacherID]="teacherID" (onEditSalary)="onEditRecord($event)" (onDeleteSalary)="onDeleteSalary($event)"></app-salary-list>
     </ng-container>

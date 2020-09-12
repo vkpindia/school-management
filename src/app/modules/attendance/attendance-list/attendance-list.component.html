@@ -61,23 +61,23 @@
           </ng-container>
 
           <!-- Name Number Column -->
-          <ng-container matColumnDef="absent_student_id1">
+          <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Absent Students</th>
             <td mat-cell *matCellDef="let element"><span
-                *ngIf="element.absent_student_id1;else dash">{{element.absent_student_id1}}</span></td>
+                *ngIf="element.name;else dash">{{element.name}}</span></td>
           </ng-container>
 
           <!-- Symbol Column -->
-          <ng-container matColumnDef="classid">
+          <ng-container matColumnDef="class">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Class Name</th>
             <td mat-cell *matCellDef="let element"> <span
-                *ngIf="element.classid;else dash">{{element.classid}}</span></td><!--  | titlecase -->
+                *ngIf="element.class;else dash">{{element.class}}</span></td><!--  | titlecase -->
           </ng-container>
 
           <!-- Symbol Column -->
-          <ng-container matColumnDef="sectionid">
+          <ng-container matColumnDef="section">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Section Name </th>
-            <td mat-cell *matCellDef="let element"><span *ngIf="element.sectionid ;else dash">{{element.sectionid}}</span>
+            <td mat-cell *matCellDef="let element"><span *ngIf="element.section;else dash">{{element.section}}</span>
             </td>
           </ng-container>
 
@@ -99,6 +99,8 @@
                   <span class="flaticon-more-button-of-three-dots" id="dropdownBasic1" ngbDropdownToggle></span>
                   <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button> -->
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <!-- <button ngbDropdownItem (click)="onEdit(element)"><span class="fa fa-edit"
+                        style="color: green;"></span>&nbsp;&nbsp;&nbsp;Edit</button> -->
                     <button ngbDropdownItem (click)="onDelete(element)"><span class="fa fa-trash"
                         style="color: #f00;"></span>&nbsp;&nbsp;&nbsp;Delete</button>
                   </div>

@@ -12,11 +12,12 @@ import { FormControl } from '@angular/forms';
   templateUrl: './attendance-list.component.html',
   styleUrls: ['./attendance-list.component.scss']
 })
+
 export class AttendanceListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) TSort: MatSort;
+  @ViewChild(MatSort, { static: true }) TSort: MatSort;
 
-  public displayedColumns: string[] = ['select', 'absent_student_id1', 'classid', 'sectionid', 'date', 'actions'];
+  public displayedColumns: string[] = ['select', 'name', 'class', 'section', 'date', 'actions'];
   public filterData: string = '';
   public recordLength: number;
   public isLoading: boolean = true;
@@ -37,11 +38,6 @@ export class AttendanceListComponent implements OnInit {
     this.getClassSection();
   }
 
- /*  ngAfterViewInit() {
-    this.TSort.sortChange.subscribe(() => {
-        this.paginator.pageIndex = 0;
-        this.paginator.pageSize = this.pageSize;
-    }); */
   /**
    * @description Method to get All Attendance record
    * @author Virendra Pandey
@@ -49,50 +45,72 @@ export class AttendanceListComponent implements OnInit {
    * @memberof AttendanceListComponent
    */
   public getAttendanceList() {
-      this._cs.getStudentAttendance(this.classID.value, this.sectionID.value).subscribe((data: any) => {
-        if (data) {
-          this.recordLength = data.length;
-          this.attendanceList = new MatTableDataSource(data);
-          this.attendanceList.sort = this.TSort;
-          this.attendanceList.paginator = this.paginator;
+    this._cs.getStudentAttendance(this.classID.value, this.sectionID.value).subscribe((data: any) => {
+      if (data) {
+        let absentStudentRecord: any = [];
+        let temp = {};
+        let studentNames: any;
+
+        if (data && data[0].absent_student_names1) {
+          studentNames = data[0].absent_student_names1.split(',');
+        } else if (data && data[0].absent_student_names2) {
+          studentNames = data[0].absent_student_names2.split(',');
         }
-        this.isLoading = false;
-        // Assign the data to the data source for the table to render
-        // this.AttendanceList = new MatTableDataSource(data);
-      });
+
+        if (studentNames && studentNames.length) {
+          studentNames.map((studentName, index) => {
+            temp['id'] = data[0].id;
+            temp['name'] = studentName;
+            temp['class'] = data[0].classname;
+            temp['section'] = data[0].sectionname;
+            temp['date'] = data[0].date;
+            absentStudentRecord.push(Object.assign({}, temp));
+          });
+          console.log('absentStudentRecord', absentStudentRecord);
+        }
+
+        this.recordLength = absentStudentRecord.length;
+        this.attendanceList = new MatTableDataSource(absentStudentRecord);
+        this.attendanceList.sort = this.TSort;
+        this.attendanceList.paginator = this.paginator;
+      }
+      this.isLoading = false;
+      // Assign the data to the data source for the table to render
+      // this.AttendanceList = new MatTableDataSource(data);
+    });
   }
 
   /**
-* @description
-* @author Virendra Pandey
-* @date 2020-07-21
-* @memberof AddfeeComponent
-*/
-public getClassSection() {
-  // this.showForm = false;
-  this._cs.getClassSection().subscribe(data => {
-    if (data) {
-      this.classList = data;
-    }
-  });
-}
-
-/**
-* @description
-* @author Virendra Pandey
-* @date 2020-07-19
-* @param {*} event
-* @memberof ClassAddComponent
-*/
-public onClassChange(event): void {
-  if (event) {
-    this._cs.getSections(event.value).subscribe(section => {
-      if (section) {
-        this.sectionList = section;
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-07-21
+   * @memberof AddfeeComponent
+   */
+  public getClassSection() {
+    // this.showForm = false;
+    this._cs.getClassSection().subscribe(data => {
+      if (data) {
+        this.classList = data;
       }
-    })
+    });
   }
-}
+
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-07-19
+   * @param {*} event
+   * @memberof ClassAddComponent
+   */
+  public onClassChange(event): void {
+    if (event) {
+      this._cs.getSections(event.value).subscribe(section => {
+        if (section) {
+          this.sectionList = section;
+        }
+      })
+    }
+  }
 
   /**
    * @description
@@ -102,7 +120,7 @@ public onClassChange(event): void {
    * @memberof AttendanceListComponent
    */
   isAllSelected() {
-    if(this.classID.value && this.sectionID.value && this.attendanceList){
+    if (this.classID.value && this.sectionID.value && this.attendanceList) {
       const numSelected = this.selection.selected.length;
       const numRows = this.attendanceList.data.length;
       return numSelected === numRows;
@@ -116,7 +134,7 @@ public onClassChange(event): void {
    * @memberof AttendanceListComponent
    */
   masterToggle() {
-    if(this.classID.value && this.sectionID.value){
+    if (this.classID.value && this.sectionID.value) {
       this.isAllSelected() ?
         this.selection.clear() :
         this.attendanceList.data.forEach(row => this.selection.select(row));
@@ -164,12 +182,22 @@ public onClassChange(event): void {
    */
   public onDelete(row): void {
     console.log('row', row);
-    let isDelete:boolean = confirm("Are sure you want to delete this attendance record?");
-    if(isDelete){
-      this._cs.deleteAttendance(row.id).subscribe(data=>{
-          this.getAttendanceList();
+    let isDelete: boolean = confirm("Are sure you want to delete this attendance record?");
+    if (isDelete) {
+      this._cs.deleteAttendance(row.id).subscribe(data => {
+        this.getAttendanceList();
       })
     }
   }
 
+  /**
+   * @description Method to route on edit page
+   * @author Virendra Pandey
+   * @date 2020-06-26
+   * @param {*} row
+   * @memberof AttendanceListComponent
+   */
+  public onEdit(row): void {
+    this._router.navigate(['attendance'], { queryParams: { id: row.id } });
+  }
 }

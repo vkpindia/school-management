@@ -184,7 +184,7 @@ export class SetupComponent implements OnInit {
   public onSetupTypeChange(event): void {
     if (event) {
       if (event.value == 'villages') {
-        this.fieldLabel = 'Transport Type';
+        this.fieldLabel = 'Village Name';
       } else if (event.value == 'expensetypes') {
         this.fieldLabel = 'Expense Type';
       } else if (event.value == 'feetypes') {

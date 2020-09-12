@@ -82,8 +82,20 @@ export class SetupService {
    * @memberof SetupService
    */
   getExpanseTypes() {
-
     return this._http.get(this._apiUrl + `setup/getexpensetypes`, this.httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  /**
+   * @description Method for getting all Classs data from server
+   * @author Virendra Pandey
+   * @date 2020-06-21
+   * @returns
+   * @memberof SetupService
+   */
+  getRoutes() {
+    return this._http.get(this._apiUrl + `TransportController/GetRoutes`, this.httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
@@ -141,6 +153,23 @@ export class SetupService {
   saveSetup(classRecord: any): Observable<any> {
     // console.log('ClassRecord', classRecord);
     return this._http.post(this._apiUrl + 'setup/addgenerictype', classRecord, this.httpOptions)
+     .pipe(
+       map(this.extractData),
+       catchError(this.handleError)
+     );
+  }
+
+  /**
+   * @description Method for saving Class data in server
+   * @author Virendra Pandey
+   * @date 2020-06-21
+   * @param {*} users
+   * @returns {Observable<any>}
+   * @memberof SetupService
+   */
+  saveTransport(formData: any): Observable<any> {
+    // console.log('ClassRecord', classRecord);
+    return this._http.post(this._apiUrl + 'setup/addtransporttype', formData, this.httpOptions)
      .pipe(
        map(this.extractData),
        catchError(this.handleError)

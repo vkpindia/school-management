@@ -58,11 +58,11 @@ const routes: Routes = [
         }
       },
       {
-        path: 'teachers',
+        path: 'staff',
         loadChildren: () => import('./modules/teachers/teachers.module').then(m => m.TeachersModule),
         canActivate: [AuthGuard],
         data: {
-          breadcrumb: 'Teachers',
+          breadcrumb: 'Staff',
         }
       },
       {

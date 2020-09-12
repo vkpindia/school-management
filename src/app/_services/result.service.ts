@@ -171,7 +171,7 @@ getStudentRecord(classid, sectionid) {
    */
   saveTotalResult(payload: any): Observable<any> {
     // console.log('parentRecord', parentRecord);
-    return this._http.post(this._apiUrl + 'results/addstudentatendencetotals', payload)
+    return this._http.post(this._apiUrl + 'results/addstudentresultstotals', payload)
      .pipe(
        map(this.extractData),
        catchError(this.handleError)

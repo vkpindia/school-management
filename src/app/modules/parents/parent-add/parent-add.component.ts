@@ -27,7 +27,7 @@ export class ParentAddComponent implements OnInit {
   public cardTitle: string = 'Add New Parents';
   public showButtons: boolean = false;
   public showForm: boolean = true;
-  public buttonLabel: string = 'Submit';
+  public buttonLabel: string = 'Next';
   public paramID: any;
   private _phonePattern = '^[0-9-+s()]*$';
   private _emailPattern = '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}';
@@ -55,21 +55,21 @@ export class ParentAddComponent implements OnInit {
       // father details
       father_guardian_firstname  : new FormControl(null, Validators.required),
       familyname : new FormControl(null, Validators.required),
-      father_guardian_adharnumber : new FormControl(null, [Validators.required, Validators.minLength(12)]),
+      father_guardian_adharnumber : new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{10}')]),
       father_guardian_qualification : new FormControl(null, Validators.required),
       father_guardian_occupation : new FormControl(null, Validators.required),
-      father_guardian_mobilenumber : new FormControl(null, [Validators.required, Validators.minLength(10)]),
+      father_guardian_mobilenumber : new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{10}')]),
       email : new FormControl(null, [Validators.required, Validators.pattern(this._emailPattern)]),
 
       // Mother fields
       mother_firstname : new FormControl(null, Validators.required),
-      mother_aadharnumber : new FormControl(null, [Validators.required, Validators.minLength(12)]),
+      mother_aadharnumber : new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{12}')]),
       mother_qualification : new FormControl(null, Validators.required),
       mother_occupation : new FormControl(null, Validators.required),
-      mother_phonenumber : new FormControl(null, [Validators.required, Validators.minLength(10)]),
+      mother_phonenumber : new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{10}')]),
 
       //Optional Fields
-      bank_accountnumber : new FormControl(null, Validators.minLength(12)),
+      bank_accountnumber : new FormControl(null),
       bank_ifsccode : new FormControl(null),
       bank_addressbranch : new FormControl(null),
       bank_accountname : new FormControl(null),
@@ -78,7 +78,7 @@ export class ParentAddComponent implements OnInit {
       mothertoung : new FormControl(null),
       nationality  : new FormControl(null),
       bloodgroup : new FormControl(null),
-      whatsappnumber : new FormControl(null,  Validators.minLength(10))
+      whatsappnumber : new FormControl(null,  Validators.pattern('[0-9 ]{10}'))
     });
     console.log('Parent details', this.parentDetails);
     if (this.parentDetails && this.parentDetails.id) {
@@ -121,16 +121,7 @@ export class ParentAddComponent implements OnInit {
   public onSubmit() {
     console.log('onSubmit');
     this.submitted = true;
-    console.log('this.parentForm.value', this.parentForm.value);
-    // console.log('this.parentForm.invalid', this.parentForm.invalid);
-    /* if (this.parentForm.value) {
-      this.parentForm.value.Class = parseInt(this.parentForm.value.Class, 10);
-      this.parentForm.value.dob = this._date.transform(this.parentForm.value.dob, 'MM/dd/yyyy');
-      this.parentForm.value.dateofparent = this._date.transform(this.parentForm.value.dateofparent, 'MM/dd/yyyy');
-    } */
-
-    // console.log('this.parentForm.value.dateofparent', this.parentForm.value.dateofparent);
-    // stop here if form is invalid
+    // console.log('this.parentForm.value', this.parentForm.value);
     if (this.parentForm.invalid) {
       return;
     }
@@ -163,7 +154,6 @@ export class ParentAddComponent implements OnInit {
       console.log('this.paramID', this.paramID);
       console.log('payload', payload);
       this._ss.postParent(payload).subscribe(data => {
-        console.log('data', data);
         this.showNotification('Submitted Successfully!!');
         this.parentForm.reset();
         this._router.navigate(['/fees'], { queryParams: { id: this.paramID } });
