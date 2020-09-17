@@ -19,14 +19,12 @@ import { ErrorInterceptor, JwtInterceptor, fakeBackendProvider } from './_helper
 import { CommonModule } from '@angular/common';
 import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
     OnboardLayoutComponent,
     UserLayoutComponent,
-    SideNavComponent,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,

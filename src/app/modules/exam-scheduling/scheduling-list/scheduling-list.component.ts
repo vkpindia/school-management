@@ -24,6 +24,7 @@ export class SchedulingListComponent implements OnInit, OnChanges {
   public scheduledExamList: MatTableDataSource<any>;
   public selection = new SelectionModel<any>(true, []);
 
+  // tslint:disable-next-line: variable-name
   constructor(private _ens: ExamSchedulingService) { }
 
   ngOnChanges(changes: SimpleChanges): void {

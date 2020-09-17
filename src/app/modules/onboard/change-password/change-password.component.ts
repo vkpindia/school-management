@@ -11,6 +11,7 @@ import { MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, MatSnackBar
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss']
 })
+
 export class ChangePasswordComponent implements OnInit {
 
   public resetPasswordForm: FormGroup;
@@ -80,7 +81,7 @@ export class ChangePasswordComponent implements OnInit {
         });
   }
 
-  /**
+/**
  * @description
  * @author Virendra Pandey
  * @date 2020-06-18

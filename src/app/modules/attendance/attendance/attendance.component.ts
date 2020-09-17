@@ -126,7 +126,7 @@ export class AttendanceComponent implements OnInit {
         if (section) {
           this.sectionList = section;
         }
-      })
+      });
     }
   }
 

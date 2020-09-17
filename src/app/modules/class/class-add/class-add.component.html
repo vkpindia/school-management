@@ -105,7 +105,7 @@
                     </mat-select> -->
                     <mat-chip-list #chipList3 aria-label="subjects" formControlName="subjects">
                       <mat-chip *ngFor="let sb of sf.subjects.value" [selectable]="selectable" [removable]="removable"
-                        (removed)="removeChips(sb, 'sb')">
+                        (removed)="removeChips(sb)">
                         {{sb}}
                         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                       </mat-chip>

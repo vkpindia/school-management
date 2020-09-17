@@ -150,6 +150,7 @@ export let navConfig = [
       {
         displayName: 'Class',
         iconName: 'build',
+        isActive: true,
         children: [
           {
             displayName: 'All Classes',
@@ -263,6 +264,31 @@ export let navConfig = [
     iconName: 'create',
     // icon: 'flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler',
     routePath: 'exam-result'
+  },
+  {
+    displayName: 'Online Examination',
+    iconName: 'build',
+    // icon: 'flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler',
+    children: [
+      {
+        displayName: 'Assessment Setup',
+        // iconName: 'event',
+        icon: 'fa fa-angle-right',
+        routePath: 'assessment'
+      },
+      {
+        displayName: 'Assessment',
+        // iconName: 'event',
+        icon: 'fa fa-angle-right',
+        routePath: 'assessment/questions'
+      },
+      {
+        displayName: 'Result',
+        // iconName: 'event',
+        icon: 'fa fa-angle-right',
+        routePath: 'assessment/result'
+      }
+    ]
   },
   {
     displayName: 'Events',

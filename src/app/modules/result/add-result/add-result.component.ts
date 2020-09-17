@@ -110,7 +110,6 @@ export class AddResultComponent implements OnInit {
     let actualTotal: number = 0;
     let totalMark: number = 0;
     let percetage: number;
-    console.log('formData', formData);
     formData.forEach(element => {
       actualTotal += element.actualmarks;
       totalMark += element.marks;
@@ -210,7 +209,7 @@ export class AddResultComponent implements OnInit {
     }
   }
 
-  /**
+/**
  * @description
  * @author Virendra Pandey
  * @date 2020-08-12
@@ -241,8 +240,7 @@ export class AddResultComponent implements OnInit {
       this.addTResultForm.get('studentid').setValue(event.option.value.id);
       if (this.studentRecordList) {
         this.studentRecordList.map(data => {
-          if (data.id == event.option.value.id) {
-            console.log('data', data);
+          if (data.id === event.option.value.id) {
             this.studentTID.patchValue(data.name);
           }
         });
@@ -250,7 +248,6 @@ export class AddResultComponent implements OnInit {
 
       (this.addResultForm.get('items') as FormArray).at(index).get('studentid')
         .patchValue(event.option.value.id);
-
     } else {
       this.addTResultForm.patchValue({
         studentid: event.option.value.id

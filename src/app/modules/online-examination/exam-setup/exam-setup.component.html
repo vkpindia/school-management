@@ -1,0 +1,218 @@
+<div class="form-container">
+  <div class="page-title">
+    <h3>Assessment Setup</h3>
+  </div>
+  <div class="form-fields">
+    <mat-card>
+      <mat-card-title>{{cardTitle}}</mat-card-title>
+      <mat-card-content class="pt-2">
+        <mat-tab-group [selectedIndex] = "selectedIndex">
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon">wc</mat-icon>
+              Exam Setup
+            </ng-template>
+            <form [formGroup]="createExamForm" (ngSubmit)="onSubmit('setup')" *ngIf="showForm">
+              <div class="row col-12 m-0 p-0 pt-3">
+
+                <div class="col-12 col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Class</mat-label>
+                    <mat-select placeholder="Select Class" formControlName="classid" (selectionChange)="onClassChange($event)">
+                      <mat-option *ngFor = "let class of classList" [value]="class.id">{{class.classname}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="submitted && ef.classid.hasError('required')">
+                     Class is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Section</mat-label>
+                    <mat-select placeholder="Select Section" formControlName="sectionid">
+                      <mat-option *ngFor = "let section of sectionList" [value]="section.id">{{section.sectionname}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="submitted && ef.sectionid.hasError('required')">
+                      Section is <strong>required</strong>
+                     </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Exam Name</mat-label>
+                    <input matInput formControlName="examname" placeholder="Enter Exam Name">
+                    <!--  <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
+              Please enter a valid email address
+            </mat-error> -->
+                    <mat-error *ngIf="submitted && ef.examname.hasError('required')">
+                      Exam name is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Subject</mat-label>
+                    <input matInput placeholder="Enter Class Subject Name" formControlName="subjectame">
+                    <mat-error *ngIf="submitted && ef.subjectame.hasError('required')">
+                      Subject is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Teacher Name</mat-label>
+                    <input matInput placeholder="Enter Techaer Name" formControlName="teachername">
+                    <mat-error *ngIf="submitted && ef.teachername.hasError('required')">
+                      Teacher name is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Allotted Time</mat-label>
+                    <input type="number" matInput placeholder="Enter Allotted Time" formControlName="timeallotted">
+                    <mat-error *ngIf="submitted && ef.timeallotted.hasError('required')">
+                      Allotted time is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Total Questions</mat-label>
+                    <input type="number" matInput placeholder="Enter Total Questions" formControlName="totalquestions">
+                    <mat-error *ngIf="submitted && ef.totalquestions.hasError('required')">
+                      Total questions is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Total Marks</mat-label>
+                    <input type="number" matInput placeholder="Enter Total Questions" formControlName="totalmarks">
+                    <mat-error *ngIf="submitted && ef.totalmarks.hasError('required')">
+                      Total marks is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-6">
+                  <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Comments</mat-label>
+                    <textarea matInput placeholder="Enter Comments" formControlName="teachersnotes" rows="2"></textarea>
+                    <mat-error *ngIf="submitted && ef.teachersnotes.hasError('required')">
+                      Comments is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+              </div>
+              <div class="example-button-row pt-3 pb-2 text-center">
+                <button mat-raised-button color="primary" type="submit">Next</button>
+                <button mat-raised-button class="ml-3 mat-secondary"
+                  (click)="onFormReset($event, 'setup')">Reset</button>
+              </div>
+            </form>
+          </mat-tab>
+
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="">layers</mat-icon>
+              Create Questions
+            </ng-template>
+            <form [formGroup]="questionForm" (ngSubmit)="onSubmit('questions')" *ngIf="showForm">
+              <div class="row col-12 m-0 p-0 pt-3">
+                <div formArrayName="items" *ngFor="let item of f.items['controls']; let i = index">
+                  <div class="row m-0" [formGroupName]="i">
+
+                    <div class="col-12">
+                      <mat-form-field appearance="outline" class="p-0">
+                        <mat-label>Question</mat-label>
+                        <textarea matInput placeholder="Enter Question" formControlName="question" rows="2"></textarea>
+                        <mat-error *ngIf="submitted && item.get('question').hasError('required')">
+                          Question is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-4">
+                      <mat-form-field appearance="outline" class="p-0">
+                        <mat-label>First Answer</mat-label>
+                        <input matInput placeholder="Enter first answer" formControlName="answer1">
+                        <mat-error *ngIf="submitted && item.get('answer1').hasError('required')">
+                          First answer is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-4">
+                      <mat-form-field appearance="outline" class="p-0">
+                        <mat-label>Second Answer</mat-label>
+                        <input type="number" matInput placeholder="Enter second answer" formControlName="answer2">
+                        <mat-error *ngIf="submitted && item.get('answer2').hasError('required')">
+                          Second answer is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-4">
+                      <mat-form-field appearance="outline" class="p-0">
+                        <mat-label>Third Answer</mat-label>
+                        <input  matInput placeholder="Enter third answer" formControlName="answer3">
+                        <mat-error *ngIf="submitted && item.get('answer3').hasError('required')">
+                          Third answer is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-4">
+                      <mat-form-field appearance="outline" class="p-0">
+                        <mat-label>Fourth Answer</mat-label>
+                        <input matInput placeholder="Enter fourth answer" formControlName="answer4">
+                        <mat-error *ngIf="submitted && item.get('answer4').hasError('required')">
+                          Fourth answer is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-4">
+                      <mat-form-field appearance="outline" class="p-0">
+                        <mat-label>Right Answer</mat-label>
+                        <input matInput placeholder="Enter right answer" formControlName="rightanswer">
+                        <mat-error *ngIf="submitted && item.get('rightanswer').hasError('required')">
+                          Right answer is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-4">
+                      <mat-form-field appearance="outline" class="p-0">
+                        <mat-label>Question Mark</mat-label>
+                        <input type="number" matInput placeholder="Enter mark" formControlName="marksforthis">
+                        <mat-error *ngIf="submitted && item.get('marksforthis').hasError('required')">
+                          Question Mark is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="example-button-row pt-3 pb-2 text-center">
+                <button mat-raised-button type="button" class="mat-next mt-2 mr-3" (click)="addNextSubjectMark()">Add
+                  Next</button>
+                <button mat-raised-button color="primary" type="submit">Submit</button>
+                <button mat-raised-button class="ml-3 mat-secondary"
+                  (click)="onFormReset($event, 'questions')">Reset</button>
+              </div>
+            </form>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  </div>

@@ -39,7 +39,7 @@ export class AttendanceService {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
     } else {
-      // The firebase returned an unsuccessful response code.
+      // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
       console.error(
         `Back-end returned code ${error.status}, ` + `body was: ${error.error}`);
@@ -63,12 +63,12 @@ export class AttendanceService {
   }
 
   /**
-* @description Method for getting all Classs data from server
-* @author Virendra Pandey
-* @date 2020-06-21
-* @returns
-* @memberof FeesService
-*/
+   * @description Method for getting all Classs data from server
+   * @author Virendra Pandey
+   * @date 2020-06-21
+   * @returns
+   * @memberof FeesService
+   */
   getStudentRecord(classid, sectionid) {
     return this._http.get(this._apiUrl + `/student/GetStudentSearch?classid=${classid}&sectionid=${sectionid}`).pipe(
       map(this.extractData),
@@ -76,12 +76,12 @@ export class AttendanceService {
   }
 
   /**
- * @description Method for getting all Classs data from server
- * @author Virendra Pandey
- * @date 2020-06-21
- * @returns
- * @memberof FeesService
- */
+   * @description Method for getting all Classs data from server
+   * @author Virendra Pandey
+   * @date 2020-06-21
+   * @returns
+   * @memberof FeesService
+   */
   getStudentAttendance(classid, sectionid) {
     return this._http.get(this._apiUrl + `attandance/getstudentsattandancebyclasssection?classid=${classid}&sectionid=${sectionid}`).pipe(
       map(this.extractData),
@@ -89,12 +89,12 @@ export class AttendanceService {
   }
 
   /**
-* @description Method for getting unique Class data by key
-* @author Virendra Pandey
-* @date 2020-06-21
-* @returns {Observable<any>}
-* @memberof FeeService
-*/
+   * @description Method for getting unique Class data by key
+   * @author Virendra Pandey
+   * @date 2020-06-21
+   * @returns {Observable<any>}
+   * @memberof FeeService
+   */
   getClassSection(): Observable<any> {
     const url = `${this._apiUrl}setup/getclassesandsections`;
     return this._http.get(url).pipe(

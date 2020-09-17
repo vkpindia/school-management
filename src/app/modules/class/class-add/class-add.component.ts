@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClassService } from '../../../_services/class.service';
-import { DatePipe } from '@angular/common';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 
@@ -25,8 +24,6 @@ export class ClassAddComponent implements OnInit {
   public showButtons: boolean = false;
   public isTabDisabled: boolean = true;
   public buttonLabel: string = 'Submit';
-  private _phonePattern = '^[0-9-+s()]*$';
-  private _emailPattern = '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}';
   public selectedIndex: number;
   public chipsAlert: string;
   public classSectionList: any = [];
@@ -36,17 +33,18 @@ export class ClassAddComponent implements OnInit {
   public horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   public verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
-  //Chips variable declaration
+  // Chips variable declaration
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
+
   constructor(
-    private _ar: ActivatedRoute,
-    private _router: Router,
+    // tslint:disable-next-line: variable-name
     private _snackBar: MatSnackBar,
+    // tslint:disable-next-line: variable-name
     private _cs: ClassService
   ) { }
 
@@ -63,7 +61,7 @@ export class ClassAddComponent implements OnInit {
       subjects: new FormControl([], Validators.required),
     });
 
-    //method call
+    // method call
     this.getClassList();
   }
 
@@ -76,7 +74,7 @@ export class ClassAddComponent implements OnInit {
   get sf() { return this.sectionForm.controls; }
   get cf() { return this.classForm.controls; }
 
-  /**
+/**
  * @description
  * @author Virendra Pandey
  * @date 2020-07-11
@@ -84,7 +82,7 @@ export class ClassAddComponent implements OnInit {
  * @param {*} controls
  * @memberof TeacherAddComponent
  */
-  addChips(event: MatChipInputEvent, controls): void {
+  addChips(event: MatChipInputEvent, form): void {
     const input = event.input;
     const value = event.value;
     console.log('value', value);
@@ -107,7 +105,7 @@ export class ClassAddComponent implements OnInit {
    * @param {*} ql
    * @memberof TeacherAddComponent
    */
-  removeChips(chipsLabel, controls): void {
+  removeChips(chipsLabel): void {
       const index = this.sf.subjects.value.indexOf(chipsLabel);
       if (index >= 0) {
         this.sf.subjects.value.splice(index, 1);
@@ -138,14 +136,14 @@ export class ClassAddComponent implements OnInit {
     /* console.log('this.classForm.value', this.classForm.value);
     console.log('this.parentForm.value', this.sectionForm.value); */
 
-    if (this.classForm.invalid && this.selectedIndex == 0) {
+    if (this.classForm.invalid && this.selectedIndex === 0) {
       return;
     }
-    if (this.sectionForm.invalid && this.selectedIndex == 1) {
+    if (this.sectionForm.invalid && this.selectedIndex === 1) {
       return;
     }
 
-    let payload = {};
+    const payload = {};
 
     this.loading = true;
     if (formType === 'class') {
@@ -156,7 +154,7 @@ export class ClassAddComponent implements OnInit {
         });
       } */
       delete payload['section'];
-      this._cs.addClass(payload).subscribe(data => {
+      this._cs.addClass(payload).subscribe(() => {
         this.isTabDisabled = false;
         this.showNotification('Submitted Successfully!!');
         this.classForm.reset();
@@ -177,7 +175,8 @@ export class ClassAddComponent implements OnInit {
       if (this.sectionForm.value.subjects && this.sectionForm.value.subjects.length) {
         this.sectionForm.value.subjects = this.sectionForm.value.subjects.length ? this.sectionForm.value.subjects.toString() : null;
       }
-      this.sectionForm.value.classid = parseInt(this.sectionForm.value.classid);
+
+      this.sectionForm.value.classid = parseInt(this.sectionForm.value.classid, 10);
       Object.assign(payload, this.sectionForm.value);
       this._cs.addSection(payload).subscribe(data => {
         console.log('data', data);
@@ -209,7 +208,7 @@ export class ClassAddComponent implements OnInit {
     if (event) {
       console.log('event', event);
       console.log('this.classSectionList', this.classSectionList);
-      this.sectionList = this.classSectionList.find(section => section.classid == event.value).section;
+      this.sectionList = this.classSectionList.find(section => section.classid === event.value).section;
       console.log('this.sectionList', this.sectionList);
     }
   }

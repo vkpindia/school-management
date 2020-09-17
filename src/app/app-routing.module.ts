@@ -181,6 +181,14 @@ const routes: Routes = [
         data: {
           breadcrumb: 'Users',
         }
+      },
+      {
+        path: 'assessment',
+        loadChildren: () => import('./modules/online-examination/online-examination.module').then(m => m.OnlineExaminationModule),
+        canActivate: [AuthGuard],
+        data: {
+          breadcrumb: 'Assessment',
+        }
       }
     ]
   }

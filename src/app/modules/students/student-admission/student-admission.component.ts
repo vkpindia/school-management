@@ -15,12 +15,12 @@ import { DatePipe } from '@angular/common';
 
 export class StudentAdmissionComponent implements OnInit {
 
-  // Component properties variable declaration
+  // Component properties letiable declaration
   @Input() studentDetails: any;
   @Output() formCancel: EventEmitter<any> = new EventEmitter<any>();
   @Output() formSubmit: EventEmitter<any> = new EventEmitter<any>();
 
-  // VAriable declaration
+  // letiable declaration
   public admissionForm: FormGroup;
   public imageSrc: string;
   public loading: boolean = false;
@@ -80,7 +80,7 @@ export class StudentAdmissionComponent implements OnInit {
       previousschoolname: new FormControl(null),
       previousschooladdress: new FormControl(null),
       profile: new FormControl('', Validators.required),
-      image: new FormControl('', Validators.required),
+      image: new FormControl([], Validators.required),
     });
     console.log('studentDetails', this.studentDetails);
     if (this.studentDetails && this.studentDetails[0].id) {
@@ -127,18 +127,40 @@ export class StudentAdmissionComponent implements OnInit {
       let file = (event.target as HTMLInputElement).files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
-
-        console.log('reader.result', reader.result);
         this.imageSrc = reader.result as string;
-        console.log('imageSrc', this.imageSrc);
-        let formData = new FormData();
-        formData.append('image', event.target.files);
-        console.log('formData', formData);
         this.admissionForm.patchValue({
-          image: formData
+          image: this.base64ToByteArray(reader.result)
         });
         this.admissionForm.get('image').updateValueAndValidity();
       };
+    }
+  }
+
+  base64ToByteArray(base64String) {
+    try {
+      let sliceSize = 1024;
+      let exncodeChar = btoa(base64String);
+      // console.log('exncodeChar', exncodeChar);
+      let byteCharacters = atob(exncodeChar);
+      // console.log('byteCharacters', byteCharacters);
+      let bytesLength = byteCharacters.length;
+      let slicesCount = Math.ceil(bytesLength / sliceSize);
+      let byteArrays = new Array(slicesCount);
+
+      for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+        let begin = sliceIndex * sliceSize;
+        let end = Math.min(begin + sliceSize, bytesLength);
+
+        let bytes = new Array(end - begin);
+        for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
+          bytes[i] = byteCharacters[offset].charCodeAt(0);
+        }
+        byteArrays[sliceIndex] = new Uint8Array(bytes);
+      }
+      return byteArrays;
+    } catch (e) {
+      console.warn('\Couldn\'t convert to byte array: ' + e);
+      return undefined;
     }
   }
 
