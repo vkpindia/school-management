@@ -53,7 +53,7 @@ export class AddFeesComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
-  public studentID:any;
+  public studentID: any;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   // qualifications: any[] = [];
   public feetypesList: any = []
@@ -100,7 +100,10 @@ export class AddFeesComponent implements OnInit {
     this.getClassSection();
     this.getfeetypes();
     this.getTerm();
-    this.getSetStudentFee();
+
+    if (this.paramID) {
+      this.getSetStudentFee();
+    }
   }
 
 
@@ -158,39 +161,24 @@ export class AddFeesComponent implements OnInit {
   }
 
   getOptionText(option) {
-    if(option){
+    if (option) {
       return option.name;
     }
   }
 
   /**
- * @description
- * @author Virendra Pandey
- * @date 2020-08-12
- * @private
- * @param {string} value
- * @returns {string[]}
- * @memberof AddFeesComponent
- */
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-08-12
+   * @private
+   * @param {string} value
+   * @returns {string[]}
+   * @memberof AddFeesComponent
+   */
   private _filter(value): any[] {
     const filterValue = value;
     return this.studentRecordList.filter(option => option.name.toLowerCase().includes(filterValue)
     );
-  }
-
-  /**
-   * @description
-   * @author Virendra Pandey
-   * @date 2020-07-26
-   * @memberof AddFeesComponent
-   */
-  public getSetStudentFee(): void {
-    let id = this.paramID ? this.paramID : 1;
-    this._fs.getFeeFirstTime(id).subscribe(data => {
-      if (data) {
-        console.log(data);
-      }
-    })
   }
 
   /**
@@ -204,11 +192,26 @@ export class AddFeesComponent implements OnInit {
     this._fs.getStudentFee(this.studentID).subscribe(data => {
       if (data) {
         this.studentList = data;
-        console.log('this.studentList', this.studentList);
         this.ShowList = true;
+      }
+    });
+  }
+
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-07-26
+   * @memberof AddFeesComponent
+   */
+  public getSetStudentFee(): void {
+    let id = this.paramID ? this.paramID : 1;
+    this._fs.getFeeFirstTime(id).subscribe(data => {
+      if (data) {
+        this.onEditRecord(data[0]);
       }
     })
   }
+
 
   /**
    * @description
@@ -225,11 +228,11 @@ export class AddFeesComponent implements OnInit {
   }
 
   /**
- * @description
- * @author Virendra Pandey
- * @date 2020-07-21
- * @memberof AddfeeComponent
- */
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-07-21
+   * @memberof AddfeeComponent
+   */
   public getClassSection() {
     // this.showForm = false;
     this._fs.getClassSection().subscribe(data => {
@@ -240,12 +243,12 @@ export class AddFeesComponent implements OnInit {
   }
 
   /**
- * @description
- * @author Virendra Pandey
- * @date 2020-07-19
- * @param {*} event
- * @memberof ClassAddComponent
- */
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-07-19
+   * @param {*} event
+   * @memberof ClassAddComponent
+   */
   public onClassChange(event): void {
     if (event) {
       this._fs.getSections(event.value).subscribe(section => {
@@ -270,7 +273,7 @@ export class AddFeesComponent implements OnInit {
     }
   }
 
-  onOptionSelection(event){
+  onOptionSelection(event) {
     this.studentID = event.option.value.id;
   }
 
@@ -302,7 +305,7 @@ export class AddFeesComponent implements OnInit {
     Object.assign(payload, this.feesForm.value);
 
     this.loading = true;
-    if(this.feesDetails && this.feesDetails.id){
+    if (this.feesDetails && this.feesDetails.id) {
       payload['id'] = this.feesDetails.id;
       this._fs.updateFees(payload).subscribe(data => {
         console.log('data', data);
@@ -389,11 +392,11 @@ export class AddFeesComponent implements OnInit {
   public onDeleteRecord(event): void {
     let isDelete: boolean = confirm("Are sure you want to delete this fee record?");
     if (isDelete) {
-      this._fs.deleteFees(event).subscribe(data=>{
-        if(data){
-          this.getSetStudentFee();
+      this._fs.deleteFees(event).subscribe(data => {
+        if (data) {
+          this.getSetStudent();
         }
-      })
+      });
     }
   }
 }

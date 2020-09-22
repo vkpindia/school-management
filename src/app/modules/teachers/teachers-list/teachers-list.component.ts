@@ -130,6 +130,6 @@ export class TeachersListComponent implements OnInit {
    */
   public onView(row): void {
     console.log('row', row);
-    this._router.navigate(['teachers/detail'], { queryParams: { id: row.id } });
+    this._router.navigate(['staff/detail'], { queryParams: { id: row.id } });
   }
 }

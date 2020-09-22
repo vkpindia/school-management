@@ -54,6 +54,19 @@
 
                 <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
+                    <mat-label>Date of Exam</mat-label>
+                    <input matInput [matDatepicker]="picker2" placeholder="Select Date" formControlName="examdate">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                    <mat-error *ngIf="submitted && f.examdate.hasError('required')">
+                      Exam date is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-12 col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Subject</mat-label>
                     <input matInput placeholder="Enter Class Subject Name" formControlName="subjectame">
                     <mat-error *ngIf="submitted && ef.subjectame.hasError('required')">

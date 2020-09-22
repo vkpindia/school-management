@@ -50,6 +50,7 @@ export class AddExpenseComponent implements OnInit {
 
       //Requird Fields
       expensetype: new FormControl(null, Validators.required),
+      totalAmmount: new FormControl(null, Validators.required),
       amount: new FormControl(null, Validators.required),
       pendingamount: new FormControl(null),
       date: new FormControl(new Date(), Validators.required),
@@ -74,6 +75,12 @@ export class AddExpenseComponent implements OnInit {
    * @memberof  expenseAddComponent
    */
   get f() { return this.expenseForm.controls; }
+
+  onAmountChange() {
+    this.expenseForm.patchValue({
+      pendingamount: this.expenseForm.value.totalAmmount - this.expenseForm.value.amount
+    });
+  }
 
   /**
    * @description

@@ -3,6 +3,41 @@
     <h3>Parents</h3>
   </div>
   <div class="form-fields">
+    <!-- Student Search -->
+    <div class="row" *ngIf="!paramID">
+      <div class="col-12 col-sm-6 col-md-3">
+        <mat-form-field appearance="outline" class="p-0">
+          <mat-label>Class</mat-label>
+          <mat-select placeholder="Select Class" [formControl]="classID" (selectionChange)="onClassChange($event)">
+            <mat-option *ngFor = "let class of classList" [value]="class.id">{{class.classname}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-3">
+        <mat-form-field appearance="outline" class="p-0">
+          <mat-label>Section</mat-label>
+          <mat-select placeholder="Select Section" [formControl]="sectionID" (selectionChange)="onSectionChange($event)">
+            <mat-option *ngFor = "let section of sectionList" [value]="section.id">{{section.sectionname}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <mat-form-field appearance="outline" class="p-0">
+          <mat-label>Search Student</mat-label>
+          <input matInput placeholder="Select student" aria-label="Number" [formControl]="studentName"
+          [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="getOptionText" (optionSelected)="onOptionSelection($event)">
+            <mat-option *ngFor="let option of studentFilteredList | async" [value]="option">
+              {{option.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+     <!--  <div class="col-12 col-md-2 pt-1 mt-1 mb-3">
+        <button mat-raised-button color="primary" type="button" (click)="getSetStudent()">Search</button>
+      </div> -->
+    </div><!-- Student search end -->
     <mat-card>
       <mat-card-title>{{cardTitle}}</mat-card-title>
       <mat-card-content class="pt-2">

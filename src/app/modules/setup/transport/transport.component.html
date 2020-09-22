@@ -15,13 +15,13 @@
                 <div class="row m-0">
                   <div class="col-12">
                     <mat-form-field appearance="outline" class="col-12 p-0">
-                      <mat-label>Type</mat-label>
+                      <mat-label>Route</mat-label>
                       <!-- <input matInput formControlName="name" placeholder="Enter Title"> -->
-                      <mat-select placeholder="Enter Type" formControlName="type">
-                        <mat-option [value]="'villages'">Transport</mat-option>
+                      <mat-select placeholder="Enter Type" formControlName="routeid">
+                        <mat-option *ngFor="let route of routeList" [value]="route.routeid">{{route.routename}}</mat-option>
                       </mat-select>
-                      <mat-error *ngIf="submitted && f.type.hasError('required')">
-                        Type is <strong>required</strong>
+                      <mat-error *ngIf="submitted && f.routeid.hasError('required')">
+                        Route is <strong>required</strong>
                       </mat-error>
                     </mat-form-field>
                   </div>
@@ -32,19 +32,6 @@
                       <input matInput placeholder="Setup Type" formControlName="villagename">
                       <mat-error *ngIf="submitted && f.villagename.hasError('required')">
                         Village Name is <strong>required</strong>
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
-
-                  <div class="col-12">
-                    <mat-form-field appearance="outline" class="col-12 p-0">
-                      <mat-label>Route</mat-label>
-                      <!-- <input matInput formControlName="name" placeholder="Enter Title"> -->
-                      <mat-select placeholder="Enter Type" formControlName="routeid">
-                        <mat-option *ngFor="let route of routeList" [value]="route.routeid">{{route.routename}}</mat-option>
-                      </mat-select>
-                      <mat-error *ngIf="submitted && f.routeid.hasError('required')">
-                        Route is <strong>required</strong>
                       </mat-error>
                     </mat-form-field>
                   </div>

@@ -30,7 +30,7 @@ export class AddSalaryComponent implements OnInit {
   public ShowList: boolean = false;
   public returnUrl: string;
   public error: string = '';
-  public cardTitle: string = 'Add/Update salary';
+  public cardTitle: string = 'Add/Update Salary';
   public showButtons: boolean = false;
   public showForm: boolean = true;
   public buttonLabel: string = 'Submit';
@@ -147,7 +147,6 @@ export class AddSalaryComponent implements OnInit {
   public getAllSalaryList(): void {
     let id = this.teacherID ? this.teacherID : 1;
     this._fs.getAllSalaryDetails(id).subscribe(data => {
-      console.log('data', data);
       if (data) {
         this.salaryList = data;
         this.ShowList = true;
@@ -190,7 +189,7 @@ export class AddSalaryComponent implements OnInit {
     this.teacherID = event.option.value.id;
     if (this.teacherID) {
       this.getSalaryDetails();
-      this.getAllSalaryList();
+      // this.getAllSalaryList();
     }
   }
 

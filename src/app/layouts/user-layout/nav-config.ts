@@ -131,12 +131,6 @@ export let navConfig = [
         routePath: 'setup'
       },
       {
-        displayName: 'Transport',
-        icon: 'fa fa-angle-right',
-        // icon: 'flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler',
-        routePath: 'setup/transport'
-      },
-      {
         displayName: 'Terms',
         icon: 'fa fa-angle-right',
         routePath: 'accounts/terms'
@@ -146,6 +140,33 @@ export let navConfig = [
         icon: 'fa fa-angle-right',
         // icon: 'explicit',
         routePath: 'accounts/fee'
+      },
+      {
+        displayName: 'Transportation',
+        iconName: 'spellcheck',
+        // icon: 'flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler',
+        // icon: 'flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler',
+        isActive: true,
+        children: [
+          {
+            displayName: 'Add Transportation',
+            // iconName: 'event',
+            icon: 'fa fa-angle-right',
+            routePath: 'transport/add'
+          },
+          {
+            displayName: 'All Transportation',
+            // iconName: 'event',
+            icon: 'fa fa-angle-right',
+            routePath: 'transport'
+          },
+          {
+            displayName: 'Create Route',
+            // iconName: 'event',
+            icon: 'fa fa-angle-right',
+            routePath: 'setup/transport',
+          },
+        ]
       },
       {
         displayName: 'Class',
@@ -220,25 +241,6 @@ export let navConfig = [
     // iconName: 'event',
     icon: 'flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler',
     routePath: 'schedule-exam'
-  },
-  {
-    displayName: 'Transport',
-    iconName: 'spellcheck',
-    // icon: 'flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler',
-    children: [
-      {
-        displayName: 'All Transportation',
-        // iconName: 'event',
-        icon: 'fa fa-angle-right',
-        routePath: 'transport'
-      },
-      {
-        displayName: 'Add Transport',
-        // iconName: 'event',
-        icon: 'fa fa-angle-right',
-        routePath: 'transport/add'
-      }
-    ]
   },
   {
     displayName: 'Role',

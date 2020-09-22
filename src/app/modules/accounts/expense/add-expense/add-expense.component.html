@@ -26,13 +26,26 @@
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
-                <mat-label>Amount</mat-label>
-                <input type="number" matInput formControlName="amount" placeholder="Enter Amount">
+                <mat-label>Total Amount</mat-label>
+                <input type="number" matInput formControlName="totalAmmount" placeholder="Enter Amount">
+                <!--  <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
+                  Please enter a valid email address
+                </mat-error> -->
+                <mat-error *ngIf="submitted && f.totalAmmount.hasError('required')">
+                  Total amount is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Pay Amount</mat-label>
+                <input type="number" matInput formControlName="amount" placeholder="Enter Amount" (blur)="onAmountChange()">
                 <!--  <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
                   Please enter a valid email address
                 </mat-error> -->
                 <mat-error *ngIf="submitted && f.amount.hasError('required')">
-                  Amount is <strong>required</strong>
+                  Pay amount is <strong>required</strong>
                 </mat-error>
               </mat-form-field>
             </div>

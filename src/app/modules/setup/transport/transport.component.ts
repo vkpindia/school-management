@@ -34,9 +34,8 @@ export class TransportComponent implements OnInit {
 
   ngOnInit(): void {
     this.transportForm = new FormGroup({
-      type: new FormControl(null, Validators.required),
-      villagename: new FormControl('', Validators.required),
       routeid: new FormControl(null, Validators.required),
+      villagename: new FormControl('', Validators.required),
       price: new FormControl(null, Validators.required),
     });
 

@@ -172,11 +172,8 @@
 </div>
 
 <div class="form-container">
-  <div class="">
-    {{salaryList|json}}
-    <ng-container *ngIf="ShowList">
+  <div class="" *ngIf="ShowList">
       <app-salary-list [salaryList]="salaryList" [teacherID]="teacherID" (onEditSalary)="onEditRecord($event)" (onDeleteSalary)="onDeleteSalary($event)"></app-salary-list>
-    </ng-container>
   </div>
 </div>
-  <ng-template #dash>---</ng-template>
+<ng-template #dash>---</ng-template>

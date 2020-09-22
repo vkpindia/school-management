@@ -6,6 +6,7 @@ import { NavigationStart, NavigationEnd, NavigationCancel, NavigationError, Rout
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
   title = 'school-management';
   loading = true;

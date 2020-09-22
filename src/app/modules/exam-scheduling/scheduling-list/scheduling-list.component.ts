@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges, OnChanges, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, SimpleChanges, OnChanges, Input, ViewChild, DoCheck, ChangeDetectorRef } from '@angular/core';
 import { ExamSchedulingService } from '../../../_services/exam-scheduling.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -10,10 +10,10 @@ import { SelectionModel } from '@angular/cdk/collections';
   templateUrl: './scheduling-list.component.html',
   styleUrls: ['./scheduling-list.component.scss']
 })
-export class SchedulingListComponent implements OnInit, OnChanges {
+export class SchedulingListComponent implements OnInit, OnChanges/* , DoCheck */ {
 
 
-  @Input() isFormSubmit: boolean;
+  @Input() isFormSubmit: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) TSort: MatSort;
 
@@ -25,17 +25,31 @@ export class SchedulingListComponent implements OnInit, OnChanges {
   public selection = new SelectionModel<any>(true, []);
 
   // tslint:disable-next-line: variable-name
-  constructor(private _ens: ExamSchedulingService) { }
+  constructor(private _ens: ExamSchedulingService, private cd: ChangeDetectorRef) {
+    // this.cd.detach();
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.isFormSubmit) {
+    console.log('changes', changes);
+    console.log('isFormSubmit', this.isFormSubmit);
+    this.cd.detectChanges();
+    if (this.isFormSubmit && this.isFormSubmit.isScheduled) {
       this.getScheduledExamList();
     }
   }
 
   ngOnInit(): void {
+    console.log('isFormSubmit oninit', this.isFormSubmit);
     this.getScheduledExamList();
   }
+
+  /*   ngDoCheck(): void {
+        if (this.isFormSubmit&& this.isFormSubmit['isScheduled']) {
+          console.log('isFormSubmit', this.isFormSubmit);
+
+        }
+    } */
+
 
   /*  ngAfterViewInit() {
    this.TSort.sortChange.subscribe(() => {
@@ -121,12 +135,12 @@ export class SchedulingListComponent implements OnInit, OnChanges {
   }
 
   /**
-* @description Method to route on edit page
-* @author Virendra Pandey
-* @date 2020-06-26
-* @param {*} row
-* @memberof SchedulingListComponent
-*/
+   * @description Method to route on edit page
+   * @author Virendra Pandey
+   * @date 2020-06-26
+   * @param {*} row
+   * @memberof SchedulingListComponent
+   */
   public onDelete(row: any): void {
     let isDelete: boolean = confirm("Are sure you want to delete this exam schedule?");
     if (isDelete) {

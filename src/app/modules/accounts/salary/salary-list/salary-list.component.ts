@@ -78,7 +78,7 @@ export class SalaryListComponent implements OnInit, OnChanges {
    * @memberof feeListComponent
    */
   isAllSelected() {
-    if (this.salaryList && this.salaryList.length){
+    if (this.salaryList && this.salaryList.length) {
       const numSelected = this.selection.selected.length;
       const numRows = this.feeList.data.length;
       return numSelected === numRows;
@@ -92,7 +92,7 @@ export class SalaryListComponent implements OnInit, OnChanges {
    * @memberof feeListComponent
    */
   masterToggle() {
-    if (this.salaryList && this.salaryList.length){
+    if (this.salaryList && this.salaryList.length) {
       this.isAllSelected() ?
         this.selection.clear() :
         this.feeList.data.forEach(row => this.selection.select(row));
@@ -122,13 +122,13 @@ export class SalaryListComponent implements OnInit, OnChanges {
    * @memberof feeListComponent
    */
   applyFilter(event) {
-     // console.log('list filter event', event);
-     const filterValue = (event.target as HTMLInputElement).value;
-     this.feeList.filter = filterValue.trim().toLowerCase();
-     // console.log('this.feeList', this.feeList);
-     if (this.feeList.paginator) {
-       this.feeList.paginator.firstPage();
-     }
+    // console.log('list filter event', event);
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.feeList.filter = filterValue.trim().toLowerCase();
+    // console.log('this.feeList', this.feeList);
+    if (this.feeList.paginator) {
+      this.feeList.paginator.firstPage();
+    }
   }
 
   /**
@@ -145,7 +145,7 @@ export class SalaryListComponent implements OnInit, OnChanges {
     }
   }
 
-  /**
+ /**
   * @description Method to route on edit page
   * @author Virendra Pandey
   * @date 2020-06-26
@@ -169,6 +169,6 @@ export class SalaryListComponent implements OnInit, OnChanges {
    * @memberof SalaryListComponent
    */
   public getTransactions(): void {
-    this._router.navigate(['accounts/salary/transactions'], { queryParams: { techerID: this.teacherID } })
+    this._router.navigate(['accounts/salary/transactions'], { queryParams: { techerID: this.teacherID } });
   }
 }

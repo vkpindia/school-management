@@ -37,10 +37,12 @@ export class AttendanceComponent implements OnInit {
   public part2: boolean;
   public shift: FormControl = new FormControl();
   public studentList: MatTableDataSource<any>;
+  public temp: Array<any>;
+  public absentStudentList: MatTableDataSource<any>;
   public studentNameRecord: any = [];
   public absentStudentsID: any = [];
 
-  public selection = new SelectionModel<any>(true, this.studentList ? this.studentList.data : []);
+  public selection = new SelectionModel<any>(true, this.absentStudentList ? this.absentStudentList.data : this.studentList.data);
   // public selection2 = new SelectionModel<any>(true, []);
 
   public loading: boolean = false;
@@ -153,6 +155,44 @@ export class AttendanceComponent implements OnInit {
       });
     }
   }
+
+    /**
+   * @description Method to get All Attendance record
+   * @author Virendra Pandey
+   * @date 2020-06-24
+   * @memberof AttendanceListComponent
+   */
+  public getAttendanceList() {
+    this._cs.getStudentAttendance(this.classID.value, this.sectionID.value).subscribe((data: any) => {
+      if (data) {
+        let absentStudentRecord: any = [];
+        let temp = {};
+        let studentIds: any;
+
+        if (data && data[0].absent_student_names1) {
+          studentIds = data[0].absent_student_id1.split(',');
+        } else if (data && data[0].absent_student_names2) {
+          studentIds = data[0].absent_student_id2.split(',');
+        }
+
+        if (studentIds && studentIds.length) {
+          studentIds.map((studentName, index) => {
+            temp['id'] = data[0].id;
+            temp['name'] = studentName;
+            temp['class'] = data[0].classname;
+            temp['section'] = data[0].sectionname;
+            temp['date'] = data[0].date;
+            absentStudentRecord.push(Object.assign({}, temp));
+          });
+          console.log('absentStudentRecord', absentStudentRecord);
+        }
+      }
+      this.isLoading = false;
+      // Assign the data to the data source for the table to render
+      // this.AttendanceList = new MatTableDataSource(data);
+    });
+  }
+
   /**
    * @description Method to get All student record
    * @author Virendra Pandey

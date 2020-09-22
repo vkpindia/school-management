@@ -82,7 +82,8 @@ export class StudentAdmissionComponent implements OnInit {
       profile: new FormControl('', Validators.required),
       image: new FormControl([], Validators.required),
     });
-    console.log('studentDetails', this.studentDetails);
+
+    // console.log('studentDetails', this.studentDetails);
     if (this.studentDetails && this.studentDetails[0].id) {
       this.cardTitle = 'Update Student Record';
       this.buttonLabel = 'Update';
@@ -120,7 +121,7 @@ export class StudentAdmissionComponent implements OnInit {
     });
   }
 
-  onFileChange(event) {
+  public onFileChange(event) {
     let reader = new FileReader();
 
     if (event.target.files && event.target.files.length) {
@@ -128,40 +129,22 @@ export class StudentAdmissionComponent implements OnInit {
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.imageSrc = reader.result as string;
+        // console.log('this.urlBase64ToUint8Array(reader.result)', reader.result);
         this.admissionForm.patchValue({
-          image: this.base64ToByteArray(reader.result)
+          image: this.imageSrc.substring(22) // this.urlBase64ToUint8Array(reader.result)
         });
         this.admissionForm.get('image').updateValueAndValidity();
       };
+
     }
   }
 
-  base64ToByteArray(base64String) {
-    try {
-      let sliceSize = 1024;
-      let exncodeChar = btoa(base64String);
-      // console.log('exncodeChar', exncodeChar);
-      let byteCharacters = atob(exncodeChar);
-      // console.log('byteCharacters', byteCharacters);
-      let bytesLength = byteCharacters.length;
-      let slicesCount = Math.ceil(bytesLength / sliceSize);
-      let byteArrays = new Array(slicesCount);
-
-      for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
-        let begin = sliceIndex * sliceSize;
-        let end = Math.min(begin + sliceSize, bytesLength);
-
-        let bytes = new Array(end - begin);
-        for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
-          bytes[i] = byteCharacters[offset].charCodeAt(0);
-        }
-        byteArrays[sliceIndex] = new Uint8Array(bytes);
-      }
-      return byteArrays;
-    } catch (e) {
-      console.warn('\Couldn\'t convert to byte array: ' + e);
-      return undefined;
-    }
+  public base64ToFile(base64String) {
+    fetch(base64String)
+      .then(res => res.blob())
+      .then(blob => {
+        const file = new File([blob], 'profile.png', { type: 'image/png' });
+      });
   }
 
   /**
@@ -172,13 +155,18 @@ export class StudentAdmissionComponent implements OnInit {
    * @memberof ClassAddComponent
    */
   public onClassChange(event): void {
+    // console.log('event', event);
     if (event) {
-      this._ss.getSections(event.value).subscribe(section => {
-        if (section) {
-          this.sectionList = section;
-        }
-      })
+      this.getSetions(event.value)
     }
+  }
+
+  getSetions(classID) {
+    this._ss.getSections(classID).subscribe(section => {
+      if (section) {
+        this.sectionList = section;
+      }
+    });
   }
 
   /**
@@ -205,8 +193,17 @@ export class StudentAdmissionComponent implements OnInit {
    */
   public setDataToForm(): void {
     if (this.studentDetails) {
-      // this.studentDetails[0].Class = this.studentDetails[0].Class;
+      this.studentDetails[0].profile = this.studentDetails[0].image;
+      this.imageSrc = 'data:image/png;base64,' + this.studentDetails[0].image;
+      delete this.studentDetails[0].image;
+      delete this.studentDetails[0].profile;
+      this.admissionForm.get('profile').clearValidators();
+      this.admissionForm.get('profile').updateValueAndValidity();
+      this.admissionForm.get('image').clearValidators();
+      this.admissionForm.get('image').updateValueAndValidity();
+      console.log('this.studentDetails[0]', this.studentDetails[0]);
       this.admissionForm.patchValue(this.studentDetails[0]);
+      this.getSetions(this.studentDetails[0].section);
     }
   }
 
@@ -228,6 +225,12 @@ export class StudentAdmissionComponent implements OnInit {
       this.admissionForm.value.dateofadmission = this._date.transform(this.admissionForm.value.dateofadmission, 'MM/dd/yyyy');
     }
 
+    if (this.studentDetails) {
+      this.admissionForm.value.profile = this.imageSrc.substring(22);
+      this.admissionForm.value.image = this.imageSrc.substring(22);
+    }
+
+console.log('this.admissionForm.value', this.admissionForm.value);
     // console.log('this.admissionForm.value.dateofadmission', this.admissionForm.value.dateofadmission);
     // stop here if form is invalid
     if (this.admissionForm.invalid) {
@@ -240,7 +243,6 @@ export class StudentAdmissionComponent implements OnInit {
     this.loading = true;
     if (this.studentDetails && this.studentDetails[0].id) {
       payload['id'] = this.studentDetails[0].id;
-      console.log('studentDetails.id', this.studentDetails.id);
       this._ss.updateStudent(this.studentDetails[0].id, payload).subscribe(data => {
         this.formSubmit.emit(true);
         this.showNotification('Updated Successfully!!');

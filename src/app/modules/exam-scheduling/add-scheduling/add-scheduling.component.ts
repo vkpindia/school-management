@@ -144,7 +144,7 @@ export class AddSchedulingComponent implements OnInit {
     this.loading = true;
     this._ens.scheduleExam(payload).subscribe(data => {
       this.showNotification('Submitted Successfully!!');
-      this.formSubmit.emit(true);
+      this.formSubmit.emit({isScheduled: true});
       this.notificationForm.reset();
       this.showForm = false;
       setTimeout(() => {

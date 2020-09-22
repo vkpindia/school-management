@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExamSchedulingComponent implements OnInit {
 
-  public isFormSubmit: boolean;
+  public isFormSubmit: any;
   constructor() { }
 
   ngOnInit(): void {
@@ -23,6 +23,7 @@ export class ExamSchedulingComponent implements OnInit {
   public onFormSubmit(event): void {
     if (event) {
       this.isFormSubmit = event;
+      console.log('isFormSubmit', this.isFormSubmit);
     }
   }
 

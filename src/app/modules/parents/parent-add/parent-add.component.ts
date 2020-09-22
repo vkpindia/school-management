@@ -3,7 +3,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ParentsService } from '../../../_services/parents.service';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
+import { FeesService } from '../../../_services/fees.service';
 
 @Component({
   selector: 'app-parent-add',
@@ -20,6 +23,15 @@ export class ParentAddComponent implements OnInit {
 
   // VAriable declaration
   public parentForm: FormGroup;
+  public studentRecordList: any = [];
+  public studentFilteredList: Observable<any[]>;
+  public classList: any = [];
+  public sectionList: any = [];
+  public studentList: any = [];
+  public classID: FormControl = new FormControl();
+  public sectionID: FormControl = new FormControl();
+  public studentID: number;
+  public studentName: FormControl = new FormControl();
   public loading: boolean = false;
   public submitted: boolean = false;
   public returnUrl: string;
@@ -39,48 +51,49 @@ export class ParentAddComponent implements OnInit {
     private _ar: ActivatedRoute,
     private _router: Router,
     private _snackBar: MatSnackBar,
-    private _ss: ParentsService
+    private _ss: ParentsService,
+    private _fs: FeesService
   ) {
     this._ar.queryParamMap.subscribe(params => {
       console.log('params student ID', params);
       this.paramID = params['params'].id;
     });
-   }
+  }
 
   ngOnInit(): void {
 
     this.parentForm = new FormGroup({
 
-      //Requird Fields
+      // Requird Fields
       // father details
-      father_guardian_firstname  : new FormControl(null, Validators.required),
-      familyname : new FormControl(null, Validators.required),
-      father_guardian_adharnumber : new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{10}')]),
-      father_guardian_qualification : new FormControl(null, Validators.required),
-      father_guardian_occupation : new FormControl(null, Validators.required),
-      father_guardian_mobilenumber : new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{10}')]),
-      email : new FormControl(null, [Validators.required, Validators.pattern(this._emailPattern)]),
+      father_guardian_firstname: new FormControl(null, Validators.required),
+      familyname: new FormControl(null, Validators.required),
+      father_guardian_adharnumber: new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{12}')]),
+      father_guardian_qualification: new FormControl(null, Validators.required),
+      father_guardian_occupation: new FormControl(null, Validators.required),
+      father_guardian_mobilenumber: new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{10}')]),
+      email: new FormControl(null, [Validators.required, Validators.pattern(this._emailPattern)]),
 
       // Mother fields
-      mother_firstname : new FormControl(null, Validators.required),
-      mother_aadharnumber : new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{12}')]),
-      mother_qualification : new FormControl(null, Validators.required),
-      mother_occupation : new FormControl(null, Validators.required),
-      mother_phonenumber : new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{10}')]),
+      mother_firstname: new FormControl(null, Validators.required),
+      mother_aadharnumber: new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{12}')]),
+      mother_qualification: new FormControl(null, Validators.required),
+      mother_occupation: new FormControl(null, Validators.required),
+      mother_phonenumber: new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{10}')]),
 
-      //Optional Fields
-      bank_accountnumber : new FormControl(null),
-      bank_ifsccode : new FormControl(null),
-      bank_addressbranch : new FormControl(null),
-      bank_accountname : new FormControl(null),
-      rationcardnumber : new FormControl(null),
-      annualIncome : new FormControl(null),
-      mothertoung : new FormControl(null),
-      nationality  : new FormControl(null),
-      bloodgroup : new FormControl(null),
-      whatsappnumber : new FormControl(null,  Validators.pattern('[0-9 ]{10}'))
+      // Optional Fields
+      bank_accountnumber: new FormControl(null),
+      bank_ifsccode: new FormControl(null),
+      bank_addressbranch: new FormControl(null),
+      bank_accountname: new FormControl(null),
+      rationcardnumber: new FormControl(null),
+      annualIncome: new FormControl(null),
+      mothertoung: new FormControl(null),
+      nationality: new FormControl(null),
+      bloodgroup: new FormControl(null),
+      whatsappnumber: new FormControl(null, Validators.pattern('[0-9 ]{10}'))
     });
-    console.log('Parent details', this.parentDetails);
+
     if (this.parentDetails && this.parentDetails.id) {
       this.cardTitle = 'Update Parent Record';
       this.buttonLabel = 'Update';
@@ -88,6 +101,7 @@ export class ParentAddComponent implements OnInit {
     }
 
     // method to set data in form
+    this.getClassSection();
     this.setDataToForm();
   }
 
@@ -110,6 +124,113 @@ export class ParentAddComponent implements OnInit {
       this.parentForm.patchValue(this.parentDetails);
     }
   }
+
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-07-21
+   * @memberof AddfeeComponent
+   */
+  public getStudentsRecord(): void {
+    this._fs.getStudentRecord(this.classID.value, this.sectionID.value).subscribe(data => {
+      if (data) {
+        this.studentRecordList = data;
+        this.studentFilteredList = this.studentName.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value))
+        );
+        // console.log('this.studentRecordList first', this.studentRecordList);
+      }
+    });
+  }
+
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-07-21
+   * @memberof AddfeeComponent
+   */
+  public getClassSection() {
+    // this.showForm = false;
+    this._fs.getClassSection().subscribe(data => {
+      if (data) {
+        this.classList = data;
+      }
+    });
+  }
+
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-07-19
+   * @param {*} event
+   * @memberof ClassAddComponent
+   */
+  public onClassChange(event): void {
+    if (event) {
+      this._fs.getSections(event.value).subscribe(section => {
+        if (section) {
+          this.sectionList = section;
+        }
+      })
+    }
+  }
+
+  /**
+   * @description getting student record on section change
+   * @author Virendra Pandey
+   * @date 2020-08-12
+   * @param {*} event
+   * @memberof AddFeesComponent
+   */
+  public onSectionChange(event): void {
+    if (event) {
+      this.getStudentsRecord();
+    }
+  }
+
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-07-26
+   * @memberof AddFeesComponent
+   */
+  public getSetStudent(): void {
+    // let id =  this.studentName.value;
+    this._fs.getStudentFee(this.studentID).subscribe(data => {
+      if (data) {
+        this.studentList = data;
+        console.log('this.studentList', this.studentList);
+        // this.ShowList = true;
+      }
+    });
+  }
+
+  onOptionSelection(event) {
+    this.studentID = event.option.value.id;
+  }
+
+  getOptionText(option) {
+    if (option) {
+      return option.name;
+    }
+  }
+
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-08-12
+   * @private
+   * @param {string} value
+   * @returns {string[]}
+   * @memberof AddFeesComponent
+   */
+  private _filter(value): any[] {
+    const filterValue = value;
+    return this.studentRecordList.filter(option => option.name.toLowerCase().includes(filterValue)
+    );
+  }
+
 
   /**
    * @description
@@ -150,8 +271,7 @@ export class ParentAddComponent implements OnInit {
           console.error(this.error);
         });
     } else {
-      payload['studentid'] = parseInt(this.paramID);
-      console.log('this.paramID', this.paramID);
+      payload['studentid'] = this.paramID ? parseInt(this.paramID, 10) : this.studentID;
       console.log('payload', payload);
       this._ss.postParent(payload).subscribe(data => {
         this.showNotification('Submitted Successfully!!');

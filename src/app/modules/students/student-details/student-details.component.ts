@@ -13,6 +13,7 @@ export class StudentDetailsComponent implements OnInit {
   public paramID: number;
   public showDetails: boolean = false;
   public isLoading: boolean = true;
+  public imageSrc:  string;
 
   constructor(private _route: Router, private _activatedRout: ActivatedRoute, private _ss: StudentsService) {
     this._activatedRout.queryParamMap.subscribe(params => {
@@ -38,8 +39,8 @@ export class StudentDetailsComponent implements OnInit {
   public getStudentDetails(): void {
     this._ss.getStudentDetails(this.paramID).subscribe(record => {
       if (record) {
-        console.log('Student Details', record);
         this.studentDetails = record[0];
+        this.imageSrc = 'data:image/png;base64,' + this.studentDetails.image;
         this.showDetails = true;
         this.isLoading = false;
       }

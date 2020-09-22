@@ -220,10 +220,21 @@ export class TeacherAddComponent implements OnInit {
       this.teacherForm.value.dob = this._date.transform(this.teacherForm.value.dob, 'MM/dd/yyyy');
       this.teacherForm.value.dateofjoin = this._date.transform(this.teacherForm.value.dateofjoin, 'MM/dd/yyyy');
 
-      this.teacherForm.value.qualification = this.teacherForm.value.qualification && this.teacherForm.value.qualification.length ? this.teacherForm.value.qualification.toString() : null;
-      this.teacherForm.value.subjects = this.teacherForm.value.subjects && this.teacherForm.value.subjects.length ? this.teacherForm.value.subjects.toString() : null;
-      this.teacherForm.value.assignedclass = this.teacherForm.value.assignedclass && this.teacherForm.value.assignedclass.length ? this.teacherForm.value.assignedclass.toString() : null;
-      this.teacherForm.value.assignedsubject = this.teacherForm.value.assignedsubject && this.teacherForm.value.assignedsubject.length ? this.teacherForm.value.assignedsubject.toString() : null;
+      this.teacherForm.value.qualification = this.teacherForm.value.qualification
+                                             && this.teacherForm.value.qualification.length ?
+                                             this.teacherForm.value.qualification.toString() : null;
+
+      this.teacherForm.value.subjects = this.teacherForm.value.subjects &&
+                                        this.teacherForm.value.subjects.length ?
+                                        this.teacherForm.value.subjects.toString() : null;
+
+      this.teacherForm.value.assignedclass = this.teacherForm.value.assignedclass &&
+                                             this.teacherForm.value.assignedclass.length ?
+                                             this.teacherForm.value.assignedclass.toString() : null;
+
+      this.teacherForm.value.assignedsubject = this.teacherForm.value.assignedsubject &&
+                                               this.teacherForm.value.assignedsubject.length ?
+                                               this.teacherForm.value.assignedsubject.toString() : null;
     }
 
     // console.log('this.teacherForm.value.dateofteacher', this.teacherForm.value.dateofteacher);

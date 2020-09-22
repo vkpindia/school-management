@@ -25,9 +25,9 @@
       <mat-card-content class="pt-4">
         <div class="row details-page">
           <div class="col-6 col-md-3">
-            <img *ngIf="studentDetails && studentDetails.sex=='female';" src="assets/images/student_female.jpg" alt="">
-            <img *ngIf="!studentDetails" src="assets/images/student_female.jpg" alt="">
-            <img *ngIf="studentDetails && studentDetails.sex=='male'" src="assets/images/male_avatar.jpg" alt="">
+            <img *ngIf="studentDetails && studentDetails.sex=='female';" [src]="imageSrc? imageSrc: 'assets/images/student_female.jpg'" alt="">
+            <img *ngIf="!studentDetails" [src]="imageSrc? imageSrc:'assets/images/student_female.jpg'" alt="">
+            <img *ngIf="studentDetails && studentDetails.sex=='male'" [src]="imageSrc? imageSrc:'assets/images/male_avatar.jpg'" alt="">
           </div>
           <div class="col-12 col-md-9">
             <h3 class="profile-heading"><span *ngIf="studentDetails && studentDetails.firstname; else name">{{studentDetails.firstname | titlecase}} {{studentDetails.lastname | titlecase}}</span>
