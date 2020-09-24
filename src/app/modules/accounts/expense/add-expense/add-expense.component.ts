@@ -12,6 +12,7 @@ import { ExpenseService } from '../../../../_services/expense.service';
   styleUrls: ['./add-expense.component.scss'],
   providers: [DatePipe]
 })
+
 export class AddExpenseComponent implements OnInit {
 
   // Component properties variable declaration
@@ -50,8 +51,8 @@ export class AddExpenseComponent implements OnInit {
 
       //Requird Fields
       expensetype: new FormControl(null, Validators.required),
-      totalAmmount: new FormControl(null, Validators.required),
-      amount: new FormControl(null, Validators.required),
+      totalamount: new FormControl(null, Validators.required),
+      paidamount: new FormControl(null, Validators.required),
       pendingamount: new FormControl(null),
       date: new FormControl(new Date(), Validators.required),
       status: new FormControl(null, Validators.required),
@@ -78,7 +79,7 @@ export class AddExpenseComponent implements OnInit {
 
   onAmountChange() {
     this.expenseForm.patchValue({
-      pendingamount: this.expenseForm.value.totalAmmount - this.expenseForm.value.amount
+      pendingamount: this.expenseForm.value.totalamount - this.expenseForm.value.paidamount
     });
   }
 
@@ -112,14 +113,7 @@ export class AddExpenseComponent implements OnInit {
   public setDataToForm(): void {
     if (this.expenseDetails) {
       // this.selectedType = this.expenseDetails.expensetype;
-      this.expenseForm.setValue({
-        expensetype: this.expenseDetails.expensetype,
-        amount: this.expenseDetails.amount,
-        pendingamount: this.expenseDetails.pendingamount,
-        date: this.expenseDetails.date,
-        status: this.expenseDetails.status,
-        description: this.expenseDetails.description
-      });
+      this.expenseForm.patchValue(this.expenseDetails);
     }
     this.showForm = true;
   }

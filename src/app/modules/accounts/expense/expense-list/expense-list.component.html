@@ -51,15 +51,22 @@
           </ng-container>
 
           <!-- Symbol Column -->
-          <ng-container matColumnDef="amount">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+          <ng-container matColumnDef="totalamount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Amount</th>
             <td mat-cell *matCellDef="let element"> <span
-                *ngIf="element.amount;else dash">{{element.amount | currency:'INR'}}</span></td>
+                *ngIf="element.totalamount;else dash">{{element.totalamount | currency:'INR'}}</span></td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="paidamount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Paid Amount</th>
+            <td mat-cell *matCellDef="let element"> <span
+                *ngIf="element.paidamount;else dash">{{element.paidamount | currency:'INR'}}</span></td>
           </ng-container>
 
           <!-- Symbol Column -->
           <ng-container matColumnDef="pendingamount">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Pending Amount</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Remaining Amount</th>
             <td mat-cell *matCellDef="let element"><span
                 *ngIf="element.pendingamount ;else dash">{{element.pendingamount | currency:'INR'}}</span>
             </td>

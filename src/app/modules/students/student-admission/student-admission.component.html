@@ -136,20 +136,22 @@
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
-                <mat-label>Fees</mat-label>
-                <input type="number" matInput placeholder="Enter Fees" formControlName="fee">
-                <mat-error *ngIf="submitted && f.fee.hasError('required')">
-                  Fee is <strong>required</strong>
+                <mat-label>Caste</mat-label>
+                <mat-select placeholder="Select Caste" formControlName="cast">
+                  <mat-option *ngFor = "let sub of casteList" [value]="sub.value">{{sub.label}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="submitted && f.cast.hasError('required')">
+                  Caste is <strong>required</strong>
                 </mat-error>
               </mat-form-field>
             </div>
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
-                <mat-label>Caste</mat-label>
-                <input matInput placeholder="Enter Caste" formControlName="cast">
-                <mat-error *ngIf="submitted && f.cast.hasError('required')">
-                  Caste is <strong>required</strong>
+                <mat-label>Sub-caste</mat-label>
+                <input matInput placeholder="Enter Sub-caste" formControlName="subcaste">
+                <mat-error *ngIf="submitted && f.subcaste.hasError('required')">
+                  Sub-caste is <strong>required</strong>
                 </mat-error>
               </mat-form-field>
             </div>

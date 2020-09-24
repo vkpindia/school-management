@@ -43,14 +43,15 @@ export class AuthenticationService {
    * @returns {Observable<any>}
    * @memberof AuthenticationService
    */
-  public login(formData:any): Observable<any> {
-    return this.http.post<any>(this._apiUrl+'login/UserLogin', formData)
+  public login(formData: any): Observable<any> {
+    return this.http.post<any>(this._apiUrl + 'login/UserLogin', formData)
       .pipe(map(user => {
         // login successful if there's a jwt token in the response
         // console.log('user', user);
         if (user && user.Message && !user.firsttime) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
+          sessionStorage.setItem('dbName', user.userid);
           this.currentUserSubject.next(user);
         } else if (user && user.Message && user.firsttime) {
           this.firstTimeUserLogin.next(user);
@@ -68,8 +69,8 @@ export class AuthenticationService {
    * @returns {Observable<any>}
    * @memberof AuthenticationService
    */
-  public resetPassword(formData:any): Observable<any> {
-    return this.http.put<any>(this._apiUrl+'adminController/UpdatePassword', formData)
+  public resetPassword(formData: any): Observable<any> {
+    return this.http.put<any>(this._apiUrl + 'adminController/UpdatePassword', formData)
       .pipe(map(user => user));
   }
 

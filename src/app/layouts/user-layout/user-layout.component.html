@@ -3,7 +3,7 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)">
     <mat-toolbar color="primary">
-      <a href="javascript:void(0)" routerLink="/"><img src="assets/images/logo.png" alt=""></a>
+      <a href="javascript:void(0)" routerLink="/"><img src="assets/images/Adyayana.png" alt=""></a>
     </mat-toolbar>
     <mat-nav-list>
       <ng-container *ngFor="let item of navItems">
@@ -103,7 +103,7 @@
           <li>
             <div ngbDropdown class="d-inline-block profile-dropdown">
               <a  class="prfl_img" id="dropdownBasic1" ngbDropdownToggle>
-                <p class="m-0"><span class="username">{{userData['username']?userData['username']:'Ashok Kumar' }}</span> <span class="userrole">Admin</span></p>
+                <p class="m-0"><span class="username">{{userData['username']?userData['username']:'Ashok Kumar' | titlecase }}</span> <span class="userrole">Admin</span></p>
                 <img src="assets/images/profile.jpg" alt="">
               </a>
               <!-- <div aria-labelledby="dropdownBasic1">
@@ -113,7 +113,7 @@
               </div> -->
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <div class="item-header">
-                    <h6 class="item-title">Ashok Kumar</h6>
+                    <h6 class="item-title">{{userData['username']?userData['username']:'Ashok Kumar' | titlecase}}</h6>
                 </div>
                 <div class="item-content">
                     <ul class="settings-list">

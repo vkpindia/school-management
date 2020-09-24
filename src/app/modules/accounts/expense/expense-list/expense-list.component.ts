@@ -15,7 +15,7 @@ export class ExpenseListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) TSort: MatSort;
 
-  public displayedColumns: string[] = ['expensetype', 'amount', 'pendingamount', 'status', 'description', 'actions'];
+  public displayedColumns: string[] = ['expensetype', 'totalamount', 'paidamount', 'pendingamount', 'status', 'description', 'actions'];
   public filterData: string = '';
   public recordLength: number;
   public isLoading: boolean = true;

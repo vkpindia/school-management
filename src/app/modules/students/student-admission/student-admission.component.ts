@@ -36,6 +36,18 @@ export class StudentAdmissionComponent implements OnInit {
   public classList: any = [];
   public sectionList: any = [];
   public routeList: any = [];
+  public casteList: any = [
+    { label: 'General', value: 'General' },
+    { label: 'OC', value: 'OC' },
+    { label: 'BC-A', value: 'BC-A' },
+    { label: 'BC-B', value: 'BC-B' },
+    { label: 'BC-C', value: 'BC-C' },
+    { label: 'BC-D', value: 'BC-D' },
+    { label: 'BC-E', value: 'BC-E' },
+    { label: 'SC', value: 'SC' },
+    { label: 'ST', value: 'ST' }
+  ];
+
 
   constructor(
     private _ar: ActivatedRoute,
@@ -60,8 +72,8 @@ export class StudentAdmissionComponent implements OnInit {
       Class: new FormControl(null, Validators.required),
       rollnumber: new FormControl(null, Validators.required),
       section: new FormControl(null, Validators.required),
-      fee: new FormControl(null, Validators.required),
       cast: new FormControl(null, Validators.required),
+      subcaste: new FormControl(null, Validators.required),
       religion: new FormControl(null, Validators.required),
       Mothertoung: new FormControl(null, Validators.required),
       nationality: new FormControl(null, Validators.required),
@@ -230,7 +242,7 @@ export class StudentAdmissionComponent implements OnInit {
       this.admissionForm.value.image = this.imageSrc.substring(22);
     }
 
-console.log('this.admissionForm.value', this.admissionForm.value);
+    console.log('this.admissionForm.value', this.admissionForm.value);
     // console.log('this.admissionForm.value.dateofadmission', this.admissionForm.value.dateofadmission);
     // stop here if form is invalid
     if (this.admissionForm.invalid) {
