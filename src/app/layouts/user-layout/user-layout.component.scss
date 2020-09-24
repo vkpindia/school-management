@@ -232,3 +232,21 @@
     }
   }
 }
+
+
+footer{
+  .footer-block {
+    padding: 5px 20px;
+    background-color: #05346a;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+a{
+  color: #2397d6;
+}
+    @media(max-width: 576px) {
+      align-items: center;
+      flex-direction: column;
+    }
+  }
+}

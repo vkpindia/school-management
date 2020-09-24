@@ -217,6 +217,7 @@ app-registration,app-change-password {
 
 .main-content {
   // margin-top: 70px;
+  height: calc(100vh - 100px);
   padding: 20px;
   .list-container {
     // overflow: hidden;
@@ -284,6 +285,7 @@ app-registration,app-change-password {
         td.mat-cell {
           font-size: 15px;
           font-weight: 400;
+          padding-right: 15px;
           .dropdown {
             .dropdown-menu {
               border: none;
