@@ -61,7 +61,7 @@ export class TeacherAddComponent implements OnInit {
       lastname: new FormControl(null, Validators.required),
       dob: new FormControl(null, Validators.required),
       sex: new FormControl(null, Validators.required),
-      cast: new FormControl(null, Validators.required),
+      caste: new FormControl(null, Validators.required),
       religion: new FormControl(null, Validators.required),
       previousexp: new FormControl(null),
       previouswrkaddress: new FormControl(null),
