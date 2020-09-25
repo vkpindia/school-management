@@ -233,20 +233,29 @@
   }
 }
 
-
-footer{
+footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding-left: 0;
+  transition: padding-left 0.3s;
   .footer-block {
     padding: 5px 20px;
     background-color: #05346a;
     display: flex;
     justify-content: space-between;
     color: #fff;
-a{
-  color: #2397d6;
-}
-    @media(max-width: 576px) {
+    a {
+      color: #2397d6;
+    }
+
+    @media (max-width: 576px) {
       align-items: center;
       flex-direction: column;
     }
+  }
+  @media (max-width: 960px) {
+    padding-left: 0 !important;
   }
 }

@@ -91,7 +91,7 @@
                         </div>
                     </div>
                 </div> -->
-            <!-- </div> -->
+              <!-- </div> -->
             </div>
           </li>
           <li>
@@ -102,8 +102,10 @@
           </li>
           <li>
             <div ngbDropdown class="d-inline-block profile-dropdown">
-              <a  class="prfl_img" id="dropdownBasic1" ngbDropdownToggle>
-                <p class="m-0"><span class="username">{{userData['username']?userData['username']:'Ashok Kumar' | titlecase }}</span> <span class="userrole">Admin</span></p>
+              <a class="prfl_img" id="dropdownBasic1" ngbDropdownToggle>
+                <p class="m-0"><span
+                    class="username">{{userData['username']?userData['username']:'Ashok Kumar' | titlecase }}</span>
+                  <span class="userrole">Admin</span></p>
                 <img src="assets/images/profile.jpg" alt="">
               </a>
               <!-- <div aria-labelledby="dropdownBasic1">
@@ -113,18 +115,21 @@
               </div> -->
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <div class="item-header">
-                    <h6 class="item-title">{{userData['username']?userData['username']:'Ashok Kumar' | titlecase}}</h6>
+                  <h6 class="item-title">{{userData['username']?userData['username']:'Ashok Kumar' | titlecase}}</h6>
                 </div>
                 <div class="item-content">
-                    <ul class="settings-list">
-                        <li ngbDropdownItem><a href="javascript:void(0)"><i class="flaticon-user"></i>My Profile</a></li>
-                        <li ngbDropdownItem><a href="javascript:void(0)"><i class="flaticon-list"></i>Task</a></li>
-                        <li ngbDropdownItem><a href="javascript:void(0)"><i class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i>Message</a></li>
-                        <li ngbDropdownItem><a href="javascript:void(0)"><i class="flaticon-gear-loading"></i>Account Settings</a></li>
-                        <li ngbDropdownItem><a href="javascript:void(0)" (click)="signOut()"><i class="flaticon-turn-off"></i>Log Out</a></li>
-                    </ul>
+                  <ul class="settings-list">
+                    <li ngbDropdownItem><a href="javascript:void(0)"><i class="flaticon-user"></i>My Profile</a></li>
+                    <li ngbDropdownItem><a href="javascript:void(0)"><i class="flaticon-list"></i>Task</a></li>
+                    <li ngbDropdownItem><a href="javascript:void(0)"><i
+                          class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i>Message</a></li>
+                    <li ngbDropdownItem><a href="javascript:void(0)"><i class="flaticon-gear-loading"></i>Account
+                        Settings</a></li>
+                    <li ngbDropdownItem><a href="javascript:void(0)" (click)="signOut()"><i
+                          class="flaticon-turn-off"></i>Log Out</a></li>
+                  </ul>
                 </div>
-            </div>
+              </div>
             </div>
           </li>
         </ul>

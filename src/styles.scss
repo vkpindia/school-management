@@ -217,7 +217,7 @@ app-registration,app-change-password {
 
 .main-content {
   // margin-top: 70px;
-  height: calc(100vh - 100px);
+  // height: calc(100vh - 100px);
   padding: 20px;
   .list-container {
     // overflow: hidden;
@@ -896,4 +896,11 @@ a {
 
 .form-container input{
   text-transform: capitalize !important;
+}
+
+.open-menu {
+  footer {
+    padding-left: 250px !important;
+    // width: calc(100% - 250px);
+  }
 }

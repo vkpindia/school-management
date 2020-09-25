@@ -34,6 +34,7 @@ export class UserLayoutComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.userData = JSON.parse(localStorage.getItem('currentUser'));
+    document.body.classList.add("open-menu");
   }
 
   ngAfterViewInit() {
