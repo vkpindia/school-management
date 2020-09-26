@@ -92,7 +92,7 @@
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Absent Days</mat-label>
-                <input matInput placeholder="Enter absent days" formControlName="absentdays">
+                <input matInput placeholder="Enter absent days" formControlName="absentdays" (blur)="calculateSalary()">
                 <mat-error *ngIf="submitted && f.absentdays.hasError('required')">
                   Absent days is <strong>required</strong>
                 </mat-error>
@@ -126,7 +126,7 @@
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Pay Amount</mat-label>
-                <input type="number" matInput placeholder="Enter amount" formControlName="payamount">
+                <input type="number" matInput placeholder="Enter amount" formControlName="payamount" (blur)="calculatePending()">
               </mat-form-field>
             </div>
 

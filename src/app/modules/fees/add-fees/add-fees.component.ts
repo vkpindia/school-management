@@ -114,12 +114,19 @@ export class AddFeesComponent implements OnInit {
    */
   get f() { return this.feesForm.controls; }
 
+
+  public feeAfterDiscount() {
+    this.feesForm.patchValue({
+      feeafterdiscount: this.f.discount.value > 0 ? this.f.feeamount.value - this.f.discount.value : this.f.feeamount.value
+      });
+  }
+
   /**
- * @description
- * @author Virendra Pandey
- * @date 2020-07-21
- * @memberof AddfeeComponent
- */
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-07-21
+   * @memberof AddfeeComponent
+   */
   public getfeetypes() {
     this._fs.getFeeType().subscribe(data => {
       if (data) {

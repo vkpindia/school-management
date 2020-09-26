@@ -44,6 +44,27 @@ export class TeacherAddComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   // qualifications: any[] = [];
 
+  public casteList: any = [
+    { label: 'General', value: 'General' },
+    { label: 'OC', value: 'OC' },
+    { label: 'BC-A', value: 'BC-A' },
+    { label: 'BC-B', value: 'BC-B' },
+    { label: 'BC-C', value: 'BC-C' },
+    { label: 'BC-D', value: 'BC-D' },
+    { label: 'BC-E', value: 'BC-E' },
+    { label: 'SC', value: 'SC' },
+    { label: 'ST', value: 'ST' }
+  ];
+  public bloodGroupList: any = [
+    { label: 'A+', value: 'A+' },
+    { label: 'A-', value: 'A+' },
+    { label: 'B+', value: 'B-' },
+    { label: 'B-', value: 'B-' },
+    { label: 'O+', value: 'O+' },
+    { label: 'O-', value: 'O-' },
+    { label: 'AB+', value: 'AB+' },
+    { label: 'AB-', value: 'AB-' },
+  ];
   constructor(
     private _ar: ActivatedRoute,
     private _router: Router,
@@ -62,7 +83,7 @@ export class TeacherAddComponent implements OnInit {
       dob: new FormControl(null, Validators.required),
       sex: new FormControl(null, Validators.required),
       caste: new FormControl(null, Validators.required),
-      religion: new FormControl(null, Validators.required),
+      religion: new FormControl('Hindu', Validators.required),
       previousexp: new FormControl(null),
       previouswrkaddress: new FormControl(null),
       positionapplied: new FormControl(null),
@@ -221,20 +242,20 @@ export class TeacherAddComponent implements OnInit {
       this.teacherForm.value.dateofjoin = this._date.transform(this.teacherForm.value.dateofjoin, 'MM/dd/yyyy');
 
       this.teacherForm.value.qualification = this.teacherForm.value.qualification
-                                             && this.teacherForm.value.qualification.length ?
-                                             this.teacherForm.value.qualification.toString() : null;
+        && this.teacherForm.value.qualification.length ?
+        this.teacherForm.value.qualification.toString() : null;
 
       this.teacherForm.value.subjects = this.teacherForm.value.subjects &&
-                                        this.teacherForm.value.subjects.length ?
-                                        this.teacherForm.value.subjects.toString() : null;
+        this.teacherForm.value.subjects.length ?
+        this.teacherForm.value.subjects.toString() : null;
 
       this.teacherForm.value.assignedclass = this.teacherForm.value.assignedclass &&
-                                             this.teacherForm.value.assignedclass.length ?
-                                             this.teacherForm.value.assignedclass.toString() : null;
+        this.teacherForm.value.assignedclass.length ?
+        this.teacherForm.value.assignedclass.toString() : null;
 
       this.teacherForm.value.assignedsubject = this.teacherForm.value.assignedsubject &&
-                                               this.teacherForm.value.assignedsubject.length ?
-                                               this.teacherForm.value.assignedsubject.toString() : null;
+        this.teacherForm.value.assignedsubject.length ?
+        this.teacherForm.value.assignedsubject.toString() : null;
     }
 
     // console.log('this.teacherForm.value.dateofteacher', this.teacherForm.value.dateofteacher);

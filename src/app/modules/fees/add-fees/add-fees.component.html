@@ -9,7 +9,7 @@
         <mat-form-field appearance="outline" class="p-0">
           <mat-label>Class</mat-label>
           <mat-select placeholder="Select Class" [formControl]="classID" (selectionChange)="onClassChange($event)">
-            <mat-option *ngFor = "let class of classList" [value]="class.id">{{class.classname}}</mat-option>
+            <mat-option *ngFor="let class of classList" [value]="class.id">{{class.classname}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -17,8 +17,9 @@
       <div class="col-12 col-sm-6 col-md-3">
         <mat-form-field appearance="outline" class="p-0">
           <mat-label>Section</mat-label>
-          <mat-select placeholder="Select Section" [formControl]="sectionID" (selectionChange)="onSectionChange($event)">
-            <mat-option *ngFor = "let section of sectionList" [value]="section.id">{{section.sectionname}}</mat-option>
+          <mat-select placeholder="Select Section" [formControl]="sectionID"
+            (selectionChange)="onSectionChange($event)">
+            <mat-option *ngFor="let section of sectionList" [value]="section.id">{{section.sectionname}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -26,8 +27,9 @@
         <mat-form-field appearance="outline" class="p-0">
           <mat-label>Search</mat-label>
           <input matInput placeholder="Select student" aria-label="Number" [formControl]="studentName"
-          [matAutocomplete]="auto">
-          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="getOptionText" (optionSelected)="onOptionSelection($event)">
+            [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="getOptionText"
+            (optionSelected)="onOptionSelection($event)">
             <mat-option *ngFor="let option of studentFilteredList | async" [value]="option">
               {{option.name}}
             </mat-option>
@@ -138,7 +140,8 @@
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Discount</mat-label>
-                <input type="number" matInput placeholder="Enter discount" formControlName="discount">
+                <input type="number" (blur)="feeAfterDiscount()" matInput placeholder="Enter discount"
+                  formControlName="discount">
               </mat-form-field>
             </div>
 
@@ -201,7 +204,8 @@
     <!-- <mat-card>
       <mat-card-content class="pt-2"> -->
     <ng-container>
-      <app-fees [studentList]="studentList" [studentID]="studentID" (onEditFee)="onEditRecord($event)" (onDeleteFee)="onDeleteRecord($event)" [showList]="ShowList"></app-fees>
+      <app-fees [studentList]="studentList" [studentID]="studentID" (onEditFee)="onEditRecord($event)"
+        (onDeleteFee)="onDeleteRecord($event)" [showList]="ShowList"></app-fees>
     </ng-container>
     <!-- </mat-card-content>
     </mat-card> -->

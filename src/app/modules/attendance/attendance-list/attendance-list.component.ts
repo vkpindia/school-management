@@ -51,9 +51,9 @@ export class AttendanceListComponent implements OnInit {
         let temp = {};
         let studentNames: any;
 
-        if (data && data[0].absent_student_names1) {
+        if (data && data.length && data[0].absent_student_names1) {
           studentNames = data[0].absent_student_names1.split(',');
-        } else if (data && data[0].absent_student_names2) {
+        } else if (data && data.length && data[0].absent_student_names2) {
           studentNames = data[0].absent_student_names2.split(',');
         }
 

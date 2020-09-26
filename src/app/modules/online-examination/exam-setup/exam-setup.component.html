@@ -58,7 +58,7 @@
                     <input matInput [matDatepicker]="picker2" placeholder="Select Date" formControlName="examdate">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
-                    <mat-error *ngIf="submitted && f.examdate.hasError('required')">
+                    <mat-error *ngIf="submitted && ef.examdate.hasError('required')">
                       Exam date is <strong>required</strong>
                     </mat-error>
                   </mat-form-field>

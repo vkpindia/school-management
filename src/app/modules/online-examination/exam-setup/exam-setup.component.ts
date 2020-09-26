@@ -28,7 +28,7 @@ export class ExamSetupComponent implements OnInit {
   public buttonLabel: string = 'Submit';
   private _phonePattern = '^[0-9-+s()]*$';
   private _emailPattern = '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}';
-  public selectedIndex: number;
+  public selectedIndex: number = 0;
   public controlIndex: any;
   public chipsAlert: string;
   public classList: any = [];
@@ -55,9 +55,9 @@ export class ExamSetupComponent implements OnInit {
   ngOnInit(): void {
     this.createExamForm = new FormGroup({
       classid: new FormControl(null, Validators.required),
-      sectionid: new FormControl('', [Validators.required]),
+      sectionid: new FormControl('', Validators.required),
       examname: new FormControl(null, Validators.required),
-      examdate: new FormControl(null, Validators.required),
+      examdate: new FormControl('', Validators.required),
       subjectame: new FormControl(null, Validators.required),
       teachername: new FormControl(null, Validators.required),
       timeallotted: new FormControl(null, Validators.required),
@@ -203,6 +203,7 @@ export class ExamSetupComponent implements OnInit {
         this.showNotification('Submitted Successfully!!');
         this.createExamForm.reset();
         this.showForm = false;
+        this.submitted = false;
         setTimeout(() => {
           this.showForm = true;
         }, 100);
@@ -225,6 +226,7 @@ export class ExamSetupComponent implements OnInit {
         this.questionForm.reset();
         // this.f.subjects.setValue([]);
         this.showForm = false;
+        this.submitted = false;
         setTimeout(() => {
           this.showForm = true;
         }, 100);

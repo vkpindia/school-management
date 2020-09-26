@@ -42,7 +42,7 @@ export class AttendanceComponent implements OnInit {
   public studentNameRecord: any = [];
   public absentStudentsID: any = [];
 
-  public selection = new SelectionModel<any>(true, this.absentStudentList ? this.absentStudentList.data : this.studentList.data);
+  public selection = new SelectionModel<any>(true, this.studentList ? this.studentList.data : []);
   // public selection2 = new SelectionModel<any>(true, []);
 
   public loading: boolean = false;
@@ -156,7 +156,7 @@ export class AttendanceComponent implements OnInit {
     }
   }
 
-    /**
+  /**
    * @description Method to get All Attendance record
    * @author Virendra Pandey
    * @date 2020-06-24
@@ -169,9 +169,9 @@ export class AttendanceComponent implements OnInit {
         let temp = {};
         let studentIds: any;
 
-        if (data && data[0].absent_student_names1) {
+        if (data && data.length && data[0].absent_student_names1) {
           studentIds = data[0].absent_student_id1.split(',');
-        } else if (data && data[0].absent_student_names2) {
+        } else if (data && data.length && data[0].absent_student_names2) {
           studentIds = data[0].absent_student_id2.split(',');
         }
 
@@ -340,7 +340,8 @@ export class AttendanceComponent implements OnInit {
     const studentsName: Array<string> = [];
 
     Object.assign(payload, this.attendanceForm.value);
-
+    console.log('absentStudentsID', this.absentStudentsID);
+    console.log(' this.studentNameRecord', this.studentNameRecord);
     // Set absent student
     this.absentStudentsID.map(id => {
       this.studentNameRecord.map(record => {
@@ -349,7 +350,7 @@ export class AttendanceComponent implements OnInit {
         }
       });
     });
-
+    console.log('studentsName', studentsName);
     if (payload['attendace_part'] === 'shift_1') {
       payload['part1'] = true;
       payload['part2'] = false;

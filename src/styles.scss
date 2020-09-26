@@ -219,6 +219,10 @@ app-registration,app-change-password {
   // margin-top: 70px;
   // height: calc(100vh - 100px);
   padding: 20px;
+  padding-bottom: 50px !important;
+  @media(max-width: 576px){
+    padding-bottom: 70px !important;
+  }
   .list-container {
     // overflow: hidden;
     .mat-card {

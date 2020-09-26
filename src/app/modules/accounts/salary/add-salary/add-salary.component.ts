@@ -45,6 +45,7 @@ export class AddSalaryComponent implements OnInit {
   public horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   public verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   public teacherID: any;
+  public payAmount: number;
 
   //Chips variable declaration
   visible = true;
@@ -135,7 +136,42 @@ export class AddSalaryComponent implements OnInit {
       if (data) {
         this.salaryForm.patchValue(data[0]);
       }
-    })
+    });
+  }
+
+  public calculateSalary(): void {
+    let oneDaySalary = this.f.netsalary.value / 30;
+    let totalAbsent: number;
+    let salaryDeduction: number = 0;
+    if (Number(this.f.absentdays.value) > 0) {
+      totalAbsent = Number(this.f.absentdays.value) - 1;
+    }
+
+    if (totalAbsent > 0) {
+      salaryDeduction = oneDaySalary * totalAbsent;
+    }
+
+    console.log('oneDaySalary', oneDaySalary);
+    console.log('salaryDeduction', salaryDeduction);
+
+    this.payAmount = Number((this.f.netsalary.value - salaryDeduction).toFixed(2));
+    console.log('payAmount', this.payAmount);
+
+    this.salaryForm.patchValue({
+      payamount: this.payAmount
+    });
+
+  }
+
+  public calculatePending() {
+    let pendingAmount: number = 0;
+    if (this.f.payamount.value < this.payAmount) {
+      pendingAmount = this.payAmount - this.f.payamount.value;
+    }
+
+    this.salaryForm.patchValue({
+      pendingamount: pendingAmount.toFixed(2)
+    });
   }
 
   /**
@@ -170,15 +206,15 @@ export class AddSalaryComponent implements OnInit {
     })
   }
 
- /**
-  * @description
-  * @author Virendra Pandey
-  * @date 2020-08-12
-  * @private
-  * @param {string} value
-  * @returns {string[]}
-  * @memberof AddFeesComponent
-  */
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-08-12
+   * @private
+   * @param {string} value
+   * @returns {string[]}
+   * @memberof AddFeesComponent
+   */
   private _filter(value): any[] {
     const filterValue = value;
     return this.teacherRecordList.filter(option => option.name.toLowerCase().includes(filterValue)

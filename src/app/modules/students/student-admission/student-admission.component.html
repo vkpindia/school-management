@@ -190,7 +190,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-12 col-sm-6 col-md-4">
+            <!-- <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Blood Group</mat-label>
                 <input matInput placeholder="Enter Blood Group" formControlName="bloodgroup">
@@ -198,7 +198,21 @@
                   Blood group is <strong>required</strong>
                 </mat-error>
               </mat-form-field>
+            </div> -->
+
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Blood Group</mat-label>
+                <mat-select placeholder="Select Blood Group" formControlName="bloodgroup">
+                  <mat-option *ngFor = "let sub of bloodGroupList" [value]="sub.value">{{sub.label}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="submitted && f.bloodgroup.hasError('required')">
+                  Blood group is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
             </div>
+
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
