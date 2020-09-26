@@ -48,12 +48,12 @@ export class AuthenticationService {
       .pipe(map(user => {
         // login successful if there's a jwt token in the response
         // console.log('user', user);
-        if (user && user.Message && !user.firsttime) {
+        if (user && user.message && !user.firsttime) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
           sessionStorage.setItem('dbName', user.userid);
           this.currentUserSubject.next(user);
-        } else if (user && user.Message && user.firsttime) {
+        } else if (user && user.message && user.firsttime) {
           this.firstTimeUserLogin.next(user);
         }
         return user;
