@@ -84,7 +84,7 @@
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Term Name</mat-label>
                 <mat-select placeholder="Select Term Name" formControlName="termname">
-                  <mat-option *ngFor="let term of termList" [value]="term.id">{{term.termname}}</mat-option>
+                  <mat-option *ngFor="let term of termList" [value]="term.termname">{{term.termname}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="submitted && f.termname.hasError('required')">
                   Term name is <strong>required</strong>
@@ -198,12 +198,11 @@
     </mat-card>
   </div>
 </div>
-
 <div class="form-container">
   <div class="">
     <!-- <mat-card>
       <mat-card-content class="pt-2"> -->
-    <ng-container>
+    <ng-container *ngIf="ShowList">
       <app-fees [studentList]="studentList" [studentID]="studentID" (onEditFee)="onEditRecord($event)"
         (onDeleteFee)="onDeleteRecord($event)" [showList]="ShowList"></app-fees>
     </ng-container>

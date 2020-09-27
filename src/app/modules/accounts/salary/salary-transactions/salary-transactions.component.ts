@@ -22,15 +22,13 @@ export class SalaryTransactionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.displayedColumns = [{key: 'salarytype', title: "Salary Type"}, {key: 'paidamount', title: 'Paid Amount'}, {key: 'paiddate', title: 'Paid Date'}, {key: 'discription', title: 'Description'}];
     this.displayedColumns = ['salarytype', 'paidamount', 'paiddate', 'discription'];
-    this._ss.getAllTransaction(this.teacherID).subscribe(data=>{
-      if(data){
+    this._ss.getAllTransaction(this.teacherID).subscribe(data => {
+      if (data) {
         this.transactionList = data;
         this.showTransaction = true;
-        console.log('this.transactionList', this.transactionList);
       }
-    })
+    });
   }
 
 }

@@ -135,6 +135,7 @@ export class AddSalaryComponent implements OnInit {
     this._fs.getSalaryDetails(id).subscribe(data => {
       if (data) {
         this.salaryForm.patchValue(data[0]);
+        this.salaryRecord = data[0];
       }
     });
   }
@@ -267,9 +268,10 @@ export class AddSalaryComponent implements OnInit {
     Object.assign(payload, this.salaryForm.value);
 
     this.loading = true;
+    console.log('salaryRecord', this.salaryRecord);
+    payload['teacherid'] = this.salaryRecord.teacherid;
+    payload['id'] = this.salaryRecord.id;
     if (this.salaryRecord && this.salaryRecord.id) {
-      payload['id'] = this.salaryRecord.id;
-      payload['teacherid'] = this.salaryRecord.id;
       this._fs.updateSalary(this.salaryRecord.id, payload).subscribe(data => {
         this.showNotification('Updated Successfully!!');
         if (this.salaryForm) {
@@ -290,6 +292,7 @@ export class AddSalaryComponent implements OnInit {
           console.error(this.error);
         });
     } else {
+      console.log('payload', payload);
       this._fs.saveSalary(payload).subscribe(data => {
         this.showNotification('Submitted Successfully!!');
         if (this.salaryForm) {

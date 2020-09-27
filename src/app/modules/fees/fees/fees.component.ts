@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatSort } from '@angular/material/sort';
@@ -12,17 +12,17 @@ import { Router } from '@angular/router';
 })
 export class FeesComponent implements OnInit {
 
- @Input() studentList: any = [];
- @Input() studentID: any;
- @Input() showList: boolean;
+  @Input() studentList: any = [];
+  @Input() studentID: any;
+  @Input() showList: boolean;
 
- @Output() onEditFee: EventEmitter<any> = new EventEmitter<any>();
- @Output() onDeleteFee: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onEditFee: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onDeleteFee: EventEmitter<any> = new EventEmitter<any>();
 
- @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
- @ViewChild(MatSort, {static: true}) TSort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) TSort: MatSort;
 
-  public displayedColumns: string[] = ['name', 'feetype', 'feeamount', 'paidamount', 'termname', 'actions'];
+  public displayedColumns: string[] = ['select', 'name', 'feetype', 'feeamount', 'paidamount', 'termname', 'actions'];
   public filterData: string = '';
   public recordLength: number;
   public isLoading: boolean = true;
@@ -32,18 +32,25 @@ export class FeesComponent implements OnInit {
   public isCreate: boolean = false;
 
   // tslint:disable-next-line: variable-name
-  constructor(private _router: Router) { }
+  constructor(private _router: Router, private cd: ChangeDetectorRef) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+    this.cd.detectChanges();
+  }
 
   ngOnInit(): void {
     // method call
+
     this.getFeeList();
   }
 
- /*  ngAfterViewInit() {
-    this.TSort.sortChange.subscribe(() => {
-        this.paginator.pageIndex = 0;
-        this.paginator.pageSize = this.pageSize;
-    }); */
+  /*  ngAfterViewInit() {
+     this.TSort.sortChange.subscribe(() => {
+         this.paginator.pageIndex = 0;
+         this.paginator.pageSize = this.pageSize;
+     }); */
   /**
    * @description Method to get All parent record
    * @author Virendra Pandey
@@ -51,16 +58,17 @@ export class FeesComponent implements OnInit {
    * @memberof feeListComponent
    */
   public getFeeList() {
-      if (this.studentList && this.studentList.length) {
-        this.recordLength = this.studentList.length;
-        this.feeList = new MatTableDataSource(this.studentList);
-        this.feeList.sort = this.TSort;
-        this.feeList.paginator = this.paginator;
-        // this.showForm = true;
-      }
-      this.isLoading = false;
-      // Assign the data to the data source for the table to render
-      // this.feeList = new MatTableDataSource(data);
+    console.log('studentList', this.studentList);
+    if (this.studentList && this.studentList.length) {
+      this.recordLength = this.studentList.length;
+      this.feeList = new MatTableDataSource(this.studentList);
+      this.feeList.sort = this.TSort;
+      this.feeList.paginator = this.paginator;
+      // this.showForm = true;
+    }
+    this.isLoading = false;
+    // Assign the data to the data source for the table to render
+    // this.feeList = new MatTableDataSource(data);
   }
 
   /**
@@ -71,9 +79,11 @@ export class FeesComponent implements OnInit {
    * @memberof feeListComponent
    */
   isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.feeList.data.length;
-    return numSelected === numRows;
+    if (this.feeList) {
+      const numSelected = this.selection.selected.length;
+      const numRows = this.feeList.data.length;
+      return numSelected === numRows;
+    }
   }
 
   /**
@@ -129,8 +139,8 @@ export class FeesComponent implements OnInit {
    */
   public onEdit(row): void {
     console.log('row', row);
-    if(row){
-      this.onDeleteFee.emit(row);
+    if (row) {
+      this.onEditFee.emit(row);
     }
   }
 
@@ -142,7 +152,7 @@ export class FeesComponent implements OnInit {
    * @memberof feeListComponent
    */
   public onDelete(row): void {
-    if(row){
+    if (row) {
       this.onDeleteFee.emit(row.id);
     }
   }

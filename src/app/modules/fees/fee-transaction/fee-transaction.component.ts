@@ -22,7 +22,7 @@ export class FeeTransactionComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.displayedColumns = ['salarytype', 'paidamount', 'paiddate', 'discription'];
+    this.displayedColumns = ['feetype', 'paidamount', 'paiddate', 'discription'];
     this._ss.getAllTransaction(this.studentID).subscribe(data=>{
       if(data){
         this.transactionList = data;

@@ -271,12 +271,13 @@ export class ParentAddComponent implements OnInit {
           console.error(this.error);
         });
     } else {
-      payload['studentid'] = this.paramID ? parseInt(this.paramID, 10) : this.studentID;
+      let studentID = this.paramID ? parseInt(this.paramID, 10) : this.studentID;
+      payload['studentid'] = studentID;
       console.log('payload', payload);
       this._ss.postParent(payload).subscribe(data => {
         this.showNotification('Submitted Successfully!!');
         this.parentForm.reset();
-        this._router.navigate(['/fees'], { queryParams: { id: this.paramID } });
+        this._router.navigate(['/fees'], { queryParams: { id: studentID } });
       },
         error => {
           this.error = error;

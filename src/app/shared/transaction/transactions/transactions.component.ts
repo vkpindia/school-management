@@ -35,7 +35,7 @@ export class TransactionsComponent implements OnInit {
 
   ngOnInit(): void {
     // method call
-    console.log('displayedColumns', this.transactionsList);
+    console.log('displayedColumns', this.displayedColumns);
     this.getTransactionList();
   }
 

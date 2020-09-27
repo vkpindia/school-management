@@ -15,6 +15,7 @@ import { startWith, map } from 'rxjs/operators';
   styleUrls: ['./add-fees.component.scss'],
   providers: [MatSnackBar, DatePipe]
 })
+
 export class AddFeesComponent implements OnInit {
 
   // Component properties variable declaration
@@ -47,6 +48,8 @@ export class AddFeesComponent implements OnInit {
   private _emailPattern = '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}';
   public horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   public verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  public payAmount: number;
+
 
   //Chips variable declaration
   visible = true;
@@ -80,7 +83,6 @@ export class AddFeesComponent implements OnInit {
 
       //Requird Fields
       // id: new FormControl(null, Validators.required),
-      studentName: new FormControl(null, Validators.required),
       name: new FormControl(null, Validators.required),
       feetype: new FormControl(null, Validators.required),
       termname: new FormControl(null, Validators.required),
@@ -118,7 +120,7 @@ export class AddFeesComponent implements OnInit {
   public feeAfterDiscount() {
     this.feesForm.patchValue({
       feeafterdiscount: this.f.discount.value > 0 ? this.f.feeamount.value - this.f.discount.value : this.f.feeamount.value
-      });
+    });
   }
 
   /**
@@ -148,6 +150,7 @@ export class AddFeesComponent implements OnInit {
       }
     });
   }
+
   /**
    * @description
    * @author Virendra Pandey
@@ -216,7 +219,7 @@ export class AddFeesComponent implements OnInit {
       if (data) {
         this.onEditRecord(data[0]);
       }
-    })
+    });
   }
 
 
@@ -230,6 +233,7 @@ export class AddFeesComponent implements OnInit {
   public onEditRecord(event: any): void {
     if (event) {
       this.feesDetails = event;
+      event.feetype = Number(event.feetype);
       this.feesForm.patchValue(event);
     }
   }
@@ -266,6 +270,16 @@ export class AddFeesComponent implements OnInit {
     }
   }
 
+  public calculatePending() {
+    let pendingAmount: number = 0;
+    if (this.f.payamount.value < this.payAmount) {
+      pendingAmount = this.payAmount - this.f.payamount.value;
+    }
+
+    this.feesForm.patchValue({
+      pendingamount: pendingAmount.toFixed(2)
+    });
+  }
 
   /**
    * @description getting student record on section change
@@ -304,6 +318,7 @@ export class AddFeesComponent implements OnInit {
 
     // console.log('this.feesForm.value.dateoffees', this.feesForm.value.dateoffees);
     // stop here if form is invalid
+    console.log('this.feesForm.invalid', this.feesForm.invalid);
     if (this.feesForm.invalid) {
       return;
     }
@@ -314,6 +329,7 @@ export class AddFeesComponent implements OnInit {
     this.loading = true;
     if (this.feesDetails && this.feesDetails.id) {
       payload['id'] = this.feesDetails.id;
+      payload['studentid'] = this.feesDetails.studentid;
       this._fs.updateFees(payload).subscribe(data => {
         console.log('data', data);
         this.showNotification('Submitted Successfully!!');
@@ -332,6 +348,7 @@ export class AddFeesComponent implements OnInit {
           console.error(this.error);
         });
     } else {
+      payload['studentid'] = this.paramID ? Number(this.paramID) : Number(this.studentID);
       this._fs.saveFees(payload).subscribe(data => {
         this.showNotification('Updated Successfully!!');
         if (this.feesForm) {
@@ -401,6 +418,7 @@ export class AddFeesComponent implements OnInit {
     if (isDelete) {
       this._fs.deleteFees(event).subscribe(data => {
         if (data) {
+          this.ShowList = false;
           this.getSetStudent();
         }
       });
