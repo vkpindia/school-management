@@ -6,7 +6,7 @@
     <mat-card>
       <mat-card-title>{{cardTitle}}</mat-card-title>
       <mat-card-content class="pt-2">
-        <mat-tab-group [selectedIndex] = "selectedIndex">
+        <mat-tab-group [selectedIndex]="selectedIndex">
           <mat-tab>
             <ng-template mat-tab-label>
               <mat-icon class="example-tab-icon">wc</mat-icon>
@@ -18,11 +18,12 @@
                 <div class="col-12 col-sm-6 col-md-4">
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Class</mat-label>
-                    <mat-select placeholder="Select Class" formControlName="classid" (selectionChange)="onClassChange($event)">
-                      <mat-option *ngFor = "let class of classList" [value]="class.id">{{class.classname}}</mat-option>
+                    <mat-select placeholder="Select Class" formControlName="classid"
+                      (selectionChange)="onClassChange($event)">
+                      <mat-option *ngFor="let class of classList" [value]="class.id">{{class.classname}}</mat-option>
                     </mat-select>
                     <mat-error *ngIf="submitted && ef.classid.hasError('required')">
-                     Class is <strong>required</strong>
+                      Class is <strong>required</strong>
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -31,11 +32,12 @@
                   <mat-form-field appearance="outline" class="p-0">
                     <mat-label>Section</mat-label>
                     <mat-select placeholder="Select Section" formControlName="sectionid">
-                      <mat-option *ngFor = "let section of sectionList" [value]="section.id">{{section.sectionname}}</mat-option>
+                      <mat-option *ngFor="let section of sectionList" [value]="section.id">{{section.sectionname}}
+                      </mat-option>
                     </mat-select>
                     <mat-error *ngIf="submitted && ef.sectionid.hasError('required')">
                       Section is <strong>required</strong>
-                     </mat-error>
+                    </mat-error>
                   </mat-form-field>
                 </div>
 
@@ -141,7 +143,8 @@
             </ng-template>
             <form [formGroup]="questionForm" (ngSubmit)="onSubmit('questions')" *ngIf="showForm">
               <div class="row col-12 m-0 p-0 pt-3">
-                <div formArrayName="items" *ngFor="let item of f.items['controls']; let i = index">
+                <div class="questions-widget" formArrayName="items"
+                  *ngFor="let item of f.items['controls']; let i = index">
                   <div class="row m-0" [formGroupName]="i">
 
                     <div class="col-12">
@@ -153,6 +156,14 @@
                         </mat-error>
                       </mat-form-field>
                     </div>
+                    <div class="col-12">
+                      <img [src]="qImageSrc" *ngIf="qImageSrc" style="width:200px;" class="mb-2">
+                      <div class="form-group">
+                        <label for="exampleFormControlFile1">Upload Question</label>
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                           accept="image/*" (change)="onFileChange($event, 'questionImage', i)">
+                      </div>
+                    </div>
 
                     <div class="col-12 col-sm-6 col-md-4">
                       <mat-form-field appearance="outline" class="p-0">
@@ -162,6 +173,14 @@
                           First answer is <strong>required</strong>
                         </mat-error>
                       </mat-form-field>
+                      <div class="">
+                        <img [src]="qansImageSrc1" *ngIf="qansImageSrc1" style="width:200px;" class="mb-2">
+                        <div class="form-group">
+                          <label for="exampleFormControlFile1">Upload Answer</label>
+                          <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                             accept="image/*" (change)="onFileChange($event, 'answerImage1', i)">
+                        </div>
+                      </div>
                     </div>
 
                     <div class="col-12 col-sm-6 col-md-4">
@@ -172,16 +191,32 @@
                           Second answer is <strong>required</strong>
                         </mat-error>
                       </mat-form-field>
+                      <div class="">
+                        <img [src]="qansImageSrc1" *ngIf="qansImageSrc2" style="width:200px;" class="mb-2">
+                        <div class="form-group">
+                          <label for="exampleFormControlFile1">Upload Answer</label>
+                          <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                             accept="image/*" (change)="onFileChange($event, 'answerImage2', i)">
+                        </div>
+                      </div>
                     </div>
 
                     <div class="col-12 col-sm-6 col-md-4">
                       <mat-form-field appearance="outline" class="p-0">
                         <mat-label>Third Answer</mat-label>
-                        <input  matInput placeholder="Enter third answer" formControlName="answer3">
+                        <input matInput placeholder="Enter third answer" formControlName="answer3">
                         <mat-error *ngIf="submitted && item.get('answer3').hasError('required')">
                           Third answer is <strong>required</strong>
                         </mat-error>
                       </mat-form-field>
+                      <div class="">
+                        <img [src]="qansImageSrc1" *ngIf="qansImageSrc3" style="width:200px;" class="mb-2">
+                        <div class="form-group">
+                          <label for="exampleFormControlFile1">Upload Answer</label>
+                          <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                             accept="image/*" (change)="onFileChange($event, 'answerImage3', i)">
+                        </div>
+                      </div>
                     </div>
 
                     <div class="col-12 col-sm-6 col-md-4">
@@ -192,6 +227,14 @@
                           Fourth answer is <strong>required</strong>
                         </mat-error>
                       </mat-form-field>
+                      <div class="">
+                        <img [src]="qansImageSrc1" *ngIf="qansImageSrc4" style="width:200px;" class="mb-2">
+                        <div class="form-group">
+                          <label for="exampleFormControlFile1">Upload Answer</label>
+                          <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                             accept="image/*" (change)="onFileChange($event, 'answerImage4', i)">
+                        </div>
+                      </div>
                     </div>
 
                     <div class="col-12 col-sm-6 col-md-4">
@@ -218,7 +261,7 @@
               </div>
               <div class="example-button-row pt-3 pb-2 text-center">
                 <button mat-raised-button type="button" class="mat-next mt-2 mr-3" (click)="addNextSubjectMark()">Add
-                  Next</button>
+                  Question</button>
                 <button mat-raised-button color="primary" type="submit">Submit</button>
                 <button mat-raised-button class="ml-3 mat-secondary"
                   (click)="onFormReset($event, 'questions')">Reset</button>

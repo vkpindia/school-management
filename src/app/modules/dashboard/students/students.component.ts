@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ExpenseService } from '../../../_services/expense.service';
 import { EventNotificationService } from '../../../_services/event-notification.service';
 import * as Highcharts from 'highcharts';
+import { DashboardService } from '../../../_services/dashboard.service';
 
 @Component({
   selector: 'app-students',
@@ -15,7 +16,7 @@ import * as Highcharts from 'highcharts';
 })
 export class StudentsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) TSort: MatSort;
+  @ViewChild(MatSort, { static: true }) TSort: MatSort;
 
   public highcharts: typeof Highcharts = Highcharts;
 
@@ -33,74 +34,96 @@ export class StudentsComponent implements OnInit {
   public dateLbelBg: string;
   public colorCount: number = 0;
   public eventList: any = [];
+  public totals: any;
   // tslint:disable-next-line: variable-name
 
-  public attendanceCharts = {
-    chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: null,
-      plotShadow: false,
-      type: 'pie'
-    },
-    title: {
-      text: ''
-    },
-    tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage}%</b>'
-    },
-    accessibility: {
-      point: {
-        valueSuffix: '%'
-      }
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-          enabled: false
-        },
-        showInLegend: false
-      }
-    },
-    credits: {
-      enabled: false
-    },
-    series: [{
-      name: 'Students',
-      colorByPoint: true,
-      data: [{
-        name: 'Present',
-        y: 65.8,
-        sliced: true,
-        selected: true,
-        color: '#ffaa01'
-      }, {
-        name: 'Absent',
-        y: 28.2,
-        color: '#417dfc'
-      }]
-    }]
-  }
-  constructor(private _es: ExpenseService, private _router: Router, private _activatedRout: ActivatedRoute, private _ens: EventNotificationService) { }
+  public attendanceCharts: any;
+  constructor(private _es: ExpenseService, private ds: DashboardService, private _router: Router, private _activatedRout: ActivatedRoute, private _ens: EventNotificationService) { }
 
   ngOnInit(): void {
     // method call
     this.getexpenseList();
-    if(this._activatedRout.routeConfig.path=='add'){
+    if (this._activatedRout.routeConfig.path === 'add') {
       this.showForm = true;
       this.isCreate = true;
       this.isLoading = false;
     }
     this.getnotificationList();
     this.getEventList();
+    this.getStudentChart();
   }
 
- /*  ngAfterViewInit() {
-    this.TSort.sortChange.subscribe(() => {
-        this.paginator.pageIndex = 0;
-        this.paginator.pageSize = this.pageSize;
-    }); */
+  /*  ngAfterViewInit() {
+     this.TSort.sortChange.subscribe(() => {
+         this.paginator.pageIndex = 0;
+         this.paginator.pageSize = this.pageSize;
+     }); */
+  /**
+   * @description Method to get student chart series
+   * @author Virendra Pandey
+   * @date 2020-10-17
+   * @memberof StudentsComponent
+   */
+  public getStudentChart(): void {
+    this.ds.getStudentDashboard(JSON.parse(localStorage.getItem('currentUser')).id).subscribe(data => {
+      this.totals = data['studenttotals'];
+      if (data['studentsattandance'] && data['studentsattandance'].length) {
+        this.attendanceCharts = {
+          chart: {
+            type: 'column'
+          },
+          title: {
+            text: ''
+          },
+          subtitle: {
+            text: ''
+          },
+          accessibility: {
+            announceNewData: {
+              enabled: true
+            }
+          },
+          xAxis: {
+            type: 'category'
+          },
+          yAxis: {
+            title: {
+              text: ''
+            }
+
+          },
+          legend: {
+            enabled: false
+          },
+          plotOptions: {
+            series: {
+              borderWidth: 0,
+              dataLabels: {
+                enabled: true,
+                format: '{point.y:.1f}'
+              }
+            }
+          },
+
+          tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total<br/>'
+          },
+          credits: {
+            enabled: false
+          },
+          series: [
+            {
+              name: "Attendance(Percentage)",
+              colorByPoint: true,
+              data: data['studentsattandance']
+            }
+          ],
+        };
+      }
+    });
+  }
+
   /**
    * @description Method to get All parent record
    * @author Virendra Pandey
@@ -123,7 +146,7 @@ export class StudentsComponent implements OnInit {
     });
   }
 
-    /**
+  /**
    * @description
    * @author Virendra Pandey
    * @date 2020-07-16
@@ -145,7 +168,7 @@ export class StudentsComponent implements OnInit {
     })
   }
 
-    /**
+  /**
    * @description
    * @author Virendra Pandey
    * @date 2020-07-16
@@ -168,13 +191,13 @@ export class StudentsComponent implements OnInit {
     })
   }
 
-  public onEventDelete(row){
-   let isDeleyte:boolean = confirm("Are sure you want to delete this Event?");
-   if(isDeleyte){
-    this._ens.deleteEvent(row.id, true).subscribe(data=>{
-      this.getEventList();
-    })
-   }
+  public onEventDelete(row) {
+    let isDeleyte: boolean = confirm("Are sure you want to delete this Event?");
+    if (isDeleyte) {
+      this._ens.deleteEvent(row.id, true).subscribe(data => {
+        this.getEventList();
+      })
+    }
   }
 
   /**
@@ -234,28 +257,28 @@ export class StudentsComponent implements OnInit {
     }
   }
 
-      /**
-     * @description Method to route on edit page
-     * @author Virendra Pandey
-     * @date 2020-06-26
-     * @param {*} row
-     * @memberof ExpenseListComponent
-     */
-    public onDelete(row:any): void {
-      console.log('row', row);
-      let isDelete:boolean = confirm("Are sure you want to delete this expense?");
-      if(isDelete){
-        this._es.deleteExpense(row.id).subscribe(data=>{
-            this.getexpenseList();
-        })
-      }
+  /**
+   * @description Method to route on edit page
+   * @author Virendra Pandey
+   * @date 2020-06-26
+   * @param {*} row
+   * @memberof ExpenseListComponent
+   */
+  public onDelete(row: any): void {
+    console.log('row', row);
+    let isDelete: boolean = confirm("Are sure you want to delete this expense?");
+    if (isDelete) {
+      this._es.deleteExpense(row.id).subscribe(data => {
+        this.getexpenseList();
+      })
     }
+  }
 
-    public openForm(): void{
-      this.isLoading = false;
-      this._router.navigate(['add'], {relativeTo: this._activatedRout.parent});
-      // this.showForm = true;
-    }
+  public openForm(): void {
+    this.isLoading = false;
+    this._router.navigate(['add'], { relativeTo: this._activatedRout.parent });
+    // this.showForm = true;
+  }
 
   /**
    * @description Method to route on edit page

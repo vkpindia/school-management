@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://sergiusschoolsapi.azurewebsites.net/api/'
+  apiBaseUrl: 'http://adyayana.com/api/'
 };
 
 /*

@@ -240,6 +240,7 @@ footer {
   left: 0;
   padding-left: 0;
   transition: padding-left 0.3s;
+  z-index: 1;
   .footer-block {
     padding: 5px 20px;
     background-color: #05346a;

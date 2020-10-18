@@ -8,8 +8,8 @@
   </div> -->
   <div class="s-list">
     <div class="row gutters-20">
-      <div class="col-md-4 col-12 row p-0 m-0">
-        <div class="col-md-6 col-12 pr-0">
+      <div class="col-12 row p-0 m-0">
+        <!-- <div class="col-md-6 col-12 pr-0">
             <div class="dashboard-summery-two">
                 <div class="item-icon bg-light-magenta">
                     <i class="flaticon-classmates text-magenta"></i>
@@ -21,36 +21,36 @@
                     <div class="item-title">Total Students</div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="col-md-6 col-12 pr-0">
             <div class="dashboard-summery-two">
                 <div class="item-icon bg-light-blue">
                     <i class="flaticon-shopping-list text-blue"></i>
                 </div>
                 <div class="item-content">
-                    <div class="item-number"><span class="counter" data-num="19050">19050</span></div>
+                    <div class="item-number"><span class="counter" data-num="19050">{{totals?.totalexams}}</span></div>
                     <div class="item-title">Total Exams</div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-12 pr-0">
+        <!-- <div class="col-md-6 col-12 pr-0">
             <div class="dashboard-summery-two">
                 <div class="item-icon bg-light-yellow">
                     <i class="flaticon-mortarboard text-orange"></i>
                 </div>
                 <div class="item-content">
                     <div class="item-number"><span class="counter" data-num="23890">23890</span></div>
-                    <div class="item-title">Graduate Studes</div>
+                    <div class="item-title">Graduate Students</div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 col-12 pr-0">
+        </div> -->
+        <div class="col-md-6 col-12">
             <div class="dashboard-summery-two">
                 <div class="item-icon bg-light-red">
                     <i class="flaticon-money text-red"></i>
                 </div>
                 <div class="item-content">
-                    <div class="item-number"><span>₹</span><span class="counter" data-num="2102050">2102050</span></div>
+                    <div class="item-number"><span>₹</span><span class="counter" data-num="2102050">{{totals?.totalincome}}</span></div>
                     <div class="item-title">Total Income</div>
                 </div>
             </div>
@@ -66,11 +66,13 @@
               </div>
             </div>
             <div class="doughnut-chart-wrap">
-              <highcharts-chart [Highcharts]="highcharts" [options]="attendanceCharts"
-                style="width: 100%; height: 400px; display: flex; flex-wrap: wrap;">
-              </highcharts-chart>
+              <ng-container *ngIf="attendanceCharts">
+                <highcharts-chart [Highcharts]="highcharts" [options]="attendanceCharts"
+                  style="width: 100%; height: 400px; display: flex; flex-wrap: wrap;">
+                </highcharts-chart>
+              </ng-container>
             </div>
-            <div class="student-report">
+            <!-- <div class="student-report">
               <div class="student-count pseudo-bg-blue">
                 <h4 class="item-title">Female Students</h4>
                 <div class="item-number">24,500</div>
@@ -79,7 +81,35 @@
                 <h4 class="item-title">Male Students</h4>
                 <div class="item-number">10,500 </div>
               </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4 pr-0">
+        <div class="card dashboard-card-three pd-b-20">
+          <div class="card-body">
+            <div class="heading-layout1">
+              <div class="item-title">
+                <h3>Salary</h3>
+              </div>
             </div>
+            <div class="doughnut-chart-wrap">
+              <ng-container *ngIf="salaryChart">
+                <highcharts-chart [Highcharts]="highcharts" [options]="salaryChart"
+                  style="width: 100%; height: 400px; display: flex; flex-wrap: wrap;">
+                </highcharts-chart>
+              </ng-container>
+            </div>
+            <!-- <div class="student-report">
+              <div class="student-count pseudo-bg-blue">
+                <h4 class="item-title">Female Students</h4>
+                <div class="item-number">24,500</div>
+              </div>
+              <div class="student-count pseudo-bg-yellow">
+                <h4 class="item-title">Male Students</h4>
+                <div class="item-number">10,500 </div>
+              </div>
+            </div> -->
           </div>
         </div>
       </div>

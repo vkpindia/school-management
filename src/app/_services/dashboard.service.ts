@@ -7,20 +7,10 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class EventNotificationService {
+
+export class DashboardService {
+
   private _apiUrl: string = environment.apiBaseUrl;
-  // private _apiUrl: string = 'http://mannapur.com/api/';
-  // private _apiUrl: string = 'https://schoolsapi1.azurewebsites.net/api/';
-
-  // setting headers for http call
-
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'Application/json; charset=utf-8',
-      'Access-Control-Allow-Origin': '*'
-    }),
-    crossDomain: true
-  };
 
   constructor(private _http: HttpClient) { }
 
@@ -68,41 +58,53 @@ export class EventNotificationService {
    * @returns
    * @memberof ClassService
    */
-  getAllList(isevent: boolean) {
+  getAdminDashboard() {
     console.log('_apiUrl', this._apiUrl);
-    return this._http.get(this._apiUrl + `events/GetEventorNotification?events=${isevent}`).pipe(
+    return this._http.get(this._apiUrl + `dashboard/getadmindashboard`).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+  /**
+   * @description Method for getting all Classs data from server
+   * @author Virendra Pandey
+   * @date 2020-06-21
+   * @returns
+   * @memberof ClassService
+   */
+  getStudentDashboard(studentid) {
+    console.log('_apiUrl', this._apiUrl);
+    return this._http.get(this._apiUrl + `dashboard/getstudentdashboard?studentid=${studentid}`).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
 
   /**
-   * @description Method for saving Class data in server
+   * @description Method for getting all Classs data from server
    * @author Virendra Pandey
    * @date 2020-06-21
-   * @param {*} users
-   * @returns {Observable<any>}
+   * @returns
    * @memberof ClassService
    */
-  postRecord(classRecord: any)/* : Observable<any> */ {
-    // console.log('ClassRecord', classRecord);
-    return this._http.post(this._apiUrl + 'events/AddEventorNotification', classRecord)
-     .pipe(
-       map(this.extractData),
-       catchError(this.handleError)
-     );
+  getParentDashboard(parentid) {
+    console.log('_apiUrl', this._apiUrl);
+    return this._http.get(this._apiUrl + `dashboard/getparentdashboard?parentid=${parentid}`).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
   }
 
   /**
-   * @description Method for deleting unique data by key
+   * @description Method for getting all Classs data from server
    * @author Virendra Pandey
    * @date 2020-06-21
-   * @param {*} id
-   * @returns {Observable<any>}
+   * @returns
    * @memberof ClassService
    */
-  deleteEvent(id: number, isevent:boolean): Observable<any> {
-    const url = `${this._apiUrl}events/DeleteEvents?id=${id}&isevent=${isevent}`;
-    return this._http.delete(url).pipe(
+  getTeacherDashboard(teacherid) {
+    console.log('_apiUrl', this._apiUrl);
+    return this._http.get(this._apiUrl + `dashboard/getteacherdashboard?teacherid=${teacherid}`).pipe(
+      map(this.extractData),
       catchError(this.handleError));
   }
+
+
 }

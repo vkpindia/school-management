@@ -251,7 +251,7 @@ export class AddResultComponent implements OnInit {
     } else {
       this.addTResultForm.patchValue({
         studentid: event.option.value.id
-      })
+      });
     }
     this.getResult();
   }

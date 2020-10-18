@@ -19,7 +19,7 @@
             <div class="col-6">
               <div class="item-content">
                 <div class="item-title">Students</div>
-                <div class="item-number"><span class="counter" data-num="150000">150000</span></div>
+                <div class="item-number"><span class="counter" data-num="150000">{{totals?.stdudentscount}}</span></div>
               </div>
             </div>
           </div>
@@ -36,7 +36,7 @@
             <div class="col-6">
               <div class="item-content">
                 <div class="item-title">Teachers</div>
-                <div class="item-number"><span class="counter" data-num="2250">2250</span></div>
+                <div class="item-number"><span class="counter" data-num="2250">{{totals?.teacherscount}}</span></div>
               </div>
             </div>
           </div>
@@ -53,7 +53,7 @@
             <div class="col-6">
               <div class="item-content">
                 <div class="item-title">Parents</div>
-                <div class="item-number"><span class="counter" data-num="5690">5690</span></div>
+                <div class="item-number"><span class="counter" data-num="5690">{{totals?.parentscount}}</span></div>
               </div>
             </div>
           </div>
@@ -70,7 +70,7 @@
             <div class="col-6">
               <div class="item-content">
                 <div class="item-title">Earnings</div>
-                <div class="item-number"><span>₹</span><span class="counter" data-num="193000">193000</span></div>
+                <div class="item-number"><span>₹</span><span class="counter" data-num="193000">{{totals?.parentscount}}</span></div>
               </div>
             </div>
           </div>
@@ -101,9 +101,12 @@
           </div>
         </div>
         <div class="earning-chart-wrap">
-          <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions"
-            style="width: 100% !important; height: 400px; display: flex; flex-wrap: wrap;">
-          </highcharts-chart>
+          <ng-container *ngIf="earningsChart">
+            <highcharts-chart [Highcharts]="highcharts" [options]="earningsChart"
+              style="width: 100% !important; height: 400px; display: flex; flex-wrap: wrap;">
+            </highcharts-chart>
+          </ng-container>
+
         </div>
       </div>
     </div>
@@ -132,38 +135,53 @@
           </div>
         </div>
         <div class="expense-chart-wrap">
-          <highcharts-chart [Highcharts]="highcharts" [options]="drillDownColumnOption"
-            style="width: 100%; height: 400px; display: flex; flex-wrap: wrap;">
-          </highcharts-chart>
+          <ng-container *ngIf="expansesChart">
+            <highcharts-chart [Highcharts]="highcharts" [options]="expansesChart"
+              style="width: 100%; height: 400px; display: flex; flex-wrap: wrap;">
+            </highcharts-chart>
+          </ng-container>
         </div>
       </div>
     </div>
   </div>
   <div class="col-12 col-md-6 col-xl-3">
     <div class="card dashboard-card-three pd-b-20">
-        <div class="card-body">
-            <div class="heading-layout1">
-                <div class="item-title">
-                    <h3>Students</h3>
-                </div>
-            </div>
-            <div class="doughnut-chart-wrap"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-            <highcharts-chart [Highcharts]="highcharts" [options]="StudentsCharts"
-            style="width: 100%; height: 400px; display: flex; flex-wrap: wrap;">
-          </highcharts-chart>
-            </div>
-            <div class="student-report">
-                <div class="student-count pseudo-bg-blue">
-                    <h4 class="item-title">Female Students</h4>
-                    <div class="item-number">45,000</div>
-                </div>
-                <div class="student-count pseudo-bg-yellow">
-                    <h4 class="item-title">Male Students</h4>
-                    <div class="item-number">1,05,000</div>
-                </div>
-            </div>
+      <div class="card-body">
+        <div class="heading-layout1">
+          <div class="item-title">
+            <h3>Students</h3>
+          </div>
         </div>
+        <div class="doughnut-chart-wrap">
+          <div class="chartjs-size-monitor"
+            style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+            <div class="chartjs-size-monitor-expand"
+              style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+              <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+            </div>
+            <div class="chartjs-size-monitor-shrink"
+              style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+              <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+            </div>
+          </div>
+          <ng-container *ngIf="StudentsCharts">
+            <highcharts-chart [Highcharts]="highcharts" [options]="StudentsCharts"
+              style="width: 100%; height: 400px; display: flex; flex-wrap: wrap;">
+            </highcharts-chart>
+          </ng-container>
+        </div>
+        <div class="student-report">
+          <div class="student-count pseudo-bg-blue">
+            <h4 class="item-title">Female Students</h4>
+            <div class="item-number">45,000</div>
+          </div>
+          <div class="student-count pseudo-bg-yellow">
+            <h4 class="item-title">Male Students</h4>
+            <div class="item-number">1,05,000</div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 </div>
 <ng-template #dash>---</ng-template>

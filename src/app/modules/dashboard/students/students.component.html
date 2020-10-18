@@ -19,7 +19,7 @@
             <div class="col-6">
               <div class="item-content">
                 <div class="item-title">Notification</div>
-                <div class="item-number"><span class="counter" data-num="12">12</span></div>
+                <div class="item-number"><span class="counter" data-num="12">{{totals?.notificationscount}}</span></div>
               </div>
             </div>
           </div>
@@ -36,7 +36,7 @@
             <div class="col-6">
               <div class="item-content">
                 <div class="item-title">Events</div>
-                <div class="item-number"><span class="counter" data-num="06">6</span></div>
+                <div class="item-number"><span class="counter" data-num="06">{{totals?.eventscount}}</span></div>
               </div>
             </div>
           </div>
@@ -53,7 +53,7 @@
             <div class="col-6">
               <div class="item-content">
                 <div class="item-title">Attendance</div>
-                <div class="item-number"><span class="counter" data-num="94">94</span><span>%</span></div>
+                <div class="item-number"><span class="counter" data-num="94">{{totals?.attendancepercentage}}</span><span>%</span></div>
               </div>
             </div>
           </div>
@@ -179,12 +179,26 @@
             <h3>Attendence</h3>
           </div>
         </div>
+        <div class="expense-report">
+          <div class="monthly-expense pseudo-bg-Aquamarine">
+            <div class="expense-date">Sept 2020</div>
+            <div class="expense-amount">78%</div>
+          </div>
+          <div class="monthly-expense pseudo-bg-blue">
+            <div class="expense-date">Aug 2020</div>
+            <div class="expense-amount">67%</div>
+          </div>
+          <div class="monthly-expense pseudo-bg-yellow">
+            <div class="expense-date">Jul 2020</div>
+            <div class="expense-amount">98%</div>
+          </div>
+        </div>
         <div class="doughnut-chart-wrap">
           <highcharts-chart [Highcharts]="highcharts" [options]="attendanceCharts"
             style="width: 100%; height: 400px; display: flex; flex-wrap: wrap;">
           </highcharts-chart>
         </div>
-        <div class="student-report">
+        <!-- <div class="student-report">
           <div class="student-count pseudo-bg-blue">
             <h4 class="item-title">Absent</h4>
             <div class="item-number">28.2%</div>
@@ -193,7 +207,7 @@
             <h4 class="item-title">Present</h4>
             <div class="item-number">65.8%</div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

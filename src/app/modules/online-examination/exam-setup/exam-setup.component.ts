@@ -35,6 +35,13 @@ export class ExamSetupComponent implements OnInit {
   public sectionList: any = [];
   public showForm: boolean = true;
 
+  // images variable declaration
+  public qImageSrc: string;
+  public qansImageSrc1: string;
+  public qansImageSrc2: string;
+  public qansImageSrc3: string;
+  public qansImageSrc4: string;
+
   public horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   public verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
@@ -84,22 +91,74 @@ export class ExamSetupComponent implements OnInit {
   get ef() { return this.createExamForm.controls; }
 
   /**
-   * @description Form group
+   * @description Creating Dynamic Fields
    * @author Virendra Pandey
    * @date 2020-08-21
    * @returns {FormGroup}
    * @memberof ExamSetupComponent
    */
   public createFields(): FormGroup {
+
     return new FormGroup({
       question: new FormControl(null, Validators.required),
+      question_image: new FormControl(null),
       answer1: new FormControl(null, Validators.required),
+      answer1_image: new FormControl(null),
       answer2: new FormControl(null, Validators.required),
+      answer2_image: new FormControl(null),
       answer3: new FormControl(null, Validators.required),
+      answer3_image: new FormControl(null),
       answer4: new FormControl(null, Validators.required),
+      answer4_image: new FormControl(null),
       rightanswer: new FormControl(null, Validators.required),
       marksforthis: new FormControl(null, Validators.required)
     });
+
+  }
+
+  /**
+   * @description Form group
+   * @author Virendra Pandey
+   * @date 2020-08-21
+   * @returns {FormGroup}
+   * @memberof ExamSetupComponent
+   */
+  public onFileChange(event, imageType, index) {
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const file = (event.target as HTMLInputElement).files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        if (imageType === 'questionImage') {
+          this.qImageSrc = reader.result as string;
+          (this.questionForm.get('items') as FormArray).at(index).get('question_image')
+            .patchValue(this.qImageSrc.substring(22));
+
+        } else if (imageType === 'answerImage1') {
+          this.qansImageSrc1 = reader.result as string;
+          (this.questionForm.get('items') as FormArray).at(index).get('answer1_image')
+            .patchValue(this.qansImageSrc1.substring(22));
+
+        } else if (imageType === 'answerImage2') {
+          this.qansImageSrc2 = reader.result as string;
+          (this.questionForm.get('items') as FormArray).at(index).get('answer2_image')
+            .patchValue(this.qansImageSrc2.substring(22));
+
+        } else if (imageType === 'answerImage3') {
+          this.qansImageSrc3 = reader.result as string;
+          (this.questionForm.get('items') as FormArray).at(index).get('answer3_image')
+            .patchValue(this.qansImageSrc3.substring(22));
+
+        } else if (imageType === 'answerImage4') {
+          this.qansImageSrc4 = reader.result as string;
+          (this.questionForm.get('items') as FormArray).at(index).get('answer4_image')
+            .patchValue(this.qansImageSrc4.substring(22));
+
+        }
+      };
+
+    }
   }
 
   /**
@@ -219,8 +278,13 @@ export class ExamSetupComponent implements OnInit {
 
     if (formType === 'questions') {
       Object.assign(payload, this.questionForm.value);
-      payload['examid'] = examid;
-      this._cs.addExamQustions(payload).subscribe(data => {
+      payload['items'].map(data => {
+        data['examid'] = examid;
+        return data;
+      });
+      console.log('payload', payload);
+      // payload['examid'] = examid;
+      this._cs.addExamQustions(payload['items']).subscribe(data => {
         console.log('data', data);
         this.showNotification('Submitted Successfully!!');
         this.questionForm.reset();
@@ -268,5 +332,4 @@ export class ExamSetupComponent implements OnInit {
       this.questionForm.reset();
     }
   }
-
 }

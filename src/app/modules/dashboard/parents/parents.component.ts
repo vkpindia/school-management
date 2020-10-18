@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ExpenseService } from '../../../_services/expense.service';
 import { EventNotificationService } from '../../../_services/event-notification.service';
+import { DashboardService } from 'src/app/_services/dashboard.service';
 
 @Component({
   selector: 'app-parents',
@@ -14,7 +15,7 @@ import { EventNotificationService } from '../../../_services/event-notification.
 })
 export class ParentsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) TSort: MatSort;
+  @ViewChild(MatSort, { static: true }) TSort: MatSort;
 
   public displayedColumns: string[] = ['expensetype', 'amount', 'pendingamount', 'status', 'description', 'actions'];
   public filterData: string = '';
@@ -29,25 +30,36 @@ export class ParentsComponent implements OnInit {
   public randomColor = ['#40dfcd', '#fbd540', '#f939a1'];
   public dateLbelBg: string;
   public colorCount: number = 0;
+  public totals: any;
   // tslint:disable-next-line: variable-name
-  constructor(private _es: ExpenseService, private _router: Router, private _activatedRout: ActivatedRoute, private _ens: EventNotificationService) { }
+  constructor(
+    private _es: ExpenseService, private ds: DashboardService,
+    private _router: Router, private _activatedRout: ActivatedRoute,
+    private _ens: EventNotificationService) { }
 
   ngOnInit(): void {
     // method call
     this.getexpenseList();
-    if(this._activatedRout.routeConfig.path=='add'){
+    if (this._activatedRout.routeConfig.path == 'add') {
       this.showForm = true;
       this.isCreate = true;
       this.isLoading = false;
     }
     this.getnotificationList();
+    this.getParentDashboard();
   }
 
- /*  ngAfterViewInit() {
-    this.TSort.sortChange.subscribe(() => {
-        this.paginator.pageIndex = 0;
-        this.paginator.pageSize = this.pageSize;
-    }); */
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-10-18
+   * @memberof ParentsComponent
+   */
+  public getParentDashboard(): void {
+    this.ds.getParentDashboard(JSON.parse(localStorage.getItem('currentUser')).id).subscribe(data => {
+      this.totals = data['parenttotals'];
+    });
+  }
   /**
    * @description Method to get All parent record
    * @author Virendra Pandey
@@ -70,12 +82,12 @@ export class ParentsComponent implements OnInit {
     });
   }
 
-    /**
-   * @description
-   * @author Virendra Pandey
-   * @date 2020-07-16
-   * @memberof NotificationListComponent
-   */
+  /**
+ * @description
+ * @author Virendra Pandey
+ * @date 2020-07-16
+ * @memberof NotificationListComponent
+ */
   public getnotificationList() {
     this._ens.getAllList(false).subscribe(data => {
       if (data) {
@@ -149,28 +161,28 @@ export class ParentsComponent implements OnInit {
     }
   }
 
-      /**
-     * @description Method to route on edit page
-     * @author Virendra Pandey
-     * @date 2020-06-26
-     * @param {*} row
-     * @memberof ExpenseListComponent
-     */
-    public onDelete(row:any): void {
-      console.log('row', row);
-      let isDelete:boolean = confirm("Are sure you want to delete this expense?");
-      if(isDelete){
-        this._es.deleteExpense(row.id).subscribe(data=>{
-            this.getexpenseList();
-        })
-      }
+  /**
+ * @description Method to route on edit page
+ * @author Virendra Pandey
+ * @date 2020-06-26
+ * @param {*} row
+ * @memberof ExpenseListComponent
+ */
+  public onDelete(row: any): void {
+    console.log('row', row);
+    let isDelete: boolean = confirm("Are sure you want to delete this expense?");
+    if (isDelete) {
+      this._es.deleteExpense(row.id).subscribe(data => {
+        this.getexpenseList();
+      })
     }
+  }
 
-    public openForm(): void{
-      this.isLoading = false;
-      this._router.navigate(['add'], {relativeTo: this._activatedRout.parent});
-      // this.showForm = true;
-    }
+  public openForm(): void {
+    this.isLoading = false;
+    this._router.navigate(['add'], { relativeTo: this._activatedRout.parent });
+    // this.showForm = true;
+  }
 
   /**
    * @description Method to route on edit page
