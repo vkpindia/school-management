@@ -27,6 +27,28 @@ export let navConfig = [
     ]
   },
   {
+    displayName: 'School Registration',
+    iconName: 'school',
+    // isActive: true,
+    children: [
+      {
+        displayName: 'Registration',
+        icon: 'fa fa-angle-right',
+        routePath: 'school-registration'
+      },
+      {
+        displayName: 'First Level Approval',
+        icon: 'fa fa-angle-right',
+        routePath: 'school-registration/approval-first'
+      },
+      {
+        displayName: 'Second Level Approval',
+        icon: 'fa fa-angle-right',
+        routePath: 'school-registration/approval-second'
+      }
+    ]
+  },
+  {
     displayName: 'Students',
     // iconName: 'person',
     icon: 'flaticon-classmates',

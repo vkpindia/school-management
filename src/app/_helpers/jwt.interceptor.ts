@@ -22,7 +22,8 @@ export class JwtInterceptor implements HttpInterceptor {
         setHeaders: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type' : 'application/json',
-          Authorization: `${currentUser['message']}`
+          Authorization: `${currentUser['message']}`,
+          UserName: currentUser.username
         },
         /*url: request.url,
          withCredentials: true

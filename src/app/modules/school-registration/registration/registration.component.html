@@ -1,0 +1,184 @@
+<div class="form-container">
+  <div class="page-title">
+    <h3>School Registration</h3>
+  </div>
+  <div class="form-fields">
+    <mat-card>
+      <mat-card-title>{{cardTitle}}</mat-card-title>
+      <mat-card-content class="pt-2">
+        <form [formGroup]="admissionForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
+          <div class="row">
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>School Name</mat-label>
+                <input matInput formControlName="schoolname" placeholder="Enter School Name">
+                <!--  <mat-error *ngIf="submitted && f.username.hasError('email') && !f.username.hasError('required')">
+                  Please enter a valid email address
+                </mat-error> -->
+                <mat-error *ngIf="submitted && f.schoolname.hasError('required')">
+                  School name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- For image field -->
+            <div class="col-12 col-sm-6 col-md-4">
+              <img [src]="imageSrc" *ngIf="imageSrc" style="width:200px;" class="mb-2">
+              <div class="form-group">
+                <label for="exampleFormControlFile1">Upload Icon</label>
+                <input type="file" class="form-control-file" accept="image/*"
+                  (change)="onFileChange($event, 'icon')">
+              </div>
+            </div>
+
+            <!-- For image field -->
+            <div class="col-12 col-sm-6 col-md-4">
+              <img [src]="imageSrc1" *ngIf="imageSrc1" style="width:200px;" class="mb-2">
+              <div class="form-group">
+                <label for="exampleFormControlFile1">Upload Banner</label>
+                <input type="file" class="form-control-file" accept="image/*"
+                  (change)="onFileChange($event, 'banner')">
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>School Address</mat-label>
+                <textarea matInput placeholder="Enter Last Name" formControlName="schooladdress" rows="2"></textarea>
+                <mat-error *ngIf="submitted && f.schooladdress.hasError('required')">
+                  School Adress is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label> Start Date</mat-label>
+                <input matInput [matDatepicker]="picker12" placeholder="Select startdate" formControlName="startdate">
+                <mat-datepicker-toggle matSuffix [for]="picker12"></mat-datepicker-toggle>
+                <mat-datepicker #picker12></mat-datepicker>
+                <mat-error *ngIf="submitted && f.startdate.hasError('required')">
+                  Start Date is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label> End Date</mat-label>
+                <input matInput [matDatepicker]="picker13" placeholder="Select enddate" formControlName="enddate">
+                <mat-datepicker-toggle matSuffix [for]="picker13"></mat-datepicker-toggle>
+                <mat-datepicker #picker13></mat-datepicker>
+                <mat-error *ngIf="submitted && f.enddate.hasError('required')">
+                  End Date is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Director Name</mat-label>
+                <input matInput placeholder="Enter Director Name" formControlName="directorname">
+                <mat-error *ngIf="submitted && f.directorname.hasError('required')">
+                  Director name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <img [src]="imageSrc2" *ngIf="imageSrc2" style="width:200px;" class="mb-2">
+              <div class="form-group">
+                <label for="exampleFormControlFile1">Upload Picture</label>
+                <input type="file" class="form-control-file" accept="image/*"
+                  (change)="onFileChange($event, 'director')">
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="Enter Email" formControlName="directormail">
+                <mat-error *ngIf="submitted && f.directormail.hasError('required')">
+                  Email is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="submitted && f.directormail.hasError('pattern') && f.directormail.dirty">
+                  Email should be in proper formate.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- control now -->
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Mobile Number</mat-label>
+                <input type="number" matInput placeholder="Enter Mobile Number" formControlName="directormobilenumber">
+                <mat-error *ngIf="submitted && f. directormobilenumber.hasError('required')">
+                  Mobile number is <strong>required</strong>
+                </mat-error>
+                <mat-error
+                  *ngIf="submitted && f. directormobilenumber.hasError('pattern') && f. directormobilenumber.dirty && !f.directormobilenumber.hasError('required')">
+                  Mobile number must be only 10 digit
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label> School Mobile Number</mat-label>
+                <input type="number" matInput placeholder="Enter Mobile Number"
+                  formControlName="schoolaltermobilenumber">
+                <mat-error *ngIf="submitted && f.schoolaltermobilenumber.hasError('required')">
+                  School Mobile number is <strong>required</strong>
+                </mat-error>
+                <mat-error
+                  *ngIf="submitted && f.schoolaltermobilenumber.hasError('pattern') && f.schoolaltermobilenumber.dirty && !f.schoolaltermobilenumber.hasError('required')">
+                  Mobile number must be only 10 digit
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Agent Name</mat-label>
+                <input matInput placeholder="Enter Agent Name" formControlName="agentname">
+                <mat-error *ngIf="submitted && f.agentname.hasError('required')">
+                  Agent name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Request Date </mat-label>
+                <input matInput [matDatepicker]="picker4" placeholder="Select date" formControlName="requestdate">
+                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                <mat-datepicker #picker4></mat-datepicker>
+                <mat-error *ngIf="submitted && f.requestdate.hasError('required')">
+                  Request date is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-checkbox formControlName="firstlevelacceptance">First Level Acceptance</mat-checkbox>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-checkbox formControlName="secondlevelacceptance">Second Level Acceptance</mat-checkbox>
+            </div>
+
+
+          </div>
+
+          <div class="example-button-row pt-3 text-center">
+            <button style="width: auto;" mat-raised-button color="primary" type="submit">Submit</button>
+            <button style="width: auto;" mat-raised-button class="ml-3 mat-secondary"
+              (click)="onFormReset($event)">Reset</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #dash>---</ng-template>

@@ -42,6 +42,14 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: 'school-registration',
+        loadChildren: () => import('./modules/school-registration/school-registration.module').then(m => m.SchoolRegistrationModule),
+        canActivate: [AuthGuard],
+        data: {
+          breadcrumb: 'School Registration',
+        }
+      },
+      {
         path: 'students',
         loadChildren: () => import('./modules/students/students.module').then(m => m.StudentsModule),
         canActivate: [AuthGuard],

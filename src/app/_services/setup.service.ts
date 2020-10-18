@@ -9,8 +9,6 @@ import { environment } from '../../environments/environment';
 })
 export class SetupService {
  private _apiUrl: string = environment.apiBaseUrl;
-  // private _apiUrl: string = 'http://mannapur.com/api/';
-  // private _apiUrl: string = 'https://schoolsapi1.azurewebsites.net/api/';
 
   // setting headers for http call
 
