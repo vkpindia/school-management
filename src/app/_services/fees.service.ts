@@ -96,7 +96,7 @@ export class FeesService {
  * @memberof FeesService
  */
   getStudentRecord(classid, sectionid) {
-    return this._http.get(this._apiUrl + `/student/GetStudentSearch?classid=${classid}&sectionid=${sectionid}`).pipe(
+    return this._http.get(this._apiUrl + `student/GetStudentSearch?classid=${classid}&sectionid=${sectionid}`).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }

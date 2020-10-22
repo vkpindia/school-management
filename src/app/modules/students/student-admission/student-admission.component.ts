@@ -148,13 +148,14 @@ export class StudentAdmissionComponent implements OnInit {
     let reader = new FileReader();
 
     if (event.target.files && event.target.files.length) {
+      let fileExt = event.target.files[0].type.split('/')[1];
       let file = (event.target as HTMLInputElement).files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.imageSrc = reader.result as string;
         // console.log('this.urlBase64ToUint8Array(reader.result)', reader.result);
         this.admissionForm.patchValue({
-          image: this.imageSrc.substring(22) // this.urlBase64ToUint8Array(reader.result)
+          image: fileExt === 'png' ? this.imageSrc.substring(22) : this.imageSrc.substring(23) // this.urlBase64ToUint8Array(reader.result)
         });
         this.admissionForm.get('image').updateValueAndValidity();
       };

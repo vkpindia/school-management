@@ -55,7 +55,6 @@ export class ParentAddComponent implements OnInit {
     private _fs: FeesService
   ) {
     this._ar.queryParamMap.subscribe(params => {
-      console.log('params student ID', params);
       this.paramID = params['params'].id;
     });
   }
