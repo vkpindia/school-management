@@ -88,23 +88,24 @@ export class RegistrationComponent implements OnInit {
 
     const reader = new FileReader();
     if (event.target.files && event.target.files.length) {
+      let fileExt = event.target.files[0].type.split('/')[1];
       const file = (event.target as HTMLInputElement).files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
         if (imageType === 'icon') {
           this.imageSrc = reader.result as string;
           this.admissionForm.patchValue({
-            schoolicon: this.imageSrc.substring(22) // this.urlBase64ToUint8Array(reader.result)
+            schoolicon: this.imageSrc.replace(`data:image/${fileExt};base64,`, '') // this.urlBase64ToUint8Array(reader.result)
           });
         } else if (imageType === 'banner') {
           this.imageSrc1 = reader.result as string;
           this.admissionForm.patchValue({
-            schoolbanner: this.imageSrc1.substring(22) // this.urlBase64ToUint8Array(reader.result)
+            schoolbanner: this.imageSrc1.replace(`data:image/${fileExt};base64,`, '') // this.urlBase64ToUint8Array(reader.result)
           });
         } else if (imageType === 'director') {
           this.imageSrc2 = reader.result as string;
           this.admissionForm.patchValue({
-            directorimage: this.imageSrc2.substring(22) // this.urlBase64ToUint8Array(reader.result)
+            directorimage: this.imageSrc2.replace(`data:image/${fileExt};base64,`, '') // this.urlBase64ToUint8Array(reader.result)
           });
         }
       };

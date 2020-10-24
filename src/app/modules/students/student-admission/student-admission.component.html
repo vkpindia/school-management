@@ -103,10 +103,10 @@
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Class</mat-label>
-                <mat-select placeholder="Select Class" formControlName="Class" (selectionChange)="onClassChange($event)">
+                <mat-select placeholder="Select Class" formControlName="class" (selectionChange)="onClassChange($event)">
                   <mat-option *ngFor = "let class of classList" [value]="class.id">{{class.classname}}</mat-option>
                 </mat-select>
-                <mat-error *ngIf="submitted && f.Class.hasError('required')">
+                <mat-error *ngIf="submitted && f.class.hasError('required')">
                   Class name is <strong>required</strong>
                 </mat-error>
               </mat-form-field>
@@ -169,12 +169,12 @@
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Mother Tongue</mat-label>
-                <mat-select placeholder="Select Mother tongue" formControlName="Mothertoung">
+                <mat-select placeholder="Select Mother tongue" formControlName="mothertoung">
                   <mat-option value="telugu">Telugu</mat-option>
                   <mat-option value="hindi">Hindi</mat-option>
                   <mat-option value="english">English</mat-option>
                 </mat-select>
-                <mat-error *ngIf="submitted && f.Mothertoung.hasError('required')">
+                <mat-error *ngIf="submitted && f.mothertoung.hasError('required')">
                   Mother Tongue is <strong>required</strong>
                 </mat-error>
               </mat-form-field>

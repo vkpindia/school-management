@@ -160,8 +160,8 @@
                       <img [src]="qImageSrc" *ngIf="qImageSrc" style="width:200px;" class="mb-2">
                       <div class="form-group">
                         <label for="exampleFormControlFile1">Upload Question</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                           accept="image/*" (change)="onFileChange($event, 'questionImage', i)">
+                        <input type="file" class="form-control-file"  accept="image/*"
+                          (change)="onFileChange($event, 'questionImage', i)">
                       </div>
                     </div>
 
@@ -177,8 +177,8 @@
                         <img [src]="qansImageSrc1" *ngIf="qansImageSrc1" style="width:200px;" class="mb-2">
                         <div class="form-group">
                           <label for="exampleFormControlFile1">Upload Answer</label>
-                          <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                             accept="image/*" (change)="onFileChange($event, 'answerImage1', i)">
+                          <input type="file" class="form-control-file"  accept="image/*"
+                            (change)="onFileChange($event, 'answerImage1', i)">
                         </div>
                       </div>
                     </div>
@@ -186,7 +186,7 @@
                     <div class="col-12 col-sm-6 col-md-4">
                       <mat-form-field appearance="outline" class="p-0">
                         <mat-label>Second Answer</mat-label>
-                        <input type="number" matInput placeholder="Enter second answer" formControlName="answer2">
+                        <input type="text" matInput placeholder="Enter second answer" formControlName="answer2">
                         <mat-error *ngIf="submitted && item.get('answer2').hasError('required')">
                           Second answer is <strong>required</strong>
                         </mat-error>
@@ -195,8 +195,8 @@
                         <img [src]="qansImageSrc1" *ngIf="qansImageSrc2" style="width:200px;" class="mb-2">
                         <div class="form-group">
                           <label for="exampleFormControlFile1">Upload Answer</label>
-                          <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                             accept="image/*" (change)="onFileChange($event, 'answerImage2', i)">
+                          <input type="file" class="form-control-file"  accept="image/*"
+                            (change)="onFileChange($event, 'answerImage2', i)">
                         </div>
                       </div>
                     </div>
@@ -213,8 +213,8 @@
                         <img [src]="qansImageSrc1" *ngIf="qansImageSrc3" style="width:200px;" class="mb-2">
                         <div class="form-group">
                           <label for="exampleFormControlFile1">Upload Answer</label>
-                          <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                             accept="image/*" (change)="onFileChange($event, 'answerImage3', i)">
+                          <input type="file" class="form-control-file"  accept="image/*"
+                            (change)="onFileChange($event, 'answerImage3', i)">
                         </div>
                       </div>
                     </div>
@@ -231,8 +231,8 @@
                         <img [src]="qansImageSrc1" *ngIf="qansImageSrc4" style="width:200px;" class="mb-2">
                         <div class="form-group">
                           <label for="exampleFormControlFile1">Upload Answer</label>
-                          <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                             accept="image/*" (change)="onFileChange($event, 'answerImage4', i)">
+                          <input type="file" class="form-control-file"  accept="image/*"
+                            (change)="onFileChange($event, 'answerImage4', i)">
                         </div>
                       </div>
                     </div>
@@ -267,6 +267,29 @@
                   (click)="onFormReset($event, 'questions')">Reset</button>
               </div>
             </form>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="pt-3">
+    <mat-card>
+      <mat-card-content>
+        <mat-tab-group [selectedIndex]="selectedIndex">
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon">wc</mat-icon>
+              Exam List
+            </ng-template>
+            <app-exams-list (examEdit)="onExamEdit($event)"></app-exams-list>
+          </mat-tab>
+
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="">layers</mat-icon>
+              Questions List
+            </ng-template>
+            <app-question-list (questionEdit) = "onQuestionEdit($event)"></app-question-list>
           </mat-tab>
         </mat-tab-group>
       </mat-card-content>

@@ -6,9 +6,96 @@
     <mat-card>
       <!-- <mat-card-title>{{cardTitle}}</mat-card-title> -->
       <mat-card-content class="pt-2">
-        <div class="pb-2 text-center">
-          <button *ngIf="isStartExam" mat-raised-button type="button" (click)="startAssessment()" class="mat-next mt-2 mr-3">Start Assessment</button>
-          <button *ngIf="!isStartExam" mat-raised-button type="button" (click)="getQuestions()" class="mat-next mt-2 mr-3">Start Exam</button>
+        <div *ngIf="showResult">
+          <div class="pb-2" *ngIf="!showQuestions">
+            <!--  <div class="text-center">
+              <button *ngIf="isStartExam" mat-raised-button type="button" (click)="startAssessment()"
+                class="mat-next mt-2 mr-3">Start Assessment</button>
+            </div> -->
+            <h2 class="text-center font-weight-bold">Instructions</h2>
+            <div class="">
+              <ul class="m-0">
+                <li>
+                  <p>Welcome to online exam for <strong>{{examDetails[0]?.examname}}.</strong></p>
+                </li>
+                <li>
+                  <p>All questions are compulsory.</p>
+                </li>
+                <li>
+                  <p>Exam for subject<strong> {{examDetails[0]?.subjectame}}.</strong></p>
+                </li>
+                <li>
+                  <p>Exam has total <strong> {{examDetails[0]?.totalquestions}} </strong>questions.</p>
+                </li>
+                <li>
+                  <p>Total time for exam is<strong> {{examDetails[0]?.timeallotted}} </strong>minutes.</p>
+                </li>
+                <li>
+                  <p>Total marks for exam is <strong> {{examDetails[0]?.totalmarks}}.</strong></p>
+                </li>
+                <li>
+                  <p>You are allowed to submit only once, make sure that you have correctly attempted all the questions before submission.</p>
+                </li>
+                <li>
+                  <p>Make sure you clicked on submit button to successfully complete the test.</p>
+                </li>
+                <li>
+                  <p>New students must contact their class teacher for the admission number.</p>
+                </li>
+              </ul>
+              <h3 class="font-weight-bold"><em>Best of Luck for your Exam</em></h3>
+              <mat-divider></mat-divider>
+              <br>
+              <div class="text-center">
+                <button mat-raised-button type="button" (click)="getQuestions()" class="mat-next mt-2 mr-3">Start
+                  Exam</button>
+              </div>
+            </div>
+          </div>
+          <div class="questions-widget" *ngIf="showQuestions">
+            <!--  *ngIf="showQuestions" -->
+            <div class="d-flex justify-content-between">
+              <p>Subject: <strong>{{examDetails[0]?.subjectame}}</strong></p>
+              <p>Time Left: <strong>{{allottedTime | reverseCounter}}</strong></p>
+            </div>
+            <mat-divider></mat-divider>
+            <ul class="p-3">
+              <li *ngFor="let question of questionAnsList | slice: startIndex: endIndex; let i=index">
+                <p><strong>Q.</strong>&nbsp; <span>{{question.question}}</span></p>
+                <mat-radio-group (change)="onSelection($event, question.id)">
+                  <ul class="answerList row">
+                    <li class="col-12 col-md-6">
+                      <mat-radio-button [value]="question.answer1">{{question.answer1}}</mat-radio-button>
+                    </li>
+                    <li class="col-12 col-md-6">
+                      <mat-radio-button [value]="question.answer2">{{question.answer2}}</mat-radio-button>
+                    </li>
+                    <li class="col-12 col-md-6">
+                      <mat-radio-button [value]="question.answer3">{{question.answer3}}</mat-radio-button>
+                    </li>
+                    <li class="col-12 col-md-6">
+                      <mat-radio-button [value]="question.answer4">{{question.answer4}}</mat-radio-button>
+                    </li>
+                  </ul>
+                </mat-radio-group>
+              </li>
+            </ul>
+            <div class="d-flex justify-content-between" *ngIf="!(this.endIndex > this.questionAnsList.length)">
+              <!-- *ngIf="!(this.endIndex == this.questionAnsList.length)" -->
+              <button [disabled]="this.startIndex == 0" mat-raised-button color="primary"
+                (click)="prevQuestion()">Previous</button>
+              <button mat-raised-button color="primary" (click)="nextQuestion()">{{btnLabel}}</button>
+            </div>
+            <!-- <div class="btn-submit text-center" *ngIf="this.endIndex == this.questionAnsList.length">
+              <button mat-raised-button color="primary" (click)="submitAnswer()">Submit</button>
+            </div> -->
+          </div>
+        </div>
+        <div class="exam-result" *ngIf="!showResult">
+          <p><strong>Subject: </strong> {{examDetails[0].subjectame}}</p>
+          <p><strong>Total Questions: </strong> {{examDetails[0].totalquestions}}</p>
+          <p><strong>Total Marks: </strong> {{examDetails[0].totalmarks}}</p>
+          <p><strong>Obtained Mark: </strong> {{obtainedMark}}/{{examDetails[0].totalmarks}}</p>
         </div>
       </mat-card-content>
     </mat-card>

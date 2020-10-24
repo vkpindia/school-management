@@ -7,11 +7,21 @@ import { OnlineExaminationRoutingModule } from './online-examination-routing.mod
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from '../../shared/material/material.module';
+import { ReverseCounterPipe } from 'src/app/pipes/reverse-counter.pipe';
+import { QuestionListComponent } from './question-list/question-list.component';
+import { ExamsListComponent } from './exams-list/exams-list.component';
 
 
 
 @NgModule({
-  declarations: [ExamSetupComponent, ExamResultComponent, AssessmentQuestionsComponent],
+  declarations: [
+    ExamSetupComponent,
+    ExamResultComponent,
+    AssessmentQuestionsComponent,
+    ReverseCounterPipe,
+    QuestionListComponent,
+    ExamsListComponent
+  ],
   imports: [
     CommonModule,
     OnlineExaminationRoutingModule,

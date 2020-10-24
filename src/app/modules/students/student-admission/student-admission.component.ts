@@ -80,13 +80,13 @@ export class StudentAdmissionComponent implements OnInit {
       adminnumber: new FormControl(null, Validators.required),
       enrolnumber: new FormControl(null, Validators.required),
       dateofadmission: new FormControl(null, Validators.required),
-      Class: new FormControl(null, Validators.required),
+      class: new FormControl(null, Validators.required),
       rollnumber: new FormControl(null, Validators.required),
       section: new FormControl(null, Validators.required),
       cast: new FormControl(null, Validators.required),
       subcaste: new FormControl(null, Validators.required),
       religion: new FormControl(null, Validators.required),
-      Mothertoung: new FormControl(null, Validators.required),
+      mothertoung: new FormControl(null, Validators.required),
       nationality: new FormControl(null, Validators.required),
       bloodgroup: new FormControl(null, Validators.required),
       mobilenumber: new FormControl(null, [Validators.required, Validators.pattern('[0-9 ]{10}')]),
@@ -154,8 +154,10 @@ export class StudentAdmissionComponent implements OnInit {
       reader.onload = () => {
         this.imageSrc = reader.result as string;
         // console.log('this.urlBase64ToUint8Array(reader.result)', reader.result);
+        /* console.log('this.imageSrc', this.imageSrc);
+        console.log('this.imageSrc', this.imageSrc.replace(`data:image/${fileExt};base64,`, '')); */
         this.admissionForm.patchValue({
-          image: fileExt === 'png' ? this.imageSrc.substring(22) : this.imageSrc.substring(23) // this.urlBase64ToUint8Array(reader.result)
+          image: this.imageSrc.replace(`data:image/${fileExt};base64,`, '') // this.urlBase64ToUint8Array(reader.result)
         });
         this.admissionForm.get('image').updateValueAndValidity();
       };
@@ -186,6 +188,7 @@ export class StudentAdmissionComponent implements OnInit {
   }
 
   getSetions(classID) {
+    console.log('classID', classID);
     this._ss.getSections(classID).subscribe(section => {
       if (section) {
         this.sectionList = section;

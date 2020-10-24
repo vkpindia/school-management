@@ -16,7 +16,8 @@ body {
 }
 app-login,
 app-forgot,
-app-registration,app-change-password {
+app-registration,
+app-change-password {
   width: 100%;
   .mat-form-field {
     width: 100%;
@@ -220,7 +221,7 @@ app-registration,app-change-password {
   // height: calc(100vh - 100px);
   padding: 20px;
   padding-bottom: 50px !important;
-  @media(max-width: 576px){
+  @media (max-width: 576px) {
     padding-bottom: 70px !important;
   }
   .list-container {
@@ -233,7 +234,7 @@ app-registration,app-change-password {
       .mat-form-field-outline {
         background-color: #f8f8f8;
       }
-      .mat-card{
+      .mat-card {
         overflow: auto;
       }
       .list-head {
@@ -246,9 +247,9 @@ app-registration,app-change-password {
           margin: 0;
           padding: 0;
         }
-        @media screen and(max-width: 480px){
-           flex-direction: column;
-           align-items: flex-start;
+        @media screen and(max-width: 480px) {
+          flex-direction: column;
+          align-items: flex-start;
         }
       }
     }
@@ -883,22 +884,22 @@ a {
   }
 }
 
-.details-page{
-  img{
+.details-page {
+  img {
     width: 100%;
   }
 }
 
-.table-bordered{
-  th{
+.table-bordered {
+  th {
     padding-left: 10px !important;
   }
-  td{
+  td {
     padding-left: 10px !important;
   }
 }
 
-.form-container input{
+.form-container input {
   text-transform: capitalize !important;
 }
 
@@ -907,4 +908,11 @@ a {
     padding-left: 250px !important;
     // width: calc(100% - 250px);
   }
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #4099ff;
+}
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: #4099ff;
 }

@@ -18,12 +18,14 @@ import {MatDividerModule} from '@angular/material/divider';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatRadioModule} from '@angular/material/radio';
 
 const materiaModules = [
   MatCardModule,
   MatFormFieldModule,
   MatAutocompleteModule,
   MatInputModule,
+  MatRadioModule,
   MatIconModule,
   MatTableModule,
   MatPaginatorModule,

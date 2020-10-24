@@ -195,7 +195,7 @@ export class AssessmentService {
    * @returns
    * @memberof AssessmentService
    */
-  getTotalResultsByStudentID(examid, studentid) {
+  getTotalResultsByStudentID(examid?: number, studentid = null) {
     return this._http.get(this._apiUrl + `OnlineexamsController/GetTotalresultsbystudentid?examid=${examid}&studentid=${studentid}`)
       .pipe(
         map(this.extractData),
@@ -255,7 +255,7 @@ export class AssessmentService {
    * @memberof AssessmentService
    */
   deleteResults(examID) {
-    return this._http.delete(this._apiUrl + `attandance/DeleteResult?id=${examID}`)
+    return this._http.delete(this._apiUrl + `OnlineexamsController/DeleteResult?id=${examID}`)
       .pipe(
         map(this.extractData),
         catchError(this.handleError)
@@ -270,7 +270,7 @@ export class AssessmentService {
    * @memberof AssessmentService
    */
   deleteQuestions(id) {
-    return this._http.delete(this._apiUrl + `attandance/DeleteQuestion?id=${id}`)
+    return this._http.delete(this._apiUrl + `OnlineexamsController/DeleteQuestion?id=${id}`)
       .pipe(
         map(this.extractData),
         catchError(this.handleError)
@@ -285,7 +285,7 @@ export class AssessmentService {
    * @memberof AssessmentService
    */
   deleteExamSetup(id) {
-    return this._http.delete(this._apiUrl + `attandance/DeleteExam?id=${id}`)
+    return this._http.delete(this._apiUrl + `OnlineexamsController/DeleteExam?id=${id}`)
       .pipe(
         map(this.extractData),
         catchError(this.handleError)

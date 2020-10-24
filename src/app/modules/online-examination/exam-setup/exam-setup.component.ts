@@ -34,6 +34,9 @@ export class ExamSetupComponent implements OnInit {
   public classList: any = [];
   public sectionList: any = [];
   public showForm: boolean = true;
+  public examID: number;
+  public examDetails: any;
+  public questionsRecord: any;
 
   // images variable declaration
   public qImageSrc: string;
@@ -127,33 +130,34 @@ export class ExamSetupComponent implements OnInit {
     const reader = new FileReader();
 
     if (event.target.files && event.target.files.length) {
+      let fileExt = event.target.files[0].type.split('/')[1];
       const file = (event.target as HTMLInputElement).files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
         if (imageType === 'questionImage') {
           this.qImageSrc = reader.result as string;
           (this.questionForm.get('items') as FormArray).at(index).get('question_image')
-            .patchValue(this.qImageSrc.substring(22));
+            .patchValue(this.qImageSrc.replace(`data:image/${fileExt};base64,`, ''));
 
         } else if (imageType === 'answerImage1') {
           this.qansImageSrc1 = reader.result as string;
           (this.questionForm.get('items') as FormArray).at(index).get('answer1_image')
-            .patchValue(this.qansImageSrc1.substring(22));
+            .patchValue(this.qansImageSrc1.replace(`data:image/${fileExt};base64,`, ''));
 
         } else if (imageType === 'answerImage2') {
           this.qansImageSrc2 = reader.result as string;
           (this.questionForm.get('items') as FormArray).at(index).get('answer2_image')
-            .patchValue(this.qansImageSrc2.substring(22));
+            .patchValue(this.qansImageSrc2.replace(`data:image/${fileExt};base64,`, ''));
 
         } else if (imageType === 'answerImage3') {
           this.qansImageSrc3 = reader.result as string;
           (this.questionForm.get('items') as FormArray).at(index).get('answer3_image')
-            .patchValue(this.qansImageSrc3.substring(22));
+            .patchValue(this.qansImageSrc3.replace(`data:image/${fileExt};base64,`, ''));
 
         } else if (imageType === 'answerImage4') {
           this.qansImageSrc4 = reader.result as string;
           (this.questionForm.get('items') as FormArray).at(index).get('answer4_image')
-            .patchValue(this.qansImageSrc4.substring(22));
+            .patchValue(this.qansImageSrc4.replace(`data:image/${fileExt};base64,`, ''));
 
         }
       };
@@ -226,7 +230,7 @@ export class ExamSetupComponent implements OnInit {
     if (this.questionForm.invalid && this.selectedIndex === 1) {
       return;
     }
-    let examid: number;
+
     let payload = {};
 
     this.loading = true;
@@ -255,51 +259,90 @@ export class ExamSetupComponent implements OnInit {
           }
         });
       }
-
-      this._cs.addExamSetup(payload).subscribe(data => {
-        examid = data['examid'];
-        this.isTabDisabled = false;
-        this.showNotification('Submitted Successfully!!');
-        this.createExamForm.reset();
-        this.showForm = false;
-        this.submitted = false;
-        setTimeout(() => {
-          this.showForm = true;
-        }, 100);
-        // this.getClassList();
-        this.selectedIndex = 1;
-      },
-        error => {
-          this.error = error;
-          this.loading = false;
-          console.error(this.error);
-        });
+      if (this.examDetails && this.examDetails['id']) {
+        payload['id'] = this.examDetails['id'];
+        this._cs.updateExamSetup(payload).subscribe(data => {
+          this.isTabDisabled = false;
+          this.showNotification('Updated Successfully!!');
+          this.createExamForm.reset();
+          this.showForm = false;
+          this.submitted = false;
+          setTimeout(() => {
+            this.showForm = true;
+          }, 100);
+        },
+          error => {
+            this.error = error;
+            this.loading = false;
+            console.error(this.error);
+          });
+      } else {
+        this._cs.addExamSetup(payload).subscribe(data => {
+          localStorage.setItem('examID', data['id']);
+          this.isTabDisabled = false;
+          this.showNotification('Submitted Successfully!!');
+          this.createExamForm.reset();
+          this.showForm = false;
+          this.submitted = false;
+          setTimeout(() => {
+            this.showForm = true;
+          }, 100);
+          // this.getClassList();
+          this.selectedIndex = 1;
+        },
+          error => {
+            this.error = error;
+            this.loading = false;
+            console.error(this.error);
+          });
+      }
     }
 
     if (formType === 'questions') {
       Object.assign(payload, this.questionForm.value);
       payload['items'].map(data => {
-        data['examid'] = examid;
+        if (this.questionsRecord && this.questionsRecord.id) {
+          data['id'] = this.questionsRecord.id;
+        }
+        data['examid'] = this.questionsRecord ? this.questionsRecord.examid : localStorage.getItem('examID');
         return data;
       });
-      console.log('payload', payload);
+      // console.log('payload', payload);
       // payload['examid'] = examid;
-      this._cs.addExamQustions(payload['items']).subscribe(data => {
-        console.log('data', data);
-        this.showNotification('Submitted Successfully!!');
-        this.questionForm.reset();
-        // this.f.subjects.setValue([]);
-        this.showForm = false;
-        this.submitted = false;
-        setTimeout(() => {
-          this.showForm = true;
-        }, 100);
-      },
-        error => {
-          this.error = error;
-          this.loading = false;
-          console.error(this.error);
-        });
+      if (this.questionsRecord && this.questionsRecord.id) {
+        this._cs.updateExamQuestions(payload['items']).subscribe(data => {
+          this.showNotification('Updated Successfully!!');
+          this.questionForm.reset();
+          // this.f.subjects.setValue([]);
+          this.showForm = false;
+          this.submitted = false;
+          setTimeout(() => {
+            this.showForm = true;
+          }, 100);
+        },
+          error => {
+            this.error = error;
+            this.loading = false;
+            console.error(this.error);
+          });
+      } else {
+        this._cs.addExamQustions(payload['items']).subscribe(data => {
+          this.showNotification('Submitted Successfully!!');
+          this.questionForm.reset();
+          // this.f.subjects.setValue([]);
+          this.showForm = false;
+          this.submitted = false;
+          setTimeout(() => {
+            this.showForm = true;
+          }, 100);
+        },
+          error => {
+            this.error = error;
+            this.loading = false;
+            console.error(this.error);
+          });
+      }
+
     }
   }
 
@@ -316,6 +359,38 @@ export class ExamSetupComponent implements OnInit {
       verticalPosition: 'top',
       panelClass: ['success-snackbar']
     });
+  }
+
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-10-25
+   * @param {*} event
+   * @memberof ExamSetupComponent
+   */
+  public onExamEdit(event): void {
+    if (event) {
+      this.examDetails = event;
+      this.createExamForm.patchValue(event);
+    }
+  }
+
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-10-25
+   * @param {*} event
+   * @memberof ExamSetupComponent
+   */
+  public onQuestionEdit(event): void {
+    if (event) {
+      this.selectedIndex = 1;
+      this.questionsRecord = event;
+      let questionsList = [];
+      questionsList.push(event);
+      console.log('questionsList', questionsList);
+      this.questionForm.patchValue({ items: questionsList });
+    }
   }
 
   /**
