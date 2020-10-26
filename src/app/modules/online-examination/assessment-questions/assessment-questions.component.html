@@ -61,20 +61,36 @@
             <mat-divider></mat-divider>
             <ul class="p-3">
               <li *ngFor="let question of questionAnsList | slice: startIndex: endIndex; let i=index">
-                <p><strong>Q.</strong>&nbsp; <span>{{question.question}}</span></p>
+                <div class="mb-3"><strong>Q.</strong>&nbsp;
+                  <span *ngIf="question.question">{{question.question}}</span>
+                  <img *ngIf="question.question_image" [src]="'data:image/png;base64,'+question.question_image" alt="">
+                </div>
+
                 <mat-radio-group (change)="onSelection($event, question.id)">
                   <ul class="answerList row">
                     <li class="col-12 col-md-6">
-                      <mat-radio-button [value]="question.answer1">{{question.answer1}}</mat-radio-button>
+                      <mat-radio-button [value]="question.answer1">
+                        <span *ngIf="question.answer1">{{question.answer1}}</span>
+                        <img *ngIf="question.answer1_image" [src]="'data:image/png;base64,'+question.answer1_image" alt="">
+                      </mat-radio-button>
                     </li>
                     <li class="col-12 col-md-6">
-                      <mat-radio-button [value]="question.answer2">{{question.answer2}}</mat-radio-button>
+                      <mat-radio-button [value]="question.answer2">
+                        <span *ngIf="question.answer2">{{question.answer2}}</span>
+                        <img *ngIf="question.answer2_image" [src]="'data:image/png;base64,'+question.answer2_image" alt="">
+                      </mat-radio-button>
                     </li>
                     <li class="col-12 col-md-6">
-                      <mat-radio-button [value]="question.answer3">{{question.answer3}}</mat-radio-button>
+                      <mat-radio-button [value]="question.answer3">
+                        <span *ngIf="question.answer3">{{question.answer2}}</span>
+                        <img *ngIf="question.answer3_image" [src]="'data:image/png;base64,'+question.answer3_image" alt="">
+                      </mat-radio-button>
                     </li>
                     <li class="col-12 col-md-6">
-                      <mat-radio-button [value]="question.answer4">{{question.answer4}}</mat-radio-button>
+                      <mat-radio-button [value]="question.answer4">
+                        <span *ngIf="question.answer4">{{question.answer2}}</span>
+                        <img *ngIf="question.answer4_image" [src]="'data:image/png;base64,'+question.answer4_image" alt="">
+                      </mat-radio-button>
                     </li>
                   </ul>
                 </mat-radio-group>
