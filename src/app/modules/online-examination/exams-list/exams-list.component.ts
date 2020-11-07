@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild, OnChanges, ChangeDetectorRef, DoCheck } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatSort } from '@angular/material/sort';
@@ -13,11 +13,12 @@ import { FormControl } from '@angular/forms';
   templateUrl: './exams-list.component.html',
   styleUrls: ['./exams-list.component.scss']
 })
-export class ExamsListComponent implements OnInit {
+export class ExamsListComponent implements OnInit, OnChanges {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) TSort: MatSort;
 
   @Output() examEdit: EventEmitter<any> = new EventEmitter();
+  @Input() updateExamList: boolean;
 
   public displayedColumns: string[] = ['select', 'examname', 'classname', 'sectionname', 'subjectame', 'timeallotted', 'totalquestions', 'totalmarks', 'examdate', 'actions'];
   public filterData: string = '';
@@ -39,12 +40,33 @@ export class ExamsListComponent implements OnInit {
     private _cs: AttendanceService,
     private _router: Router,
     private _activatedRout: ActivatedRoute,
-    private as: AssessmentService) { }
+    private as: AssessmentService,
+    private cd: ChangeDetectorRef) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // Called before any other lifecycle hook. Use it to inject
+    // dependencies, but avoid any serious work here.
+    // Add '${implements OnChanges}' to the class.
+    this.cd.detectChanges();
+    if (this.updateExamList) {
+      this.getResults();
+    }
+
+  }
 
   ngOnInit(): void {
     // method call
     this.getClassSection();
   }
+
+  /* ngDoCheck(): void {
+    // Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+    // Add 'implements DoCheck' to the class.
+    console.log('this.updateExamList', this.updateExamList);
+    if (this.updateExamList) {
+      this.getResults();
+    }
+  } */
 
   /**
    * @description Method to get All Attendance record

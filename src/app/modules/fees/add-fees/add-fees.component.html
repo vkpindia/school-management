@@ -4,7 +4,7 @@
   </div>
   <div class="form-fields">
     <!-- Student Search -->
-    <div class="row">
+    <div class="row" *ngIf="!paramID">
       <div class="col-12 col-sm-6 col-md-3">
         <mat-form-field appearance="outline" class="p-0">
           <mat-label>Class</mat-label>
@@ -128,17 +128,6 @@
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">
-                <mat-label>Paid Amount</mat-label>
-                <input type="number" matInput placeholder="Enter amount" formControlName="paidamount">
-                <!-- <mat-error *ngIf="submitted && f.paidamount.hasError('required')">
-                  Paid amount is <strong>required</strong>
-                </mat-error> -->
-
-              </mat-form-field>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4">
-              <mat-form-field appearance="outline" class="p-0">
                 <mat-label>Discount</mat-label>
                 <input type="number" (blur)="feeAfterDiscount()" matInput placeholder="Enter discount"
                   formControlName="discount">
@@ -151,6 +140,27 @@
                 <input type="number" matInput placeholder="Enter fee after discount" formControlName="feeafterdiscount">
               </mat-form-field>
             </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Paid Amount</mat-label>
+                <input type="number" (blur)="pendingAmount()" matInput placeholder="Enter amount" formControlName="paidamount">
+                <!-- <mat-error *ngIf="submitted && f.paidamount.hasError('required')">
+                  Paid amount is <strong>required</strong>
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline" class="p-0">
+                <mat-label>Pending Amount</mat-label>
+                <input type="number" matInput placeholder="Pending amount" formControlName="pendingamount">
+                <!-- <mat-error *ngIf="submitted && f.paidamount.hasError('required')">
+                  Paid amount is <strong>required</strong>
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+
 
             <div class="col-12 col-sm-6 col-md-4">
               <mat-form-field appearance="outline" class="p-0">

@@ -157,10 +157,10 @@
                       </mat-form-field>
                     </div>
                     <div class="col-12">
-                      <img [src]="qImageSrc" *ngIf="qImageSrc" style="width:200px;" class="mb-2">
+                      <img id="{{'qImageSrc' + i}}" style="width:200px;" class="mb-2"><!-- *ngIf="qImageSrc+i" -->
                       <div class="form-group">
                         <label for="exampleFormControlFile1">Upload Question</label>
-                        <input type="file" class="form-control-file"  accept="image/*"
+                        <input type="file" class="form-control-file" accept="image/*"
                           (change)="onFileChange($event, 'questionImage', i)">
                       </div>
                     </div>
@@ -174,10 +174,10 @@
                         </mat-error>
                       </mat-form-field>
                       <div class="">
-                        <img [src]="qansImageSrc1" *ngIf="qansImageSrc1" style="width:200px;" class="mb-2">
+                        <img  id="{{'qansImageSrc1'+i}}" style="width:200px;" class="mb-2">
                         <div class="form-group">
                           <label for="exampleFormControlFile1">Upload Answer</label>
-                          <input type="file" class="form-control-file"  accept="image/*"
+                          <input type="file" class="form-control-file" accept="image/*"
                             (change)="onFileChange($event, 'answerImage1', i)">
                         </div>
                       </div>
@@ -192,10 +192,10 @@
                         </mat-error>
                       </mat-form-field>
                       <div class="">
-                        <img [src]="qansImageSrc1" *ngIf="qansImageSrc2" style="width:200px;" class="mb-2">
+                        <img  id="{{'qansImageSrc2'+i}}" style="width:200px;" class="mb-2">
                         <div class="form-group">
                           <label for="exampleFormControlFile1">Upload Answer</label>
-                          <input type="file" class="form-control-file"  accept="image/*"
+                          <input type="file" class="form-control-file" accept="image/*"
                             (change)="onFileChange($event, 'answerImage2', i)">
                         </div>
                       </div>
@@ -210,10 +210,10 @@
                         </mat-error>
                       </mat-form-field>
                       <div class="">
-                        <img [src]="qansImageSrc1" *ngIf="qansImageSrc3" style="width:200px;" class="mb-2">
+                        <img  id="{{'qansImageSrc3'+i}}" style="width:200px;" class="mb-2">
                         <div class="form-group">
                           <label for="exampleFormControlFile1">Upload Answer</label>
-                          <input type="file" class="form-control-file"  accept="image/*"
+                          <input type="file" class="form-control-file" accept="image/*"
                             (change)="onFileChange($event, 'answerImage3', i)">
                         </div>
                       </div>
@@ -228,10 +228,10 @@
                         </mat-error>
                       </mat-form-field>
                       <div class="">
-                        <img [src]="qansImageSrc1" *ngIf="qansImageSrc4" style="width:200px;" class="mb-2">
+                        <img  id="{{'qansImageSrc4'+i}}" style="width:200px;" class="mb-2">
                         <div class="form-group">
                           <label for="exampleFormControlFile1">Upload Answer</label>
-                          <input type="file" class="form-control-file"  accept="image/*"
+                          <input type="file" class="form-control-file" accept="image/*"
                             (change)="onFileChange($event, 'answerImage4', i)">
                         </div>
                       </div>
@@ -281,7 +281,7 @@
               <mat-icon class="example-tab-icon">wc</mat-icon>
               Exam List
             </ng-template>
-            <app-exams-list (examEdit)="onExamEdit($event)"></app-exams-list>
+            <app-exams-list [updateExamList]='updateExamList' (examEdit)="onExamEdit($event)"></app-exams-list>
           </mat-tab>
 
           <mat-tab>
@@ -289,7 +289,7 @@
               <mat-icon class="">layers</mat-icon>
               Questions List
             </ng-template>
-            <app-question-list (questionEdit) = "onQuestionEdit($event)"></app-question-list>
+            <app-question-list [updateList]='updateList' (questionEdit)="onQuestionEdit($event)"></app-question-list>
           </mat-tab>
         </mat-tab-group>
       </mat-card-content>

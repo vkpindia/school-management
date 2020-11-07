@@ -37,6 +37,9 @@ export class ExamSetupComponent implements OnInit {
   public examID: number;
   public examDetails: any;
   public questionsRecord: any;
+  public updateList: boolean;
+  public updateExamList: boolean;
+
 
   // images variable declaration
   public qImageSrc: string;
@@ -76,6 +79,8 @@ export class ExamSetupComponent implements OnInit {
       teachersnotes: new FormControl(null)
     });
 
+    this.updateExamList = false;
+    this.updateList = false;
     this.questionForm = new FormGroup({
       items: new FormArray([this.createFields()])
     });
@@ -103,18 +108,18 @@ export class ExamSetupComponent implements OnInit {
   public createFields(): FormGroup {
 
     return new FormGroup({
-      question: new FormControl(null, Validators.required),
+      question: new FormControl(null),
       question_image: new FormControl(null),
-      answer1: new FormControl(null, Validators.required),
+      answer1: new FormControl(null),
       answer1_image: new FormControl(null),
-      answer2: new FormControl(null, Validators.required),
+      answer2: new FormControl(null),
       answer2_image: new FormControl(null),
-      answer3: new FormControl(null, Validators.required),
+      answer3: new FormControl(null),
       answer3_image: new FormControl(null),
-      answer4: new FormControl(null, Validators.required),
+      answer4: new FormControl(null),
       answer4_image: new FormControl(null),
-      rightanswer: new FormControl(null, Validators.required),
-      marksforthis: new FormControl(null, Validators.required)
+      rightanswer: new FormControl(null),
+      marksforthis: new FormControl(null)
     });
 
   }
@@ -135,29 +140,34 @@ export class ExamSetupComponent implements OnInit {
       reader.readAsDataURL(file);
       reader.onload = () => {
         if (imageType === 'questionImage') {
-          this.qImageSrc = reader.result as string;
+          let qImageSrc = reader.result as string;
+          document.querySelector('#qImageSrc' + index).setAttribute('src', qImageSrc);
           (this.questionForm.get('items') as FormArray).at(index).get('question_image')
-            .patchValue(this.qImageSrc.replace(`data:image/${fileExt};base64,`, ''));
+            .patchValue(qImageSrc.replace(`data:image/${fileExt};base64,`, ''));
 
         } else if (imageType === 'answerImage1') {
-          this.qansImageSrc1 = reader.result as string;
+          let qansImageSrc1 = reader.result as string;
+          document.querySelector('#qansImageSrc1' + index).setAttribute('src', qansImageSrc1);
           (this.questionForm.get('items') as FormArray).at(index).get('answer1_image')
-            .patchValue(this.qansImageSrc1.replace(`data:image/${fileExt};base64,`, ''));
+            .patchValue(qansImageSrc1.replace(`data:image/${fileExt};base64,`, ''));
 
         } else if (imageType === 'answerImage2') {
-          this.qansImageSrc2 = reader.result as string;
+          let qansImageSrc2 = reader.result as string;
+          document.querySelector('#qansImageSrc2' + index).setAttribute('src', qansImageSrc2);
           (this.questionForm.get('items') as FormArray).at(index).get('answer2_image')
             .patchValue(this.qansImageSrc2.replace(`data:image/${fileExt};base64,`, ''));
 
         } else if (imageType === 'answerImage3') {
-          this.qansImageSrc3 = reader.result as string;
+          let qansImageSrc3 = reader.result as string;
+          document.querySelector('#qansImageSrc3' + index).setAttribute('src', qansImageSrc3);
           (this.questionForm.get('items') as FormArray).at(index).get('answer3_image')
-            .patchValue(this.qansImageSrc3.replace(`data:image/${fileExt};base64,`, ''));
+            .patchValue(qansImageSrc3.replace(`data:image/${fileExt};base64,`, ''));
 
         } else if (imageType === 'answerImage4') {
-          this.qansImageSrc4 = reader.result as string;
+          let qansImageSrc4 = reader.result as string;
+          document.querySelector('#qansImageSrc4' + index).setAttribute('src', qansImageSrc4);
           (this.questionForm.get('items') as FormArray).at(index).get('answer4_image')
-            .patchValue(this.qansImageSrc4.replace(`data:image/${fileExt};base64,`, ''));
+            .patchValue(qansImageSrc4.replace(`data:image/${fileExt};base64,`, ''));
 
         }
       };
@@ -264,6 +274,7 @@ export class ExamSetupComponent implements OnInit {
         this._cs.updateExamSetup(payload).subscribe(data => {
           this.isTabDisabled = false;
           this.showNotification('Updated Successfully!!');
+          this.updateExamList = true;
           this.createExamForm.reset();
           this.showForm = false;
           this.submitted = false;
@@ -312,6 +323,7 @@ export class ExamSetupComponent implements OnInit {
       if (this.questionsRecord && this.questionsRecord.id) {
         this._cs.updateExamQuestions(payload['items']).subscribe(data => {
           this.showNotification('Updated Successfully!!');
+          this.updateList = true;
           this.questionForm.reset();
           // this.f.subjects.setValue([]);
           this.showForm = false;

@@ -80,8 +80,7 @@ export class AddFeesComponent implements OnInit {
   ngOnInit(): void {
 
     this.feesForm = new FormGroup({
-
-      //Requird Fields
+      // Requird Fields
       // id: new FormControl(null, Validators.required),
       name: new FormControl(null, Validators.required),
       feetype: new FormControl(null, Validators.required),
@@ -89,13 +88,14 @@ export class AddFeesComponent implements OnInit {
       termstartdate: new FormControl(new Date(), Validators.required),
       termenddate: new FormControl(new Date(), Validators.required),
       feeamount: new FormControl(null),
-      status: new FormControl(null),
-      paidamount: new FormControl(null),
-
       discount: new FormControl(null),
       feeafterdiscount: new FormControl(null),
-      description: new FormControl(null),
-      paiddate: new FormControl(null)
+      paidamount: new FormControl(null),
+      pendingamount: new FormControl(null),
+
+      paiddate: new FormControl(null),
+      status: new FormControl(null),
+      description: new FormControl(null)
     });
 
     //Method Call
@@ -120,6 +120,12 @@ export class AddFeesComponent implements OnInit {
   public feeAfterDiscount() {
     this.feesForm.patchValue({
       feeafterdiscount: this.f.discount.value > 0 ? this.f.feeamount.value - this.f.discount.value : this.f.feeamount.value
+    });
+  }
+
+  public pendingAmount() {
+    this.feesForm.patchValue({
+      pendingamount: this.f.paidamount.value > 0 ? this.f.feeafterdiscount.value - this.f.paidamount.value : this.f.feeafterdiscount.value
     });
   }
 
@@ -170,6 +176,14 @@ export class AddFeesComponent implements OnInit {
     });
   }
 
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-11-07
+   * @param {*} option
+   * @returns
+   * @memberof AddFeesComponent
+   */
   getOptionText(option) {
     if (option) {
       return option.name;
@@ -222,7 +236,6 @@ export class AddFeesComponent implements OnInit {
     });
   }
 
-
   /**
    * @description
    * @author Virendra Pandey
@@ -266,11 +279,18 @@ export class AddFeesComponent implements OnInit {
         if (section) {
           this.sectionList = section;
         }
-      })
+      });
     }
   }
 
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-11-07
+   * @memberof AddFeesComponent
+   */
   public calculatePending() {
+
     let pendingAmount: number = 0;
     if (this.f.payamount.value < this.payAmount) {
       pendingAmount = this.payAmount - this.f.payamount.value;
@@ -294,8 +314,20 @@ export class AddFeesComponent implements OnInit {
     }
   }
 
+  /**
+   * @description
+   * @author Virendra Pandey
+   * @date 2020-11-07
+   * @param {*} event
+   * @memberof AddFeesComponent
+   */
   onOptionSelection(event) {
     this.studentID = event.option.value.id;
+    this.studentRecordList.map(data => {
+      if (this.studentID === data.id) {
+        this.feesForm.get('name').patchValue(data.name);
+      }
+    });
   }
 
   /**
@@ -307,7 +339,6 @@ export class AddFeesComponent implements OnInit {
    */
   public onSubmit() {
     this.submitted = true;
-    console.log('this.feesForm.value', this.feesForm.value);
     // console.log('this.feesForm.invalid', this.feesForm.invalid);
     if (this.feesForm.value) {
       // this.feesForm.value.Class = parseInt(this.feesForm.value.Class, 10);

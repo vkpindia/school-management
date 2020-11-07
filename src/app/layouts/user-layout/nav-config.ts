@@ -295,16 +295,16 @@ export let navConfig = [
     // icon: 'flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler',
     children: [
       {
-        displayName: 'Assessment Setup',
-        // iconName: 'event',
-        icon: 'fa fa-angle-right',
-        routePath: 'assessment'
-      },
-      {
         displayName: 'Assessment',
         // iconName: 'event',
         icon: 'fa fa-angle-right',
         routePath: 'assessment/questions'
+      },
+      {
+        displayName: 'Assessment Setup',
+        // iconName: 'event',
+        icon: 'fa fa-angle-right',
+        routePath: 'assessment'
       },
       {
         displayName: 'Result',

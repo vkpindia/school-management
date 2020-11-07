@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ChangeDetectorRef, SimpleChanges, OnChanges } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatSort } from '@angular/material/sort';
@@ -14,11 +14,12 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./question-list.component.scss']
 })
 
-export class QuestionListComponent implements OnInit {
+export class QuestionListComponent implements OnInit, OnChanges {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) TSort: MatSort;
 
   @Output() questionEdit: EventEmitter<any> = new EventEmitter();
+  @Input() updateList: boolean;
 
   public displayedColumns: string[] = ['select', 'question', 'answer1', 'answer2', 'answer3', 'answer4', 'rightanswer', 'marksforthis', 'actions'];
   public filterData: string = '';
@@ -35,12 +36,25 @@ export class QuestionListComponent implements OnInit {
   public sectionList: any = [];
   public examList: any = [];
 
+
   // tslint:disable-next-line: variable-name
   constructor(
     private _cs: AttendanceService,
     private _router: Router,
     private _activatedRout: ActivatedRoute,
-    private as: AssessmentService) { }
+    private as: AssessmentService,
+    private cd: ChangeDetectorRef) { }
+
+    ngOnChanges(changes: SimpleChanges): void {
+      // Called before any other lifecycle hook. Use it to inject
+      // dependencies, but avoid any serious work here.
+      // Add '${implements OnChanges}' to the class.
+        this.cd.detectChanges();
+        if(this.updateList){
+          this.getExamList();
+        }
+
+    }
 
   ngOnInit(): void {
     // method call
