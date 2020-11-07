@@ -155,7 +155,7 @@ export class ExamSetupComponent implements OnInit {
           let qansImageSrc2 = reader.result as string;
           document.querySelector('#qansImageSrc2' + index).setAttribute('src', qansImageSrc2);
           (this.questionForm.get('items') as FormArray).at(index).get('answer2_image')
-            .patchValue(this.qansImageSrc2.replace(`data:image/${fileExt};base64,`, ''));
+            .patchValue(qansImageSrc2.replace(`data:image/${fileExt};base64,`, ''));
 
         } else if (imageType === 'answerImage3') {
           let qansImageSrc3 = reader.result as string;
@@ -171,7 +171,6 @@ export class ExamSetupComponent implements OnInit {
 
         }
       };
-
     }
   }
 
