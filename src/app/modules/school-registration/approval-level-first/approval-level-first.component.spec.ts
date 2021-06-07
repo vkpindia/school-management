@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ApprovalLevelFirstComponent } from './approval-level-first.component';
 
@@ -6,7 +6,7 @@ describe('ApprovalLevelFirstComponent', () => {
   let component: ApprovalLevelFirstComponent;
   let fixture: ComponentFixture<ApprovalLevelFirstComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ApprovalLevelFirstComponent ]
     })

@@ -42,7 +42,7 @@ export class AttendanceComponent implements OnInit {
   public studentNameRecord: any = [];
   public absentStudentsID: any = [];
 
-  public selection = new SelectionModel<any>(true, this.studentList ? this.studentList.data : []);
+  public selection = new SelectionModel<any>(true, []);
   // public selection2 = new SelectionModel<any>(true, []);
 
   public loading: boolean = false;
@@ -68,10 +68,10 @@ export class AttendanceComponent implements OnInit {
 
   // tslint:disable-next-line: variable-name
   constructor(private _cs: AttendanceService
-    , private _router: Router
-    , private _activatedRout: ActivatedRoute
-    , private _date: DatePipe
-    , private _snackBar: MatSnackBar) {
+    ,         private _router: Router
+    ,         private _activatedRout: ActivatedRoute
+    ,         private _date: DatePipe
+    ,         private _snackBar: MatSnackBar) {
 
     /*  if (initiallySelectedValues && initiallySelectedValues.length) {
        if (this._isMulti) {
@@ -86,18 +86,18 @@ export class AttendanceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.attendanceForm = new FormGroup({
+     this.selection = new SelectionModel<any>(true, this.studentList ? this.studentList.data : []);
+     this.attendanceForm = new FormGroup({
       classid: new FormControl(null, Validators.required),
       sectionid: new FormControl(null, Validators.required),
       attendace_part: new FormControl(null, Validators.required),
       date: new FormControl(new Date(), Validators.required),
     });
 
-    this.isAllSelected();
+     this.isAllSelected();
     // method call
-    this.getClassSection();
-    this.getStudentAttendanceList();
+     this.getClassSection();
+     this.getStudentAttendanceList();
   }
 
   /**

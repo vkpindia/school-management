@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ApprovalLevelSecondComponent } from './approval-level-second.component';
 
@@ -6,7 +6,7 @@ describe('ApprovalLevelSecondComponent', () => {
   let component: ApprovalLevelSecondComponent;
   let fixture: ComponentFixture<ApprovalLevelSecondComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ApprovalLevelSecondComponent ]
     })

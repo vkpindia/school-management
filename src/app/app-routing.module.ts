@@ -28,7 +28,6 @@ const routes: Routes = [
     },
     children: [
       {
-        canActivate: [AuthGuard],
         path: '',
         redirectTo: '/dashboard',
         pathMatch: 'full'
@@ -203,7 +202,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 

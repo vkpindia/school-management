@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { OnboardLayoutComponent } from './onboard-layout.component';
 
@@ -6,7 +6,7 @@ describe('OnboardLayoutComponent', () => {
   let component: OnboardLayoutComponent;
   let fixture: ComponentFixture<OnboardLayoutComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ OnboardLayoutComponent ]
     })
